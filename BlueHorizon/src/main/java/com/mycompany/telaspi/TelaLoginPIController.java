@@ -1,12 +1,17 @@
 package com.mycompany.telaspi;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class TelaLoginPIController {
 
@@ -49,7 +54,7 @@ public class TelaLoginPIController {
         Alert loginSucesso = new Alert(Alert.AlertType.INFORMATION);
         loginSucesso.setTitle("BlueHorizon - Login");
         loginSucesso.setHeaderText("Login efetuado com sucesso!");
-        loginSucesso.setContentText("Seja bem-vindo(a), " + email + ".");
+        loginSucesso.setContentText("Seja bem-vindo(a), " + email);
         loginSucesso.showAndWait();
             
         } else {
@@ -60,15 +65,25 @@ public class TelaLoginPIController {
         loginErro.setContentText("Senha ou email incorretos");
         loginErro.showAndWait();
         
-        }
-        
+        }       
     }
 
     @FXML
-    private void ActionHyperlinkRecSenha(ActionEvent event) {
+    private void ActionHyperlinkRecSenha(ActionEvent event) throws IOException {
         
-        //Arrumar
-        System.out.println("Link de recuperação de senha clicado!");
-     
+    try {
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaRecSenha.fxml"));
+        Parent root = loader.load();
+        
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Recuperação de Senha");
+        stage.show();
+        
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    
     }
 }
