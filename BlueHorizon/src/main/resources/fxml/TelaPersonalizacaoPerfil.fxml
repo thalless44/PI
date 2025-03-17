@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<FlowPane alignment="CENTER" minHeight="700.0" minWidth="700.0" prefWidth="1000.0" style="-fx-background-color: #6ec4e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.telaspi.TelaPersonalizacaoPerfil">
+   <children>
+        <Pane prefHeight="450.0" prefWidth="742.0" style="-fx-background-color: #d9d9d9;">
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color fx:constant="GRAY" />
+                    </color>
+                </DropShadow>
+            </effect>
+            <children>
+                <Label layoutX="168.0" layoutY="42.0" text="INFORMAÇÕES DO PERFIL" textAlignment="JUSTIFY">
+                    <font>
+                        <Font name="System Bold" size="32.0" />
+                    </font>
+                </Label>
+            <Label layoutX="90.0" layoutY="144.0" prefHeight="19.0" prefWidth="41.0" text="Nome:" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="104.0" layoutY="180.0" prefHeight="19.0" prefWidth="26.0" text="CPF:" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="78.0" layoutY="216.0" prefHeight="19.0" prefWidth="53.0" text="Telefone:" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="74.0" layoutY="248.0" prefHeight="19.0" prefWidth="61.0" text="Endereço:" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="96.0" layoutY="283.0" prefHeight="19.0" prefWidth="53.0" text="Email:" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="BtnPP" layoutX="304.0" layoutY="343.0" mnemonicParsing="false" onAction="#OnClickAlterarPerfil" prefHeight="19.0" prefWidth="135.0" style="-fx-background-radius: 0; -fx-background-color: #7EB97B;" text="Alterar informações">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.0" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="369.0" layoutY="144.0" prefHeight="19.0" prefWidth="128.0" text="Data de Nascimento:" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="369.0" layoutY="180.0" prefHeight="19.0" prefWidth="128.0" text="Data de Contratação:" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="450.0" layoutY="216.0" prefHeight="19.0" prefWidth="41.0" text="Cargo:" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Nometxt" layoutX="147.0" layoutY="141.0" prefHeight="25.0" prefWidth="211.0" />
+            <TextField fx:id="Cpftxt" layoutX="147.0" layoutY="177.0" prefHeight="25.0" prefWidth="211.0" />
+            <TextField fx:id="TelefoneTxt" layoutX="147.0" layoutY="213.0" prefHeight="25.0" prefWidth="211.0" />
+            <TextField fx:id="Enderecotxt" layoutX="147.0" layoutY="245.0" prefHeight="25.0" prefWidth="211.0" />
+            <TextField fx:id="Emailtxt" layoutX="147.0" layoutY="280.0" prefHeight="25.0" prefWidth="211.0" />
+            <TextField fx:id="DatadeNascimentotxt" layoutX="497.0" layoutY="141.0" prefHeight="25.0" prefWidth="155.0" />
+            <TextField fx:id="DatadeContratacaotxt" layoutX="497.0" layoutY="177.0" prefHeight="25.0" prefWidth="155.0" />
+            <ComboBox fx:id="Cargocb" layoutX="497.0" layoutY="213.0" prefHeight="25.0" prefWidth="155.0" />
+            <Button fx:id="BtnPP1" layoutX="304.0" layoutY="385.0" mnemonicParsing="false" onAction="#OnClickSair" prefHeight="19.0" prefWidth="135.0" style="-fx-background-radius: 0; -fx-background-color: #DC7777;" text="Sair">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.0" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            </children>
+        </Pane>
+   </children>
+</FlowPane>
