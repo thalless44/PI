@@ -1,4 +1,5 @@
 com\mycompany\telaspi\TelaLoginPIController.class
 module-info.class
 com\mycompany\telaspi\App.class
+com\mycompany\telaspi\TelaCadastroClienteController.class
 com\mycompany\telaspi\TelaRecSenhaController.class
