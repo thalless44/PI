@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="735.0" prefWidth="992.0" style="-fx-background-color: #6ec4e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.telaspi.TelaCadastroFuncionarioController">
+   <children>
+      <Pane prefHeight="532.0" prefWidth="779.0" style="-fx-background-color: #d9d9d9;">
+         <effect>
+            <DropShadow>
+               <input>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.0" />
+                     </color>
+                  </DropShadow>
+               </input>
+               <color>
+                  <Color opacity="0.49618321657180786" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <Label layoutX="178.0" layoutY="40.0" text="CADASTRO DE FUNCIONÁRIO">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtfdNome" layoutX="38.0" layoutY="144.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtfdCPF" layoutX="38.0" layoutY="219.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtfdTelefone" layoutX="38.0" layoutY="298.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtfdEndereco" layoutX="38.0" layoutY="377.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtfdEmail" layoutX="296.0" layoutY="144.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtfdSenha" layoutX="296.0" layoutY="219.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtfdConfirmarSenha" layoutX="296.0" layoutY="298.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtfdDataNascimento" layoutX="552.0" layoutY="144.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtfdDataContratacao" layoutX="552.0" layoutY="219.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtfdSalario" layoutX="552.0" layoutY="298.0" prefHeight="25.0" prefWidth="187.0" />
+            <Button fx:id="btnEfetuarCadastroFuncionario" layoutX="339.0" layoutY="377.0" mnemonicParsing="false" onAction="#OnActionBtnEfetuarCadastroFuncionario" style="-fx-background-color: #7eb97b;" text="Efetuar cadastro" />
+            <Button fx:id="btnSair" layoutX="339.0" layoutY="420.0" mnemonicParsing="false" onAction="#OnActionBtnSair" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #DC7777;" text="Sair" />
+            <Label layoutX="38.0" layoutY="127.0" text="Nome" />
+            <Label layoutX="38.0" layoutY="202.0" text="CPF" />
+            <Label layoutX="38.0" layoutY="281.0" text="Telefone" />
+            <Label layoutX="38.0" layoutY="360.0" text="Endereço" />
+            <Label layoutX="296.0" layoutY="127.0" text="Email" />
+            <Label layoutX="296.0" layoutY="202.0" text="Senha" />
+            <Label layoutX="296.0" layoutY="281.0" text="Confirmar senha" />
+            <Label layoutX="552.0" layoutY="127.0" text="Data de nascimento" />
+            <Label layoutX="552.0" layoutY="202.0" text="Data de contratação" />
+            <Label layoutX="552.0" layoutY="281.0" text="Salário" />
+            <Label layoutX="552.0" layoutY="360.0" text="Cargo" />
+            <ComboBox fx:id="cmbxCargo" layoutX="552.0" layoutY="377.0" prefHeight="25.0" prefWidth="187.0" />
+         </children>
+      </Pane>
+   </children>
+</FlowPane>

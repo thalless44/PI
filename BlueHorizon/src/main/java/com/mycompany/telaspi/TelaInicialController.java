@@ -44,6 +44,21 @@ public class TelaInicialController {
 
     @FXML
     void onClickFuncionario(ActionEvent event) {
+        
+        try{
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaCadastroFuncionario.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = new Stage();
+            
+            stage.setScene(new Scene (root));
+            stage.setTitle("Cadastro de funcionário");
+            stage.show();
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
 
     }
 

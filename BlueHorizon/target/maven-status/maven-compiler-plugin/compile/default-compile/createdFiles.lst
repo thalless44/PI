@@ -1,7 +1,9 @@
+com\mycompany\telaspi\TelaRecSenhaController.class
+com\mycompany\telaspi\TelaInicialController.class
 com\mycompany\telaspi\TelaLoginPIController.class
 module-info.class
 com\mycompany\telaspi\App.class
+com\mycompany\telaspi\TelaCadastroFuncionarioController.class
 com\mycompany\telaspi\TelaPersonalizacaoPerfil.class
-com\mycompany\telaspi\TelaInformacoesPerfilController.class
 com\mycompany\telaspi\TelaCadastroClienteController.class
-com\mycompany\telaspi\TelaRecSenhaController.class
+com\mycompany\telaspi\TelaInformacoesPerfilController.class
