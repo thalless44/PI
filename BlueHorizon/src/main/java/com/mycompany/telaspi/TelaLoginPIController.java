@@ -51,11 +51,19 @@ public class TelaLoginPIController {
         
         }else if(email.equals("usuario@gmail.com") && senha.equals("12345")){
             
-        Alert loginSucesso = new Alert(Alert.AlertType.INFORMATION);
-        loginSucesso.setTitle("BlueHorizon - Login");
-        loginSucesso.setHeaderText("Login efetuado com sucesso!");
-        loginSucesso.setContentText("Seja bem-vindo(a), " + email);
-        loginSucesso.showAndWait();
+        try {
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaInicial.fxml"));
+        Parent root = loader.load();
+        
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Tela Home");
+        stage.show();
+        
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
             
         } else {
             

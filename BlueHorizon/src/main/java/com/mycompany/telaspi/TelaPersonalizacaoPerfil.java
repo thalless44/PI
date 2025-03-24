@@ -1,11 +1,15 @@
 package com.mycompany.telaspi;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
@@ -45,21 +49,13 @@ public class TelaPersonalizacaoPerfil {
     @FXML
     void OnClickAlterarPerfil(ActionEvent event) {
         // Lógica para alterar o perfil
+        
+        Alert confirmar = new Alert(Alert.AlertType.WARNING);
+        confirmar.setTitle("Alterações fei com sucesso");
+        
     }
 
-    @FXML
-    void OnClickSair(ActionEvent event) {
-     
-        if(FecharTelaPersonalizacaoPerfil()){
-            
-            Stage stage = (Stage) BtnPP1.getScene().getWindow();
-            stage.close();
-            
-        }else{
-            event.consume();
-        }
-    }
-
+   
     // Método para inicializar o ComboBox com as opções
     @FXML
     public void initialize() {
@@ -76,4 +72,23 @@ public class TelaPersonalizacaoPerfil {
         return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
         
     }
-}
+    
+    @FXML
+    void OnClickSair(ActionEvent event) {
+     
+        try {
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaInicial.fxml"));
+        Parent root = loader.load();
+        
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Tela Home");
+        stage.show();
+        
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    
+    }}
+   
