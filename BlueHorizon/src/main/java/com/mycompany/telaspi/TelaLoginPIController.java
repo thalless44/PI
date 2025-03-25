@@ -58,7 +58,9 @@ public class TelaLoginPIController {
         
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-        stage.setTitle("Tela Home");
+        stage.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
+        
+        stage.setMaximized(true);
         stage.show();
         
     } catch (IOException e) {
@@ -87,6 +89,7 @@ public class TelaLoginPIController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Recuperação de Senha");
+        stage.setMaximized(true);
         stage.show();
         
     } catch (IOException e) {

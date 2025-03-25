@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
@@ -13,6 +16,9 @@ public class TelaInicialController {
     
     @FXML
     private MenuItem menuAcessarPerfil;
+    
+    @FXML
+    private Menu btnSair;
 
     @FXML
     private MenuItem menuCadastroCliente;
@@ -22,7 +28,25 @@ public class TelaInicialController {
 
     @FXML
     private MenuItem menuCadastroImovol;
+    
+    @FXML
+    private MenuItem btnFecharApp;
+    
+    @FXML
+    private MenuItem btnRelatorioVendaDosImoveis;
 
+    
+    
+    @FXML
+    void OnActionFecharAplicacao(ActionEvent event) {
+        
+        if(SairTelaInicio()){        
+            System.exit(0);       
+        }else{       
+            event.consume();        
+        }
+    }
+ 
     @FXML
     void onClickCliente(ActionEvent event) {
         try{
@@ -34,6 +58,8 @@ public class TelaInicialController {
             
             stage.setScene(new Scene (root));
             stage.setTitle("Personalização de perfil");
+            stage.setMaximized(true);
+
             stage.show();
             
         }catch(IOException e){
@@ -54,6 +80,8 @@ public class TelaInicialController {
             
             stage.setScene(new Scene (root));
             stage.setTitle("Cadastro de funcionário");
+            stage.setMaximized(true);
+
             stage.show();
             
         }catch(IOException e){
@@ -79,6 +107,8 @@ public class TelaInicialController {
             
             stage.setScene(new Scene (root));
             stage.setTitle("Personalização de perfil");
+            stage.setMaximized(true);
+
             stage.show();
             
         }catch(IOException e){
@@ -87,6 +117,23 @@ public class TelaInicialController {
 
     }
     
-    
+     @FXML
+    void OnActionBtnRelatorioVendaDosImoveis(ActionEvent event) {
+        
+        //Tela de relatório de vendas
+
+    }
+
+
+    private boolean SairTelaInicio() {
+        
+        Alert FecharTelaInicio = new Alert(Alert.AlertType.WARNING);
+        FecharTelaInicio.setTitle("Aviso");
+        FecharTelaInicio.setHeaderText("Tem certeza que deseja fechar a aplicação?");
+        FecharTelaInicio.setContentText("Todas as alterações não salvas serão perdidas");
+        return FecharTelaInicio.showAndWait().filter(response
+                -> response == ButtonType.OK).isPresent();
+    }
+
     
 }

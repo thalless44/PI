@@ -84,6 +84,8 @@ public class TelaPersonalizacaoPerfil {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Tela Home");
+        stage.setMaximized(true);
+
         stage.show();
         
     } catch (IOException e) {

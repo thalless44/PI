@@ -51,6 +51,8 @@ public class TelaInformacoesPerfilController {
             
             stage.setScene(new Scene (root));
             stage.setTitle("Personalização de perfil");
+            
+            stage.setMaximized(true);
             stage.show();
             
         }catch(IOException e){

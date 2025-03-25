@@ -24,6 +24,8 @@ public class App extends Application {
 
         stage.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
         stage.setScene(scene);
+        
+        stage.setMaximized(true);
         stage.show();
 
     }
