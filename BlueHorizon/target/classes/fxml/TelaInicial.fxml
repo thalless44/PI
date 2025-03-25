@@ -42,7 +42,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Usuário Sistema">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Planilha" />
+                  <MenuItem fx:id="btnUsuarioSistema" mnemonicParsing="false" onAction="#OnClickAbrirUsuarioSistema" text="Planilha" />
                </items>
             </Menu>
             <Menu fx:id="btnSair" mnemonicParsing="false" text="Sair">

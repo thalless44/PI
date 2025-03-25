@@ -17,6 +17,10 @@ public class TelaInicialController {
     @FXML
     private MenuItem menuAcessarPerfil;
     
+    
+    @FXML
+    private MenuItem btnUsuarioSistema;
+    
     @FXML
     private Menu btnSair;
 
@@ -65,6 +69,31 @@ public class TelaInicialController {
         }catch(IOException e){
             e.printStackTrace();
         }
+
+    }
+    
+     @FXML
+    void OnClickAbrirUsuarioSistema(ActionEvent event) {
+        
+         try{
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaUsuarioSistema.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = new Stage();
+            
+            stage.setScene(new Scene (root));
+            stage.setTitle("UsuariosSistema");
+            stage.setMaximized(true);
+
+            stage.show();
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+        
+        
 
     }
 
@@ -135,5 +164,8 @@ public class TelaInicialController {
                 -> response == ButtonType.OK).isPresent();
     }
 
+    
+    
+    
     
 }
