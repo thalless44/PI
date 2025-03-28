@@ -1,7 +1,7 @@
-module com.mycompany.telaspi {
+module principal {
     requires javafx.controls;
     requires javafx.fxml;
-    
-    exports com.mycompany.telaspi;
-    opens com.mycompany.telaspi to javafx.fxml;
+
+    opens controller to javafx.fxml;
+    exports principal;
 }
