@@ -17,7 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        stage.setTitle("Enter your Trip");
+        stage.setTitle("Tela Login");
         URL url = new File("src/main/java/view/TelaLoginPI.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();

@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class TelaRecSenhaController {
+    private Stage stage;
 
     @FXML
     private Button btnRecuperarSenha;
@@ -18,6 +19,9 @@ public class TelaRecSenhaController {
 
     @FXML
     private TextField txtfdEmailRecSenha;
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     @FXML
     void ActionRecuperarSenha(ActionEvent event) {

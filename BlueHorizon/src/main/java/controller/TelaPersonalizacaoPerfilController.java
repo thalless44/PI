@@ -1,6 +1,8 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,6 +17,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 public class TelaPersonalizacaoPerfilController {
+    private Stage stage; 
 
     @FXML
     private Button BtnPP; 
@@ -45,6 +48,10 @@ public class TelaPersonalizacaoPerfilController {
 
     @FXML
     private TextField TelefoneTxt;
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     @FXML
     void OnClickAlterarPerfil(ActionEvent event) {
@@ -75,22 +82,23 @@ public class TelaPersonalizacaoPerfilController {
     
     @FXML
     void OnClickSair(ActionEvent event) {
-     
         try {
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaInicial.fxml"));
-        Parent root = loader.load();
-        
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Tela Home");
-        stage.setMaximized(true);
+            URL url = new File("src/main/java/view/TelaTelaInicial.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Stage telaInicial = new Stage();
+            TelaInicialController ti = loader.getController(); 
+            ti.setStage(telaInicial);
+            Scene scene = new Scene(root);
+            telaInicial.setScene(scene);
+            telaInicial.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
 
-        stage.show();
+            telaInicial.show();
+            } catch (IOException e) {
+            e.printStackTrace();
+            }
         
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        
     
     }}
    

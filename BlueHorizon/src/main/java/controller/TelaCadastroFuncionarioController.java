@@ -5,8 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class TelaCadastroFuncionarioController {
+    private Stage stage;
 
     @FXML
     private Button btnEfetuarCadastroFuncionario;
@@ -46,6 +48,10 @@ public class TelaCadastroFuncionarioController {
 
     @FXML
     private TextField txtfdTelefone;
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     @FXML
     void OnActionBtnEfetuarCadastroFuncionario(ActionEvent event) {

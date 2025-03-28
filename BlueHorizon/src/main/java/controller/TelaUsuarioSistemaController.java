@@ -1,6 +1,8 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,8 @@ import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 
 public class TelaUsuarioSistemaController {
+    
+    private Stage stage;
     
     
         @FXML
@@ -36,23 +40,30 @@ public class TelaUsuarioSistemaController {
 
     @FXML
     private TableColumn<?, ?> tbtelefone;
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+    
 
     @FXML
     void OnClickSair(ActionEvent event) {
 
-                try {
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaInicial.fxml"));
-        Parent root = loader.load();
-        
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Tela Home");
-        stage.show();
-        
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        try {
+            URL url = new File("src/main/java/view/TelaTelaInicial.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Stage telaInicial = new Stage();
+            TelaInicialController ti = loader.getController(); 
+            ti.setStage(telaInicial);
+            Scene scene = new Scene(root);
+            telaInicial.setScene(scene);
+            telaInicial.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
+
+            telaInicial.show();
+            } catch (IOException e) {
+            e.printStackTrace();
+            }
     
     }
     

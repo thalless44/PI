@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class TelaCadastroClienteController {
+    
+    private Stage stage;
 
     @FXML
     private Button btnCancelarcadastro;
@@ -24,6 +26,10 @@ public class TelaCadastroClienteController {
 
     @FXML
     private TextField txtTelefoneCliente;
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     @FXML
     void ActionCancelarCadastro(ActionEvent event) {

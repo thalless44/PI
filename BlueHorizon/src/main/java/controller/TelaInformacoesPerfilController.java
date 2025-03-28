@@ -1,6 +1,8 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class TelaInformacoesPerfilController {
+    private Stage stage;
 
     @FXML
     private Button BtnPP;
@@ -38,26 +41,30 @@ public class TelaInformacoesPerfilController {
 
     @FXML
     private Label nomeID;
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     @FXML
     void OnClickPersonalizarPerfil(ActionEvent event) {
         
-        try{
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaPersonalizacaoPerfil.fxml"));
+        try {
+            URL url = new File("src/main/java/view/TelaPersonalizacaoPerfil.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
-            
-            Stage stage = new Stage();
-            
-            stage.setScene(new Scene (root));
-            stage.setTitle("Personalização de perfil");
-            
-            stage.setMaximized(true);
-            stage.show();
-            
-        }catch(IOException e){
+            Stage telaPerfil = new Stage();
+            TelaPersonalizacaoPerfilController ti = loader.getController(); 
+            ti.setStage(telaPerfil);
+            Scene scene = new Scene(root);
+            telaPerfil.setScene(scene);
+            telaPerfil.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
+
+            telaPerfil.show();
+            } catch (IOException e) {
             e.printStackTrace();
-        }
+            }
+        
 
     }
 

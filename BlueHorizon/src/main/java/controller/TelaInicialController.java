@@ -1,6 +1,8 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +15,8 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 public class TelaInicialController {
-    private Stage stageInicial;
-    
+    private Stage stage;
+
     
     @FXML
     private MenuItem menuAcessarPerfil;
@@ -40,6 +42,10 @@ public class TelaInicialController {
     
     @FXML
     private MenuItem btnRelatorioVendaDosImoveis;
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     
     
@@ -55,70 +61,63 @@ public class TelaInicialController {
  
     @FXML
     void onClickCliente(ActionEvent event) {
-        try{
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaCadastroCliente.fxml"));
+        try {
+            URL url = new File("src/main/java/view/TelaCadastroCliente.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
-            
-            Stage stage = new Stage();
-            
-            stage.setScene(new Scene (root));
-            stage.setTitle("Personalização de perfil");
-            stage.setMaximized(true);
+            Stage telaCC = new Stage();
+            TelaCadastroClienteController ti = loader.getController(); 
+            ti.setStage(telaCC);
+            Scene scene = new Scene(root);
+            telaCC.setScene(scene);
+            telaCC.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
 
-            stage.show();
-            
-        }catch(IOException e){
+            telaCC.show();
+            } catch (IOException e) {
             e.printStackTrace();
-        }
-
+            }
+        
     }
     
      @FXML
     void OnClickAbrirUsuarioSistema(ActionEvent event) {
-        
-         try{
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaUsuarioSistema.fxml"));
+        try {
+            URL url = new File("src/main/java/view/TelaUsuarioSistema.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
-            
-            Stage stage = new Stage();
-            
-            stage.setScene(new Scene (root));
-            stage.setTitle("UsuariosSistema");
-            stage.setMaximized(true);
+            Stage telaUS = new Stage();
+            TelaUsuarioSistemaController ti = loader.getController(); 
+            ti.setStage(telaUS);
+            Scene scene = new Scene(root);
+            telaUS.setScene(scene);
+            telaUS.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
 
-            stage.show();
-            
-        }catch(IOException e){
+            telaUS.show();
+            } catch (IOException e) {
             e.printStackTrace();
-        }
-
+            }
         
-        
-
     }
+
 
     @FXML
     void onClickFuncionario(ActionEvent event) {
         
-        try{
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaCadastroFuncionario.fxml"));
+        try {
+            URL url = new File("src/main/java/view/TelaCadastroFuncionario.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
-            
-            Stage stage = new Stage();
-            
-            stage.setScene(new Scene (root));
-            stage.setTitle("Cadastro de funcionário");
-            stage.setMaximized(true);
+            Stage telaCF = new Stage();
+            TelaCadastroFuncionarioController ti = loader.getController(); 
+            ti.setStage(telaCF);
+            Scene scene = new Scene(root);
+            telaCF.setScene(scene);
+            telaCF.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
 
-            stage.show();
-            
-        }catch(IOException e){
+            telaCF.show();
+            } catch (IOException e) {
             e.printStackTrace();
-        }
-
+            }
     }
 
     @FXML
@@ -127,24 +126,22 @@ public class TelaInicialController {
     }
 
     @FXML
-    void onClickPerfil(ActionEvent event) {
-        
-        try{
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaInformacoesPerfil.fxml"));
+    void onClickPerfil(ActionEvent event) {        
+        try {
+            URL url = new File("src/main/java/view/TelaInformacoesPerfil.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
-            
-            Stage stage = new Stage();
-            
-            stage.setScene(new Scene (root));
-            stage.setTitle("Personalização de perfil");
-            stage.setMaximized(true);
+            Stage telaIP = new Stage();
+            TelaInformacoesPerfilController ti = loader.getController(); 
+            ti.setStage(telaIP);
+            Scene scene = new Scene(root);
+            telaIP.setScene(scene);
+            telaIP.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
 
-            stage.show();
-            
-        }catch(IOException e){
+            telaIP.show();
+            } catch (IOException e) {
             e.printStackTrace();
-        }
+            }
 
     }
     

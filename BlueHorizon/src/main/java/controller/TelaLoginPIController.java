@@ -1,6 +1,8 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,23 +52,23 @@ public class TelaLoginPIController {
         loginPreencher.setContentText("Campo de senha vazio. Preencha");
         loginPreencher.showAndWait();
         
-        }else if(email.equals("usuario@gmail.com") && senha.equals("12345")){
+        }else if(email.equals("usuario") && senha.equals("12345")){
             
-        try {
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaInicial.fxml"));
-        Parent root = loader.load();
-        
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
-        
-        stage.setMaximized(true);
-        stage.show();
-        
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+            try {
+            URL url = new File("src/main/java/view/TelaInicial.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Stage telaInicial = new Stage();
+            TelaInicialController ti = loader.getController(); 
+            ti.setStage(telaInicial);
+            Scene scene = new Scene(root);
+            telaInicial.setScene(scene);
+            telaInicial.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
+
+            telaInicial.show();
+            } catch (IOException e) {
+            e.printStackTrace();
+            }
             
         } else {
             
@@ -82,20 +84,23 @@ public class TelaLoginPIController {
     @FXML
     private void ActionHyperlinkRecSenha(ActionEvent event) throws IOException {
         
-    try {
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TelaRecSenha.fxml"));
-        Parent root = loader.load();
-        
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Recuperação de Senha");
-        stage.setMaximized(true);
-        stage.show();
-        
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        try {
+            URL url = new File("src/main/java/view/TelaRecSenha.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Stage telaRecSenha = new Stage();
+            TelaRecSenhaController recSenhaController = loader.getController(); 
+            recSenhaController.setStage(telaRecSenha);
+            Scene scene = new Scene(root);
+            telaRecSenha.setScene(scene);
+            telaRecSenha.setTitle("Recuperação de Senha");
+
+            // Exibir a nova tela
+            telaRecSenha.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
     
     }public void setStage(Stage stage){
         this.stageLogin = stage;
