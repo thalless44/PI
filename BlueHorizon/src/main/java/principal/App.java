@@ -17,7 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        stage.setTitle("Tela Login");
+        stage.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
         URL url = new File("src/main/java/view/TelaLoginPI.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
@@ -29,6 +29,7 @@ public class App extends Application {
         });
         Scene scene = new Scene (root);
         telaLogin.setScene(scene);
+        telaLogin.setMaximized(true);
         telaLogin.show();
     }
 

@@ -29,7 +29,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="87.0" layoutY="180.0" prefHeight="19.0" prefWidth="53.0" text="Cpf:" textAlignment="CENTER">
+            <Label layoutX="87.0" layoutY="180.0" prefHeight="19.0" prefWidth="53.0" text="CPF:" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -49,7 +49,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button fx:id="BtnPP" layoutX="298.0" layoutY="386.0" mnemonicParsing="false" onAction="#OnClickPersonalizarPerfil" prefHeight="25.0" prefWidth="135.0" style="-fx-background-radius: 0; -fx-background-color: #bdbdbd;" text="Personalizar Perfil">
+            <Button fx:id="BtnPP" layoutX="298.0" layoutY="350.0" mnemonicParsing="false" onAction="#OnClickPersonalizarPerfil" prefHeight="25.0" prefWidth="135.0" style="-fx-background-radius: 0; -fx-background-color: #bdbdbd;" text="Personalizar Perfil">
                <effect>
                   <DropShadow>
                      <color>
@@ -84,6 +84,18 @@
             <Label fx:id="DnID" layoutX="574.0" layoutY="145.0" text="XX/XX/XXXX" />
             <Label fx:id="DcID" layoutX="574.0" layoutY="181.0" text="XX/XX/XXXX" />
             <Label fx:id="CargoID" layoutX="496.0" layoutY="215.0" text="XXXX" />
+            <Button fx:id="btnSair" layoutX="298.0" layoutY="392.0" mnemonicParsing="false" onAction="#OnClickSairInformacoesPerfil" prefHeight="25.0" prefWidth="135.0" style="-fx-background-radius: 0; -fx-background-color: #DC7777;" text="Sair">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.0" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
             </children>
         </Pane>
    </children>

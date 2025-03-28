@@ -65,6 +65,7 @@ public class TelaLoginPIController {
             telaInicial.setScene(scene);
             telaInicial.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
 
+            telaInicial.setMaximized(true);
             telaInicial.show();
             } catch (IOException e) {
             e.printStackTrace();
@@ -94,6 +95,8 @@ public class TelaLoginPIController {
             Scene scene = new Scene(root);
             telaRecSenha.setScene(scene);
             telaRecSenha.setTitle("Recuperação de Senha");
+            
+            telaRecSenha.setMaximized(true);
 
             // Exibir a nova tela
             telaRecSenha.show();

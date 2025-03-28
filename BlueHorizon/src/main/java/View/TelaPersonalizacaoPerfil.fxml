@@ -21,7 +21,7 @@
                 </DropShadow>
             </effect>
             <children>
-                <Label layoutX="168.0" layoutY="42.0" text="INFORMAÇÕES DO PERFIL" textAlignment="JUSTIFY">
+                <Label layoutX="123.0" layoutY="38.0" text="ALTERAR INFORMAÇÕES DO PERFIL" textAlignment="JUSTIFY">
                     <font>
                         <Font name="System Bold" size="32.0" />
                     </font>

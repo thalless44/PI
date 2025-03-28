@@ -8,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -17,6 +19,9 @@ public class TelaInformacoesPerfilController {
 
     @FXML
     private Button BtnPP;
+    
+    @FXML
+    private Button btnSair;
 
     @FXML
     private Label CargoID;
@@ -60,12 +65,33 @@ public class TelaInformacoesPerfilController {
             telaPerfil.setScene(scene);
             telaPerfil.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
 
+            telaPerfil.setMaximized(true);
             telaPerfil.show();
             } catch (IOException e) {
             e.printStackTrace();
             }
+    }
+    
+    @FXML
+    void OnClickSairInformacoesPerfil(ActionEvent event) {
         
+        if(FecharTelaInformacoesPerfil()){              
+            //faz com que feche apenas a tela de rec senha, ao inves da aplicação toda
+            Stage stage = (Stage) btnSair.getScene().getWindow();
+            stage.close();          
+        }else{
+            event.consume();
+        }
 
+    }
+
+    private boolean FecharTelaInformacoesPerfil() {
+        
+        Alert confirmar = new Alert(Alert.AlertType.WARNING);
+        confirmar.setTitle("Confirmação");
+        confirmar.setHeaderText("Tem certeza que deseja fechar a tela de informações do perfil?");
+        confirmar.setContentText("Todas as alterações não salvas serão perdidas!");
+        return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
     }
 
 }

@@ -35,8 +35,8 @@ public class TelaCadastroClienteController {
     void ActionCancelarCadastro(ActionEvent event) {
         Alert confirmar = new Alert(Alert.AlertType.CONFIRMATION);
         confirmar.setTitle("Confirmação");
-        confirmar.setHeaderText("Cancelar Cadastro");
-        confirmar.setContentText("Tem certeza que deseja cancelar o cadastro?");
+        confirmar.setHeaderText("Cancelar Cadastro de cliente");
+        confirmar.setContentText("Tem certeza que deseja cancelar o cadastro de cliente?");
         
         if (confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent()) {
             Stage stage = (Stage) btnCancelarcadastro.getScene().getWindow();
@@ -61,9 +61,9 @@ public class TelaCadastroClienteController {
             erro.show();
         } else {
             Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
-            sucesso.setTitle("Sucesso");
-            sucesso.setHeaderText("Cadastro Efetuado");
-            sucesso.setContentText("Cliente cadastrado com sucesso!\n\nNome: " + nome + "\nEmail: " + email + "\nTelefone: " + telefone);
+            sucesso.setTitle("Cadastro de cliente");
+            sucesso.setHeaderText("Cadastro efetuado com sucesso!");
+            sucesso.setContentText("Nome: " + nome + "\nEmail: " + email + "\nTelefone: " + telefone);
             sucesso.showAndWait();
         }
     }

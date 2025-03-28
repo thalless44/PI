@@ -8,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 
@@ -49,21 +51,13 @@ public class TelaUsuarioSistemaController {
     @FXML
     void OnClickSair(ActionEvent event) {
 
-        try {
-            URL url = new File("src/main/java/view/TelaTelaInicial.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-            Stage telaInicial = new Stage();
-            TelaInicialController ti = loader.getController(); 
-            ti.setStage(telaInicial);
-            Scene scene = new Scene(root);
-            telaInicial.setScene(scene);
-            telaInicial.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
-
-            telaInicial.show();
-            } catch (IOException e) {
-            e.printStackTrace();
-            }
+        if(FecharTelaUsuariosSistema()){              
+            //faz com que feche apenas a tela de rec senha, ao inves da aplicação toda
+            Stage stage = (Stage) btnSair.getScene().getWindow();
+            stage.close();          
+        }else{
+            event.consume();
+        }
     
     }
     
@@ -79,6 +73,15 @@ public class TelaUsuarioSistemaController {
     @FXML
     void OnclickExcluir(ActionEvent event) {
 
+    }
+
+    private boolean FecharTelaUsuariosSistema() {
+        
+        Alert confirmar = new Alert(Alert.AlertType.WARNING);
+        confirmar.setTitle("Confirmação");
+        confirmar.setHeaderText("Tem certeza que deseja fechar a tela atual?");
+        confirmar.setContentText("Todas as alterações não salvas serão perdidas!");
+        return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
     }
 
 }

@@ -47,8 +47,7 @@ public class TelaInicialController {
         this.stage = stage;
     }
 
-    
-    
+  
     @FXML
     void OnActionFecharAplicacao(ActionEvent event) {
         
@@ -72,6 +71,7 @@ public class TelaInicialController {
             telaCC.setScene(scene);
             telaCC.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
 
+            telaCC.setMaximized(true);
             telaCC.show();
             } catch (IOException e) {
             e.printStackTrace();
@@ -92,6 +92,7 @@ public class TelaInicialController {
             telaUS.setScene(scene);
             telaUS.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
 
+            telaUS.setMaximized(true);
             telaUS.show();
             } catch (IOException e) {
             e.printStackTrace();
@@ -113,7 +114,8 @@ public class TelaInicialController {
             Scene scene = new Scene(root);
             telaCF.setScene(scene);
             telaCF.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
-
+            
+            telaCF.setMaximized(true);
             telaCF.show();
             } catch (IOException e) {
             e.printStackTrace();
@@ -138,6 +140,7 @@ public class TelaInicialController {
             telaIP.setScene(scene);
             telaIP.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
 
+            telaIP.setMaximized(true);
             telaIP.show();
             } catch (IOException e) {
             e.printStackTrace();

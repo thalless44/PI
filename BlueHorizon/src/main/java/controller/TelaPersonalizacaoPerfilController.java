@@ -69,6 +69,19 @@ public class TelaPersonalizacaoPerfilController {
         // Adicionando as opções "Gerente" e "Corretor" no ComboBox
         Cargocb.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
     }
+    
+    @FXML
+    void OnClickSair(ActionEvent event) {
+        
+         if(FecharTelaPersonalizacaoPerfil()){              
+            //faz com que feche apenas a tela de rec senha, ao inves da aplicação toda
+            Stage stage = (Stage) BtnPP1.getScene().getWindow();
+            stage.close();          
+        }else{
+            event.consume();
+        }
+         
+    }
 
     private boolean FecharTelaPersonalizacaoPerfil() {
         
@@ -80,25 +93,7 @@ public class TelaPersonalizacaoPerfilController {
         
     }
     
-    @FXML
-    void OnClickSair(ActionEvent event) {
-        try {
-            URL url = new File("src/main/java/view/TelaTelaInicial.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-            Stage telaInicial = new Stage();
-            TelaInicialController ti = loader.getController(); 
-            ti.setStage(telaInicial);
-            Scene scene = new Scene(root);
-            telaInicial.setScene(scene);
-            telaInicial.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
+    }
 
-            telaInicial.show();
-            } catch (IOException e) {
-            e.printStackTrace();
-            }
-        
-        
-    
-    }}
+
    
