@@ -4,9 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class TelaCadastroImovelController {
 
+    private Stage stage;
+    
     @FXML
     private Button btnAdicionarImagem;
 
@@ -83,6 +86,12 @@ public class TelaCadastroImovelController {
     @FXML
     void onClickCancelarCadastro(ActionEvent event) {
 
+    }
+
+   
+    
+    public void setStage(Stage stage){
+        this.stage = stage;
     }
 
 }

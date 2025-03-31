@@ -129,8 +129,8 @@ public class TelaInicialController {
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             Stage telaIP = new Stage();
-            TelaInformacoesPerfilController ti = loader.getController(); 
-            ti.setStage(telaIP);
+            TelaCadastroImovelController imovelpi = loader.getController(); 
+            imovelpi.setStage(telaIP);
             Scene scene = new Scene(root);
             telaIP.setScene(scene);
             telaIP.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
