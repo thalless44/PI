@@ -63,7 +63,7 @@ public class TelaInformacoesPerfilController {
             ti.setStage(telaPerfil);
             Scene scene = new Scene(root);
             telaPerfil.setScene(scene);
-            telaPerfil.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
+            telaPerfil.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Personalização de perfil");
 
             telaPerfil.setMaximized(true);
             telaPerfil.show();

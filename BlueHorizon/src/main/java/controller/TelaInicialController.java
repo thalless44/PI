@@ -69,7 +69,7 @@ public class TelaInicialController {
             ti.setStage(telaCC);
             Scene scene = new Scene(root);
             telaCC.setScene(scene);
-            telaCC.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
+            telaCC.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Cadastro de cliente");
 
             telaCC.setMaximized(true);
             telaCC.show();
@@ -90,7 +90,7 @@ public class TelaInicialController {
             ti.setStage(telaUS);
             Scene scene = new Scene(root);
             telaUS.setScene(scene);
-            telaUS.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
+            telaUS.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Usuários do sistema");
 
             telaUS.setMaximized(true);
             telaUS.show();
@@ -113,7 +113,7 @@ public class TelaInicialController {
             ti.setStage(telaCF);
             Scene scene = new Scene(root);
             telaCF.setScene(scene);
-            telaCF.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
+            telaCF.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Cadastro de funcionário");
             
             telaCF.setMaximized(true);
             telaCF.show();
@@ -138,7 +138,7 @@ public class TelaInicialController {
             ti.setStage(telaIP);
             Scene scene = new Scene(root);
             telaIP.setScene(scene);
-            telaIP.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
+            telaIP.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Informações do perfil");
 
             telaIP.setMaximized(true);
             telaIP.show();
@@ -151,7 +151,23 @@ public class TelaInicialController {
      @FXML
     void OnActionBtnRelatorioVendaDosImoveis(ActionEvent event) {
         
-        //Tela de relatório de vendas
+        try {
+       
+        URL url = new File("src/main/java/View/TelaRelatorioVendas.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+        Stage telaRV = new Stage();
+        TelaRelatorioVendasController tR = loader.getController(); 
+        tR.setStage(telaRV);
+        Scene scene = new Scene(root);
+        telaRV.setScene(scene);
+        telaRV.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Relatório de venda dos imóveis");
+        telaRV.setMaximized(true);
+        telaRV.show();
+       
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
 
     }
 

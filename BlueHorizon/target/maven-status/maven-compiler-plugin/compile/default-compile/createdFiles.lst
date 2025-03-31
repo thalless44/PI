@@ -1,6 +1,8 @@
 controller\TelaInicialController.class
+dal\ConexaoBD.class
 controller\TelaInformacoesPerfilController.class
 controller\TelaLoginPIController.class
+controller\TelaRelatorioVendasController.class
 module-info.class
 controller\TelaUsuarioSistemaController.class
 controller\TelaRecSenhaController.class
