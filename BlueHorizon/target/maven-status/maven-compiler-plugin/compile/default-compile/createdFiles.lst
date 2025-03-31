@@ -9,4 +9,5 @@ controller\TelaRecSenhaController.class
 controller\TelaCadastroClienteController.class
 principal\App.class
 controller\TelaCadastroFuncionarioController.class
+controller\TelaCadastroImovelController.class
 controller\TelaPersonalizacaoPerfilController.class

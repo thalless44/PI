@@ -124,6 +124,24 @@ public class TelaInicialController {
 
     @FXML
     void onClickImovel(ActionEvent event) {
+          try {
+            URL url = new File("src/main/java/view/TelaCadastroImovel.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Stage telaIP = new Stage();
+            TelaInformacoesPerfilController ti = loader.getController(); 
+            ti.setStage(telaIP);
+            Scene scene = new Scene(root);
+            telaIP.setScene(scene);
+            telaIP.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
+
+            telaIP.setMaximized(true);
+            telaIP.show();
+            } catch (IOException e) {
+            e.printStackTrace();
+            }
+
+        
 
     }
 
