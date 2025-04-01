@@ -33,16 +33,16 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="txtfdNome" layoutX="38.0" layoutY="144.0" prefHeight="25.0" prefWidth="187.0" />
-            <TextField fx:id="txtfdCPF" layoutX="38.0" layoutY="219.0" prefHeight="25.0" prefWidth="187.0" />
-            <TextField fx:id="txtfdTelefone" layoutX="38.0" layoutY="298.0" prefHeight="25.0" prefWidth="187.0" />
-            <TextField fx:id="txtfdEndereco" layoutX="38.0" layoutY="377.0" prefHeight="25.0" prefWidth="187.0" />
-            <TextField fx:id="txtfdEmail" layoutX="296.0" layoutY="144.0" prefHeight="25.0" prefWidth="187.0" />
-            <TextField fx:id="txtfdSenha" layoutX="296.0" layoutY="219.0" prefHeight="25.0" prefWidth="187.0" />
-            <TextField fx:id="txtfdConfirmarSenha" layoutX="296.0" layoutY="298.0" prefHeight="25.0" prefWidth="187.0" />
-            <TextField fx:id="txtfdDataNascimento" layoutX="552.0" layoutY="144.0" prefHeight="25.0" prefWidth="187.0" />
-            <TextField fx:id="txtfdDataContratacao" layoutX="552.0" layoutY="219.0" prefHeight="25.0" prefWidth="187.0" />
-            <TextField fx:id="txtfdSalario" layoutX="552.0" layoutY="298.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtFNome" layoutX="38.0" layoutY="144.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtFCPF" layoutX="38.0" layoutY="219.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtFTelefone" layoutX="38.0" layoutY="298.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtFEndereco" layoutX="38.0" layoutY="377.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtFEmail" layoutX="296.0" layoutY="144.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtFSenha" layoutX="296.0" layoutY="219.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtFSenha" layoutX="296.0" layoutY="298.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtFDataNascimento" layoutX="552.0" layoutY="144.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtFDataContratacao" layoutX="552.0" layoutY="219.0" prefHeight="25.0" prefWidth="187.0" />
+            <TextField fx:id="txtFSalario" layoutX="552.0" layoutY="298.0" prefHeight="25.0" prefWidth="187.0" />
             <Button fx:id="btnEfetuarCadastroFuncionario" layoutX="339.0" layoutY="377.0" mnemonicParsing="false" onAction="#OnActionBtnEfetuarCadastroFuncionario" style="-fx-background-color: #7eb97b;" text="Efetuar cadastro" />
             <Button fx:id="btnSair" layoutX="339.0" layoutY="420.0" mnemonicParsing="false" onAction="#OnActionBtnSair" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #DC7777;" text="Sair" />
             <Label layoutX="38.0" layoutY="127.0" text="Nome" />

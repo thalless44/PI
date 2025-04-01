@@ -3,6 +3,10 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,15 +18,21 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.LoginDAO;
+import model.Login;
 
 public class TelaLoginPIController {
+    
+        private Connection conexao;
+    private final LoginDAO dao = new LoginDAO();
+
     private Stage stageLogin;
 
-    @FXML
-    private TextField txtfdEmail;
+     @FXML
+    private TextField txtEmail;
 
     @FXML
-    private PasswordField txtfdSenha;
+    private PasswordField txtSenha;
 
     @FXML
     private Button btnEfetuarLogin;
@@ -33,8 +43,13 @@ public class TelaLoginPIController {
     @FXML
     private void ActionEfetuarLogin(ActionEvent event) {
         
-        String email = txtfdEmail.getText();
-        String senha = txtfdSenha.getText();
+        
+        
+        
+        String email = txtEmail.getText();
+        String senha = txtSenha.getText();
+        
+        
         
         if(email.isEmpty()){
             
@@ -52,7 +67,17 @@ public class TelaLoginPIController {
         loginPreencher.setContentText("Campo de senha vazio. Preencha");
         loginPreencher.showAndWait();
         
-        }else if(email.equals("usuario") && senha.equals("12345")){
+        }
+        
+        Login f=null;
+            try {
+                f = processarLogin(email, senha);
+            } catch (IOException ex) {
+                Logger.getLogger(TelaLoginPIController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaLoginPIController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        if(f != null){
             
             try {
             URL url = new File("src/main/java/view/TelaInicial.fxml").toURI().toURL();
@@ -112,4 +137,19 @@ public class TelaLoginPIController {
     public void abrirJanela (){
         System.out.println("Janela exibida");
     }
+    
+    
+    public Login processarLogin(String login,String senha) throws IOException, SQLException {
+        if (!dao.bancoOnline()) {
+            System.out.println("Banco de dados desconectado!");
+        } else if (login != null && !login.isEmpty() && senha != null && !senha.isEmpty()) {
+               System.out.println("Processo de autenticação");
+               Login f = dao.autenticar(txtEmail.getText(), txtSenha.getText());
+               return f;
+        } else {
+            System.out.println("Verifique as informações!");
+        }
+return null;
+    }
+
 }

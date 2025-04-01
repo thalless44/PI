@@ -1,13 +1,17 @@
 controller\TelaInicialController.class
 controller\TelaInformacoesPerfilController.class
+model\FuncionarioDAO.class
 principal\App.class
 controller\TelaCadastroFuncionarioController.class
 dal\ConexaoBD.class
+model\GenericDAO.class
 controller\TelaLoginPIController.class
 controller\TelaRelatorioVendasController.class
+model\LoginDAO.class
 module-info.class
 controller\TelaUsuarioSistemaController.class
 controller\TelaRecSenhaController.class
+model\Login.class
 controller\TelaCadastroClienteController.class
 controller\TelaCadastroImovelController.class
 controller\TelaPersonalizacaoPerfilController.class

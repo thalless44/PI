@@ -1,5 +1,8 @@
 package controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -8,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.FuncionarioDAO;
 
 public class TelaCadastroFuncionarioController {
     private Stage stage;
@@ -22,34 +26,31 @@ public class TelaCadastroFuncionarioController {
     private ComboBox<?> cmbxCargo;
 
     @FXML
-    private TextField txtfdCPF;
+    private TextField txtFCPF;
 
     @FXML
-    private TextField txtfdConfirmarSenha;
+    private TextField txtFDataContratacao;
 
     @FXML
-    private TextField txtfdDataContratacao;
+    private TextField txtFDataNascimento;
 
     @FXML
-    private TextField txtfdDataNascimento;
+    private TextField txtFEmail;
 
     @FXML
-    private TextField txtfdEmail;
+    private TextField txtFEndereco;
 
     @FXML
-    private TextField txtfdEndereco;
+    private TextField txtFNome;
 
     @FXML
-    private TextField txtfdNome;
+    private TextField txtFSalario;
 
     @FXML
-    private TextField txtfdSalario;
+    private TextField txtFSenha;
 
     @FXML
-    private TextField txtfdSenha;
-
-    @FXML
-    private TextField txtfdTelefone;
+    private TextField txtFTelefone;
     
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -57,8 +58,37 @@ public class TelaCadastroFuncionarioController {
 
     @FXML
     void OnActionBtnEfetuarCadastroFuncionario(ActionEvent event) {
-
+        cadastrarFuncionario();
+        
     }
+    private void cadastrarFuncionario() {
+        String nome = txtFNome.getText();
+        String cpf = txtFCPF.getText();
+        String endereco = txtFEndereco.getText();
+        String telefone = txtFTelefone.getText();
+        String email = txtFEmail.getText();
+        String senha = txtFSenha.getText();
+        double salario = Double.parseDouble(txtFSalario.getText());
+        
+        // Converter a data para o formato correto
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataNascimentoLD = LocalDate.parse(txtFDataNascimento.getText(), formato);
+        LocalDate dataContratacaoLD = LocalDate.parse(txtFDataContratacao.getText(), formato);
+
+        // Converter LocalDate para Date (formato aceito pelo MySQL)
+        Date dataNascimento = Date.valueOf(dataNascimentoLD);
+        Date dataContratacao = Date.valueOf(dataContratacaoLD);
+
+        boolean sucesso = FuncionarioDAO.cadastrarFuncionario(nome, cpf, dataNascimento, dataContratacao, endereco, telefone, email, senha, salario);
+
+        Alert alert = new Alert(sucesso ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR);
+        alert.setTitle(sucesso ? "Sucesso" : "Erro");
+        alert.setHeaderText(sucesso ? "Cadastro realizado!" : "Erro ao cadastrar!");
+        alert.setContentText(sucesso ? "O funcionário foi cadastrado com sucesso." : "Verifique os dados e tente novamente.");
+        alert.showAndWait();
+    }
+        
+        
 
     @FXML
     void OnActionBtnSair(ActionEvent event) {
