@@ -23,7 +23,8 @@ import model.Login;
 
 public class TelaLoginPIController {
     
-        private Connection conexao;
+    private Connection conexao;
+    
     private final LoginDAO dao = new LoginDAO();
 
     private Stage stageLogin;
@@ -42,34 +43,22 @@ public class TelaLoginPIController {
 
     @FXML
     private void ActionEfetuarLogin(ActionEvent event) {
-        
-        
-        
-        
+            
         String email = txtEmail.getText();
         String senha = txtSenha.getText();
-        
-        
-        
-        if(email.isEmpty()){
+            
+        /*if(email.isEmpty() || senha.isEmpty()){
             
         Alert loginPreencher = new Alert(Alert.AlertType.ERROR);
         loginPreencher.setTitle("BlueHorizon - Login");
         loginPreencher.setHeaderText("Erro ao efetuar o login!");
-        loginPreencher.setContentText("Campo de email vazio. Preencha");
+        loginPreencher.setContentText("Campo de email ou senha vazio. Verifique e preencha!");
         loginPreencher.showAndWait();
         
-        }else if(senha.isEmpty()){
-            
-        Alert loginPreencher = new Alert(Alert.AlertType.ERROR);
-        loginPreencher.setTitle("BlueHorizon - Login");
-        loginPreencher.setHeaderText("Erro ao efetuar o login!");
-        loginPreencher.setContentText("Campo de senha vazio. Preencha");
-        loginPreencher.showAndWait();
-        
-        }
+        }*/
         
         Login f=null;
+        
             try {
                 f = processarLogin(email, senha);
             } catch (IOException ex) {
@@ -77,6 +66,7 @@ public class TelaLoginPIController {
             } catch (SQLException ex) {
                 Logger.getLogger(TelaLoginPIController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         if(f != null){
             
             try {
@@ -96,12 +86,20 @@ public class TelaLoginPIController {
             e.printStackTrace();
             }
             
-        } else {
+        } else if(email.isEmpty() || senha.isEmpty()) {
+            
+        Alert loginPreencher = new Alert(Alert.AlertType.ERROR);
+        loginPreencher.setTitle("BlueHorizon - Login");
+        loginPreencher.setHeaderText("Erro ao efetuar o login!");
+        loginPreencher.setContentText("Campo de email ou senha vazio. Verifique e preencha!");
+        loginPreencher.showAndWait();
+        
+        }else{
             
         Alert loginErro = new Alert(Alert.AlertType.ERROR);
         loginErro.setTitle("BlueHorizon - Login");
         loginErro.setHeaderText("Erro ao efetuar o login!");
-        loginErro.setContentText("Senha ou email incorretos");
+        loginErro.setContentText("Senha ou email incorreto. Verifique e adicione corretamente!");
         loginErro.showAndWait();
         
         }       

@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public class FuncionarioDAO extends GenericDAO {
     public static boolean cadastrarFuncionario(String nome, String cpf, Date dataNascimento, Date dataContratacao, 
-                                               String endereco, String telefone, String email, String senha, double salario) {
-        String sql = "INSERT INTO funcionarios (nome, cpf, dataNascimento, dataContratacao, endereco, telefone, email, senha, salario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                                               String endereco, String telefone, String email, String senha,String cargo, double salario) {
+        String sql = "INSERT INTO funcionarios (nome, cpf, dataNascimento, dataContratacao, endereco, telefone, email, senha, cargo, salario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -22,7 +22,8 @@ public class FuncionarioDAO extends GenericDAO {
             stmt.setString(6, telefone);
             stmt.setString(7, email);
             stmt.setString(8, senha);
-            stmt.setDouble(9, salario);
+            stmt.setString(9, cargo);
+            stmt.setDouble(10, salario);
 
             int linhasAfetadas = stmt.executeUpdate();
             return linhasAfetadas > 0;

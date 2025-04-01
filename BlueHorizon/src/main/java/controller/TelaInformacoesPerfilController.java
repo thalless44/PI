@@ -88,9 +88,9 @@ public class TelaInformacoesPerfilController {
     private boolean FecharTelaInformacoesPerfil() {
         
         Alert confirmar = new Alert(Alert.AlertType.WARNING);
-        confirmar.setTitle("Confirmação");
+        confirmar.setTitle("Aviso");
         confirmar.setHeaderText("Tem certeza que deseja fechar a tela de informações do perfil?");
-        confirmar.setContentText("Todas as alterações não salvas serão perdidas!");
+        confirmar.setContentText("Todas as alterações não salvas serão perdidas e a tela atual será fechada!");
         return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
     }
 

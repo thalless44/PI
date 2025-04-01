@@ -55,10 +55,11 @@ public class TelaPersonalizacaoPerfilController {
 
     @FXML
     void OnClickAlterarPerfil(ActionEvent event) {
+        
         // Lógica para alterar o perfil
         
-        Alert confirmar = new Alert(Alert.AlertType.WARNING);
-        confirmar.setTitle("Alterações fei com sucesso");
+        Alert confirmar = new Alert(Alert.AlertType.INFORMATION);
+        confirmar.setTitle("Alterações feitas com sucesso!");
         
     }
 
@@ -86,9 +87,9 @@ public class TelaPersonalizacaoPerfilController {
     private boolean FecharTelaPersonalizacaoPerfil() {
         
         Alert confirmar = new Alert(Alert.AlertType.WARNING);
-        confirmar.setTitle("Confirmação");
-        confirmar.setHeaderText("Tem certeza que deseja fechar a tela atual?");
-        confirmar.setContentText("Todas as alterações não salvas serão perdidas!");
+        confirmar.setTitle("Aviso");
+        confirmar.setHeaderText("Tem certeza que deseja fechar a tela de personalização de perfil?");
+        confirmar.setContentText("Todas as alterações não salvas serão perdidas e a tela atual será fechada!");
         return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
         
     }

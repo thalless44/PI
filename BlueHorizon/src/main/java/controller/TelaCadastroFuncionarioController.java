@@ -3,6 +3,7 @@ package controller;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -23,7 +24,7 @@ public class TelaCadastroFuncionarioController {
     private Button btnSair;
 
     @FXML
-    private ComboBox<?> cmbxCargo;
+    private ComboBox<String> cmbxCargo;
 
     @FXML
     private TextField txtFCPF;
@@ -58,16 +59,28 @@ public class TelaCadastroFuncionarioController {
 
     @FXML
     void OnActionBtnEfetuarCadastroFuncionario(ActionEvent event) {
+        
         cadastrarFuncionario();
         
     }
+    
+    // Método para inicializar o ComboBox com as opções
+    @FXML
+    public void initialize() {
+        
+        // Adicionando as opções "Gerente" e "Corretor" no ComboBox
+        cmbxCargo.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
+    }
+    
     private void cadastrarFuncionario() {
+        
         String nome = txtFNome.getText();
         String cpf = txtFCPF.getText();
         String endereco = txtFEndereco.getText();
         String telefone = txtFTelefone.getText();
         String email = txtFEmail.getText();
         String senha = txtFSenha.getText();
+        String cargo = cmbxCargo.getValue();
         double salario = Double.parseDouble(txtFSalario.getText());
         
         // Converter a data para o formato correto
@@ -79,7 +92,8 @@ public class TelaCadastroFuncionarioController {
         Date dataNascimento = Date.valueOf(dataNascimentoLD);
         Date dataContratacao = Date.valueOf(dataContratacaoLD);
 
-        boolean sucesso = FuncionarioDAO.cadastrarFuncionario(nome, cpf, dataNascimento, dataContratacao, endereco, telefone, email, senha, salario);
+        boolean sucesso = FuncionarioDAO.cadastrarFuncionario(nome, cpf, dataNascimento, dataContratacao,
+                endereco, telefone, email, senha, cargo, salario);
 
         Alert alert = new Alert(sucesso ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR);
         alert.setTitle(sucesso ? "Sucesso" : "Erro");
@@ -93,7 +107,8 @@ public class TelaCadastroFuncionarioController {
     @FXML
     void OnActionBtnSair(ActionEvent event) {
         
-        if(FecharTelaCadastroFuncionario()){              
+        if(FecharTelaCadastroFuncionario()){    
+            
             //faz com que feche apenas a tela de rec senha, ao inves da aplicação toda
             Stage stage = (Stage) btnSair.getScene().getWindow();
             stage.close();          

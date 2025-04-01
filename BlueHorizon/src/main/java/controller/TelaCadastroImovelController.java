@@ -2,7 +2,9 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -75,16 +77,33 @@ public class TelaCadastroImovelController {
 
     @FXML
     void OnClickAdicionarImagem(ActionEvent event) {
+        
+        //Método para adicionar as imagens dos imóveis
+        
+        //Código aqui...
 
     }
 
     @FXML
     void onClickCadastro(ActionEvent event) {
+        
+        //Método para efetuar o cadastro do imóvel
+        
+        //Código aqui...
 
     }
 
     @FXML
     void onClickCancelarCadastro(ActionEvent event) {
+        
+        if(CancelarCadastroImovel()){
+            
+            Stage stage = (Stage) btnCancelarCadastro.getScene().getWindow();
+            stage.close(); 
+            
+        }else{        
+            event.consume();
+        }
 
     }
 
@@ -92,6 +111,16 @@ public class TelaCadastroImovelController {
     
     public void setStage(Stage stage){
         this.stage = stage;
+    }
+
+    private boolean CancelarCadastroImovel() {
+        
+        Alert confirmar = new Alert(Alert.AlertType.WARNING);
+        confirmar.setTitle("Aviso");
+        confirmar.setHeaderText("Tem certeza que deseja fechar a tela de cadastro de imóvel?");
+        confirmar.setContentText("Todas as alterações não salvas serão perdidas e a tela atual será fechada!");
+        return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
+        
     }
 
 }

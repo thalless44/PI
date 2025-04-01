@@ -33,15 +33,13 @@ public class TelaCadastroClienteController {
 
     @FXML
     void ActionCancelarCadastro(ActionEvent event) {
-        Alert confirmar = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmar.setTitle("Confirmação");
-        confirmar.setHeaderText("Cancelar Cadastro de cliente");
-        confirmar.setContentText("Tem certeza que deseja cancelar o cadastro de cliente?");
         
-        if (confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent()) {
+        if(CancelarCadastroCliente()){
+            
             Stage stage = (Stage) btnCancelarcadastro.getScene().getWindow();
             stage.close();
-        } else {
+            
+        }else{
             event.consume();
         }
     }
@@ -66,5 +64,15 @@ public class TelaCadastroClienteController {
             sucesso.setContentText("Nome: " + nome + "\nEmail: " + email + "\nTelefone: " + telefone);
             sucesso.showAndWait();
         }
+    }
+
+    private boolean CancelarCadastroCliente() {
+        
+        Alert confirmar = new Alert(Alert.AlertType.WARNING);
+        confirmar.setTitle("Aviso");
+        confirmar.setHeaderText("Tem certeza que deseja fechar a tela de cadastro de cliente?");
+        confirmar.setContentText("Todas as alterações não salvas serão perdidas e a tela atual será fechada!");
+        
+        return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();        
     }
 }
