@@ -16,4 +16,5 @@ controller\TelaRecSenhaController.class
 model\Login.class
 controller\TelaCadastroClienteController.class
 controller\TelaCadastroImovelController.class
+model\ClienteDAO.class
 controller\TelaPersonalizacaoPerfilController.class

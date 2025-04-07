@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.ClienteDAO;
+import model.FuncionarioDAO;
 
 public class TelaCadastroClienteController {
     
@@ -47,11 +49,13 @@ public class TelaCadastroClienteController {
     @FXML
     void ActionEfetuarCadastro(ActionEvent event) {
         
-        String nome = txtNomeCliente.getText();
+        cadastrarCliente();
+        
+      /*  String nome = txtNomeCliente.getText();
         String email = txtEmailCliente.getText();
         String telefone = txtTelefoneCliente.getText();
 
-        if (nome.isEmpty() || email.isEmpty() || telefone.isEmpty()) {
+       if (nome.isEmpty() || email.isEmpty() || telefone.isEmpty()) {
             Alert erro = new Alert(Alert.AlertType.ERROR);
             erro.setTitle("Erro");
             erro.setHeaderText("Campos obrigatórios");
@@ -63,7 +67,7 @@ public class TelaCadastroClienteController {
             sucesso.setHeaderText("Cadastro efetuado com sucesso!");
             sucesso.setContentText("Nome: " + nome + "\nEmail: " + email + "\nTelefone: " + telefone);
             sucesso.showAndWait();
-        }
+        }*/
     }
 
     private boolean CancelarCadastroCliente() {
@@ -74,5 +78,35 @@ public class TelaCadastroClienteController {
         confirmar.setContentText("Todas as alterações não salvas serão perdidas e a tela atual será fechada!");
         
         return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();        
+    }
+
+    private void cadastrarCliente() {
+        
+        String nome = txtNomeCliente.getText();
+        String email = txtEmailCliente.getText();
+        String telefone = txtTelefoneCliente.getText();
+        
+         if(nome.isEmpty() || email.isEmpty() || telefone.isEmpty()){
+            
+            Alert erro = new Alert(Alert.AlertType.ERROR);
+            erro.setTitle("Erro");
+            erro.setHeaderText("Campos obrigatórios");
+            erro.setContentText("Todos os campos devem ser preenchidos!");
+            erro.show();
+         
+        }else{
+         
+        boolean sucesso = ClienteDAO.cadastrarCliente(nome, email, telefone);
+            
+            Alert CadastrarCliente = new Alert(Alert.AlertType.INFORMATION);
+            CadastrarCliente.setTitle("Sucesso");
+            CadastrarCliente.setHeaderText("Cadastro realizado!");
+            CadastrarCliente.setContentText("O cliente foi cadastrado com sucesso.");
+            CadastrarCliente.showAndWait();
+            
+            Stage stage = (Stage) btnCancelarcadastro.getScene().getWindow();
+            stage.close();
+            
+         }
     }
 }
