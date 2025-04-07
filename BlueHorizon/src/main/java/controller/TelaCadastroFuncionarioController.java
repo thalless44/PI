@@ -69,8 +69,12 @@ public class TelaCadastroFuncionarioController {
             erroDados.setHeaderText("Campos obrigatórios");
             erroDados.setContentText("Todos os campos devem ser preenchidos!");
             erroDados.showAndWait();
-        }else if (txtFCPF.getText().matches("[z0-9]+")){
-             
+        }else if (!txtFCPF.getText().matches("[z0-9]+")){
+            Alert erro = new Alert(Alert.AlertType.WARNING);
+            erro.setTitle("Erro");
+            erro.setHeaderText("Campos CPF");
+            erro.setContentText("Não deve conter letras");
+            erro.showAndWait();
         
         }
         
@@ -82,24 +86,7 @@ public class TelaCadastroFuncionarioController {
     @FXML
     public void initialize() {
         
-        TextFormatter<String> formatter = new TextFormatter<>(change -> {
-            String text = change.getControlNewText();
-            if (text.length() > 14) {
-                return null; 
-            }
-            StringBuilder maskedText = new StringBuilder(text);
-            if (maskedText.length() > 3 && maskedText.length() <= 6) {
-                maskedText.insert(3, ".");
-            } else if (maskedText.length() > 6 && maskedText.length() <= 9) {
-                maskedText.insert(7, ".");
-            } else if (maskedText.length() > 9 && maskedText.length() <= 11) {
-                maskedText.insert(11, "-");
-            }
-            change.setText(maskedText.toString());
-            return change;
-        });
-
-        txtFCPF.setTextFormatter(formatter);
+        
         
         // Adicionando as opções "Gerente" e "Corretor" no ComboBox
         cmbxCargo.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
