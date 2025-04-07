@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<FlowPane alignment="CENTER" columnHalignment="CENTER" minHeight="609.0" minWidth="688.0" prefHeight="787.0" prefWidth="688.0" style="-fx-background-color: #6ec4e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaContratoController">
+   <children>
+        <Pane prefHeight="649.0" prefWidth="522.0" style="-fx-background-color: #d9d9d9;">
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color fx:constant="GRAY" />
+                    </color>
+                </DropShadow>
+            </effect>
+            <children>
+                <Label fx:id="lblContrato" layoutX="188.0" layoutY="37.0" text="CONTRATO">
+                    <font>
+                        <Font name="System Bold" size="32.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnSair" layoutX="226.0" layoutY="564.0" mnemonicParsing="false" onAction="#ActionSair" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #DC7777;" text="Sair">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Label layoutX="39.0" layoutY="122.0" text="ID contrato:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="39.0" layoutY="154.0" text="Data do contrato:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="184.0" text="Valor total:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="39.0" layoutY="255.0" prefHeight="21.0" prefWidth="76.0" text="ID imóvel:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="314.0" prefHeight="21.0" prefWidth="130.0" text="Valor do imóvel:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="286.0" text="Data de cadastro:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="373.0" text="Nome do cliente:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="43.0" layoutY="403.0" text="Email do cliente:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="433.0" text="Telefone do cliente:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblIdContrato" layoutX="123.0" layoutY="124.0" prefHeight="17.0" prefWidth="389.0" />
+            <Label fx:id="lblValorTotal" layoutX="123.0" layoutY="186.0" prefHeight="17.0" prefWidth="389.0" />
+            <Label fx:id="lblDataContrato" layoutX="158.0" layoutY="156.0" prefHeight="17.0" prefWidth="355.0" />
+            <Label fx:id="lblIdImovel" layoutX="109.0" layoutY="257.0" prefHeight="17.0" prefWidth="403.0" />
+            <Label fx:id="lblDataCadastro" layoutX="158.0" layoutY="288.0" prefHeight="17.0" prefWidth="355.0" />
+            <Label fx:id="lblValorImovel" layoutX="151.0" layoutY="316.0" prefHeight="17.0" prefWidth="355.0" />
+            <Label fx:id="lblNomeCliente" layoutX="158.0" layoutY="375.0" prefHeight="17.0" prefWidth="355.0" />
+            <Label fx:id="lblEmailCliente" layoutX="157.0" layoutY="405.0" prefHeight="17.0" prefWidth="355.0" />
+            <Label fx:id="lblTelefoneCliente" layoutX="174.0" layoutY="435.0" prefHeight="17.0" prefWidth="336.0" />
+            </children>
+        </Pane>
+   </children>
+</FlowPane>

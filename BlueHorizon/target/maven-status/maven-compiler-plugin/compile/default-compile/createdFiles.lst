@@ -1,6 +1,7 @@
 controller\TelaInicialController.class
 controller\TelaAlterarDadosClientesController.class
 controller\TelaInformacoesPerfilController.class
+controller\TelaContratoController.class
 controller\TelaPagamentoController.class
 model\FuncionarioDAO.class
 principal\App.class

@@ -76,7 +76,6 @@ public class TelaInformacoesPerfilController {
     void OnClickSairInformacoesPerfil(ActionEvent event) {
         
         if(FecharTelaInformacoesPerfil()){              
-            //faz com que feche apenas a tela de rec senha, ao inves da aplicação toda
             Stage stage = (Stage) btnSair.getScene().getWindow();
             stage.close();          
         }else{

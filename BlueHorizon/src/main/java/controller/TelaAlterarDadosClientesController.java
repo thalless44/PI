@@ -1,13 +1,13 @@
 package controller;
 
-
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class TelaAlterarDadosClientesController  {
 
@@ -15,7 +15,7 @@ public class TelaAlterarDadosClientesController  {
     private Button btnAlterarDados;
 
     @FXML
-    private Button btnEfetuarLogin1;
+    private Button btnCancelar;
 
     @FXML
     private Label lblAlterarDadosClientes;
@@ -30,21 +30,46 @@ public class TelaAlterarDadosClientesController  {
     private Label lblTelefone;
 
     @FXML
-    private PasswordField txtEmail;
+    private Label txtEmail;
 
     @FXML
     private TextField txtNome;
 
     @FXML
-    private PasswordField txtTelefone;
+    private Label txtTelefone;
 
     @FXML
     void ActionAlterarDados(ActionEvent event) {
+        if (!txtNome.getText().isEmpty()||!txtEmail.getText().isEmpty()||!txtTelefone.getText().isEmpty()){
+            Alert alterarDados = new Alert(Alert.AlertType.WARNING);
+            alterarDados.setTitle("Erro");
+            alterarDados.setHeaderText("Campos obrigatórios");
+            alterarDados.setContentText("Todos os campos devem ser preenchidos!");
+            alterarDados.showAndWait();
+        }
 
     }
 
     @FXML
     void ActionCancelar(ActionEvent event) {
+        
+        if(FecharTelaAlterarDadosCliente()){              
+            Stage stage = (Stage) btnCancelar.getScene().getWindow();
+            stage.close();          
+        }else{
+            event.consume();
+        }
+
+
+    }
+
+    private boolean FecharTelaAlterarDadosCliente() {
+        
+        Alert sair = new Alert(Alert.AlertType.WARNING);
+        sair.setTitle("Aviso");
+        sair.setHeaderText("Tem certeza que deseja fechar a tela de alterar dados de clientes?");
+        sair.setContentText("Todas as alterações não salvas serão perdidas e a tela atual será fechada!");
+        return sair.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
 
     }
 
