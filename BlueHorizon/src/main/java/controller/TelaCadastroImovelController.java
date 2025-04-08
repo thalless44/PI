@@ -1,17 +1,26 @@
 package controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import model.ImovelDAO;
+import model.PropriedadesDAO;
+import model.ProprietarioDAO;
 
 public class TelaCadastroImovelController {
-
-    private Stage stage;
     
+    private Stage stage;
+
     @FXML
     private Button btnAdicionarImagem;
 
@@ -20,6 +29,37 @@ public class TelaCadastroImovelController {
 
     @FXML
     private Button btnCancelarCadastro;
+    
+     @FXML
+    private RadioButton rbDisponivel;
+
+    @FXML
+    private RadioButton rbNaoDisponivel;
+
+
+    @FXML
+    private RadioButton rbNaoJardim;
+
+    @FXML
+    private RadioButton rbNaoMobiliada;
+
+    @FXML
+    private RadioButton rbNaoPiscina;
+
+    @FXML
+    private RadioButton rbNaoSG;
+
+    @FXML
+    private RadioButton rbSimJardim;
+
+    @FXML
+    private RadioButton rbSimMobiliada;
+
+    @FXML
+    private RadioButton rbSimPiscina;
+
+    @FXML
+    private RadioButton rbSimSG;
 
     @FXML
     private TextField txtArea;
@@ -43,16 +83,11 @@ public class TelaCadastroImovelController {
     private TextField txtIDimovel;
 
     @FXML
-    private TextField txtJardim;
-
-    @FXML
-    private TextField txtMobiliada;
-
-    @FXML
     private TextField txtNumeracaoImovel;
-
+    
     @FXML
-    private TextField txtPiscina;
+    private TextField txtTipoPropriedade;
+
 
     @FXML
     private TextField txtProprietario;
@@ -64,9 +99,6 @@ public class TelaCadastroImovelController {
     private TextField txtRua;
 
     @FXML
-    private TextField txtSistemadeSeguranca;
-
-    @FXML
     private TextField txtTelefoneProprietario;
 
     @FXML
@@ -74,26 +106,98 @@ public class TelaCadastroImovelController {
 
     @FXML
     private TextField txtValor;
+    
+    private ToggleGroup grupoJardim;
+    private ToggleGroup grupoMobiliada;
+    private ToggleGroup grupoPiscina;
+    private ToggleGroup grupoSG;
+    private ToggleGroup grupoDisponibilidade;
+    
+    @FXML
+    void initialize(){
+        
+        grupoJardim = new ToggleGroup();
+        grupoPiscina = new ToggleGroup();
+        grupoMobiliada = new ToggleGroup();
+        grupoSG = new ToggleGroup();
+        grupoDisponibilidade = new ToggleGroup();
+        
+        rbSimJardim.setToggleGroup(grupoJardim);
+        rbNaoJardim.setToggleGroup(grupoJardim);
+        
+        rbSimPiscina.setToggleGroup(grupoPiscina);
+        rbNaoPiscina.setToggleGroup(grupoPiscina);
+        
+        rbSimMobiliada.setToggleGroup(grupoMobiliada);
+        rbNaoMobiliada.setToggleGroup(grupoMobiliada);
+        
+        rbSimSG.setToggleGroup(grupoSG);
+        rbNaoSG.setToggleGroup(grupoSG);
+        
+        rbDisponivel.setToggleGroup(grupoDisponibilidade);
+        rbNaoDisponivel.setToggleGroup(grupoDisponibilidade);
+
+    }
 
     @FXML
     void OnClickAdicionarImagem(ActionEvent event) {
-        
-        //Método para adicionar as imagens dos imóveis
-        
-        //Código aqui...
 
     }
 
     @FXML
     void onClickCadastro(ActionEvent event) {
         
-        //Método para efetuar o cadastro do imóvel
+        String telefoneProprietario = txtTelefoneProprietario.getText();
+        String nomeProprietario = txtProprietario.getText();
+        String emailProprietario = txtTelefoneProprietario.getText();
         
-        //Código aqui...
+        String tipoPropriedade = txtTipoPropriedade.getText();
+        String cidade = txtCidades.getText();
+        double preco = Double.parseDouble(txtValor.getText());
+        boolean disponibilidade = rbDisponivel.isSelected();
+        
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataCadastroLD = LocalDate.parse(txtDatacadastro.getText(), formato);
+        
+        Date dataCadastro = Date.valueOf(dataCadastroLD);
+        
+        String rua = txtRua.getText();
+        String endereco = txtRua.getText();
+        
+        int quartos = Integer.parseInt(txtQuartos.getText());
+        int banheiros = Integer.parseInt(txtBanheiros.getText());
+        int vagasGaragem = Integer.parseInt(txtVagaGaragem.getText());
+        boolean mobiliada = rbSimMobiliada.isSelected(); // Exemplo para "Sim" ou "Não"
+        boolean jardim = rbSimJardim.isSelected();
+        boolean sistemaSeguranca = rbSimSG.isSelected();
+        boolean piscina = rbSimPiscina.isSelected();
+        int numeroCasa = Integer.parseInt(txtNumeracaoImovel.getText());
+        String area = txtArea.getText();
+
+         boolean sucessoProprietario = ProprietarioDAO.Proprietarios(telefoneProprietario, nomeProprietario, emailProprietario);
+         boolean sucessoPropriedade = PropriedadesDAO.Propriedades(tipoPropriedade, endereco, preco, disponibilidade, dataCadastro, rua);
+         boolean sucessoImovel = ImovelDAO.InformacoesImovel(quartos, banheiros, vagasGaragem, mobiliada, jardim, sistemaSeguranca, piscina, numeroCasa, area);
+
+    // Verificando se todas as inserções foram bem-sucedidas
+    if (sucessoProprietario && sucessoPropriedade && sucessoImovel) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Cadastro Realizado");
+        alert.setHeaderText("Imóvel cadastrado com sucesso!");
+        alert.setContentText("O imóvel foi cadastrado corretamente no banco de dados.");
+        alert.showAndWait();
+    } else {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro no Cadastro");
+        alert.setHeaderText("Falha ao cadastrar o imóvel");
+        alert.setContentText("Houve um erro ao tentar cadastrar o imóvel. Verifique os dados e tente novamente.");
+        alert.showAndWait();
+    }
+        
+ 
 
     }
 
-    @FXML
+     @FXML
     void onClickCancelarCadastro(ActionEvent event) {
         
         if(CancelarCadastroImovel()){
@@ -121,7 +225,5 @@ public class TelaCadastroImovelController {
         confirmar.setContentText("Todas as alterações não salvas serão perdidas e a tela atual será fechada!");
         return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
         
-    }
-
+    }    
 }
-

@@ -52,6 +52,7 @@ public class TelaAlterarDadosFuncionariosController {
 
     @FXML
     void ActionAlterarDadosFuncionario(ActionEvent event) {
+        
         if (!txtfdAlterarDataFuncionario.getText().isEmpty()||!txtfdAlterarEnderecoFuncionario.getText().isEmpty()||!txtfdAlterarSalarioFuncionario.getText().isEmpty()||!txtfdAlterarTelefoneFuncionario.getText().isEmpty()
                 ||!txtfdNomeFuncionarioAlterar.getText().isEmpty()){
             Alert alteracao = new Alert(Alert.AlertType.WARNING);
