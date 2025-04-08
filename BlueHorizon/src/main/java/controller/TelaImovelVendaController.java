@@ -37,9 +37,6 @@ public class TelaImovelVendaController {
     private Label lblEmail;
 
     @FXML
-    private Label lblIdImovel;
-
-    @FXML
     private Label lblImovelVenda;
 
     @FXML
@@ -77,11 +74,11 @@ public class TelaImovelVendaController {
 
     @FXML
     void ActionEditarImovel(ActionEvent event) {
-        if (!lblIdImovel.getText().isEmpty()) {
+        if (!lblNumeracaoImovel.getText().isEmpty()) {
             Alert editar = new Alert(Alert.AlertType.INFORMATION);
             editar.setTitle("Editar Imóvel");
             editar.setHeaderText("Ação de Edição");
-            editar.setContentText("O imóvel com ID " + lblIdImovel.getText() + " será enviado para edição.");
+            editar.setContentText("O imóvel nº " + lblNumeracaoImovel.getText() + " será enviado para edição.");
             editar.showAndWait();
         } else {
             Alert aviso = new Alert(Alert.AlertType.WARNING);
