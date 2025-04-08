@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import model.FuncionarioDAO;
 
@@ -54,6 +53,8 @@ public class TelaCadastroFuncionarioController {
     @FXML
     private TextField txtFTelefone;
     
+    
+    
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -69,17 +70,14 @@ public class TelaCadastroFuncionarioController {
             erroDados.setHeaderText("Campos obrigatórios");
             erroDados.setContentText("Todos os campos devem ser preenchidos!");
             erroDados.showAndWait();
-        }else if (!txtFCPF.getText().matches("[z0-9]+")){
+        }else if (!txtFCPF.getText().matches("[z0-9]")) {
             Alert erro = new Alert(Alert.AlertType.WARNING);
             erro.setTitle("Erro");
             erro.setHeaderText("Campos CPF");
             erro.setContentText("Não deve conter letras");
             erro.showAndWait();
-        
-        }
-        
-        cadastrarFuncionario();
-        
+        }else{cadastrarFuncionario();}
+          
     }
     
     // Método para inicializar o ComboBox com as opções
@@ -148,5 +146,5 @@ public class TelaCadastroFuncionarioController {
         confirmar.setContentText("Todas as alterações não salvas serão perdidas!");
         return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
     }
-
+     
 }
