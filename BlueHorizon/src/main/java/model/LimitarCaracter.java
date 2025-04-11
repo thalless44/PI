@@ -7,7 +7,7 @@ public class LimitarCaracter {
 
     public enum TipoEntrada {
         NUMEROINTEIRO, NUMERODECIMAL, NOME, EMAIL, DATA;
-    };
+    }
 
     private int qtdCaracteres;
     private TipoEntrada tpEntrada;
@@ -18,43 +18,40 @@ public class LimitarCaracter {
     }
 
     public TextFormatter<String> getFormatter() {
-        // Define um filtro de caracteres com base no tipo de entrada
-        TextFormatter.Change change = new TextFormatter.Change() {
-            @Override
-            public void commit() {
-                String newText = getText();
-                // Limita a quantidade de caracteres
-                if (newText.length() > qtdCaracteres) {
-                    newText = newText.substring(0, qtdCaracteres);
-                }
-                setText(newText);
-            }
-        };
+        return new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
 
-        TextFormatter<String> formatter;
-        formatter = new TextFormatter<>(change);
-        switch (tpEntrada) {
-            case NUMEROINTEIRO:
-                formatter.setFilter(c -> c.getText().matches("[^0-9]") ? null : c);
-                break;
-            case NUMERODECIMAL:
-                formatter.setFilter(c -> c.getText().matches("[^0-9,.]") ? null : c);
-                break;
-            case NOME:
-                formatter.setFilter(c -> c.getText().matches("[^\\p{IsLatin} ]") ? null : c);
-                break;
-            case EMAIL:
-                formatter.setFilter(c -> c.getText().matches("[^\\p{IsLatin}@.\\-_][^0-9]") ? null : c);
-                break;
-            case DATA:
-                formatter.setFilter(c -> c.getText().matches("[^0-9/]") ? null : c);
-                break;
-        }
-        return formatter;
+            // Limita a quantidade de caracteres
+            if (newText.length() > qtdCaracteres) {
+                return null; // Ignora a mudança se ultrapassar o limite
+            }
+
+            // Aplica filtro de acordo com o tipo de entrada
+            String insertedText = change.getText();
+
+            switch (tpEntrada) {
+                case NUMEROINTEIRO:
+                    if (!insertedText.matches("[0-9]*")) return null;
+                    break;
+                case NUMERODECIMAL:
+                    if (!insertedText.matches("[0-9,.]*")) return null;
+                    break;
+                case NOME:
+                    if (!insertedText.matches("[\\p{IsLatin} ]*")) return null;
+                    break;
+                case EMAIL:
+                    if (!insertedText.matches("[\\p{IsLatin}@.\\-_0-9]*")) return null;
+                    break;
+                case DATA:
+                    if (!insertedText.matches("[0-9/]*")) return null;
+                    break;
+            }
+
+            return change;
+        });
     }
 
     public void applyToTextInputControl(TextInputControl textInputControl) {
-        // Aplica o TextFormatter ao TextInputControl
         textInputControl.setTextFormatter(getFormatter());
     }
 }
