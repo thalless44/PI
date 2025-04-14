@@ -18,7 +18,6 @@ model\PropriedadesDAO.class
 controller\TelaPersonalizacaoPerfilController.class
 controller\TelaAlterarDadosClientesController.class
 controller\TelaInformacoesPerfilController.class
-model\LimitarCaracter$1.class
 controller\TelaPagamentoController.class
 model\LimitarCaracter$TipoEntrada.class
 principal\App.class

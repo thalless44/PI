@@ -1,5 +1,6 @@
 package controller;
 
+import static java.lang.Integer.parseInt;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -53,10 +54,30 @@ public class TelaCadastroFuncionarioController {
     @FXML
     private TextField txtFTelefone;
     
+    private static final int LIMIT = 12;
     
-    
-    public void setStage(Stage stage) {
-        this.stage = stage;
+    @FXML
+    public void initialize() {
+     
+        txtFCPF.textProperty().addListener((observable, oldValue, newValue) -> {
+    try {
+        if (!newValue.equals("")) {
+                Long.parseLong(newValue);
+            
+        } else {
+            txtFCPF.setText(oldValue);
+        }
+    } catch (Exception ex) {
+        txtFCPF.setText(oldValue);
+    }
+});
+
+
+        
+        
+        
+
+        cmbxCargo.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
     }
 
     @FXML
@@ -80,15 +101,7 @@ public class TelaCadastroFuncionarioController {
           
     }
     
-    // Método para inicializar o ComboBox com as opções
-    @FXML
-    public void initialize() {
-        
-        
-        
-        // Adicionando as opções "Gerente" e "Corretor" no ComboBox
-        cmbxCargo.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
-    }
+ 
     
     private void cadastrarFuncionario() {
         
@@ -127,7 +140,6 @@ public class TelaCadastroFuncionarioController {
         
         if(FecharTelaCadastroFuncionario()){    
             
-            //faz com que feche apenas a tela de rec senha, ao inves da aplicação toda
             Stage stage = (Stage) btnSair.getScene().getWindow();
             stage.close();          
         }else{
@@ -145,6 +157,12 @@ public class TelaCadastroFuncionarioController {
         confirmar.setHeaderText("Tem certeza que deseja fechar a tela de cadastro de funcionarios?");
         confirmar.setContentText("Todas as alterações não salvas serão perdidas!");
         return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
+    }
+    
+    public void setStage(Stage stage) {
+        
+        
+        this.stage = stage;
     }
      
 }

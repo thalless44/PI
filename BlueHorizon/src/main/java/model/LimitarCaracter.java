@@ -23,10 +23,10 @@ public class LimitarCaracter {
 
             // Limita a quantidade de caracteres
             if (newText.length() > qtdCaracteres) {
-                return null; // Ignora a mudança se ultrapassar o limite
+                return null; 
             }
 
-            // Aplica filtro de acordo com o tipo de entrada
+
             String insertedText = change.getText();
 
             switch (tpEntrada) {
