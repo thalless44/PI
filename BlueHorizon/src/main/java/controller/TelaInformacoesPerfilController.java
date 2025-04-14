@@ -8,11 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import util.AlertaUtil;
 
 public class TelaInformacoesPerfilController {
     private Stage stage;
@@ -75,22 +75,20 @@ public class TelaInformacoesPerfilController {
     @FXML
     void OnClickSairInformacoesPerfil(ActionEvent event) {
         
-        if(FecharTelaInformacoesPerfil()){              
+        if (FecharTelaInformacoesPerfil()) {              
             Stage stage = (Stage) btnSair.getScene().getWindow();
             stage.close();          
-        }else{
+        } else {
             event.consume();
         }
-
     }
 
     private boolean FecharTelaInformacoesPerfil() {
         
-        Alert confirmar = new Alert(Alert.AlertType.WARNING);
-        confirmar.setTitle("Aviso");
-        confirmar.setHeaderText("Tem certeza que deseja fechar a tela de informações do perfil?");
-        confirmar.setContentText("Todas as alterações não salvas serão perdidas e a tela atual será fechada!");
-        return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
+        // Chamando o método para confirmação de fechamento
+        return AlertaUtil.mostrarConfirmacao(
+            "Aviso", 
+            "Tem certeza que deseja fechar a tela de informações do perfil?\nTodas as alterações não salvas serão perdidas e a tela atual será fechada!"
+        ).filter(response -> response == ButtonType.OK).isPresent();
     }
-
 }

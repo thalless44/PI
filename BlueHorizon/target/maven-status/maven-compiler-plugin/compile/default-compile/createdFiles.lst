@@ -24,3 +24,4 @@ dal\ConexaoBD.class
 controller\TelaLoginPIController.class
 controller\TelaImovelVendaController.class
 model\Login.class
+util\AlertaUtil.class

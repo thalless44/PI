@@ -12,24 +12,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.LoginDAO;
 import model.Login;
+import model.LoginDAO;
+import util.AlertaUtil;
 
 public class TelaLoginPIController {
-    
-    private Connection conexao;
-    
-    private final LoginDAO dao = new LoginDAO();
 
+    private Connection conexao;
+    private final LoginDAO dao = new LoginDAO();
     private Stage stageLogin;
 
-     @FXML
+    @FXML
     private TextField txtEmail;
 
     @FXML
@@ -43,111 +41,93 @@ public class TelaLoginPIController {
 
     @FXML
     private void ActionEfetuarLogin(ActionEvent event) {
-            
         String email = txtEmail.getText();
         String senha = txtSenha.getText();
-            
-        /*if(email.isEmpty() || senha.isEmpty()){
-            
-        Alert loginPreencher = new Alert(Alert.AlertType.ERROR);
-        loginPreencher.setTitle("BlueHorizon - Login");
-        loginPreencher.setHeaderText("Erro ao efetuar o login!");
-        loginPreencher.setContentText("Campo de email ou senha vazio. Verifique e preencha!");
-        loginPreencher.showAndWait();
-        
-        }*/
-        
-        Login f=null;
-        
-            try {
-                f = processarLogin(email, senha);
-            } catch (IOException ex) {
-                Logger.getLogger(TelaLoginPIController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaLoginPIController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        if(f != null){
-            
-            try {
-            URL url = new File("src/main/java/view/TelaInicial.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-            Stage telaInicial = new Stage();
-            TelaInicialController ti = loader.getController(); 
-            ti.setStage(telaInicial);
-            Scene scene = new Scene(root);
-            telaInicial.setScene(scene);
-            telaInicial.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Inicio");
 
-            telaInicial.setMaximized(true);
-            telaInicial.show();
-            } catch (IOException e) {
-            e.printStackTrace();
+        if (email.isEmpty() || senha.isEmpty()) {
+            AlertaUtil.mostrarErro("Erro ao efetuar o login",
+                    "Campo de email ou senha vazio. Verifique e preencha!");
+            return;
+        }
+
+        try {
+            Login usuario = processarLogin(email, senha);
+
+            if (usuario != null) {
+                abrirTelaInicial();
+            } else {
+                AlertaUtil.mostrarErro("Erro ao efetuar o login",
+                        "Senha ou email incorreto. Verifique e adicione corretamente!");
             }
-            
-        } else if(email.isEmpty() || senha.isEmpty()) {
-            
-        Alert loginPreencher = new Alert(Alert.AlertType.ERROR);
-        loginPreencher.setTitle("BlueHorizon - Login");
-        loginPreencher.setHeaderText("Erro ao efetuar o login!");
-        loginPreencher.setContentText("Campo de email ou senha vazio. Verifique e preencha!");
-        loginPreencher.showAndWait();
-        
-        }else{
-            
-        Alert loginErro = new Alert(Alert.AlertType.ERROR);
-        loginErro.setTitle("BlueHorizon - Login");
-        loginErro.setHeaderText("Erro ao efetuar o login!");
-        loginErro.setContentText("Senha ou email incorreto. Verifique e adicione corretamente!");
-        loginErro.showAndWait();
-        
-        }       
+
+        } catch (IOException | SQLException e) {
+            Logger.getLogger(TelaLoginPIController.class.getName()).log(Level.SEVERE, null, e);
+            AlertaUtil.mostrarErro("Erro inesperado", "Ocorreu um erro ao tentar realizar o login.");
+        }
     }
 
     @FXML
-    private void ActionHyperlinkRecSenha(ActionEvent event) throws IOException {
-        
+    private void ActionHyperlinkRecSenha(ActionEvent event) {
         try {
             URL url = new File("src/main/java/view/TelaRecSenha.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
+
             Stage telaRecSenha = new Stage();
-            TelaRecSenhaController recSenhaController = loader.getController(); 
-            recSenhaController.setStage(telaRecSenha);
+            TelaRecSenhaController controller = loader.getController();
+            controller.setStage(telaRecSenha);
+
             Scene scene = new Scene(root);
             telaRecSenha.setScene(scene);
-            telaRecSenha.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Recuperação de senha");
-            
+            telaRecSenha.setTitle("BlueHorizon - Recuperação de senha");
             telaRecSenha.setMaximized(true);
-
-            // Exibir a nova tela
             telaRecSenha.show();
+
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(TelaLoginPIController.class.getName()).log(Level.SEVERE, null, e);
+            AlertaUtil.mostrarErro("Erro ao abrir tela", "Não foi possível abrir a tela de recuperação de senha.");
         }
-    
-    
-    }public void setStage(Stage stage){
+    }
+
+    public void setStage(Stage stage) {
         this.stageLogin = stage;
     }
-    
-    public void abrirJanela (){
-        System.out.println("Janela exibida");
-    }
-    
-    
-    public Login processarLogin(String login,String senha) throws IOException, SQLException {
+
+    public Login processarLogin(String email, String senha) throws IOException, SQLException {
         if (!dao.bancoOnline()) {
             System.out.println("Banco de dados desconectado!");
-        } else if (login != null && !login.isEmpty() && senha != null && !senha.isEmpty()) {
-               System.out.println("Processo de autenticação");
-               Login f = dao.autenticar(txtEmail.getText(), txtSenha.getText());
-               return f;
-        } else {
-            System.out.println("Verifique as informações!");
+            return null;
         }
-return null;
+
+        if (email != null && !email.isEmpty() && senha != null && !senha.isEmpty()) {
+            return dao.autenticar(email, senha);
+        }
+
+        return null;
     }
 
+    private void abrirTelaInicial() throws IOException {
+        URL url = new File("src/main/java/view/TelaInicial.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage telaInicial = new Stage();
+        TelaInicialController controller = loader.getController();
+        controller.setStage(telaInicial);
+
+        Scene scene = new Scene(root);
+        telaInicial.setScene(scene);
+        telaInicial.setTitle("BlueHorizon - Início");
+        telaInicial.setMaximized(true);
+        telaInicial.show();
+
+        if (stageLogin != null) {
+            stageLogin.close();
+        }
+    }
+
+    // ✅ Aqui está o método que estava faltando
+    public void abrirJanela() {
+        System.out.println("Janela de login exibida com sucesso!");
+    }
 }

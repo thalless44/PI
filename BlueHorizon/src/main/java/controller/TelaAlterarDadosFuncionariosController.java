@@ -2,12 +2,13 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import util.AlertaUtil;
 
 public class TelaAlterarDadosFuncionariosController {
 
@@ -52,37 +53,31 @@ public class TelaAlterarDadosFuncionariosController {
 
     @FXML
     void ActionAlterarDadosFuncionario(ActionEvent event) {
-        
-        if (!txtfdAlterarDataFuncionario.getText().isEmpty()||!txtfdAlterarEnderecoFuncionario.getText().isEmpty()||!txtfdAlterarSalarioFuncionario.getText().isEmpty()||!txtfdAlterarTelefoneFuncionario.getText().isEmpty()
-                ||!txtfdNomeFuncionarioAlterar.getText().isEmpty()){
-            Alert alteracao = new Alert(Alert.AlertType.WARNING);
-            alteracao.setTitle("Preencha um dos campos");
-            alteracao.setHeaderText("Campos obrigatórios");
-            alteracao.setContentText("pelo menos um dos campos deve ser preenchido!");
-            alteracao.showAndWait();
+        if (txtfdAlterarDataFuncionario.getText().isEmpty() && 
+            txtfdAlterarEnderecoFuncionario.getText().isEmpty() && 
+            txtfdAlterarSalarioFuncionario.getText().isEmpty() && 
+            txtfdAlterarTelefoneFuncionario.getText().isEmpty() && 
+            txtfdNomeFuncionarioAlterar.getText().isEmpty()) {
+            
+            AlertaUtil.mostrarAviso("Preencha um dos campos", 
+                "Pelo menos um dos campos deve ser preenchido!");
         }
-        
-
     }
 
     @FXML
     void ActionCancelar(ActionEvent event) {
-        
-         if(FecharTelaAlterarDadosFuncionario()){    
-            
-           
+        if (FecharTelaAlterarDadosFuncionario()) {    
             Stage stage = (Stage) btnCancelarFuncionario.getScene().getWindow();
             stage.close();          
-        }else{
+        } else {
             event.consume();
         }
-
     }
 
     private boolean FecharTelaAlterarDadosFuncionario() {
-        
-        return false;
-        
+        return AlertaUtil.mostrarConfirmacao(
+            "Confirmação", 
+            "Tem certeza que deseja fechar a tela de alteração de dados de funcionário?\nTodas as alterações não salvas serão perdidas!"
+        ).filter(response -> response == ButtonType.OK).isPresent();
     }
-
 }

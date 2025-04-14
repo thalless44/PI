@@ -2,10 +2,11 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import util.AlertaUtil;
 
 public class TelaImovelVendaController {
 
@@ -75,34 +76,30 @@ public class TelaImovelVendaController {
     @FXML
     void ActionEditarImovel(ActionEvent event) {
         if (!lblNumeracaoImovel.getText().isEmpty()) {
-            Alert editar = new Alert(Alert.AlertType.INFORMATION);
-            editar.setTitle("Editar Imóvel");
-            editar.setHeaderText("Ação de Edição");
-            editar.setContentText("O imóvel nº " + lblNumeracaoImovel.getText() + " será enviado para edição.");
-            editar.showAndWait();
+            AlertaUtil.mostrarInformacao(
+                "Editar Imóvel",
+                "O imóvel nº " + lblNumeracaoImovel.getText() + " será enviado para edição."
+            );
         } else {
-            Alert aviso = new Alert(Alert.AlertType.WARNING);
-            aviso.setTitle("Imóvel não selecionado");
-            aviso.setHeaderText("Nenhum imóvel carregado");
-            aviso.setContentText("Não é possível editar. Nenhum imóvel foi selecionado.");
-            aviso.showAndWait();
+            AlertaUtil.mostrarAviso(
+                "Imóvel não selecionado",
+                "Não é possível editar. Nenhum imóvel foi selecionado."
+            );
         }
     }
 
     @FXML
     void ActionEfetuarVenda(ActionEvent event) {
         if (!lblDisponibilidade.getText().equalsIgnoreCase("Vendido")) {
-            Alert venda = new Alert(Alert.AlertType.CONFIRMATION);
-            venda.setTitle("Venda Efetuada");
-            venda.setHeaderText("Confirmação de Venda");
-            venda.setContentText("O imóvel foi vendido com sucesso!");
-            venda.showAndWait();
+            AlertaUtil.mostrarInformacao(
+                "Venda Efetuada",
+                "O imóvel foi vendido com sucesso!"
+            );
         } else {
-            Alert aviso = new Alert(Alert.AlertType.WARNING);
-            aviso.setTitle("Venda não permitida");
-            aviso.setHeaderText("Imóvel já vendido");
-            aviso.setContentText("Este imóvel já está marcado como vendido.");
-            aviso.showAndWait();
+            AlertaUtil.mostrarAviso(
+                "Venda não permitida",
+                "Este imóvel já está marcado como vendido."
+            );
         }
     }
 
@@ -117,6 +114,9 @@ public class TelaImovelVendaController {
     }
 
     private boolean FecharTelaImovelVenda() {
-        return true;
+        return AlertaUtil.mostrarConfirmacao(
+            "Confirmação",
+            "Tem certeza que deseja sair da tela do imóvel?\nTodas as alterações não salvas serão perdidas!"
+        ).filter(response -> response == ButtonType.OK).isPresent();
     }
 }
