@@ -6,14 +6,13 @@ import java.time.format.DateTimeFormatter;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import model.FuncionarioDAO;
+import util.AlertaUtil;
 
 public class TelaCadastroFuncionarioController {
     private Stage stage;
@@ -61,34 +60,23 @@ public class TelaCadastroFuncionarioController {
     @FXML
     void OnActionBtnEfetuarCadastroFuncionario(ActionEvent event) {
         
-        if (txtFNome.getText().isEmpty()||txtFCPF.getText().isEmpty()||txtFEndereco.getText().isEmpty()||txtFTelefone.getText().isEmpty()
-                ||txtFEmail.getText().isEmpty()||txtFSenha.getText().isEmpty()|| txtFSalario.getText().isEmpty()
-                || txtFDataContratacao.getText().isEmpty()||txtFDataNascimento.getText().isEmpty()){
-            Alert erroDados = new Alert(Alert.AlertType.WARNING);
-            erroDados.setTitle("Erro");
-            erroDados.setHeaderText("Campos obrigatórios");
-            erroDados.setContentText("Todos os campos devem ser preenchidos!");
-            erroDados.showAndWait();
-        }else if (!txtFCPF.getText().matches("[z0-9]+")){
-            Alert erro = new Alert(Alert.AlertType.WARNING);
-            erro.setTitle("Erro");
-            erro.setHeaderText("Campos CPF");
-            erro.setContentText("Não deve conter letras");
-            erro.showAndWait();
+        if (txtFNome.getText().isEmpty() || txtFCPF.getText().isEmpty() || txtFEndereco.getText().isEmpty() || txtFTelefone.getText().isEmpty()
+                || txtFEmail.getText().isEmpty() || txtFSenha.getText().isEmpty() || txtFSalario.getText().isEmpty()
+                || txtFDataContratacao.getText().isEmpty() || txtFDataNascimento.getText().isEmpty()) {
+            
+            AlertaUtil.mostrarAviso("Campos obrigatórios", "Todos os campos devem ser preenchidos!");
         
+        } else if (!txtFCPF.getText().matches("[0-9]+")) {
+            
+            AlertaUtil.mostrarAviso("Campos CPF", "Não deve conter letras");
+        
+        } else {
+            cadastrarFuncionario();
         }
-        
-        cadastrarFuncionario();
-        
     }
     
-    // Método para inicializar o ComboBox com as opções
     @FXML
     public void initialize() {
-        
-        
-        
-        // Adicionando as opções "Gerente" e "Corretor" no ComboBox
         cmbxCargo.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
     }
     
@@ -103,50 +91,37 @@ public class TelaCadastroFuncionarioController {
         String cargo = cmbxCargo.getValue();
         double salario = Double.parseDouble(txtFSalario.getText());
         
-        // Converter a data para o formato correto
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataNascimentoLD = LocalDate.parse(txtFDataNascimento.getText(), formato);
         LocalDate dataContratacaoLD = LocalDate.parse(txtFDataContratacao.getText(), formato);
 
-        // Converter LocalDate para Date (formato aceito pelo MySQL)
         Date dataNascimento = Date.valueOf(dataNascimentoLD);
         Date dataContratacao = Date.valueOf(dataContratacaoLD);
 
         boolean sucesso = FuncionarioDAO.cadastrarFuncionario(nome, cpf, dataNascimento, dataContratacao,
                 endereco, telefone, email, senha, cargo, salario);
 
-        Alert alert = new Alert(sucesso ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR);
-        alert.setTitle(sucesso ? "Sucesso" : "Erro");
-        alert.setHeaderText(sucesso ? "Cadastro realizado!" : "Erro ao cadastrar!");
-        alert.setContentText(sucesso ? "O funcionário foi cadastrado com sucesso." : "Verifique os dados e tente novamente.");
-        alert.showAndWait();
+        if (sucesso) {
+            AlertaUtil.mostrarInformacao("Cadastro realizado", "O funcionário foi cadastrado com sucesso.");
+        } else {
+            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique os dados e tente novamente.");
+        }
     }
-        
-        
 
     @FXML
     void OnActionBtnSair(ActionEvent event) {
-        
-        if(FecharTelaCadastroFuncionario()){    
-            
-            //faz com que feche apenas a tela de rec senha, ao inves da aplicação toda
+        if (FecharTelaCadastroFuncionario()) {
             Stage stage = (Stage) btnSair.getScene().getWindow();
-            stage.close();          
-        }else{
+            stage.close();
+        } else {
             event.consume();
         }
-        
-        
-
     }
 
     private boolean FecharTelaCadastroFuncionario() {
-        
-        Alert confirmar = new Alert(Alert.AlertType.WARNING);
-        confirmar.setTitle("Confirmação");
-        confirmar.setHeaderText("Tem certeza que deseja fechar a tela de cadastro de funcionarios?");
-        confirmar.setContentText("Todas as alterações não salvas serão perdidas!");
-        return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
+        return AlertaUtil.confirmarAcao(
+            "Confirmação",
+            "Tem certeza que deseja fechar a tela de cadastro de funcionarios?\nTodas as alterações não salvas serão perdidas!"
+        );
     }
-
 }

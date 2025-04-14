@@ -22,4 +22,5 @@ principal\App.class
 controller\TelaCadastroFuncionarioController.class
 dal\ConexaoBD.class
 controller\TelaLoginPIController.class
+controller\TelaImovelVendaController.class
 model\Login.class
