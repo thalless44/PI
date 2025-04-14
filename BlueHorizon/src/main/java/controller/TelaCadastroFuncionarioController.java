@@ -118,10 +118,10 @@ public class TelaCadastroFuncionarioController {
         }
     }
 
-    private boolean FecharTelaCadastroFuncionario() {
-        return AlertaUtil.confirmarAcao(
-            "Confirmação",
-            "Tem certeza que deseja fechar a tela de cadastro de funcionarios?\nTodas as alterações não salvas serão perdidas!"
-        );
-    }
+ private boolean FecharTelaCadastroFuncionario() {
+    return AlertaUtil.mostrarConfirmacao(
+        "Confirmação", 
+        "Tem certeza que deseja fechar a tela de cadastro de funcionários?\nTodas as alterações não salvas serão perdidas!"
+    ).filter(response -> response == ButtonType.OK).isPresent();
+ }
 }

@@ -4,9 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.ClienteDAO;
+import util.AlertaUtil;
 
 public class TelaCadastroClienteController {
     
@@ -69,11 +71,10 @@ public class TelaCadastroClienteController {
     }
 
 private boolean CancelarCadastroCliente() {
-    return AlertaUtil.confirmarAcao(
-        "Aviso",
-        "Tem certeza que deseja fechar a tela de cadastro de cliente?\n"
-        + "Todas as alterações não salvas serão perdidas e a tela atual será fechada!"
-    );
+    return AlertaUtil.mostrarConfirmacao(
+        "Aviso", 
+        "Tem certeza que deseja fechar a tela de cadastro de cliente?\nTodas as alterações não salvas serão perdidas e a tela atual será fechada!"
+    ).filter(response -> response == ButtonType.OK).isPresent();
 }
 
     private void cadastrarCliente() {
@@ -99,4 +100,5 @@ private boolean CancelarCadastroCliente() {
                 "Ocorreu um erro ao tentar cadastrar o cliente.");
         }
     }
+}
 }
