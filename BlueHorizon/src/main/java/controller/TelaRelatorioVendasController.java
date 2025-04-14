@@ -2,16 +2,16 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
+import util.AlertaUtil;
 
 public class TelaRelatorioVendasController {
     
-     private Stage stage;
+    private Stage stage;
 
     @FXML
     private Button btnSair;
@@ -33,19 +33,23 @@ public class TelaRelatorioVendasController {
 
     @FXML
     void OnClickbntSair(ActionEvent event) {
-       
-        Alert alert = new Alert(AlertType.WARNING);
-        alert.setTitle("Confirmação");
-        alert.setHeaderText("Tem certeza que deseja fechar a tela de relatório de vendas?");
-        alert.setContentText("Todas as alterações não salvas serão perdidas.");
-        alert.showAndWait();
         
-        Stage stage = (Stage) btnSair.getScene().getWindow();
-        stage.close();
+        // Usando AlertaUtil para confirmar o fechamento
+        if (AlertaUtil.mostrarConfirmacao(
+                "Confirmação", 
+                "Tem certeza que deseja fechar a tela de relatório de vendas?\nTodas as alterações não salvas serão perdidas."
+            ).filter(response -> response == ButtonType.OK).isPresent()) {
+            
+            // Se o usuário confirmar, fecha a tela
+            Stage stage = (Stage) btnSair.getScene().getWindow();
+            stage.close();
+        } else {
+            // Caso o usuário cancele, nada acontece
+            event.consume();
+        }
     }
 
     void setStage(Stage stage) {
-        
-         this.stage = stage;
+        this.stage = stage;
     }
 }

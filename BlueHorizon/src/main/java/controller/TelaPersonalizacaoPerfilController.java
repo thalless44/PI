@@ -1,20 +1,14 @@
 package controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.collections.FXCollections;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import util.AlertaUtil;
 
 public class TelaPersonalizacaoPerfilController {
     private Stage stage; 
@@ -55,46 +49,41 @@ public class TelaPersonalizacaoPerfilController {
 
     @FXML
     void OnClickAlterarPerfil(ActionEvent event) {
+        // Lógica para alterar o perfil (aqui você pode colocar a implementação)
         
-        // Lógica para alterar o perfil
-        
-        Alert confirmar = new Alert(Alert.AlertType.INFORMATION);
-        confirmar.setTitle("Alterações feitas com sucesso!");
-        
+        // Usando AlertaUtil para mostrar um alerta de sucesso
+        AlertaUtil.mostrarInformacao(
+            "Alterações feitas com sucesso!", 
+            "As alterações no seu perfil foram salvas com sucesso."
+        );
     }
 
-   
     // Método para inicializar o ComboBox com as opções
     @FXML
     public void initialize() {
         // Adicionando as opções "Gerente" e "Corretor" no ComboBox
         Cargocb.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
     }
-    
+
     @FXML
     void OnClickSair(ActionEvent event) {
-        
-         if(FecharTelaPersonalizacaoPerfil()){              
-            //faz com que feche apenas a tela de rec senha, ao inves da aplicação toda
+        if (FecharTelaPersonalizacaoPerfil()) {
             Stage stage = (Stage) BtnPP1.getScene().getWindow();
-            stage.close();          
-        }else{
+            stage.close();
+        } else {
             event.consume();
         }
-         
     }
 
     private boolean FecharTelaPersonalizacaoPerfil() {
-        
-        Alert confirmar = new Alert(Alert.AlertType.WARNING);
-        confirmar.setTitle("Aviso");
-        confirmar.setHeaderText("Tem certeza que deseja fechar a tela de personalização de perfil?");
-        confirmar.setContentText("Todas as alterações não salvas serão perdidas e a tela atual será fechada!");
-        return confirmar.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
-        
+        // Usando AlertaUtil para confirmar se o usuário realmente quer fechar a tela
+        return AlertaUtil.mostrarConfirmacao(
+            "Aviso", 
+            "Tem certeza que deseja fechar a tela de personalização de perfil?\nTodas as alterações não salvas serão perdidas e a tela atual será fechada!"
+        ).filter(response -> response == ButtonType.OK).isPresent();
     }
-    
-    }
+}
+
 
 
    
