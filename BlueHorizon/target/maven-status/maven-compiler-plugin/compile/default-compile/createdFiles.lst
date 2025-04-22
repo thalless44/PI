@@ -1,5 +1,6 @@
 controller\TelaInicialController.class
 controller\TelaContratoController.class
+model\Funcionario.class
 model\ImovelDAO.class
 model\FuncionarioDAO.class
 model\ProprietarioDAO.class

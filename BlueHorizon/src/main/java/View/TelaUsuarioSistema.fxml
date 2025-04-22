@@ -26,7 +26,7 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Label>
-            <Button fx:id="btnSair" layoutX="957.0" layoutY="709.0" mnemonicParsing="false" onAction="#OnClickSair" prefHeight="25.0" prefWidth="87.0" style="-fx-background-radius: 0; -fx-background-color: #bdbdbd;" text="SAIR">
+            <Button fx:id="btnSair" layoutX="902.0" layoutY="709.0" mnemonicParsing="false" onAction="#OnClickSair" prefHeight="25.0" prefWidth="87.0" style="-fx-background-radius: 0; -fx-background-color: #bdbdbd;" text="SAIR">
                <effect>
                   <DropShadow>
                      <color>
@@ -38,21 +38,27 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <TableView layoutX="109.0" layoutY="57.0" prefHeight="647.0" prefWidth="935.0">
-              <columns>
-                <TableColumn fx:id="tbnome" prefWidth="283.0" text="Nome" />
-                <TableColumn fx:id="tbemail" prefWidth="144.0" text="Email" />
-                  <TableColumn fx:id="tbtelefone" prefWidth="168.0" text="Telefone" />
-                  <TableColumn fx:id="tbdtnascimento" prefWidth="163.0" text="Dt. Nascimento" />
-                  <TableColumn fx:id="tbcargo" prefWidth="176.0" text="Cargo" />
-              </columns>
+            <TableView fx:id="tabelaUsuarios" layoutX="164.0" layoutY="54.0" prefHeight="647.0" prefWidth="825.0">
+               <columns>
+                  <TableColumn fx:id="TableColumnID" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="TableColumnNome" prefWidth="75.0" text="Nome" />
+                  <TableColumn fx:id="TableColumnSalario" prefWidth="75.0" text="Salário" />
+                  <TableColumn fx:id="TableColumnTelefone" prefWidth="75.0" text="Telefone" />
+                  <TableColumn fx:id="TableColumnEndereco" prefWidth="75.0" text="Endereço" />
+                  <TableColumn fx:id="TableColumnCPF" prefWidth="75.0" text="CPF" />
+                  <TableColumn fx:id="TableColumnCargo" prefWidth="75.0" text="Cargo" />
+                  <TableColumn fx:id="TableColumnContratacao" prefWidth="75.0" text="Contratação" />
+                  <TableColumn fx:id="TableColumnNascimento" prefWidth="75.0" text="Nascimento" />
+                  <TableColumn fx:id="TableColumnEmail" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="TableColumnSenha" prefWidth="75.0" text="Senha" />
+               </columns>
             </TableView>
-            <Button fx:id="btnAlterarDados" layoutX="109.0" layoutY="709.0" mnemonicParsing="false" onAction="#OnclickAlterarDados" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #EBDB8C;" text="Alterar Dados">
+            <Button fx:id="btnAlterarDados" layoutX="164.0" layoutY="709.0" mnemonicParsing="false" onAction="#OnclickAlterarDados" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #EBDB8C;" text="Alterar Dados">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="btnExcluir" layoutX="225.0" layoutY="709.0" mnemonicParsing="false" onAction="#OnclickExcluir" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #DC7777;" text="Excluir">
+            <Button fx:id="btnExcluir" layoutX="284.0" layoutY="709.0" mnemonicParsing="false" onAction="#OnclickExcluir" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #DC7777;" text="Excluir">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

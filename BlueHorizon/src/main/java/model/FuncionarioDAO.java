@@ -4,7 +4,10 @@ import dal.ConexaoBD;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FuncionarioDAO {
 
@@ -51,5 +54,36 @@ public class FuncionarioDAO {
             e.printStackTrace();  // Se houver erro, exibe no console
             return false;  // Retorna false caso aconteça algum erro
         }
+    }
+    // Novo método para listar os funcionários
+     public static List<Funcionario> listarTodos() {
+        List<Funcionario> lista = new ArrayList<>();
+        String sql = "SELECT * FROM funcionarios";
+
+        try (Connection conn = ConexaoBD.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Funcionario f = new Funcionario(
+                    rs.getInt("id_funcionario"),
+                    String.valueOf(rs.getDouble("Salario")),
+                    rs.getString("nome"),
+                    rs.getString("telefone"),
+                    rs.getString("endereco"),
+                    rs.getString("cpf"),
+                    rs.getString("cargo"),
+                    rs.getDate("dataContratacao").toLocalDate(),
+                    rs.getDate("dataNascimento").toLocalDate(),
+                    rs.getString("Senha"),
+                    rs.getString("email")
+                );
+                lista.add(f);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
     }
 }
