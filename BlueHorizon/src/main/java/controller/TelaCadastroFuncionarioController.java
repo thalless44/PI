@@ -77,6 +77,9 @@ public class TelaCadastroFuncionarioController {
     
     @FXML
     public void initialize() {
+        
+        
+        
         cmbxCargo.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
     }
     

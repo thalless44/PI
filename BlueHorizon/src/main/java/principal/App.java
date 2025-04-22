@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import model.FuncionarioDAO;
 
 public class App extends Application {
 
@@ -37,5 +38,8 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+    //int idParaDeletar = 2;  // Coloque o ID de um funcionário válido
 
+        // Chama o método deletarFuncionario e obtém o retorno (true ou false)
+        // boolean sucesso = FuncionarioDAO.deletarFuncionario(idParaDeletar);
 }

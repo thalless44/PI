@@ -6,18 +6,21 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class FuncionarioDAO extends GenericDAO {
+public class FuncionarioDAO {
+
+    // Método para cadastrar funcionário (já existente)
     public static boolean cadastrarFuncionario(String nome, String cpf, Date dataNascimento, Date dataContratacao, 
-                                               String endereco, String telefone, String email, String senha,String cargo, double salario) {
+                                               String endereco, String telefone, String email, String senha, 
+                                               String cargo, double salario) {
         String sql = "INSERT INTO funcionarios (nome, cpf, dataNascimento, dataContratacao, endereco, telefone, email, senha, cargo, salario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
+
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, nome);
             stmt.setString(2, cpf);
-            stmt.setDate(3, dataNascimento);  
-            stmt.setDate(4, dataContratacao); 
+            stmt.setDate(3, dataNascimento);
+            stmt.setDate(4, dataContratacao);
             stmt.setString(5, endereco);
             stmt.setString(6, telefone);
             stmt.setString(7, email);
@@ -30,6 +33,23 @@ public class FuncionarioDAO extends GenericDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    // Método para deletar funcionário
+    public static boolean deletarFuncionario(int id_funcionario) {
+          String sql = "DELETE FROM funcionarios WHERE id_funcionario = ?";
+
+        try (Connection conn = ConexaoBD.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id_funcionario);  // Atribui o ID que queremos deletar
+            int linhasAfetadas = stmt.executeUpdate();  // Executa o DELETE
+
+            return linhasAfetadas > 0;  // Se o valor for maior que 0, quer dizer que algo foi deletado
+        } catch (SQLException e) {
+            e.printStackTrace();  // Se houver erro, exibe no console
+            return false;  // Retorna false caso aconteça algum erro
         }
     }
 }
