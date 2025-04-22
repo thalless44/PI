@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Login;
 import model.LoginDAO;
@@ -130,4 +131,7 @@ public class TelaLoginPIController {
     public void abrirJanela() {
         System.out.println("Janela de login exibida com sucesso!");
     }
+    
+       
+        
 }

@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import javafx.scene.image.Image;
 import model.FuncionarioDAO;
 
 public class App extends Application {
@@ -29,6 +30,10 @@ public class App extends Application {
             lc.abrirJanela();
         });
         Scene scene = new Scene (root);
+        
+        Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+        telaLogin.getIcons().add(icone);
+        
         telaLogin.setScene(scene);
         telaLogin.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Login");
         telaLogin.setMaximized(true);
@@ -40,6 +45,6 @@ public class App extends Application {
     }
     //int idParaDeletar = 2;  // Coloque o ID de um funcionário válido
 
-        // Chama o método deletarFuncionario e obtém o retorno (true ou false)
+         //Chama o método deletarFuncionario e obtém o retorno (true ou false)
         // boolean sucesso = FuncionarioDAO.deletarFuncionario(idParaDeletar);
 }
