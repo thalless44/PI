@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.FuncionarioDAO;
+import model.LimitarCaracter;
 
 public class TelaCadastroFuncionarioController {
     private Stage stage;
@@ -23,6 +24,9 @@ public class TelaCadastroFuncionarioController {
 
     @FXML
     private Button btnSair;
+    
+    @FXML
+    private TextField txtFConfirmacaoSenha;
 
     @FXML
     private ComboBox<String> cmbxCargo;
@@ -54,28 +58,20 @@ public class TelaCadastroFuncionarioController {
     @FXML
     private TextField txtFTelefone;
     
-    private static final int LIMIT = 12;
     
     @FXML
-    public void initialize() {
-     
-        txtFCPF.textProperty().addListener((observable, oldValue, newValue) -> {
-    try {
-        if (!newValue.equals("")) {
-                Long.parseLong(newValue);
-            
-        } else {
-            txtFCPF.setText(oldValue);
-        }
-    } catch (Exception ex) {
-        txtFCPF.setText(oldValue);
-    }
-});
-
-
+    public void initialize() { 
         
-        
-        
+    new LimitarCaracter(50, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtFNome);
+    new LimitarCaracter(11, LimitarCaracter.TipoEntrada.NUMEROINTEIRO).applyToTextInputControl(txtFCPF);
+    new LimitarCaracter(100, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtFEndereco);
+    new LimitarCaracter(12, LimitarCaracter.TipoEntrada.NUMEROINTEIRO).applyToTextInputControl(txtFTelefone);
+    new LimitarCaracter(100, LimitarCaracter.TipoEntrada.EMAIL).applyToTextInputControl(txtFEmail);
+    new LimitarCaracter(20, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtFSenha);
+    new LimitarCaracter(20, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtFConfirmacaoSenha);
+    new LimitarCaracter(100, LimitarCaracter.TipoEntrada.NUMERODECIMAL).applyToTextInputControl(txtFSalario);
+    new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtFDataContratacao);
+    new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtFDataNascimento);
 
         cmbxCargo.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
     }
@@ -91,13 +87,29 @@ public class TelaCadastroFuncionarioController {
             erroDados.setHeaderText("Campos obrigatórios");
             erroDados.setContentText("Todos os campos devem ser preenchidos!");
             erroDados.showAndWait();
-        }else if (!txtFCPF.getText().matches("[z0-9]")) {
+        }else if (!txtFSenha.getText().equals(txtFConfirmacaoSenha.getText())) {
             Alert erro = new Alert(Alert.AlertType.WARNING);
             erro.setTitle("Erro");
-            erro.setHeaderText("Campos CPF");
-            erro.setContentText("Não deve conter letras");
+            erro.setHeaderText("Senha se diferem");
             erro.showAndWait();
-        }else{cadastrarFuncionario();}
+        }else if (txtFTelefone.getText().length()<12){
+            Alert erro = new Alert(Alert.AlertType.WARNING);
+            erro.setTitle("Eroo");
+            erro.setHeaderText("Falta numeros no telefone");
+            erro.showAndWait();
+        }else if (txtFCPF.getText().length()<12){
+        Alert erro = new Alert(Alert.AlertType.WARNING);
+            erro.setTitle("Eroo");
+            erro.setHeaderText("Falta numeros no CPF");
+            erro.showAndWait();
+        }else if(txtFSalario.getText().length()<4){
+            Alert erro = new Alert(Alert.AlertType.WARNING);
+            erro.setTitle("Eroo");
+            erro.setHeaderText("Falta numeros no Salarios");
+            erro.showAndWait();
+        
+        }
+        else{cadastrarFuncionario();}
           
     }
     
