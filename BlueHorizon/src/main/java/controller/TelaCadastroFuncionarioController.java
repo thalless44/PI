@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.FuncionarioDAO;
 import util.AlertaUtil;
+import util.LimitarCaracter;
+import util.LimitarCaracter.VerificarData;
 
 public class TelaCadastroFuncionarioController {
     private Stage stage;
@@ -49,6 +51,9 @@ public class TelaCadastroFuncionarioController {
 
     @FXML
     private TextField txtFSenha;
+    
+    @FXML
+    private TextField txtFConfirmacaoSenha;
 
     @FXML
     private TextField txtFTelefone;
@@ -56,32 +61,59 @@ public class TelaCadastroFuncionarioController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
-    @FXML
-    void OnActionBtnEfetuarCadastroFuncionario(ActionEvent event) {
-        
-        if (txtFNome.getText().isEmpty() || txtFCPF.getText().isEmpty() || txtFEndereco.getText().isEmpty() || txtFTelefone.getText().isEmpty()
-                || txtFEmail.getText().isEmpty() || txtFSenha.getText().isEmpty() || txtFSalario.getText().isEmpty()
-                || txtFDataContratacao.getText().isEmpty() || txtFDataNascimento.getText().isEmpty()) {
-            
-            AlertaUtil.mostrarAviso("Campos obrigatórios", "Todos os campos devem ser preenchidos!");
-        
-        } else if (!txtFCPF.getText().matches("[0-9]+")) {
-            
-            AlertaUtil.mostrarAviso("Campos CPF", "Não deve conter letras");
-        
-        } else {
-            cadastrarFuncionario();
-        }
-    }
     
     @FXML
     public void initialize() {
+        
+        new LimitarCaracter (50, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtFNome);
+        new LimitarCaracter (100, LimitarCaracter.TipoEntrada.EMAIL).applyToTextInputControl(txtFEmail);
+        new LimitarCaracter (100, LimitarCaracter.TipoEntrada.NUMERODECIMAL).applyToTextInputControl(txtFSalario);
+        new LimitarCaracter (10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtFDataContratacao);
+        new LimitarCaracter (10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtFDataNascimento);
+        new LimitarCaracter (14, LimitarCaracter.TipoEntrada.CPF).applyToTextInputControl(txtFCPF);
+        new LimitarCaracter (15, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtFTelefone);
+        
         
         
         
         cmbxCargo.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
     }
+
+    @FXML
+    void OnActionBtnEfetuarCadastroFuncionario(ActionEvent event) {
+         boolean dataValidaNascimento = VerificarData.validarData(txtFDataNascimento.getText());
+         boolean dataValidaContratacao = VerificarData.validarData(txtFDataContratacao.getText());
+        
+        if (txtFNome.getText().isEmpty()||txtFCPF.getText().isEmpty()||txtFEndereco.getText().isEmpty()||txtFTelefone.getText().isEmpty()
+                ||txtFEmail.getText().isEmpty()||txtFSenha.getText().isEmpty()|| txtFSalario.getText().isEmpty()
+                || txtFDataContratacao.getText().isEmpty()||txtFDataNascimento.getText().isEmpty()){
+            AlertaUtil.mostrarErro("Erro ao cadastrar", "Todos os campos devem ser preenchidos!");
+           
+        }else if (!txtFSenha.getText().equals(txtFConfirmacaoSenha.getText())) {
+            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Senha e Confirmação .");
+            
+        }else if (txtFTelefone.getText().length()!=15){
+            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Telefone.");
+            
+        }else if (txtFCPF.getText().length()!=14){
+            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo CPF.");
+        
+        }else if(txtFSalario.getText().length()<4){
+            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Salario.");
+        
+        }else if(txtFEmail.getText().length()<10){
+            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Email.");
+            
+        }else if(txtFDataContratacao.getText().length()!=10 || !dataValidaContratacao ){
+            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Data de Contratação.");
+      
+        }else if(txtFDataNascimento.getText().length()!=10 || !dataValidaNascimento){
+            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Data de Nascimento.");
+            
+        }else{cadastrarFuncionario();}
+          
+    }
+    
     
     private void cadastrarFuncionario() {
         
