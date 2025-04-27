@@ -63,15 +63,14 @@ public class TelaCadastroFuncionarioController {
     public void initialize() { 
         
     new LimitarCaracter(50, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtFNome);
-    new LimitarCaracter(11, LimitarCaracter.TipoEntrada.NUMEROINTEIRO).applyToTextInputControl(txtFCPF);
     new LimitarCaracter(100, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtFEndereco);
     new LimitarCaracter(12, LimitarCaracter.TipoEntrada.NUMEROINTEIRO).applyToTextInputControl(txtFTelefone);
     new LimitarCaracter(100, LimitarCaracter.TipoEntrada.EMAIL).applyToTextInputControl(txtFEmail);
-    new LimitarCaracter(20, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtFSenha);
-    new LimitarCaracter(20, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtFConfirmacaoSenha);
     new LimitarCaracter(100, LimitarCaracter.TipoEntrada.NUMERODECIMAL).applyToTextInputControl(txtFSalario);
     new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtFDataContratacao);
     new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtFDataNascimento);
+    new LimitarCaracter(14, LimitarCaracter.TipoEntrada.CPF).applyToTextInputControl(txtFCPF);
+    new LimitarCaracter(15, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtFTelefone);
 
         cmbxCargo.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
     }
@@ -92,12 +91,12 @@ public class TelaCadastroFuncionarioController {
             erro.setTitle("Erro");
             erro.setHeaderText("Senha se diferem");
             erro.showAndWait();
-        }else if (txtFTelefone.getText().length()<12){
+        }else if (txtFTelefone.getText().length()!=15){
             Alert erro = new Alert(Alert.AlertType.WARNING);
             erro.setTitle("Eroo");
             erro.setHeaderText("Falta numeros no telefone");
             erro.showAndWait();
-        }else if (txtFCPF.getText().length()<12){
+        }else if (txtFCPF.getText().length()!=14){
         Alert erro = new Alert(Alert.AlertType.WARNING);
             erro.setTitle("Eroo");
             erro.setHeaderText("Falta numeros no CPF");
@@ -108,8 +107,22 @@ public class TelaCadastroFuncionarioController {
             erro.setHeaderText("Falta numeros no Salarios");
             erro.showAndWait();
         
-        }
-        else{cadastrarFuncionario();}
+        }else if(txtFEmail.getText().length()<10){
+            Alert erro = new Alert(Alert.AlertType.WARNING);
+            erro.setTitle("Eroo");
+            erro.setHeaderText("Falta numeros no Salarios");
+            erro.showAndWait();
+        }else if(txtFDataContratacao.getText().length()!=10){
+            Alert erro = new Alert(Alert.AlertType.WARNING);
+            erro.setTitle("Eroo");
+            erro.setHeaderText("Falta numeros Data de Contratação");
+            erro.showAndWait();
+        }else if(txtFDataNascimento.getText().length()!=10){
+            Alert erro = new Alert(Alert.AlertType.WARNING);
+            erro.setTitle("Eroo");
+            erro.setHeaderText("Falta numeros na Data de Nascimento");
+            erro.showAndWait();
+        }else{cadastrarFuncionario();}
           
     }
     
