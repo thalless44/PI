@@ -10,9 +10,9 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane alignment="CENTER" columnHalignment="CENTER" minHeight="609.0" minWidth="700.0" prefHeight="716.0" prefWidth="854.0" style="-fx-background-color: #6ec4e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaAlterarDadosFuncionariosController">
+<FlowPane alignment="CENTER" columnHalignment="CENTER" minHeight="609.0" minWidth="700.0" prefHeight="949.0" prefWidth="854.0" style="-fx-background-color: #6ec4e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaAlterarDadosFuncionariosController">
    <children>
-        <Pane prefHeight="655.0" prefWidth="613.0" style="-fx-background-color: #d9d9d9;">
+        <Pane prefHeight="860.0" prefWidth="613.0" style="-fx-background-color: #d9d9d9;">
             <effect>
                 <DropShadow>
                     <color>
@@ -21,27 +21,33 @@
                 </DropShadow>
             </effect>
             <children>
-            <Button fx:id="btnCancelarFuncionario" layoutX="260.0" layoutY="577.0" mnemonicParsing="false" onAction="#ActionCancelar" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #DC7777;" text="Cancelar " />
-                <Label fx:id="lblAlterarDadosClientes" layoutX="51.0" layoutY="22.0" prefHeight="42.0" prefWidth="513.0" text="ALTERAR DADOS FUNCIONÁRIOS">
+            <Button fx:id="btnCancelarFuncionario" layoutX="257.0" layoutY="774.0" mnemonicParsing="false" onAction="#ActionCancelar" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #DC7777;" text="Cancelar " />
+                <Label fx:id="lblAlterarDadosClientes" layoutX="14.0" layoutY="26.0" prefHeight="47.0" prefWidth="633.0" text="ALTERAR DADOS DOS FUNCIONÁRIOS">
                     <font>
                         <Font name="System Bold" size="32.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtfdNomeFuncionarioAlterar" layoutX="189.0" layoutY="130.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir nome" />
+                <TextField fx:id="txtfdNomeFuncionarioAlterar" layoutX="189.0" layoutY="130.0" prefHeight="32.0" prefWidth="236.0" />
                 <Label fx:id="lblNome" layoutX="188.0" layoutY="113.0" text="Nome" />
                 <Label fx:id="lblEmail" layoutX="192.0" layoutY="168.0" text="Email" />
-                <Button fx:id="btnAlterarDadosFuncionario" layoutX="258.0" layoutY="538.0" mnemonicParsing="false" onAction="#ActionAlterarDadosFuncionario" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #ebdb8c;" text="Alterar dados" />
-            <Label fx:id="lblTelefone" layoutX="191.0" layoutY="223.0" text="Telefone" />
-            <Label layoutX="189.0" layoutY="279.0" text="Endereco" />
-            <Label layoutX="190.0" layoutY="337.0" text="Data de Nascimento" />
-            <Label layoutX="189.0" layoutY="396.0" text="Cargo" />
-            <Label layoutX="188.0" layoutY="452.0" text=" Salário" />
-            <TextField fx:id="txtfdAlterarEmailFuncionario" layoutX="189.0" layoutY="185.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir email" />
-            <TextField fx:id="txtfdAlterarTelefoneFuncionario" layoutX="190.0" layoutY="240.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir telefone" />
-            <TextField fx:id="txtfdAlterarEnderecoFuncionario" layoutX="189.0" layoutY="296.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir endereço" />
-            <TextField fx:id="txtfdAlterarDataFuncionario" layoutX="189.0" layoutY="354.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir data de nascimento" />
-            <TextField fx:id="txtfdAlterarSalarioFuncionario" layoutX="189.0" layoutY="469.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir salário" />
-            <ComboBox fx:id="cmbxAlterarCargoFuncionario" layoutX="190.0" layoutY="413.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir cargo" />
+                <Button fx:id="btnAlterarDadosFuncionario" layoutX="257.0" layoutY="734.0" mnemonicParsing="false" onAction="#ActionAlterarDadosFuncionario" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #ebdb8c;" text="Alterar dados" />
+            <Label fx:id="lblTelefone" layoutX="191.0" layoutY="284.0" text="Telefone" />
+            <Label layoutX="187.0" layoutY="403.0" text="  Endereco" />
+            <Label layoutX="192.0" layoutY="461.0" text="Data de Nascimento" />
+            <Label layoutX="190.0" layoutY="593.0" text=" Cargo" />
+            <Label layoutX="189.0" layoutY="660.0" text=" Salário" />
+            <TextField fx:id="txtfdAlterarEmailFuncionario" layoutX="189.0" layoutY="185.0" prefHeight="32.0" prefWidth="236.0" />
+            <TextField fx:id="txtfdAlterarTelefoneFuncionario" layoutX="192.0" layoutY="301.0" prefHeight="32.0" prefWidth="236.0" />
+            <TextField fx:id="txtfdAlterarEnderecoFuncionario" layoutX="192.0" layoutY="420.0" prefHeight="32.0" prefWidth="236.0" />
+            <TextField fx:id="txtfdAlterarDataNascimentoFuncionario" layoutX="192.0" layoutY="478.0" prefHeight="32.0" prefWidth="236.0" />
+            <TextField fx:id="txtfdAlterarSalarioFuncionario" layoutX="192.0" layoutY="677.0" prefHeight="32.0" prefWidth="236.0" />
+            <ComboBox fx:id="cmbxAlterarCargoFuncionario" layoutX="192.0" layoutY="610.0" prefHeight="32.0" prefWidth="236.0" />
+            <TextField fx:id="txtfdAlterarCPFFuncionario" layoutX="192.0" layoutY="362.0" prefHeight="32.0" prefWidth="236.0" />
+            <Label fx:id="lblTelefone1" layoutX="194.0" layoutY="345.0" text="CPF" />
+            <TextField fx:id="txtfdAlterarSenhaFuncionario" layoutX="192.0" layoutY="243.0" prefHeight="32.0" prefWidth="236.0" />
+            <Label fx:id="lblEmail1" layoutX="192.0" layoutY="226.0" text="Senha" />
+            <TextField fx:id="txtfdAlterarDataContratoFuncionario" layoutX="192.0" layoutY="546.0" prefHeight="32.0" prefWidth="236.0" />
+            <Label layoutX="192.0" layoutY="529.0" text="Data de contratação" />
             </children>
         </Pane>
    </children>

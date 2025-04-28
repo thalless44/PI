@@ -86,4 +86,34 @@ public class FuncionarioDAO {
 
         return lista;
     }
+
+    public static void atualizarFuncionario(Funcionario funcionario) throws SQLException {
+        
+        String sql = "UPDATE funcionarios SET Salario=?, nome=?, telefone=?, endereco=?, cpf=?, cargo=?, dataContratacao=?, dataNascimento=?, Senha=?, email=? WHERE id=?"; 
+                
+        try(Connection conn = ConexaoBD.conectar();
+                PreparedStatement stmt = conn.prepareStatement(sql)){
+            
+            stmt.setString(1, funcionario.getSalario());
+            stmt.setString(2, funcionario.getNome());
+            stmt.setString(3, funcionario.getTelefone());
+            stmt.setString(4, funcionario.getEndereco());
+            stmt.setString(5, funcionario.getCpf());
+            stmt.setString(6, funcionario.getCargo());
+            stmt.setDate(7, Date.valueOf(funcionario.getDataContratacao()));
+            stmt.setDate(8, Date.valueOf(funcionario.getDataNascimento()));
+            stmt.setString(9, funcionario.getSenha());
+            stmt.setString(10, funcionario.getEmail());
+            
+            stmt.executeUpdate();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+            
+            throw new RuntimeException("Erro ao atualizar funcionário.", e);
+        }
+        
+        
+    }
 }
+
