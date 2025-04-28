@@ -27,7 +27,7 @@
                         <Font name="System Bold" size="32.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtfdNomeFuncionarioAlterar" layoutX="189.0" layoutY="130.0" prefHeight="32.0" prefWidth="236.0" />
+                <TextField fx:id="txtfdNomeFuncionarioAlterar" layoutX="189.0" layoutY="130.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir nome" />
                 <Label fx:id="lblNome" layoutX="188.0" layoutY="113.0" text="Nome" />
                 <Label fx:id="lblEmail" layoutX="192.0" layoutY="168.0" text="Email" />
                 <Button fx:id="btnAlterarDadosFuncionario" layoutX="258.0" layoutY="538.0" mnemonicParsing="false" onAction="#ActionAlterarDadosFuncionario" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #ebdb8c;" text="Alterar dados" />
@@ -36,12 +36,12 @@
             <Label layoutX="190.0" layoutY="337.0" text="Data de Nascimento" />
             <Label layoutX="189.0" layoutY="396.0" text="Cargo" />
             <Label layoutX="188.0" layoutY="452.0" text=" Salário" />
-            <TextField fx:id="txtfdAlterarEmailFuncionario" layoutX="189.0" layoutY="185.0" prefHeight="32.0" prefWidth="236.0" />
-            <TextField fx:id="txtfdAlterarTelefoneFuncionario" layoutX="190.0" layoutY="240.0" prefHeight="32.0" prefWidth="236.0" />
-            <TextField fx:id="txtfdAlterarEnderecoFuncionario" layoutX="189.0" layoutY="296.0" prefHeight="32.0" prefWidth="236.0" />
-            <TextField fx:id="txtfdAlterarDataFuncionario" layoutX="189.0" layoutY="354.0" prefHeight="32.0" prefWidth="236.0" />
-            <TextField fx:id="txtfdAlterarSalarioFuncionario" layoutX="189.0" layoutY="469.0" prefHeight="32.0" prefWidth="236.0" />
-            <ComboBox fx:id="cmbxAlterarCargoFuncionario" layoutX="190.0" layoutY="413.0" prefHeight="32.0" prefWidth="236.0" />
+            <TextField fx:id="txtfdAlterarEmailFuncionario" layoutX="189.0" layoutY="185.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir email" />
+            <TextField fx:id="txtfdAlterarTelefoneFuncionario" layoutX="190.0" layoutY="240.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir telefone" />
+            <TextField fx:id="txtfdAlterarEnderecoFuncionario" layoutX="189.0" layoutY="296.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir endereço" />
+            <TextField fx:id="txtfdAlterarDataFuncionario" layoutX="189.0" layoutY="354.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir data de nascimento" />
+            <TextField fx:id="txtfdAlterarSalarioFuncionario" layoutX="189.0" layoutY="469.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir salário" />
+            <ComboBox fx:id="cmbxAlterarCargoFuncionario" layoutX="190.0" layoutY="413.0" prefHeight="32.0" prefWidth="236.0" promptText="Inserir cargo" />
             </children>
         </Pane>
    </children>

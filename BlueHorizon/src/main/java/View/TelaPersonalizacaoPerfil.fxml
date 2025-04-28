@@ -78,14 +78,14 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="Nometxt" layoutX="147.0" layoutY="141.0" prefHeight="25.0" prefWidth="211.0" />
-            <TextField fx:id="Cpftxt" layoutX="147.0" layoutY="177.0" prefHeight="25.0" prefWidth="211.0" />
-            <TextField fx:id="TelefoneTxt" layoutX="147.0" layoutY="213.0" prefHeight="25.0" prefWidth="211.0" />
-            <TextField fx:id="Enderecotxt" layoutX="147.0" layoutY="245.0" prefHeight="25.0" prefWidth="211.0" />
-            <TextField fx:id="Emailtxt" layoutX="147.0" layoutY="280.0" prefHeight="25.0" prefWidth="211.0" />
-            <TextField fx:id="DatadeNascimentotxt" layoutX="497.0" layoutY="141.0" prefHeight="25.0" prefWidth="155.0" />
-            <TextField fx:id="DatadeContratacaotxt" layoutX="497.0" layoutY="177.0" prefHeight="25.0" prefWidth="155.0" />
-            <ComboBox fx:id="Cargocb" layoutX="497.0" layoutY="213.0" prefHeight="25.0" prefWidth="155.0" />
+            <TextField fx:id="Nometxt" layoutX="147.0" layoutY="141.0" prefHeight="25.0" prefWidth="211.0" promptText="Inserir nome" />
+            <TextField fx:id="Cpftxt" layoutX="147.0" layoutY="177.0" prefHeight="25.0" prefWidth="211.0" promptText="Inserir CPF" />
+            <TextField fx:id="TelefoneTxt" layoutX="147.0" layoutY="213.0" prefHeight="25.0" prefWidth="211.0" promptText="Inserir telefone" />
+            <TextField fx:id="Enderecotxt" layoutX="147.0" layoutY="245.0" prefHeight="25.0" prefWidth="211.0" promptText="Inserir endereço" />
+            <TextField fx:id="Emailtxt" layoutX="147.0" layoutY="280.0" prefHeight="25.0" prefWidth="211.0" promptText="Inserir email" />
+            <TextField fx:id="DatadeNascimentotxt" layoutX="497.0" layoutY="141.0" prefHeight="25.0" prefWidth="155.0" promptText="Inserir data de nascimento" />
+            <TextField fx:id="DatadeContratacaotxt" layoutX="497.0" layoutY="177.0" prefHeight="25.0" prefWidth="155.0" promptText="Inserir data de contratação" />
+            <ComboBox fx:id="Cargocb" layoutX="497.0" layoutY="213.0" prefHeight="25.0" prefWidth="155.0" promptText="Inserir cargo" />
             <Button fx:id="BtnPP1" layoutX="304.0" layoutY="385.0" mnemonicParsing="false" onAction="#OnClickSair" prefHeight="19.0" prefWidth="135.0" style="-fx-background-radius: 0; -fx-background-color: #DC7777;" text="Sair">
                <effect>
                   <DropShadow>

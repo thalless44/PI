@@ -35,12 +35,12 @@
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <TextField fx:id="txtIDimovel" layoutX="87.0" layoutY="108.0" prefHeight="25.0" prefWidth="183.0" />
-            <TextField fx:id="txtValor" layoutX="87.0" layoutY="157.0" prefHeight="25.0" prefWidth="183.0" />
-            <TextField fx:id="txtDatacadastro" layoutX="87.0" layoutY="320.0" prefHeight="25.0" prefWidth="183.0" />
-            <TextField fx:id="txtProprietario" layoutX="87.0" layoutY="375.0" prefHeight="25.0" prefWidth="183.0" />
-            <TextField fx:id="txtEmailProprietario" layoutX="87.0" layoutY="433.0" prefHeight="25.0" prefWidth="183.0" />
-            <TextField fx:id="txtTelefoneProprietario" layoutX="87.0" layoutY="496.0" prefHeight="25.0" prefWidth="183.0" />
+            <TextField fx:id="txtIDimovel" layoutX="87.0" layoutY="108.0" prefHeight="25.0" prefWidth="183.0" promptText="Inserir ID do imóvel" />
+            <TextField fx:id="txtValor" layoutX="87.0" layoutY="157.0" prefHeight="25.0" prefWidth="183.0" promptText="Inserir valor" />
+            <TextField fx:id="txtDatacadastro" layoutX="87.0" layoutY="320.0" prefHeight="25.0" prefWidth="183.0" promptText="Inserir data de cadastro" />
+            <TextField fx:id="txtProprietario" layoutX="87.0" layoutY="375.0" prefHeight="25.0" prefWidth="183.0" promptText="Inserir nome do proprietário" />
+            <TextField fx:id="txtEmailProprietario" layoutX="87.0" layoutY="433.0" prefHeight="25.0" prefWidth="183.0" promptText="Inserir email do proprietário" />
+            <TextField fx:id="txtTelefoneProprietario" layoutX="87.0" layoutY="496.0" prefHeight="25.0" prefWidth="183.0" promptText="Inserir telefone do proprietário" />
             <Label layoutX="82.0" layoutY="91.0" text="  ID do imóvel ">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -113,13 +113,13 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <TextField fx:id="txtCidades" layoutX="332.0" layoutY="375.0" prefHeight="25.0" prefWidth="250.0" />
-            <TextField fx:id="txtNumeracaoImovel" layoutX="459.0" layoutY="267.0" prefHeight="25.0" prefWidth="117.0" />
+            <TextField fx:id="txtCidades" layoutX="332.0" layoutY="375.0" prefHeight="25.0" prefWidth="250.0" promptText="Inserir cidade" />
+            <TextField fx:id="txtNumeracaoImovel" layoutX="459.0" layoutY="267.0" prefHeight="25.0" prefWidth="117.0" promptText="Inserir numeração" />
             <TextField fx:id="txtQuartos" layoutX="459.0" layoutY="108.0" prefHeight="25.0" prefWidth="117.0" />
-            <TextField fx:id="txtVagaGaragem" layoutX="328.0" layoutY="157.0" prefHeight="25.0" prefWidth="120.0" />
-            <TextField fx:id="txtRua" layoutX="332.0" layoutY="267.0" prefHeight="25.0" prefWidth="116.0" />
-            <TextField fx:id="txtBanheiros" layoutX="331.0" layoutY="320.0" prefHeight="25.0" prefWidth="116.0" />
-            <TextField fx:id="txtArea" layoutX="328.0" layoutY="108.0" prefHeight="25.0" prefWidth="120.0" />
+            <TextField fx:id="txtVagaGaragem" layoutX="328.0" layoutY="157.0" prefHeight="25.0" prefWidth="120.0" promptText="Inserir vagas" />
+            <TextField fx:id="txtRua" layoutX="332.0" layoutY="267.0" prefHeight="25.0" prefWidth="116.0" promptText="Inserir rua" />
+            <TextField fx:id="txtBanheiros" layoutX="331.0" layoutY="320.0" prefHeight="25.0" prefWidth="116.0" promptText="Inserir banheiros" />
+            <TextField fx:id="txtArea" layoutX="328.0" layoutY="108.0" prefHeight="25.0" prefWidth="120.0" promptText="Inserir área (m²) " />
             <Button fx:id="btnAdicionarImagem" layoutX="613.0" layoutY="332.0" mnemonicParsing="false" onAction="#OnClickAdicionarImagem" prefHeight="17.0" prefWidth="265.0" style="-fx-background-color: a7a7a7;" text="Adicionar Imagem">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -155,7 +155,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="txtTipoPropriedade" layoutX="85.0" layoutY="267.0" prefHeight="25.0" prefWidth="183.0" />
+            <TextField fx:id="txtTipoPropriedade" layoutX="85.0" layoutY="267.0" prefHeight="25.0" prefWidth="183.0" promptText="Inserir tipo de propriedade" />
          </children>
       </Pane>
    </children>

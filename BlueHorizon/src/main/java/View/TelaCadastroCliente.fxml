@@ -25,14 +25,14 @@
                         <Font name="System Bold" size="32.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtNomeCliente" layoutX="83.0" layoutY="139.0" prefHeight="32.0" prefWidth="298.0" />
+                <TextField fx:id="txtNomeCliente" layoutX="83.0" layoutY="139.0" prefHeight="32.0" prefWidth="298.0" promptText="Inserir nome" />
                 <Label layoutX="83.0" layoutY="122.0" prefHeight="17.0" prefWidth="318.0" text="Nome" />
                 <Button fx:id="btnEfetuarCadastro" layoutX="172.0" layoutY="351.0" mnemonicParsing="false" onAction="#ActionEfetuarCadastro" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #7eb97b;" text="Efetuar cadastro" />
             <Button fx:id="btnCancelarcadastro" layoutX="172.0" layoutY="397.0" mnemonicParsing="false" onAction="#ActionCancelarCadastro" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #DC7777;" text="Cancelar cadastro" />
             <Label layoutX="83.0" layoutY="189.0" prefHeight="17.0" prefWidth="318.0" text="Email" />
-            <TextField fx:id="txtEmailCliente" layoutX="83.0" layoutY="206.0" prefHeight="32.0" prefWidth="298.0" />
+            <TextField fx:id="txtEmailCliente" layoutX="83.0" layoutY="206.0" prefHeight="32.0" prefWidth="298.0" promptText="Inserir email" />
             <Label layoutX="83.0" layoutY="257.0" prefHeight="17.0" prefWidth="318.0" text="Telefone" />
-            <TextField fx:id="txtTelefoneCliente" layoutX="83.0" layoutY="274.0" prefHeight="32.0" prefWidth="298.0" />
+            <TextField fx:id="txtTelefoneCliente" layoutX="83.0" layoutY="274.0" prefHeight="32.0" prefWidth="298.0" promptText="Inserir telefone" />
             </children>
         </Pane>
    </children>
