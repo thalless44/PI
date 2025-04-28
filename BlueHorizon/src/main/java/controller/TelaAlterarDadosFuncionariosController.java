@@ -1,6 +1,9 @@
 package controller;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -57,36 +60,64 @@ public class TelaAlterarDadosFuncionariosController {
     @FXML
     void ActionAlterarDadosFuncionario(ActionEvent event) throws SQLException {
         
-        //AJUSTAR
+        //AJUSTAR ESSE MÉTODO
         
-      /*  funcionario.setNome(.getText());
-        funcionario.setCpf(txtCPF.getText());
-        funcionario.setTelefone(txtTelefone.getText());
-        funcionario.setEndereco(txtEndereco.getText());
-        funcionario.setEmail(txtEmail.getText());
-        funcionario.setSenha(txtSenha.getText());
-        funcionario.setCargo(txtCargo.getText());
-        funcionario.setSalario(Double.parseDouble(txtSalario.getText()));
-        funcionario.setDataNascimento(dpNascimento.getValue());
-        funcionario.setDataContratacao(dpContratacao.getValue());
+        // Validação antes de tentar atualizar os dados
+    if (txtfdNomeFuncionarioAlterar.getText().isEmpty() && 
+        txtfdAlterarCPFFuncionario.getText().isEmpty() && 
+        txtfdAlterarTelefoneFuncionario.getText().isEmpty() && 
+        txtfdAlterarEnderecoFuncionario.getText().isEmpty() && 
+        txtfdAlterarEmailFuncionario.getText().isEmpty() && 
+        txtfdAlterarSenhaFuncionario.getText().isEmpty() && 
+        txtfdAlterarSalarioFuncionario.getText().isEmpty() && 
+        txtfdAlterarDataNascimentoFuncionario.getText().isEmpty() && 
+        txtfdAlterarDataContratoFuncionario.getText().isEmpty()) {
 
-        FuncionarioDAO.atualizarFuncionario(funcionario);
+        AlertaUtil.mostrarAviso("Preencha um dos campos", "Pelo menos um dos campos deve ser preenchido!");
+        return;  // Se nada for preenchido, não prossegue
+    }
 
-        ((Stage) ((Button) event.getSource()).getScene().getWindow()).close();
-        
-        if (txtfdAlterarDataContratoFuncionario.getText().isEmpty() && 
-            txtfdAlterarDataNascimentoFuncionario.getText().isEmpty() && 
-            txtfdAlterarCPFFuncionario.getText().isEmpty() &&
-            txtfdAlterarEmailFuncionario.getText().isEmpty() &&
-            txtfdAlterarSenhaFuncionario.getText().isEmpty() &&
-            txtfdAlterarEnderecoFuncionario.getText().isEmpty() && 
-            txtfdAlterarSalarioFuncionario.getText().isEmpty() && 
-            txtfdAlterarTelefoneFuncionario.getText().isEmpty() && 
-            txtfdNomeFuncionarioAlterar.getText().isEmpty()) {
-            
-            AlertaUtil.mostrarAviso("Preencha um dos campos", 
-                "Pelo menos um dos campos deve ser preenchido!");
+    // Ajuste nas variáveis
+    funcionario.setNome(txtfdNomeFuncionarioAlterar.getText());
+    funcionario.setCpf(txtfdAlterarCPFFuncionario.getText());
+    funcionario.setTelefone(txtfdAlterarTelefoneFuncionario.getText());
+    funcionario.setEndereco(txtfdAlterarEnderecoFuncionario.getText());
+    funcionario.setEmail(txtfdAlterarEmailFuncionario.getText());
+    funcionario.setSenha(txtfdAlterarSenhaFuncionario.getText());
+    
+    // Valida e seta o cargo se o valor não for nulo
+    if (cmbxAlterarCargoFuncionario.getValue() != null) {
+        funcionario.setCargo(cmbxAlterarCargoFuncionario.getValue());
+    }
+
+        funcionario.setSalario(txtfdAlterarSalarioFuncionario.getText());
+
+    // Validação da Data de Nascimento
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    if (!txtfdAlterarDataNascimentoFuncionario.getText().isEmpty()) {
+        try {
+            funcionario.setDataNascimento(LocalDate.parse(txtfdAlterarDataNascimentoFuncionario.getText(), formatter));
+        } catch (DateTimeParseException e) {
+            AlertaUtil.mostrarErro("Data de Nascimento inválida", "Formato correto: yyyy-MM-dd");
+            return;
         }
+    }
+
+    // Validação da Data de Contratação
+    if (!txtfdAlterarDataContratoFuncionario.getText().isEmpty()) {
+        try {
+            funcionario.setDataContratacao(LocalDate.parse(txtfdAlterarDataContratoFuncionario.getText(), formatter));
+        } catch (DateTimeParseException e) {
+            AlertaUtil.mostrarErro("Data de Contratação inválida", "Formato correto: yyyy-MM-dd");
+            return;
+        }
+    }
+
+    // Atualizar no banco
+    FuncionarioDAO.atualizarFuncionario(funcionario);
+
+    // Fechar a tela
+    ((Stage) ((Button) event.getSource()).getScene().getWindow()).close();
         
     }
 
@@ -118,12 +149,12 @@ public class TelaAlterarDadosFuncionariosController {
         txtfdAlterarEmailFuncionario.setText(funcionario.getEmail());
         txtfdAlterarSenhaFuncionario.setText(funcionario.getSenha());
         cmbxAlterarCargoFuncionario.setValue(funcionario.getCargo());
-        txtfdAlterarSalarioFuncionario.setText(funcionario.getSalario());
-        txtfdAlterarDataNascimentoFuncionario.setText(funcionario.getDataNascimento());
-        txtfdAlterarDataContratoFuncionario.setText(funcionario.getDataContratacao());
+        txtfdAlterarSalarioFuncionario.setText(String.valueOf(funcionario.getSalario()));
+        txtfdAlterarDataNascimentoFuncionario.setText(funcionario.getDataNascimento().toString());
+        txtfdAlterarDataContratoFuncionario.setText(funcionario.getDataContratacao().toString());
         
         
-    }*/
+    }
     
 }
-}
+
