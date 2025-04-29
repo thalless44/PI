@@ -21,6 +21,7 @@ model\PropriedadesDAO.class
 controller\TelaPersonalizacaoPerfilController.class
 controller\TelaAlterarDadosClientesController.class
 controller\TelaInformacoesPerfilController.class
+model\Propriedades.class
 controller\TelaPagamentoController.class
 principal\App.class
 controller\TelaCadastroFuncionarioController.class
