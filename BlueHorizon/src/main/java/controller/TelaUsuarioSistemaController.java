@@ -1,12 +1,14 @@
 package controller;
 
-import java.io.IOException;
+import java.io.File;
+import java.net.URL;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -48,6 +50,8 @@ public class TelaUsuarioSistemaController {
     public void initialize() {
         configurarColunasTabela();
         carregarUsuariosTabela();
+        
+        
     }
 
     private void configurarColunasTabela() {
@@ -85,26 +89,37 @@ public class TelaUsuarioSistemaController {
     void OnclickAlterarDados(ActionEvent event) {
         
         Funcionario funcionarioSelecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
-    
-    if (funcionarioSelecionado != null) {
-        // Passar o funcionário selecionado para a tela de alteração
-        TelaAlterarDadosFuncionariosController controller = new TelaAlterarDadosFuncionariosController();
-        controller.setFuncionario(funcionarioSelecionado);
-        
-        // Abrir a tela de alteração
-        try {
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/java/view/TelaAlterarDadosFuncionarios.fxml"));
-            loader.setController(controller);
-            stage.setScene(new Scene(loader.load()));
-            stage.show();
-        } catch (IOException e) {
-            AlertaUtil.mostrarErro("Erro", "Não foi possível abrir a tela de alteração.");
-        }
-    } else {
-        AlertaUtil.mostrarAviso("Nenhum funcionário selecionado", "Selecione um funcionário para alterar os dados.");
+
+    if (funcionarioSelecionado == null) {
+        System.out.println("Nenhum funcionário selecionado.");
+        return;
     }
+
+    try {
+        URL url = new File("src/main/java/view/TelaAlterarDadosFuncionarios.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        TelaAlterarDadosFuncionariosController tadfc = loader.getController();
+        Stage telaADF = new Stage();
+
+        tadfc.setStage(telaADF);
+        tadfc.setFuncionario(funcionarioSelecionado);  // ✅ Passa o objeto só uma vez, no lugar certo
+
+        Scene scene = new Scene(root);
+        telaADF.setScene(scene);
+        telaADF.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Alterar dados do funcionário");
+        telaADF.setMaximized(true);
+        telaADF.show();
+
+           
+          } catch (Exception e) {
+        e.printStackTrace();
+        // Aqui você pode também mostrar um alerta visual, se quiser
     }
+}
+
+
 
     @FXML
     void OnclickExcluir(ActionEvent event) {

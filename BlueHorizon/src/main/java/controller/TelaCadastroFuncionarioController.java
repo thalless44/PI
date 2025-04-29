@@ -72,10 +72,7 @@ public class TelaCadastroFuncionarioController {
         new LimitarCaracter (10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtFDataNascimento);
         new LimitarCaracter (14, LimitarCaracter.TipoEntrada.CPF).applyToTextInputControl(txtFCPF);
         new LimitarCaracter (15, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtFTelefone);
-        
-        
-        
-        
+         
         cmbxCargo.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
     }
 

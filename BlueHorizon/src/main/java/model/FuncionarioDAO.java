@@ -89,7 +89,7 @@ public class FuncionarioDAO {
 
     public static void atualizarFuncionario(Funcionario funcionario) throws SQLException {
         
-        String sql = "UPDATE funcionarios SET Salario=?, nome=?, telefone=?, endereco=?, cpf=?, cargo=?, dataContratacao=?, dataNascimento=?, Senha=?, email=? WHERE id=?"; 
+        String sql = "UPDATE funcionarios SET Salario=?, nome=?, telefone=?, endereco=?, cpf=?, cargo=?, dataContratacao=?, dataNascimento=?, Senha=?, email=? WHERE id_funcionario=?"; 
                 
         try(Connection conn = ConexaoBD.conectar();
                 PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -104,6 +104,8 @@ public class FuncionarioDAO {
             stmt.setDate(8, Date.valueOf(funcionario.getDataNascimento()));
             stmt.setString(9, funcionario.getSenha());
             stmt.setString(10, funcionario.getEmail());
+            stmt.setInt(11, funcionario.getId());
+       
             
             stmt.executeUpdate();
             
