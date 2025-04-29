@@ -1,2 +1,2 @@
-# PI
-Blue Horizon - Software de gereciamento de propriedade beira-mar
+# Projeto Integrador - IFSC Gaspar
+Blue Horizon - Software de Gereciamento de Propriedade Beira-mar
