@@ -13,9 +13,11 @@ controller\TelaAlterarDadosFuncionariosController.class
 module-info.class
 util\LimitarCaracter.class
 controller\TelaUsuarioSistemaController.class
+model\Cliente.class
 controller\TelaRecSenhaController.class
 controller\TelaCadastroClienteController.class
 controller\TelaCadastroImovelController.class
+controller\TelaClientesSistemaController.class
 model\ClienteDAO.class
 model\PropriedadesDAO.class
 controller\TelaPersonalizacaoPerfilController.class
