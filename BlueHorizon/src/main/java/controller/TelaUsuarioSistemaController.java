@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import model.Funcionario;
 import model.FuncionarioDAO;
+import static model.FuncionarioDAO.deletarFuncionario;
 import util.AlertaUtil;
 
 public class TelaUsuarioSistemaController {
@@ -110,12 +111,18 @@ public class TelaUsuarioSistemaController {
         boolean confirmado = AlertaUtil.mostrarConfirmacao(
                 "Confirmação de exclusão",
                 "Tem certeza que deseja excluir este usuário? Esta ação não poderá ser desfeita."
-        ).filter(response -> response == ButtonType.OK).isPresent();
+        ).filter( response -> response == ButtonType.OK).isPresent();
+        
 
         if (confirmado) {
-            // Lógica de exclusão futura
-            AlertaUtil.mostrarInformacao("Usuário excluído",
+            Funcionario funcionarioSelecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
+            if (funcionarioSelecionado != null ){
+                deletarFuncionario(funcionarioSelecionado.getId()); 
+                tabelaUsuarios.getItems().remove(funcionarioSelecionado);
+                AlertaUtil.mostrarInformacao("Usuário excluído",
                     "O usuário foi removido com sucesso.");
+            }
+            
         } else {
             event.consume();
         }
@@ -127,4 +134,5 @@ public class TelaUsuarioSistemaController {
                 "Tem certeza que deseja fechar a tela atual?\nTodas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
+
 }
