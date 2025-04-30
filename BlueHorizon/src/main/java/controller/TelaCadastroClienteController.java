@@ -50,30 +50,13 @@ public class TelaCadastroClienteController {
     void ActionEfetuarCadastro(ActionEvent event) {
         
         cadastrarCliente();
-        
-      /*  String nome = txtNomeCliente.getText();
-        String email = txtEmailCliente.getText();
-        String telefone = txtTelefoneCliente.getText();
-
-       if (nome.isEmpty() || email.isEmpty() || telefone.isEmpty()) {
-            Alert erro = new Alert(Alert.AlertType.ERROR);
-            erro.setTitle("Erro");
-            erro.setHeaderText("Campos obrigatórios");
-            erro.setContentText("Todos os campos devem ser preenchidos!");
-            erro.show();
-        } else {
-            Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
-            sucesso.setTitle("Cadastro de cliente");
-            sucesso.setHeaderText("Cadastro efetuado com sucesso!");
-            sucesso.setContentText("Nome: " + nome + "\nEmail: " + email + "\nTelefone: " + telefone);
-            sucesso.showAndWait();
-        }*/
     }
 
 private boolean CancelarCadastroCliente() {
     return AlertaUtil.mostrarConfirmacao(
         "Aviso", 
-        "Tem certeza que deseja fechar a tela de cadastro de cliente?\nTodas as alterações não salvas serão perdidas e a tela atual será fechada!"
+        "Tem certeza que deseja fechar a tela de cadastro de cliente?",
+        "Todas as alterações não salvas serão perdidas e a tela atual será fechada!"
     ).filter(response -> response == ButtonType.OK).isPresent();
 }
 
@@ -83,20 +66,20 @@ private boolean CancelarCadastroCliente() {
     String telefone = txtTelefoneCliente.getText();
 
     if (nome.isEmpty() || email.isEmpty() || telefone.isEmpty()) {
-        AlertaUtil.mostrarErro("Campos obrigatórios", 
+        AlertaUtil.mostrarErro("Erro","Campos obrigatórios", 
             "Todos os campos devem ser preenchidos!");
     } else {
         boolean sucesso = ClienteDAO.cadastrarCliente(nome, email, telefone);
 
         if (sucesso) {
-            AlertaUtil.mostrarInformacao("Cadastro realizado", 
+            AlertaUtil.mostrarInformacao("Cadastro de cliente", "Cadastro realizado", 
                 "O cliente foi cadastrado com sucesso.");
 
             // Fecha a janela
             Stage stage = (Stage) btnCancelarcadastro.getScene().getWindow();
             stage.close();
         } else {
-            AlertaUtil.mostrarErro("Erro ao cadastrar", 
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", 
                 "Ocorreu um erro ao tentar cadastrar o cliente.");
         }
     }

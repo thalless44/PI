@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class TelaInicialController {
@@ -68,6 +69,9 @@ public class TelaInicialController {
             TelaCadastroClienteController ti = loader.getController(); 
             ti.setStage(telaCC);
             Scene scene = new Scene(root);
+            
+            Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+            telaCC.getIcons().add(icone);
             telaCC.setScene(scene);
             telaCC.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Cadastro de cliente");
 
@@ -89,6 +93,10 @@ public class TelaInicialController {
             TelaUsuarioSistemaController ti = loader.getController(); 
             ti.setStage(telaUS);
             Scene scene = new Scene(root);
+            
+            Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+            telaUS.getIcons().add(icone);
+        
             telaUS.setScene(scene);
             telaUS.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Usuários do sistema");
 
@@ -112,6 +120,10 @@ public class TelaInicialController {
             TelaCadastroFuncionarioController ti = loader.getController(); 
             ti.setStage(telaCF);
             Scene scene = new Scene(root);
+            
+            Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+            telaCF.getIcons().add(icone);
+        
             telaCF.setScene(scene);
             telaCF.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Cadastro de funcionário");
             
@@ -132,6 +144,10 @@ public class TelaInicialController {
             TelaCadastroImovelController imovelpi = loader.getController(); 
             imovelpi.setStage(telaIP);
             Scene scene = new Scene(root);
+            
+            Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+            telaIP.getIcons().add(icone);
+        
             telaIP.setScene(scene);
             telaIP.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar");
 
@@ -155,6 +171,10 @@ public class TelaInicialController {
             TelaInformacoesPerfilController ti = loader.getController(); 
             ti.setStage(telaIP);
             Scene scene = new Scene(root);
+            
+            Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+            telaIP.getIcons().add(icone);
+        
             telaIP.setScene(scene);
             telaIP.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Informações do perfil");
 
@@ -178,6 +198,10 @@ public class TelaInicialController {
         TelaRelatorioVendasController tR = loader.getController(); 
         tR.setStage(telaRV);
         Scene scene = new Scene(root);
+        
+        Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+        telaRV.getIcons().add(icone);
+        
         telaRV.setScene(scene);
         telaRV.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Relatório de venda dos imóveis");
         telaRV.setMaximized(true);

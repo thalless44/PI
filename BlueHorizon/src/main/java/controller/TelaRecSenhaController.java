@@ -26,7 +26,10 @@ public class TelaRecSenhaController {
 
     @FXML
     void ActionRecuperarSenha(ActionEvent event) {
-        String email = txtfdEmailRecSenha.getText();
+        
+        //Ajustar a lógica da recuperação de senha
+        
+       /* String email = txtfdEmailRecSenha.getText();
 
         if (email.equals("usuario@gmail.com")) {
             AlertaUtil.mostrarInformacao(
@@ -38,7 +41,7 @@ public class TelaRecSenhaController {
                 "BlueHorizon - Recuperação de senha",
                 "Email não cadastrado no sistema ou não preenchido."
             );
-        }
+        }*/
     }
 
     @FXML
@@ -54,7 +57,8 @@ public class TelaRecSenhaController {
     private boolean FecharTelaRecSenha() {
         return AlertaUtil.mostrarConfirmacao(
             "Confirmação",
-            "Tem certeza que deseja fechar a tela atual?\nTodas as alterações não salvas serão perdidas!"
+            "Tem certeza que deseja fechar a tela atual?",
+            "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
 }

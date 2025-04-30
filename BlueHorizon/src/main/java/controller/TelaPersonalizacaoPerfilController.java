@@ -49,10 +49,11 @@ public class TelaPersonalizacaoPerfilController {
 
     @FXML
     void OnClickAlterarPerfil(ActionEvent event) {
+        
         // Lógica para alterar o perfil (aqui você pode colocar a implementação)
         
         // Usando AlertaUtil para mostrar um alerta de sucesso
-        AlertaUtil.mostrarInformacao(
+        AlertaUtil.mostrarInformacao("Sucesso",
             "Alterações feitas com sucesso!", 
             "As alterações no seu perfil foram salvas com sucesso."
         );
@@ -67,6 +68,7 @@ public class TelaPersonalizacaoPerfilController {
 
     @FXML
     void OnClickSair(ActionEvent event) {
+        
         if (FecharTelaPersonalizacaoPerfil()) {
             Stage stage = (Stage) BtnPP1.getScene().getWindow();
             stage.close();
@@ -79,7 +81,8 @@ public class TelaPersonalizacaoPerfilController {
         // Usando AlertaUtil para confirmar se o usuário realmente quer fechar a tela
         return AlertaUtil.mostrarConfirmacao(
             "Aviso", 
-            "Tem certeza que deseja fechar a tela de personalização de perfil?\nTodas as alterações não salvas serão perdidas e a tela atual será fechada!"
+            "Tem certeza que deseja fechar a tela de personalização de perfil?",
+            "Todas as alterações não salvas serão perdidas e a tela atual será fechada!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
 }

@@ -49,6 +49,7 @@ public class TelaPagamentoController {
 
     @FXML
     void ActionEfetuarPagamento(ActionEvent event) {
+        
         String idPagamento = txtIDpagamento.getText();
         String nome = txtNomeCliente.getText();
         String email = txtEmailCliente.getText();
@@ -59,11 +60,11 @@ public class TelaPagamentoController {
 
         if (idPagamento.isEmpty() || nome.isEmpty() || email.isEmpty() || telefone.isEmpty()
                 || valor.isEmpty() || data.isEmpty() || formaPagamento.isEmpty()) {
-            AlertaUtil.mostrarAviso("Campos obrigatórios",
+            AlertaUtil.mostrarAviso("Aviso", "Campos obrigatórios",
                     "Todos os campos devem ser preenchidos para efetuar o pagamento.");
         } else {
             // Aqui você pode adicionar lógica de persistência no banco, se necessário
-            AlertaUtil.mostrarInformacao("Pagamento efetuado",
+            AlertaUtil.mostrarInformacao("Sucesso", "Pagamento efetuado",
                     "O pagamento foi realizado com sucesso para o cliente: " + nome);
 
             Stage stage = (Stage) btnEfetuarPagamento.getScene().getWindow();
@@ -74,7 +75,8 @@ public class TelaPagamentoController {
     private boolean cancelarPagamento() {
         return AlertaUtil.mostrarConfirmacao(
                 "Confirmação de cancelamento",
-                "Tem certeza que deseja cancelar o pagamento?\nTodas as informações não salvas serão perdidas."
+                "Tem certeza que deseja cancelar o pagamento?",
+                "Todas as informações não salvas serão perdidas."
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
 }

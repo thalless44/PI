@@ -84,28 +84,28 @@ public class TelaCadastroFuncionarioController {
         if (txtFNome.getText().isEmpty()||txtFCPF.getText().isEmpty()||txtFEndereco.getText().isEmpty()||txtFTelefone.getText().isEmpty()
                 ||txtFEmail.getText().isEmpty()||txtFSenha.getText().isEmpty()|| txtFSalario.getText().isEmpty()
                 || txtFDataContratacao.getText().isEmpty()||txtFDataNascimento.getText().isEmpty()){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Todos os campos devem ser preenchidos!");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Todos os campos devem ser preenchidos!");
            
         }else if (!txtFSenha.getText().equals(txtFConfirmacaoSenha.getText())) {
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Senha e Confirmação .");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Senha e Confirmação .");
             
         }else if (txtFTelefone.getText().length()!=15){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Telefone.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Telefone.");
             
         }else if (txtFCPF.getText().length()!=14){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo CPF.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo CPF.");
         
         }else if(txtFSalario.getText().length()<4){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Salario.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Salario.");
         
         }else if(txtFEmail.getText().length()<10){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Email.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Email.");
             
         }else if(txtFDataContratacao.getText().length()!=10 || !dataValidaContratacao ){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Data de Contratação.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Data de Contratação.");
       
         }else if(txtFDataNascimento.getText().length()!=10 || !dataValidaNascimento){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Data de Nascimento.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Data de Nascimento.");
             
         }else{cadastrarFuncionario();}
           
@@ -134,9 +134,9 @@ public class TelaCadastroFuncionarioController {
                 endereco, telefone, email, senha, cargo, salario);
 
         if (sucesso) {
-            AlertaUtil.mostrarInformacao("Cadastro realizado", "O funcionário foi cadastrado com sucesso.");
+            AlertaUtil.mostrarInformacao("Cadastro de funcionario", "Cadastro realizado", "O funcionário foi cadastrado com sucesso.");
         } else {
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique os dados e tente novamente.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique os dados e tente novamente.");
         }
     }
 
@@ -153,7 +153,8 @@ public class TelaCadastroFuncionarioController {
  private boolean FecharTelaCadastroFuncionario() {
     return AlertaUtil.mostrarConfirmacao(
         "Confirmação", 
-        "Tem certeza que deseja fechar a tela de cadastro de funcionários?\nTodas as alterações não salvas serão perdidas!"
+        "Tem certeza que deseja fechar a tela de cadastro de funcionários?",
+        "Todas as alterações não salvas serão perdidas!"
     ).filter(response -> response == ButtonType.OK).isPresent();
  }
 }

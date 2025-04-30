@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Funcionario;
 import model.FuncionarioDAO;
@@ -107,6 +108,10 @@ public class TelaUsuarioSistemaController {
         tadfc.setFuncionario(funcionarioSelecionado);  // ✅ Passa o objeto só uma vez, no lugar certo
 
         Scene scene = new Scene(root);
+        
+        Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+        telaADF.getIcons().add(icone);
+        
         telaADF.setScene(scene);
         telaADF.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Alterar dados do funcionário");
         telaADF.setMaximized(true);
@@ -125,7 +130,8 @@ public class TelaUsuarioSistemaController {
     void OnclickExcluir(ActionEvent event) {
         boolean confirmado = AlertaUtil.mostrarConfirmacao(
                 "Confirmação de exclusão",
-                "Tem certeza que deseja excluir este usuário? Esta ação não poderá ser desfeita."
+                "Tem certeza que deseja excluir este usuário?",
+                "Esta ação não poderá ser desfeita."
         ).filter( response -> response == ButtonType.OK).isPresent();
         
 
@@ -134,7 +140,7 @@ public class TelaUsuarioSistemaController {
             if (funcionarioSelecionado != null ){
                 deletarFuncionario(funcionarioSelecionado.getId()); 
                 tabelaUsuarios.getItems().remove(funcionarioSelecionado);
-                AlertaUtil.mostrarInformacao("Usuário excluído",
+                AlertaUtil.mostrarInformacao("Aviso", "Usuário excluído",
                     "O usuário foi removido com sucesso.");
             }
             
@@ -146,7 +152,8 @@ public class TelaUsuarioSistemaController {
     private boolean FecharTelaUsuariosSistema() {
         return AlertaUtil.mostrarConfirmacao(
                 "Confirmação de saída",
-                "Tem certeza que deseja fechar a tela atual?\nTodas as alterações não salvas serão perdidas!"
+                "Tem certeza que deseja fechar a tela atual?",
+                "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
 

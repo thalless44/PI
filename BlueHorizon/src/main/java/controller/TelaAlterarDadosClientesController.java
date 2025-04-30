@@ -41,7 +41,7 @@ public class TelaAlterarDadosClientesController  {
     @FXML
     void ActionAlterarDados(ActionEvent event) {
         if (txtNome.getText().isEmpty() || txtEmail.getText().isEmpty() || txtTelefone.getText().isEmpty()) {
-            AlertaUtil.mostrarAviso("Campos obrigatórios", 
+            AlertaUtil.mostrarAviso("Aviso", "Campos obrigatórios", 
                 "Todos os campos devem ser preenchidos!");
         }
     }
@@ -59,7 +59,8 @@ public class TelaAlterarDadosClientesController  {
     private boolean FecharTelaAlterarDadosCliente() {
         return AlertaUtil.mostrarConfirmacao(
             "Confirmação", 
-            "Tem certeza que deseja fechar a tela de alterar dados de clientes?\nTodas as alterações não salvas serão perdidas e a tela atual será fechada!"
+            "Tem certeza que deseja fechar a tela de alterar dados de clientes?",
+            "Todas as alterações não salvas serão perdidas e a tela atual será fechada!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
 

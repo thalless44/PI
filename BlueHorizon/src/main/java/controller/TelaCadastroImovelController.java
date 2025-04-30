@@ -112,6 +112,7 @@ public class TelaCadastroImovelController {
 
     @FXML
     void initialize() {
+        
         grupoJardim = new ToggleGroup();
         grupoPiscina = new ToggleGroup();
         grupoMobiliada = new ToggleGroup();
@@ -136,11 +137,13 @@ public class TelaCadastroImovelController {
 
     @FXML
     void OnClickAdicionarImagem(ActionEvent event) {
+        
         // Implementar lógica para adicionar imagem (se necessário)
     }
 
     @FXML
     void onClickCadastro(ActionEvent event) {
+        
         try {
             String telefoneProprietario = txtTelefoneProprietario.getText();
             String nomeProprietario = txtProprietario.getText();
@@ -173,15 +176,15 @@ public class TelaCadastroImovelController {
             boolean sucessoImovel = ImovelDAO.InformacoesImovel(quartos, banheiros, vagasGaragem, mobiliada, jardim, sistemaSeguranca, piscina, numeroCasa, area);
 
             if (sucessoProprietario && sucessoPropriedade && sucessoImovel) {
-                AlertaUtil.mostrarInformacao("Cadastro realizado", 
+                AlertaUtil.mostrarInformacao("Cadastro de imóvel", "Cadastro realizado", 
                     "O imóvel foi cadastrado corretamente no banco de dados.");
             } else {
-                AlertaUtil.mostrarErro("Erro no Cadastro", 
+                AlertaUtil.mostrarErro("Erro", "Erro no Cadastro", 
                     "Houve um erro ao tentar cadastrar o imóvel. Verifique os dados e tente novamente.");
             }
 
         } catch (Exception e) {
-            AlertaUtil.mostrarErro("Erro", "Ocorreu um erro inesperado. Verifique os dados e tente novamente.");
+            AlertaUtil.mostrarErro("Erro", "Ocorreu um erro inesperado.","Verifique os dados e tente novamente.");
         }
     }
 
@@ -202,7 +205,8 @@ public class TelaCadastroImovelController {
     private boolean CancelarCadastroImovel() {
         return AlertaUtil.mostrarConfirmacao(
             "Confirmação", 
-            "Tem certeza que deseja fechar a tela de cadastro de imóvel?\nTodas as alterações não salvas serão perdidas!"
+            "Tem certeza que deseja fechar a tela de cadastro de imóvel?",
+            "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
 }

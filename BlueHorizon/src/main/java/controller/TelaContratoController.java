@@ -56,7 +56,8 @@ public class TelaContratoController {
     private boolean FecharTelaContrato() {
         return AlertaUtil.mostrarConfirmacao(
             "Aviso", 
-            "Tem certeza que deseja fechar a tela de contrato?\nTodas as alterações não salvas serão perdidas!"
+            "Tem certeza que deseja fechar a tela de contrato?",
+            "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
 }

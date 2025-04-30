@@ -75,7 +75,8 @@ public class TelaImovelVendaController {
 
     @FXML
     void ActionEditarImovel(ActionEvent event) {
-        if (!lblNumeracaoImovel.getText().isEmpty()) {
+        
+        /*if (!lblNumeracaoImovel.getText().isEmpty()) {
             AlertaUtil.mostrarInformacao(
                 "Editar Imóvel",
                 "O imóvel nº " + lblNumeracaoImovel.getText() + " será enviado para edição."
@@ -85,12 +86,13 @@ public class TelaImovelVendaController {
                 "Imóvel não selecionado",
                 "Não é possível editar. Nenhum imóvel foi selecionado."
             );
-        }
+        }*/
     }
 
     @FXML
     void ActionEfetuarVenda(ActionEvent event) {
-        if (!lblDisponibilidade.getText().equalsIgnoreCase("Vendido")) {
+        
+       /*if (!lblDisponibilidade.getText().equalsIgnoreCase("Vendido")) {
             AlertaUtil.mostrarInformacao(
                 "Venda Efetuada",
                 "O imóvel foi vendido com sucesso!"
@@ -100,11 +102,12 @@ public class TelaImovelVendaController {
                 "Venda não permitida",
                 "Este imóvel já está marcado como vendido."
             );
-        }
+        }*/
     }
 
     @FXML
     void ActionSair(ActionEvent event) {
+        
         if (FecharTelaImovelVenda()) {
             Stage stage = (Stage) btnSair.getScene().getWindow();
             stage.close();
@@ -116,7 +119,8 @@ public class TelaImovelVendaController {
     private boolean FecharTelaImovelVenda() {
         return AlertaUtil.mostrarConfirmacao(
             "Confirmação",
-            "Tem certeza que deseja sair da tela do imóvel?\nTodas as alterações não salvas serão perdidas!"
+            "Tem certeza que deseja sair da tela do imóvel?",
+            "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
 }

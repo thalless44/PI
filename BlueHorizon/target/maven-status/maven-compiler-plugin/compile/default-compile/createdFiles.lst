@@ -30,6 +30,5 @@ controller\TelaCadastroFuncionarioController.class
 dal\ConexaoBD.class
 controller\TelaLoginPIController.class
 controller\TelaImovelVendaController.class
-util\LimitarCaracter$1.class
 model\Login.class
 util\AlertaUtil.class

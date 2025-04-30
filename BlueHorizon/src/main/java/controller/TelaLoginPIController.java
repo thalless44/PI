@@ -46,8 +46,7 @@ public class TelaLoginPIController {
         String senha = txtSenha.getText();
 
         if (email.isEmpty() || senha.isEmpty()) {
-            AlertaUtil.mostrarErro("Erro ao efetuar o login",
-                    "Campo de email ou senha vazio. Verifique e preencha!");
+            AlertaUtil.mostrarErro("Erro","Erro ao efetuar o login", "Campo de email ou senha vazio. Verifique e preencha!");
             return;
         }
 
@@ -57,13 +56,12 @@ public class TelaLoginPIController {
             if (usuario != null) {
                 abrirTelaInicial();
             } else {
-                AlertaUtil.mostrarErro("Erro ao efetuar o login",
-                        "Senha ou email incorreto. Verifique e adicione corretamente!");
+                AlertaUtil.mostrarErro("Erro", "Erro ao efetuar o login", "Senha ou email incorreto. Verifique e adicione corretamente!");
             }
 
         } catch (IOException | SQLException e) {
             Logger.getLogger(TelaLoginPIController.class.getName()).log(Level.SEVERE, null, e);
-            AlertaUtil.mostrarErro("Erro inesperado", "Ocorreu um erro ao tentar realizar o login.");
+            AlertaUtil.mostrarErro("Erro", "Erro inesperado", "Ocorreu um erro ao tentar realizar o login.");
         }
     }
 
@@ -86,7 +84,7 @@ public class TelaLoginPIController {
 
         } catch (IOException e) {
             Logger.getLogger(TelaLoginPIController.class.getName()).log(Level.SEVERE, null, e);
-            AlertaUtil.mostrarErro("Erro ao abrir tela", "Não foi possível abrir a tela de recuperação de senha.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao abrir tela", "Não foi possível abrir a tela de recuperação de senha.");
         }
     }
 
@@ -117,6 +115,10 @@ public class TelaLoginPIController {
         controller.setStage(telaInicial);
 
         Scene scene = new Scene(root);
+        
+        Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+        telaInicial.getIcons().add(icone);
+        
         telaInicial.setScene(scene);
         telaInicial.setTitle("BlueHorizon - Início");
         telaInicial.setMaximized(true);

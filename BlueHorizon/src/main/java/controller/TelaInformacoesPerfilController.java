@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import util.AlertaUtil;
 
@@ -62,6 +63,10 @@ public class TelaInformacoesPerfilController {
             TelaPersonalizacaoPerfilController ti = loader.getController(); 
             ti.setStage(telaPerfil);
             Scene scene = new Scene(root);
+            
+            Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+            telaPerfil.getIcons().add(icone);
+        
             telaPerfil.setScene(scene);
             telaPerfil.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Personalização de perfil");
 
@@ -88,7 +93,8 @@ public class TelaInformacoesPerfilController {
         // Chamando o método para confirmação de fechamento
         return AlertaUtil.mostrarConfirmacao(
             "Aviso", 
-            "Tem certeza que deseja fechar a tela de informações do perfil?\nTodas as alterações não salvas serão perdidas e a tela atual será fechada!"
+            "Tem certeza que deseja fechar a tela de informações do perfil?",
+            "Todas as alterações não salvas serão perdidas e a tela atual será fechada!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
 }

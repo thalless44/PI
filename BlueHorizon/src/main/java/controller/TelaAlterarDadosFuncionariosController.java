@@ -84,28 +84,28 @@ public class TelaAlterarDadosFuncionariosController {
          boolean dataValidaNascimento = LimitarCaracter.VerificarData.validarData(txtfdAlterarDataNascimentoFuncionario.getText());
          boolean dataValidaContratacao = LimitarCaracter.VerificarData.validarData(txtfdAlterarDataContratoFuncionario.getText());
          
-          if (txtfdNomeFuncionarioAlterar.getText().isEmpty()||txtfdAlterarCPFFuncionario.getText().isEmpty()||txtfdAlterarEnderecoFuncionario.getText().isEmpty()||txtfdAlterarTelefoneFuncionario.getText().isEmpty()
-                ||txtfdAlterarEmailFuncionario.getText().isEmpty()||txtfdAlterarSenhaFuncionario.getText().isEmpty()|| txtfdAlterarSalarioFuncionario.getText().isEmpty()
-                || txtfdAlterarDataContratoFuncionario.getText().isEmpty()||txtfdAlterarDataNascimentoFuncionario.getText().isEmpty()){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Todos os campos devem ser preenchidos!");
+          if (txtfdNomeFuncionarioAlterar.getText().isEmpty()||txtfdAlterarCPFFuncionario.getText().isEmpty()||txtfdAlterarEnderecoFuncionario.getText().isEmpty()
+                  || txtfdAlterarTelefoneFuncionario.getText().isEmpty() || txtfdAlterarEmailFuncionario.getText().isEmpty()||txtfdAlterarSenhaFuncionario.getText().isEmpty()
+                  || txtfdAlterarSalarioFuncionario.getText().isEmpty()|| txtfdAlterarDataContratoFuncionario.getText().isEmpty()||txtfdAlterarDataNascimentoFuncionario.getText().isEmpty()){
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Todos os campos devem ser preenchidos!");
             
         }else if (txtfdAlterarTelefoneFuncionario.getText().length()!=15){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Telefone.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Telefone.");
             
         }else if (txtfdAlterarCPFFuncionario.getText().length()!=14){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo CPF.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo CPF.");
         
         }else if(txtfdAlterarSalarioFuncionario.getText().length()<4){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Salario.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Salario.");
         
         }else if(txtfdAlterarEmailFuncionario.getText().length()<10){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Email.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Email.");
             
         }else if(txtfdAlterarDataContratoFuncionario.getText().length()!=10 || !dataValidaContratacao ){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Data de Contratação.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Data de Contratação.");
       
         }else if(txtfdAlterarDataNascimentoFuncionario.getText().length()!=10 || !dataValidaNascimento){
-            AlertaUtil.mostrarErro("Erro ao cadastrar", "Verifique o campo Data de Nascimento.");
+            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Data de Nascimento.");
             
         }else{
        // Ajuste nas variáveis
@@ -123,7 +123,7 @@ public class TelaAlterarDadosFuncionariosController {
 
         funcionario.setSalario(txtfdAlterarSalarioFuncionario.getText());
 
-    // Validação da Data de Nascimento
+    // Validação da Data de Nascimento e data de contrato
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataNascimentoLD = LocalDate.parse(txtfdAlterarDataNascimentoFuncionario.getText(), formato);
@@ -131,22 +131,7 @@ public class TelaAlterarDadosFuncionariosController {
 
         Date dataNascimento = Date.valueOf(dataNascimentoLD);
         Date dataContratacao = Date.valueOf(dataContratacaoLD);
-    /*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    if (!txtfdAlterarDataNascimentoFuncionario.getText().isEmpty()) {
-        try {
-            funcionario.setDataNascimento(LocalDate.parse(txtfdAlterarDataNascimentoFuncionario.getText(), formatter));
-        } catch (DateTimeParseException e) {
-            AlertaUtil.mostrarErro("Data de Nascimento inválida", "Formato correto: dd-MM-yyyy");
-            return;
-        }*/
-    // Validação da Data de Contratação
-    /*if (!txtfdAlterarDataContratoFuncionario.getText().isEmpty()) {
-        try {
-            funcionario.setDataContratacao(LocalDate.parse(txtfdAlterarDataContratoFuncionario.getText(), formatter));
-        } catch (DateTimeParseException e) {
-            AlertaUtil.mostrarErro("Data de Contratação inválida", "Formato correto: dd-MM-yyyy");
-            return;
-        }*/
+    
     }
 
     // Atualizar no banco
@@ -154,10 +139,8 @@ public class TelaAlterarDadosFuncionariosController {
 
     // Fechar a tela
     ((Stage) ((Button) event.getSource()).getScene().getWindow()).close(); 
-        
-        
-        
-        }
+       
+    }
          
 
 
@@ -174,7 +157,8 @@ public class TelaAlterarDadosFuncionariosController {
     private boolean FecharTelaAlterarDadosFuncionario() {
         return AlertaUtil.mostrarConfirmacao(
             "Confirmação", 
-            "Tem certeza que deseja fechar a tela de alteração de dados de funcionário?\nTodas as alterações não salvas serão perdidas!"
+            "Tem certeza que deseja fechar a tela de alteração de dados de funcionário?", 
+            "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
 
@@ -196,8 +180,7 @@ public class TelaAlterarDadosFuncionariosController {
 
         txtfdAlterarDataNascimentoFuncionario.setText(funcionario.getDataNascimento().format(formatter));
         txtfdAlterarDataContratoFuncionario.setText(funcionario.getDataContratacao().format(formatter));
-        
-        
+             
     }
 
     void setStage(Stage telaADF) {

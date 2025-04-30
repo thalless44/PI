@@ -37,7 +37,8 @@ public class TelaRelatorioVendasController {
         // Usando AlertaUtil para confirmar o fechamento
         if (AlertaUtil.mostrarConfirmacao(
                 "Confirmação", 
-                "Tem certeza que deseja fechar a tela de relatório de vendas?\nTodas as alterações não salvas serão perdidas."
+                "Tem certeza que deseja fechar a tela de relatório de vendas?",
+                "Todas as alterações não salvas serão perdidas."
             ).filter(response -> response == ButtonType.OK).isPresent()) {
             
             // Se o usuário confirmar, fecha a tela
