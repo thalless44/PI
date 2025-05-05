@@ -103,7 +103,7 @@ public class TelaInicialController {
             telaUS.getIcons().add(icone);
         
             telaUS.setScene(scene);
-            telaUS.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Usuários do sistema");
+            telaUS.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Usuários do sistema - funcionários");
 
             telaUS.setMaximized(true);
             telaUS.show();
@@ -128,7 +128,7 @@ public class TelaInicialController {
             telaCC.getIcons().add(icone);
         
             telaCC.setScene(scene);
-            telaCC.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Cadastro de funcionário");
+            telaCC.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Usuários do sistema - Clientes");
             
             telaCC.setMaximized(true);
             telaCC.show();

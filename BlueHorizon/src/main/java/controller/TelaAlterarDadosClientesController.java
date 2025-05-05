@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Cliente;
@@ -32,13 +33,13 @@ public class TelaAlterarDadosClientesController  {
     private Label lblTelefone;
 
     @FXML
-    private Label txtEmail;
+    private TextField txtEmail;
 
     @FXML
     private TextField txtNome;
 
     @FXML
-    private Label txtTelefone;
+    private TextField txtTelefone;
     
     private Cliente cliente;
     
@@ -77,7 +78,7 @@ public class TelaAlterarDadosClientesController  {
     void setCliente(Cliente clienteSelecionado) {
         
         System.out.println("Cliente recebido: " + cliente);
-        this.cliente = cliente;
+        this.cliente = clienteSelecionado;
 
         // Preencher os campos com os dados do funcionário
         txtNome.setText(cliente.getNome());

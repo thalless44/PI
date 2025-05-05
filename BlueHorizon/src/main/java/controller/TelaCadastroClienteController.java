@@ -1,17 +1,16 @@
 package controller;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.ClienteDAO;
 import util.AlertaUtil;
+import util.LimitarCaracter;
 
 public class TelaCadastroClienteController {
-    
+
     private Stage stage;
 
     @FXML
@@ -28,60 +27,61 @@ public class TelaCadastroClienteController {
 
     @FXML
     private TextField txtTelefoneCliente;
-    
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
     @FXML
+    public void initialize() {
+        new LimitarCaracter(50, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtNomeCliente);
+        new LimitarCaracter(100, LimitarCaracter.TipoEntrada.EMAIL).applyToTextInputControl(txtEmailCliente);
+        new LimitarCaracter(15, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtTelefoneCliente);
+    }
+
+    @FXML
     void ActionCancelarCadastro(ActionEvent event) {
-        
-        if(CancelarCadastroCliente()){
-            
+        if (CancelarCadastroCliente()) {
             Stage stage = (Stage) btnCancelarcadastro.getScene().getWindow();
             stage.close();
-            
-        }else{
+        } else {
             event.consume();
         }
     }
 
     @FXML
     void ActionEfetuarCadastro(ActionEvent event) {
-        
         cadastrarCliente();
     }
 
-private boolean CancelarCadastroCliente() {
-    return AlertaUtil.mostrarConfirmacao(
-        "Aviso", 
-        "Tem certeza que deseja fechar a tela de cadastro de cliente?",
-        "Todas as alterações não salvas serão perdidas e a tela atual será fechada!"
-    ).filter(response -> response == ButtonType.OK).isPresent();
-}
+    private boolean CancelarCadastroCliente() {
+        return AlertaUtil.mostrarConfirmacao(
+            "Aviso",
+            "Tem certeza que deseja fechar a tela de cadastro de cliente?",
+            "Todas as alterações não salvas serão perdidas e a tela atual será fechada!"
+        ).filter(response -> response == ButtonType.OK).isPresent();
+    }
 
     private void cadastrarCliente() {
-    String nome = txtNomeCliente.getText();
-    String email = txtEmailCliente.getText();
-    String telefone = txtTelefoneCliente.getText();
+        String nome = txtNomeCliente.getText().trim();
+        String email = txtEmailCliente.getText().trim();
+        String telefone = txtTelefoneCliente.getText().trim();
 
-    if (nome.isEmpty() || email.isEmpty() || telefone.isEmpty()) {
-        AlertaUtil.mostrarErro("Erro","Campos obrigatórios", 
-            "Todos os campos devem ser preenchidos!");
-    } else {
-        boolean sucesso = ClienteDAO.cadastrarCliente(nome, email, telefone);
-
-        if (sucesso) {
-            AlertaUtil.mostrarInformacao("Cadastro de cliente", "Cadastro realizado", 
-                "O cliente foi cadastrado com sucesso.");
-
-            // Fecha a janela
-            Stage stage = (Stage) btnCancelarcadastro.getScene().getWindow();
-            stage.close();
+        if (nome.isEmpty() || email.isEmpty() || telefone.isEmpty()) {
+            AlertaUtil.mostrarErro("Erro", "Campos obrigatórios",
+                    "Todos os campos devem ser preenchidos!");
         } else {
-            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", 
-                "Ocorreu um erro ao tentar cadastrar o cliente.");
+            boolean sucesso = ClienteDAO.cadastrarCliente(nome, email, telefone);
+
+            if (sucesso) {
+                AlertaUtil.mostrarInformacao("Cadastro de cliente", "Cadastro realizado",
+                        "O cliente foi cadastrado com sucesso.");
+                Stage stage = (Stage) btnCancelarcadastro.getScene().getWindow();
+                stage.close();
+            } else {
+                AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar",
+                        "Ocorreu um erro ao tentar cadastrar o cliente.");
+            }
         }
     }
-}
 }
