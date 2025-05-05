@@ -40,9 +40,10 @@
                   <MenuItem fx:id="btnRelatorioVendaDosImoveis" mnemonicParsing="false" onAction="#OnActionBtnRelatorioVendaDosImoveis" text="Vendas dos imóveis" />
                </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Usuário Sistema">
+            <Menu mnemonicParsing="false" text="Usuários do sistema">
                <items>
-                  <MenuItem fx:id="btnUsuarioSistema" mnemonicParsing="false" onAction="#OnClickAbrirUsuarioSistema" text="Planilha" />
+                  <MenuItem fx:id="btnUsuarioSistemaFuncionario" mnemonicParsing="false" onAction="#OnClickAbrirUsuarioSistemaFuncionario" text="Planilha de funcionários" />
+                  <MenuItem fx:id="btnUsuarioSistemaCliente" mnemonicParsing="false" onAction="#OnClickAbrirUsuarioSistemaCliente" text="Planilha de clientes" />
                </items>
             </Menu>
             <Menu fx:id="btnSair" mnemonicParsing="false" text="Sair">

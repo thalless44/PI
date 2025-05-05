@@ -27,6 +27,9 @@ public class TelaInicialController {
     private MenuItem btnUsuarioSistema;
     
     @FXML
+    private MenuItem btnUsuarioSistema1;
+    
+    @FXML
     private Menu btnSair;
 
     @FXML
@@ -83,9 +86,11 @@ public class TelaInicialController {
         
     }
     
-     @FXML
-    void OnClickAbrirUsuarioSistema(ActionEvent event) {
-        try {
+      @FXML
+    void OnClickAbrirUsuarioSistemaFuncionario(ActionEvent event) {
+
+         try {
+            
             URL url = new File("src/main/java/view/TelaUsuarioSistema.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
@@ -104,8 +109,35 @@ public class TelaInicialController {
             telaUS.show();
             } catch (IOException e) {
             e.printStackTrace();
+            }        
+    }
+    
+    @FXML
+    void OnClickAbrirUsuarioSistemaCliente(ActionEvent event) {
+        
+        try {
+            URL url = new File("src/main/java/view/TelaClientesSistema.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Stage telaCC = new Stage();
+            TelaClientesSistemaController tcs = loader.getController(); 
+            tcs.setStage(telaCC);
+            Scene scene = new Scene(root);
+            
+            Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+            telaCC.getIcons().add(icone);
+        
+            telaCC.setScene(scene);
+            telaCC.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Cadastro de funcionário");
+            
+            telaCC.setMaximized(true);
+            telaCC.show();
+            } catch (IOException e) {
+            e.printStackTrace();
             }
         
+        
+
     }
 
 

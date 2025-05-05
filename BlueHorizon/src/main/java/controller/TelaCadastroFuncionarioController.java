@@ -135,6 +135,9 @@ public class TelaCadastroFuncionarioController {
 
         if (sucesso) {
             AlertaUtil.mostrarInformacao("Cadastro de funcionario", "Cadastro realizado", "O funcionário foi cadastrado com sucesso.");
+            
+             Stage stage = (Stage) btnSair.getScene().getWindow();
+            stage.close();
         } else {
             AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique os dados e tente novamente.");
         }
