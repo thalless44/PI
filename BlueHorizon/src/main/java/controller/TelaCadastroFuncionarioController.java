@@ -71,7 +71,7 @@ public class TelaCadastroFuncionarioController {
         new LimitarCaracter (10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtFDataContratacao);
         new LimitarCaracter (10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtFDataNascimento);
         new LimitarCaracter (14, LimitarCaracter.TipoEntrada.CPF).applyToTextInputControl(txtFCPF);
-        new LimitarCaracter (15, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtFTelefone);
+        new LimitarCaracter (12, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtFTelefone);
          
         cmbxCargo.setItems(FXCollections.observableArrayList("Gerente", "Corretor"));
     }
@@ -89,7 +89,7 @@ public class TelaCadastroFuncionarioController {
         }else if (!txtFSenha.getText().equals(txtFConfirmacaoSenha.getText())) {
             AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Senha e Confirmação .");
             
-        }else if (txtFTelefone.getText().length()!=15){
+        }else if (txtFTelefone.getText().length()!=12){
             AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Telefone.");
             
         }else if (txtFCPF.getText().length()!=14){

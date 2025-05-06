@@ -1,6 +1,8 @@
 package controller;
 
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Cliente;
+import model.ClienteDAO;
 import util.AlertaUtil;
 
 public class TelaAlterarDadosClientesController  {
@@ -46,11 +49,24 @@ public class TelaAlterarDadosClientesController  {
     private Stage stage;
 
     @FXML
-    void ActionAlterarDados(ActionEvent event) {
+    void ActionAlterarDados(ActionEvent event) throws SQLException {
         if (txtNome.getText().isEmpty() || txtEmail.getText().isEmpty() || txtTelefone.getText().isEmpty()) {
             AlertaUtil.mostrarAviso("Aviso", "Campos obrigatórios", 
                 "Todos os campos devem ser preenchidos!");
-        }
+        }else {
+            cliente.setNome(txtNome.getText());
+            cliente.setTelefone(txtTelefone.getText());
+            cliente.setEmail(txtEmail.getText());
+            ClienteDAO.atualizarCliente(cliente);
+            Optional<ButtonType> resultado = AlertaUtil.mostrarConfirmacao("Confimação", "Alterar Dados", "deseja alterar os dados?");
+            if (resultado.isPresent()){
+            ButtonType botaoPressionado = resultado.get();
+            if(botaoPressionado == ButtonType.OK){
+                 stage.close();
+                 
+            }
+            }
+        } 
     }
 
     @FXML

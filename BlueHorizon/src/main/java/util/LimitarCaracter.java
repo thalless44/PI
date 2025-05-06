@@ -89,35 +89,46 @@ public class LimitarCaracter {
                     change.setAnchor(cpfCaret);
                     break;
 
-                case FONE:
-                    String oldTel = change.getControlText();
-                    String newTelNumbers = new StringBuilder(oldTel)
-                        .replace(change.getRangeStart(), change.getRangeEnd(), change.getText())
-                        .toString()
-                        .replaceAll("[^0-9]", "");
+                case FONE: {
+    String foneOldText = change.getControlText();
+    String foneInsertedText = change.getText();
+    int start = change.getRangeStart();
+    int end = change.getRangeEnd();
 
-                    if (newTelNumbers.length() > 11) return null;
+    StringBuilder updatedRaw = new StringBuilder(foneOldText)
+        .replace(start, end, foneInsertedText);
 
-                    StringBuilder telFormatted = new StringBuilder();
-                    int telLen = newTelNumbers.length();
+    String digits = updatedRaw.toString().replaceAll("[^0-9]", "");
 
-                    if (telLen > 0) telFormatted.append("(").append(newTelNumbers.substring(0, Math.min(2, telLen)));
-                    if (telLen >= 2) telFormatted.append(")");
+    if (digits.length() > 11) return null;
 
-                    if (telLen > 2 && telLen <= 7) {
-                        telFormatted.append(" ").append(newTelNumbers.substring(2, telLen));
-                    } else if (telLen > 7) {
-                        telFormatted.append(" ").append(newTelNumbers.substring(2, 7));
-                        telFormatted.append("-").append(newTelNumbers.substring(7, telLen));
-                    }
+    StringBuilder foneFormatted = new StringBuilder();
+    int foneLen = digits.length();
 
-                    change.setText(telFormatted.toString());
-                    change.setRange(0, oldTel.length());
+    if (foneLen > 0) {
+        if (foneLen <= 2) {
+            foneFormatted.append(digits);
+        } else {
+            foneFormatted.append(digits.substring(0, 2)).append(" ");
+            if (foneLen > 2 && foneLen <= 7) {
+                foneFormatted.append(digits.substring(2));
+            } else if (foneLen > 7) {
+                foneFormatted.append(digits.substring(2, 7)).append("-").append(digits.substring(7));
+            }
+        }
+    }
 
-                    int telCaret = telFormatted.length();
-                    change.setCaretPosition(telCaret);
-                    change.setAnchor(telCaret);
-                    break;
+    change.setText(foneFormatted.toString());
+    change.setRange(0, foneOldText.length());
+
+    int caret = foneFormatted.length();
+    change.setCaretPosition(caret);
+    change.setAnchor(caret);
+    break;
+}
+
+
+
             }
 
             return change;
