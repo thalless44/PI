@@ -152,53 +152,22 @@ public class TelaCadastroImovelController {
     @FXML
     void OnClickAdicionarImagem(ActionEvent event) {
         
-       int idImovel = 1; // Altere conforme necessário (pode vir de outro campo)
+    
+       FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Selecionar Imagem");
+    fileChooser.getExtensionFilters().add(
+        new FileChooser.ExtensionFilter("Imagens", "*.png", "*.jpg", "*.jpeg", "*.gif")
+    );
 
-    // Declaração de recursos
-    Connection conn = null;
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
-
-    try {
-        // Conexão com o banco
-        conn = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/imobiliariaV3", "root", "1");
-
-        String sql = "SELECT foto FROM imagens_imoveis WHERE id = 1";
-        stmt = conn.prepareStatement(sql);
-        stmt.setInt(1, idImovel);
-        rs = stmt.executeQuery();
-
-        if (rs.next()) {
-            InputStream is = rs.getBinaryStream("foto");
-            if (is != null) {
-                // Se a imagem existe no banco, carregamos e exibimos
-                Image imagem = new Image(is);
-                imageViewImovel.setImage(imagem);
-            } else {
-                // Caso a imagem não exista, exibe mensagem no console ou na UI
-                System.out.println("Imagem não encontrada no banco.");
-                // Opcional: mostrar um alerta ou uma imagem padrão na interface
-            }
-        } else {
-            System.out.println("Imóvel não encontrado.");
-        }
-    } catch (SQLException e) {
-        System.err.println("Erro na conexão ou na consulta ao banco de dados: " + e.getMessage());
-        e.printStackTrace();
-    } catch (Exception e) {
-        System.err.println("Erro inesperado: " + e.getMessage());
-        e.printStackTrace();
-    } finally {
-        try {
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
-            if (conn != null) conn.close();
-        } catch (SQLException e) {
-            System.err.println("Erro ao fechar recursos: " + e.getMessage());
-        }
+    File file = fileChooser.showOpenDialog(null);
+    if (file != null) {
+        Image image = new Image(file.toURI().toString(), false);
+        imageViewImovel.setImage(image);
     }
 }
+    
+
+
    
 
 
