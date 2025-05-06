@@ -14,7 +14,9 @@ import javafx.scene.image.Image;
 import model.FuncionarioDAO;
 
 public class App extends Application {
-
+    
+    //Login: user@gmail.com
+    //Senha: 1
     
 
     @Override

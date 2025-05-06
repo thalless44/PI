@@ -89,7 +89,7 @@ public class TelaAlterarDadosFuncionariosController {
                   || txtfdAlterarSalarioFuncionario.getText().isEmpty()|| txtfdAlterarDataContratoFuncionario.getText().isEmpty()||txtfdAlterarDataNascimentoFuncionario.getText().isEmpty()){
             AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Todos os campos devem ser preenchidos!");
             
-        }else if (txtfdAlterarTelefoneFuncionario.getText().length()!=15){
+        }else if (txtfdAlterarTelefoneFuncionario.getText().length()!=13){
             AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Telefone.");
             
         }else if (txtfdAlterarCPFFuncionario.getText().length()!=14){
