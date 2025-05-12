@@ -18,14 +18,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import model.Login;
-import model.LoginDAO;
+import model.Funcionario;
+import model.FuncionarioDAO;
 import util.AlertaUtil;
 
 public class TelaLoginPIController {
 
     private Connection conexao;
-    private final LoginDAO dao = new LoginDAO();
+    private final FuncionarioDAO funcionarioDao = new FuncionarioDAO();
     private Stage stageLogin;
 
     @FXML
@@ -51,10 +51,10 @@ public class TelaLoginPIController {
         }
 
         try {
-            Login usuario = processarLogin(email, senha);
+            Funcionario funcionario = processarLogin(email, senha);
 
-            if (usuario != null) {
-                abrirTelaInicial();
+            if (funcionario != null) {
+                abrirTelaInicial(funcionario);
             } else {
                 AlertaUtil.mostrarErro("Erro", "Erro ao efetuar o login", "Senha ou email incorreto. Verifique e adicione corretamente!");
             }
@@ -92,20 +92,20 @@ public class TelaLoginPIController {
         this.stageLogin = stage;
     }
 
-    public Login processarLogin(String email, String senha) throws IOException, SQLException {
-        if (!dao.bancoOnline()) {
+    public Funcionario processarLogin(String email, String senha) throws IOException, SQLException {
+        if (!funcionarioDao.bancoOnline()) {
             System.out.println("Banco de dados desconectado!");
             return null;
         }
 
         if (email != null && !email.isEmpty() && senha != null && !senha.isEmpty()) {
-            return dao.autenticar(email, senha);
+            return funcionarioDao.autenticar(email, senha);
         }
 
         return null;
     }
 
-    private void abrirTelaInicial() throws IOException {
+    private void abrirTelaInicial(Funcionario f) throws IOException {
         URL url = new File("src/main/java/view/TelaInicial.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
@@ -113,6 +113,7 @@ public class TelaLoginPIController {
         Stage telaInicial = new Stage();
         TelaInicialController controller = loader.getController();
         controller.setStage(telaInicial);
+        controller.setFuncionario(f);
 
         Scene scene = new Scene(root);
         

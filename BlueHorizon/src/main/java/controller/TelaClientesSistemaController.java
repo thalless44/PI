@@ -19,11 +19,13 @@ import javafx.stage.Stage;
 import model.Cliente;
 import model.ClienteDAO;
 import static model.ClienteDAO.deletarCliente;
+import model.Funcionario;
 import util.AlertaUtil;
 
 public class TelaClientesSistemaController {
 
     private Stage stage;
+    private Funcionario funcionario;
 
     @FXML private Button btnAlterarDados;
     @FXML private Button btnExcluir;

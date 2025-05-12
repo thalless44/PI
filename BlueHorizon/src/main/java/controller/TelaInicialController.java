@@ -14,9 +14,12 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.Funcionario;
+import model.FuncionarioDAO;
 
 public class TelaInicialController {
     private Stage stage;
+    private Funcionario funcionario;
 
     
     @FXML
@@ -194,13 +197,21 @@ public class TelaInicialController {
     }
 
     @FXML
-    void onClickPerfil(ActionEvent event) {        
+    void onClickPerfil(ActionEvent event) {   
+ 
         try {
+            
+            FuncionarioDAO dao = new FuncionarioDAO();
+            Funcionario funcionarioAtualizado = dao.autenticar(funcionario.getEmail(), funcionario.getSenha());
+            
             URL url = new File("src/main/java/view/TelaInformacoesPerfil.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
-            Stage telaIP = new Stage();
             TelaInformacoesPerfilController ti = loader.getController(); 
+            
+            ti.preencherInformacoesPerfil(funcionarioAtualizado);
+            
+            Stage telaIP = new Stage();
             ti.setStage(telaIP);
             Scene scene = new Scene(root);
             
@@ -254,6 +265,10 @@ public class TelaInicialController {
         FecharTelaInicio.setContentText("Todas as alterações não salvas serão perdidas");
         return FecharTelaInicio.showAndWait().filter(response
                 -> response == ButtonType.OK).isPresent();
+    }
+
+    public void setFuncionario(Funcionario f) {
+        this.funcionario = f;
     }
     
     }

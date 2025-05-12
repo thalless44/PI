@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FuncionarioDAO {
+public class FuncionarioDAO extends GenericDAO{
 
     // Método para cadastrar funcionário (já existente)
     public static boolean cadastrarFuncionario(String nome, String cpf, Date dataNascimento, Date dataContratacao, 
@@ -117,5 +117,56 @@ public class FuncionarioDAO {
         
         
     }
+
+    public boolean bancoOnline() {
+        
+        Connection conn = conectarDAO();
+        if(conn != null){
+            try{
+                conectarDAO().close();
+            }catch(SQLException e){
+                
+            }
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Funcionario autenticar(String email, String senha) {
+       String sql = "SELECT * FROM funcionarios WHERE email=? AND senha=?";
+    Funcionario usuario = null;
+
+    try (Connection con = conectarDAO();
+         PreparedStatement stmt = con.prepareStatement(sql)) {
+
+        stmt.setString(1, email);
+        stmt.setString(2, senha);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            // Crie o objeto com todos os dados necessários, se desejar
+            usuario = new Funcionario(
+                rs.getInt("id_funcionario"),
+                String.valueOf(rs.getDouble("salario")),
+                rs.getString("nome"),
+                rs.getString("telefone"),
+                rs.getString("endereco"),
+                rs.getString("cpf"),
+                rs.getString("cargo"),
+                rs.getDate("dataContratacao").toLocalDate(),
+                rs.getDate("dataNascimento").toLocalDate(),
+                rs.getString("senha"),
+                rs.getString("email")
+            );
+        }
+
+        rs.close();
+    } catch (SQLException e) {
+        e.printStackTrace(); // Isso ajuda a entender o que deu errado
+    }
+
+    return usuario; // Vai retornar null se não encontrar
+}
 }
 

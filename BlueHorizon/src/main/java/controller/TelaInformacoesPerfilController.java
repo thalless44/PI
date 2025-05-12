@@ -3,6 +3,9 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.DateTimeException;
+import java.time.format.DateTimeFormatter;
+import java.util.function.Function;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +16,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.Funcionario;
 import util.AlertaUtil;
 
 public class TelaInformacoesPerfilController {
@@ -85,6 +89,39 @@ public class TelaInformacoesPerfilController {
             stage.close();          
         } else {
             event.consume();
+        }
+    }
+    
+    public void preencherInformacoesPerfil(Funcionario funcionario){
+        
+        if(funcionario != null){
+            
+        nomeID.setText(funcionario.getNome());
+        cpfID.setText(funcionario.getCpf());
+        TelefoneID.setText(funcionario.getTelefone());
+        EnderecoID.setText(funcionario.getEndereco());
+        EmailID.setText(funcionario.getEmail());
+        CargoID.setText(funcionario.getCargo());
+        
+        //Formatando datas para o modelo (dia/mes/ano)
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DnID.setText(funcionario.getDataNascimento().format(formatter));
+        DcID.setText(funcionario.getDataContratacao().format(formatter));
+        
+        if(funcionario.getDataNascimento() != null){
+            DnID.setText(funcionario.getDataNascimento().format(formatter));
+        }else{
+            DnID.setText("Não informado");
+        }
+        
+        if(funcionario.getDataContratacao() != null){
+            DnID.setText(funcionario.getDataContratacao().format(formatter));
+        }else{
+            DnID.setText("Não informado");
+        }
+        
+            
         }
     }
 

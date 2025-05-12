@@ -76,14 +76,14 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="nomeID" layoutX="131.0" layoutY="145.0" prefHeight="17.0" prefWidth="53.0" text="XXXX" />
-            <Label fx:id="cpfID" layoutX="117.0" layoutY="181.0" text="000.000.000-00" />
-            <Label fx:id="TelefoneID" layoutX="143.0" layoutY="215.0" text="00 0000-0000" />
-            <Label fx:id="EnderecoID" layoutX="147.0" layoutY="249.0" text="XXX" />
-            <Label fx:id="EmailID" layoutX="126.0" layoutY="284.0" text="XXXX@gmail.com" />
-            <Label fx:id="DnID" layoutX="574.0" layoutY="145.0" text="XX/XX/XXXX" />
-            <Label fx:id="DcID" layoutX="574.0" layoutY="181.0" text="XX/XX/XXXX" />
-            <Label fx:id="CargoID" layoutX="496.0" layoutY="215.0" text="XXXX" />
+            <Label fx:id="nomeID" layoutX="131.0" layoutY="145.0" prefHeight="17.0" prefWidth="286.0" text="XXXX" />
+            <Label fx:id="cpfID" layoutX="117.0" layoutY="181.0" prefHeight="17.0" prefWidth="286.0" text="000.000.000-00" />
+            <Label fx:id="TelefoneID" layoutX="143.0" layoutY="215.0" prefHeight="17.0" prefWidth="278.0" text="00 0000-0000" />
+            <Label fx:id="EnderecoID" layoutX="147.0" layoutY="249.0" prefHeight="17.0" prefWidth="278.0" text="XXX" />
+            <Label fx:id="EmailID" layoutX="126.0" layoutY="284.0" prefHeight="17.0" prefWidth="286.0" text="XXXX@gmail.com" />
+            <Label fx:id="DnID" layoutX="574.0" layoutY="145.0" prefHeight="17.0" prefWidth="117.0" text="XX/XX/XXXX" />
+            <Label fx:id="DcID" layoutX="574.0" layoutY="181.0" prefHeight="17.0" prefWidth="128.0" text="XX/XX/XXXX" />
+            <Label fx:id="CargoID" layoutX="496.0" layoutY="215.0" prefHeight="17.0" prefWidth="169.0" text="XXXX" />
             <Button fx:id="btnSair" layoutX="298.0" layoutY="392.0" mnemonicParsing="false" onAction="#OnClickSairInformacoesPerfil" prefHeight="25.0" prefWidth="135.0" style="-fx-background-radius: 0; -fx-background-color: #DC7777;" text="Sair">
                <effect>
                   <DropShadow>
