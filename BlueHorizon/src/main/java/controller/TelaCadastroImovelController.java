@@ -25,6 +25,7 @@ import model.ImovelDAO;
 import model.PropriedadesDAO;
 import model.ProprietarioDAO;
 import util.AlertaUtil;
+import util.LimitarCaracter;
 
 public class TelaCadastroImovelController {
 
@@ -92,9 +93,6 @@ public class TelaCadastroImovelController {
     private TextField txtEmailProprietario;
 
     @FXML
-    private TextField txtIDimovel;
-
-    @FXML
     private TextField txtNumeracaoImovel;
 
     @FXML
@@ -147,6 +145,13 @@ public class TelaCadastroImovelController {
 
         rbDisponivel.setToggleGroup(grupoDisponibilidade);
         rbNaoDisponivel.setToggleGroup(grupoDisponibilidade);
+        
+        new LimitarCaracter(50, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtProprietario);
+        new LimitarCaracter(100, LimitarCaracter.TipoEntrada.EMAIL).applyToTextInputControl(txtEmailProprietario);
+        new LimitarCaracter(12, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtTelefoneProprietario);
+        new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtDatacadastro);
+        
+        
     }
 
     @FXML
@@ -166,6 +171,8 @@ public class TelaCadastroImovelController {
     }
 }
     
+    
+
 
 
    
