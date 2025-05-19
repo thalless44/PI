@@ -4,7 +4,7 @@ import java.sql.Date;
 import javafx.beans.property.*;
 
 public class Propriedades {
-
+    
     private final StringProperty tipoPropriedade = new SimpleStringProperty();
     private final StringProperty endereco = new SimpleStringProperty();
     private final DoubleProperty preco = new SimpleDoubleProperty();
@@ -12,7 +12,7 @@ public class Propriedades {
     private final ObjectProperty<Date> dataCadastro = new SimpleObjectProperty<>();
     private final StringProperty rua = new SimpleStringProperty();
 
-    public Propriedades(String tipoPropriedade, String endereco, double preco, boolean disponibilidade, Date dataCadastro, String rua) {
+    public Propriedades(double id_propriedade, String tipoPropriedade, String endereco, double preco, boolean disponibilidade, Date dataCadastro, String rua) {
         this.tipoPropriedade.set(tipoPropriedade);
         this.endereco.set(endereco);
         this.preco.set(preco);

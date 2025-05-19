@@ -194,7 +194,7 @@
                      </font></Label>
                </children>
             </GridPane>
-            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="705.0" scaleX="0.94" scaleY="0.96" style="-fx-padding: 10px; -fx-background-color: #6ec4e9; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #000000;" VBox.vgrow="ALWAYS">
+            <ScrollPane fitToHeight="true" fitToWidth="true" onDragDetected="#scrollImovel" prefHeight="705.0" scaleX="0.94" scaleY="0.96" style="-fx-padding: 10px; -fx-background-color: #6ec4e9; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #000000;" VBox.vgrow="ALWAYS">
                <content>
                   <HBox prefHeight="542.0" prefWidth="570.0" spacing="30.0" style="-fx-padding: 10px; -fx-background-color: #6ec4e9;">
                      <children>
@@ -209,21 +209,31 @@
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Valor:">
+                              <Label layoutX="20.0" layoutY="207.0" text="Valor: ">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Disponibilidade:">
+                              <Label layoutX="20.0" layoutY="207.0" text="Tipo Imovel:">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Label>
-                              <Label layoutX="20.0" layoutY="261.0" text="Data de cadastro:">
+                              <Label layoutX="20.0" layoutY="261.0" text="Disponibilidade">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="288.0" text="Informações do imóvel:">
+                              <Label layoutX="20.0" layoutY="288.0" text="Data de cadastro:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="315.0" text="Cidade">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="342.0" text="Endereço: ">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -241,22 +251,32 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Valor:">
+                              <Label layoutX="20.0" layoutY="207.0" text="Valor: ">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Disponibilidade:">
+                              <Label layoutX="20.0" layoutY="207.0" text="Tipo Imovel:">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="261.0" text="Data de cadastro:">
+                              <Label layoutX="20.0" layoutY="261.0" text="Disponibilidade">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="288.0" text="Informações do imóvel:">
+                              <Label layoutX="20.0" layoutY="288.0" text="Data de cadastro:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="315.0" text="Cidade">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="342.0" text="Endereço: ">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -275,22 +295,32 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Valor:">
+                              <Label layoutX="20.0" layoutY="207.0" text="Valor: ">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Disponibilidade:">
+                              <Label layoutX="20.0" layoutY="207.0" text="Tipo Imovel:">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="261.0" text="Data de cadastro:">
+                              <Label layoutX="20.0" layoutY="261.0" text="Disponibilidade">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="288.0" text="Informações do imóvel:">
+                              <Label layoutX="20.0" layoutY="288.0" text="Data de cadastro:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="315.0" text="Cidade">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="342.0" text="Endereço: ">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -309,22 +339,32 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Valor:">
+                              <Label layoutX="20.0" layoutY="207.0" text="Valor: ">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Disponibilidade:">
+                              <Label layoutX="20.0" layoutY="207.0" text="Tipo Imovel:">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="261.0" text="Data de cadastro:">
+                              <Label layoutX="20.0" layoutY="261.0" text="Disponibilidade">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="288.0" text="Informações do imóvel:">
+                              <Label layoutX="20.0" layoutY="288.0" text="Data de cadastro:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="315.0" text="Cidade">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="342.0" text="Endereço: ">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -343,22 +383,32 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Valor:">
+                              <Label layoutX="20.0" layoutY="207.0" text="Valor: ">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Disponibilidade:">
+                              <Label layoutX="20.0" layoutY="207.0" text="Tipo Imovel:">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="261.0" text="Data de cadastro:">
+                              <Label layoutX="20.0" layoutY="261.0" text="Disponibilidade">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="288.0" text="Informações do imóvel:">
+                              <Label layoutX="20.0" layoutY="288.0" text="Data de cadastro:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="315.0" text="Cidade">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="342.0" text="Endereço: ">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -377,124 +427,32 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Valor:">
+                              <Label layoutX="20.0" layoutY="207.0" text="Valor: ">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Disponibilidade:">
+                              <Label layoutX="20.0" layoutY="207.0" text="Tipo Imovel:">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="261.0" text="Data de cadastro:">
+                              <Label layoutX="20.0" layoutY="261.0" text="Disponibilidade">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="288.0" text="Informações do imóvel:">
+                              <Label layoutX="20.0" layoutY="288.0" text="Data de cadastro:">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                           </children>
-                        </VBox>
-                        <VBox fillWidth="false" layoutX="1545.0" layoutY="20.0" prefHeight="535.0" prefWidth="273.0" spacing="10.0" style="-fx-padding: 10px; -fx-background-color: lightgray; -fx-background-radius: 5;">
-                           <children>
-                              <ImageView fitHeight="177.0" fitWidth="255.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../../../../../../../Downloads/she.png" />
-                                 </image>
-                              </ImageView>
-                              <Label text="Cód. do Imóvel:">
+                              <Label layoutX="20.0" layoutY="315.0" text="Cidade">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Valor:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Disponibilidade:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="261.0" text="Data de cadastro:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="288.0" text="Informações do imóvel:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
-                        <VBox fillWidth="false" layoutX="1850.0" layoutY="20.0" prefHeight="535.0" prefWidth="273.0" spacing="10.0" style="-fx-padding: 10px; -fx-background-color: lightgray; -fx-background-radius: 5;">
-                           <children>
-                              <ImageView fitHeight="177.0" fitWidth="255.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../../../../../../../Downloads/she.png" />
-                                 </image>
-                              </ImageView>
-                              <Label text="Cód. do Imóvel:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Valor:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Disponibilidade:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="261.0" text="Data de cadastro:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="288.0" text="Informações do imóvel:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
-                        <VBox fillWidth="false" layoutX="2155.0" layoutY="20.0" prefHeight="535.0" prefWidth="273.0" spacing="10.0" style="-fx-padding: 10px; -fx-background-color: lightgray; -fx-background-radius: 5;">
-                           <children>
-                              <ImageView fitHeight="177.0" fitWidth="255.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../../../../../../../Downloads/she.png" />
-                                 </image>
-                              </ImageView>
-                              <Label text="Cód. do Imóvel:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Valor:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="207.0" text="Disponibilidade:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="261.0" text="Data de cadastro:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="288.0" text="Informações do imóvel:">
+                              <Label layoutX="20.0" layoutY="342.0" text="Endereço: ">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>

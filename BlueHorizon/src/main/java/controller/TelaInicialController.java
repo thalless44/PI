@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,12 +11,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Funcionario;
 import model.FuncionarioDAO;
+import model.Propriedades;
+import static model.PropriedadesDAO.listarPropriedades;
 
 public class TelaInicialController {
     private Stage stage;
@@ -48,12 +55,24 @@ public class TelaInicialController {
     private MenuItem btnFecharApp;
     
     @FXML
+    private ScrollPane scrollPane;
+
+    @FXML
+    private VBox vboxConteudo;  
+    
+    @FXML
     private MenuItem btnRelatorioVendaDosImoveis;
     
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
+    
+    public void initialize() {
+    List<Propriedades> imoveis = listarPropriedades();
+    for (Propriedades imovel : imoveis) {
+        vboxConteudo.getChildren().add(criarCard(imovel));
+    }
+}
   
     @FXML
     void OnActionFecharAplicacao(ActionEvent event) {
@@ -255,6 +274,21 @@ public class TelaInicialController {
     }
 
     }
+    private VBox criarCard(Propriedades imovel) {
+    
+
+    Label lblValor = new Label("Valor: " + imovel.getPreco());
+    Label lblData = new Label("Data de cadastro: " + imovel.getDataCadastro());
+    Label lblInfo = new Label("Informações do imóvel: " + imovel.getEndereco());
+    Label lblRua = new Label("Rua: " + imovel.getRua());
+    Label lblTipoPropriedade = new Label("Rua: " + imovel.getTipoPropriedade());
+
+    VBox card = new VBox(5, lblValor, lblData, lblInfo, lblRua, lblTipoPropriedade);
+    card.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 10; -fx-border-color: gray;");
+    return card;
+}
+    
+    
 
 
     private boolean SairTelaInicio() {
