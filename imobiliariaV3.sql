@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `imobiliaria` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
-USE `imobiliaria`;
 -- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
 -- Host: localhost    Database: imobiliaria
@@ -127,7 +125,7 @@ CREATE TABLE `funcionarios` (
 
 LOCK TABLES `funcionarios` WRITE;
 /*!40000 ALTER TABLE `funcionarios` DISABLE KEYS */;
-INSERT INTO `funcionarios` VALUES (1,'1','1','1','1','1','1','0000-00-00','0000-00-00','1','1'),(2,'2131231.0','Thalles','123123d\\zdc','sascxa','2131231','1','2005-10-19','2005-10-19','22','22'),(3,'2131231.0','Thalles','123123d\\zdc','sascxa','2131231','1','2005-10-19','2005-10-19','22','22');
+INSERT INTO `funcionarios` VALUES (1,'1','1','1','1','1','1','2005-10-20','2005-10-20','1','1'),(2,'2131231.0','Thalles','123123d\\zdc','sascxa','2131231','1','2005-10-19','2005-10-19','22','22'),(3,'2131231.0','Thalles','123123d\\zdc','sascxa','2131231','1','2005-10-19','2005-10-19','22','22');
 /*!40000 ALTER TABLE `funcionarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -315,4 +313,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-08 10:56:55
+-- Dump completed on 2025-05-19 11:44:30
