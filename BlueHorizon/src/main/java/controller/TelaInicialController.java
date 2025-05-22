@@ -16,12 +16,14 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Funcionario;
 import model.FuncionarioDAO;
 import model.Propriedades;
+import model.PropriedadesDAO;
 import static model.PropriedadesDAO.listarPropriedades;
 
 public class TelaInicialController {
@@ -58,7 +60,7 @@ public class TelaInicialController {
     private ScrollPane scrollPane;
 
     @FXML
-    private VBox vboxConteudo;  
+    private HBox vboxConteudo;  
     
     @FXML
     private MenuItem btnRelatorioVendaDosImoveis;
@@ -68,10 +70,12 @@ public class TelaInicialController {
     }
     
     public void initialize() {
-    List<Propriedades> imoveis = listarPropriedades();
-    for (Propriedades imovel : imoveis) {
-        vboxConteudo.getChildren().add(criarCard(imovel));
-    }
+        carregarPropriedades();
+   
+}
+    @FXML
+    private void scrollImovel(MouseEvent event) {
+    
 }
   
     @FXML
@@ -274,6 +278,24 @@ public class TelaInicialController {
     }
 
     }
+    
+    
+    private void carregarPropriedades() {
+        List<Propriedades> imoveis = PropriedadesDAO.listarPropriedades();
+
+        if (imoveis.isEmpty()) {
+            Label vazio = new Label("Nenhuma propriedade encontrada.");
+            vboxConteudo.getChildren().add(vazio);
+            return;
+        }
+
+        for (Propriedades imovel : imoveis) {
+            vboxConteudo.getChildren().add(criarCard(imovel));
+        }
+    }
+
+    
+    
     private VBox criarCard(Propriedades imovel) {
     
 
@@ -281,12 +303,13 @@ public class TelaInicialController {
     Label lblData = new Label("Data de cadastro: " + imovel.getDataCadastro());
     Label lblInfo = new Label("Informações do imóvel: " + imovel.getEndereco());
     Label lblRua = new Label("Rua: " + imovel.getRua());
-    Label lblTipoPropriedade = new Label("Rua: " + imovel.getTipoPropriedade());
+    Label lblTipoPropriedade = new Label("Tipo de propriedade: " + imovel.getTipoPropriedade());
 
     VBox card = new VBox(5, lblValor, lblData, lblInfo, lblRua, lblTipoPropriedade);
     card.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 10; -fx-border-color: gray;");
     return card;
 }
+   
     
     
 
