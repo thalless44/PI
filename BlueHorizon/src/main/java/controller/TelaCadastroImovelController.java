@@ -21,7 +21,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.ImovelDAO;
 import model.PropriedadesDAO;
 import model.ProprietarioDAO;
 import util.AlertaUtil;
@@ -146,6 +145,8 @@ public class TelaCadastroImovelController {
         rbDisponivel.setToggleGroup(grupoDisponibilidade);
         rbNaoDisponivel.setToggleGroup(grupoDisponibilidade);
         
+        //limita os caracteres 
+        
         new LimitarCaracter(50, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtProprietario);
         new LimitarCaracter(100, LimitarCaracter.TipoEntrada.EMAIL).applyToTextInputControl(txtEmailProprietario);
         new LimitarCaracter(12, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtTelefoneProprietario);
@@ -172,13 +173,6 @@ public class TelaCadastroImovelController {
 }
     
     
-
-
-
-   
-
-
-
     @FXML
     void onClickCadastro(ActionEvent event) {
         
@@ -202,18 +196,20 @@ public class TelaCadastroImovelController {
             int quartos = Integer.parseInt(txtQuartos.getText());
             int banheiros = Integer.parseInt(txtBanheiros.getText());
             int vagasGaragem = Integer.parseInt(txtVagaGaragem.getText());
-            boolean mobiliada = rbSimMobiliada.isSelected();
+            boolean mobilia = rbSimMobiliada.isSelected();
             boolean jardim = rbSimJardim.isSelected();
             boolean sistemaSeguranca = rbSimSG.isSelected();
             boolean piscina = rbSimPiscina.isSelected();
             int numeroCasa = Integer.parseInt(txtNumeracaoImovel.getText());
             String area = txtArea.getText();
+            
+            //int quartos, int banheiros, int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa, String area
 
             boolean sucessoProprietario = ProprietarioDAO.Proprietarios(telefoneProprietario, nomeProprietario, emailProprietario);
-            boolean sucessoPropriedade = PropriedadesDAO.Propriedades(tipoPropriedade, endereco, preco, disponibilidade, dataCadastro, rua);
-            boolean sucessoImovel = ImovelDAO.InformacoesImovel(quartos, banheiros, vagasGaragem, mobiliada, jardim, sistemaSeguranca, piscina, numeroCasa, area);
-
-            if (sucessoProprietario && sucessoPropriedade && sucessoImovel) {
+            boolean sucessoPropriedade = PropriedadesDAO.Propriedades(tipoPropriedade, endereco, preco, disponibilidade, dataCadastro, rua, quartos, banheiros, 
+                    vagasGaragem, mobilia, jardim, sistemaSeguranca, piscina, numeroCasa, area);
+       
+            if (sucessoProprietario && sucessoPropriedade) {
                 AlertaUtil.mostrarInformacao("Cadastro de imóvel", "Cadastro realizado", 
                     "O imóvel foi cadastrado corretamente no banco de dados.");
             } else {

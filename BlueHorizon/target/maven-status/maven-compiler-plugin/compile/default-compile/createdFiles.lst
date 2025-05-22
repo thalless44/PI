@@ -2,7 +2,6 @@ controller\TelaInicialController.class
 util\LimitarCaracter$TipoEntrada.class
 controller\TelaContratoController.class
 model\Funcionario.class
-model\ImovelDAO.class
 model\FuncionarioDAO.class
 util\LimitarCaracter$VerificarData.class
 model\ProprietarioDAO.class
