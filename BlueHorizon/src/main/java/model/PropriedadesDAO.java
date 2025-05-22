@@ -85,7 +85,7 @@ public class PropriedadesDAO extends GenericDAO{
 }
      
      //metodo para deletar
-     public static boolean deletarPropriedade(int id) {
+    public static boolean deletarPropriedade(int id) {
     String sql = "DELETE FROM propriedades WHERE id = ?";
 
     try (Connection conn = ConexaoBD.conectar();
@@ -102,12 +102,11 @@ public class PropriedadesDAO extends GenericDAO{
 }
 
      public static boolean atualizarPropriedade(Propriedades p) {
-    String sql = "UPDATE propriedades SET tipo_propriedade = ?, endereco = ?, preco = ?, disponibilidade = ?, data_cadastro = ?, rua = ? WHERE id = ?";
+    String sql = "UPDATE propriedades SET tipo_propriedade = ?, endereco = ?, preco = ?, disponibilidade = ?, data_cadastro = ?, rua = ?, quartos = ?, "
+            + "banheiros  = ?, vagasGaragem = ?, mobilia = ?, jardim = ?, sistemaSeguranca = ?, piscina = ?, numeroCasa = ?, area = ? WHERE id = ?";
 
     try (Connection conn = ConexaoBD.conectar();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
-        
-        //int quartos, int banheiros, int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa, String area
 
         stmt.setString(1, p.getTipoPropriedade());
         stmt.setString(2, p.getEndereco());
