@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
--- Host: localhost    Database: imobiliaria
+-- Host: localhost    Database: imobiliariav3
 -- ------------------------------------------------------
 -- Server version	8.0.15
 
@@ -156,38 +156,6 @@ LOCK TABLES `imagens_imoveis` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `informacoes_imoveis`
---
-
-DROP TABLE IF EXISTS `informacoes_imoveis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `informacoes_imoveis` (
-  `id_propriedade` int(11) NOT NULL,
-  `quartos` int(11) NOT NULL,
-  `banheiros` int(11) NOT NULL,
-  `vagasGaragem` int(11) NOT NULL,
-  `mobilia` tinyint(1) NOT NULL,
-  `jardim` tinyint(1) NOT NULL,
-  `sistemaSeguranca` tinyint(1) NOT NULL,
-  `piscina` tinyint(1) NOT NULL,
-  `numeroCasa` int(11) NOT NULL,
-  `area` varchar(45) NOT NULL,
-  PRIMARY KEY (`id_propriedade`),
-  CONSTRAINT `informacoes_imoveis_ibfk_1` FOREIGN KEY (`id_propriedade`) REFERENCES `propriedades` (`id_propriedade`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `informacoes_imoveis`
---
-
-LOCK TABLES `informacoes_imoveis` WRITE;
-/*!40000 ALTER TABLE `informacoes_imoveis` DISABLE KEYS */;
-/*!40000 ALTER TABLE `informacoes_imoveis` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `interesse`
 --
 
@@ -231,6 +199,15 @@ CREATE TABLE `propriedades` (
   `id_proprietario` int(11) NOT NULL,
   `id_funcionario` int(11) NOT NULL,
   `rua` varchar(45) NOT NULL,
+  `quartos` int(11) NOT NULL,
+  `banheiros` int(11) NOT NULL,
+  `vagasGaragem` int(11) NOT NULL,
+  `mobilia` tinyint(1) NOT NULL,
+  `jardim` tinyint(1) NOT NULL,
+  `sistemaSeguranca` tinyint(1) NOT NULL,
+  `piscina` tinyint(1) NOT NULL,
+  `numeroCasa` int(11) NOT NULL,
+  `area` varchar(45) NOT NULL,
   PRIMARY KEY (`id_propriedade`),
   KEY `propriedades_ibfk_1` (`id_proprietario`),
   KEY `propriedades_ibfk_2` (`id_funcionario`),
@@ -313,4 +290,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-19 11:44:30
+-- Dump completed on 2025-05-22 11:52:22
