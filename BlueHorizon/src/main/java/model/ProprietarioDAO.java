@@ -8,9 +8,7 @@ import java.util.List;
 public class ProprietarioDAO extends GenericDAO {
 
     public static boolean Proprietarios(String telefoneProprietario, String nomeProprietario, String emailProprietario) {
-       
         return false;
-       
     }
 
     public static boolean cadastrarProprietario(String nome, String email, String telefone) {
@@ -109,5 +107,11 @@ public class ProprietarioDAO extends GenericDAO {
             e.printStackTrace();
             return false;
         }
+    }
+
+    // UPDATE - Versão utilitária para o controller
+    public static boolean atualizarProprietario(Proprietario p) {
+        ProprietarioDAO dao = new ProprietarioDAO();
+        return dao.atualizar(p.getId(), p.getTelefone(), p.getNome(), p.getEmail());
     }
 }
