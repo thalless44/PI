@@ -32,3 +32,4 @@ controller\TelaLoginPIController.class
 controller\TelaImovelVendaController.class
 controller\TelaProprietarioController.class
 util\AlertaUtil.class
+controller\TelaUsuarioSistemaPropietarioController.class

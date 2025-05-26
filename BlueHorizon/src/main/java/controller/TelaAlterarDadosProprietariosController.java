@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class TelaAlterarDadosProprietarioController {
+public class TelaAlterarDadosProprietariosController {
 
     @FXML
     private Button btnAlterarDados;

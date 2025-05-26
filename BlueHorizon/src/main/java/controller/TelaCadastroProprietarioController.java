@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class TelaProprietarioController {
+public class TelaCadastroProprietarioController {
 
     @FXML
     private Button btnCancelarcadastro;
