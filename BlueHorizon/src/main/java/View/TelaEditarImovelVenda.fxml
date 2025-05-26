@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<FlowPane alignment="CENTER" columnHalignment="CENTER" minHeight="609.0" minWidth="700.0" prefHeight="644.0" prefWidth="970.0" style="-fx-background-color: #6ec4e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaImovelVendaController">
+   <children>
+        <Pane prefHeight="680.0" prefWidth="922.0" style="-fx-background-color: #d9d9d9;" stylesheets="@../../resources/CSS/TelaEditarImovel.css">
+            <effect>
+            <DropShadow>
+               <color>
+                  <Color opacity="0.6717557311058044" />
+               </color>
+            </DropShadow>
+            </effect>
+            <children>
+            <Label fx:id="lblImovelVenda" layoutX="228.0" layoutY="27.0" text="ALTERAR INFORMAÇÕES DO IMÓVEL">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnAlterar" layoutX="392.0" layoutY="579.0" mnemonicParsing="false" onAction="#ActionbtnAlterarInformacoesImovel" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #EBDB8C;" text="Alterar" />
+            <Button fx:id="btnSair" layoutX="392.0" layoutY="616.0" mnemonicParsing="false" onAction="#ActionSair" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #DC7777;" text="Sair" />
+            <Pane layoutX="34.0" layoutY="88.0" prefHeight="203.0" prefWidth="395.0" style="-fx-background-color: #FFFF;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <children>
+                  <ImageView fitHeight="203.0" fitWidth="395.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane layoutX="441.0" layoutY="88.0" prefHeight="433.0" prefWidth="439.0" style="-fx-background-color: #d9d9d9;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <children>
+                  <Label layoutX="21.0" layoutY="45.0" text="Valor:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="19.0" layoutY="79.0" text="Disponibildade:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="20.0" layoutY="113.0" text="Data de cadastro:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="150.0" layoutY="6.0" text="Informações do imóvel">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Line endX="267.0" layoutX="155.0" layoutY="161.0" startX="-142.0" />
+                  <Label layoutX="15.0" layoutY="192.0" text="Área (m²):">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="14.0" layoutY="226.0" text="Quartos:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="16.0" layoutY="266.0" text="Banheiros:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="16.0" layoutY="299.0" text="Vagas de garagem:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="15.0" layoutY="332.0" text="Mobiliada:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="204.0" layoutY="192.0" text="Piscina:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="201.0" layoutY="226.0" text=" Sistema de segurança:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="203.0" layoutY="266.0" text="Cidade:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="205.0" layoutY="299.0" prefHeight="17.0" prefWidth="35.0" text="Rua:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="18.0" layoutY="365.0" text="Jardim:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="205.0" layoutY="332.0" text="Numeração do imóvel:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="lblValor" layoutX="43.0" layoutY="45.0" prefHeight="17.0" prefWidth="367.0" />
+                  <Label fx:id="lblDisponibilidade" layoutX="93.0" layoutY="79.0" prefHeight="17.0" prefWidth="322.0" />
+                  <Label fx:id="lblDataCadastro" layoutX="112.0" layoutY="113.0" prefHeight="17.0" prefWidth="295.0" />
+                  <Label fx:id="lblArea" layoutX="69.0" layoutY="192.0" prefHeight="17.0" prefWidth="130.0" />
+                  <Label fx:id="lblQuartos" layoutX="60.0" layoutY="217.0" prefHeight="17.0" prefWidth="140.0" />
+                  <Label fx:id="lblBanheiros" layoutX="74.0" layoutY="243.0" prefHeight="17.0" prefWidth="140.0" />
+                  <Label fx:id="lblVagasGaragem" layoutX="117.0" layoutY="266.0" prefHeight="17.0" prefWidth="82.0" />
+                  <Label fx:id="lblMobiliada" layoutX="74.0" layoutY="290.0" prefHeight="17.0" prefWidth="121.0" />
+                  <Label fx:id="lblJardim" layoutX="60.0" layoutY="315.0" prefHeight="17.0" prefWidth="140.0" />
+                  <Label fx:id="lblPiscina" layoutX="243.0" layoutY="192.0" prefHeight="17.0" prefWidth="173.0" />
+                  <Label fx:id="lblSistemaSegurança" layoutX="323.0" layoutY="217.0" prefHeight="17.0" prefWidth="92.0" />
+                  <Label fx:id="lblCidade" layoutX="243.0" layoutY="243.0" prefHeight="17.0" prefWidth="173.0" />
+                  <Label fx:id="lblRua" layoutX="226.0" layoutY="266.0" prefHeight="17.0" prefWidth="189.0" />
+                  <Label fx:id="lblNumeracaoImovel" layoutX="323.0" layoutY="290.0" prefHeight="17.0" prefWidth="92.0" />
+                  <TextField fx:id="txtfdValorImovel" layoutX="126.0" layoutY="41.0" prefHeight="25.0" prefWidth="206.0" promptText="Insira o valor do imóvel R$" />
+                  <TextField fx:id="txtfdDataCadastro" layoutX="125.0" layoutY="109.0" prefHeight="25.0" prefWidth="206.0" promptText="Insira a data de cadastro do imóvel" />
+                  <TextField fx:id="txtfdArea" layoutX="88.0" layoutY="188.0" prefHeight="25.0" prefWidth="107.0" promptText="Insira a área" />
+                  <TextField fx:id="txtfdQuartos" layoutX="88.0" layoutY="222.0" prefHeight="25.0" prefWidth="107.0" promptText="Quant. quartos" />
+                  <TextField fx:id="txtfdBanheiros" layoutX="88.0" layoutY="262.0" prefHeight="25.0" prefWidth="107.0" promptText="Quant. banheiros" />
+                  <TextField fx:id="txtfdVagasGaragem" layoutX="128.0" layoutY="295.0" prefHeight="25.0" prefWidth="67.0" promptText="Quant. " />
+                  <RadioButton fx:id="rbSimMobiliada" layoutX="84.0" layoutY="332.0" mnemonicParsing="false" text="Sim" />
+                  <RadioButton fx:id="rbNaoMobiliada" layoutX="136.0" layoutY="332.0" mnemonicParsing="false" text="Não" />
+                  <RadioButton fx:id="rbSimJardim" layoutX="64.0" layoutY="365.0" mnemonicParsing="false" text="Sim" />
+                  <RadioButton fx:id="rbNaoJardim" layoutX="112.0" layoutY="365.0" mnemonicParsing="false" text="Não" />
+                  <RadioButton fx:id="rbSimPiscina" layoutX="254.0" layoutY="192.0" mnemonicParsing="false" text="Sim" />
+                  <RadioButton fx:id="rbNaoPiscina" layoutX="301.0" layoutY="192.0" mnemonicParsing="false" text="Não" />
+                  <RadioButton fx:id="rbSimSS" layoutX="335.0" layoutY="226.0" mnemonicParsing="false" text="Sim" />
+                  <RadioButton fx:id="rbNaoSS" layoutX="381.0" layoutY="226.0" mnemonicParsing="false" text="Não" />
+                  <TextField fx:id="txtfdCidade" layoutX="257.0" layoutY="262.0" prefHeight="25.0" prefWidth="166.0" promptText="Insira a cidade" />
+                  <TextField fx:id="txtfdRua" layoutX="257.0" layoutY="295.0" prefHeight="25.0" prefWidth="166.0" promptText="Insira a rua" />
+                  <TextField fx:id="txtfdNumeracaoImovel" layoutX="340.0" layoutY="328.0" prefHeight="25.0" prefWidth="82.0" promptText="Ex: 90" />
+                  <RadioButton fx:id="rbDisponivel" layoutX="126.0" layoutY="79.0" mnemonicParsing="false" text="Disponível" />
+                  <RadioButton fx:id="rbIndisponivel" layoutX="216.0" layoutY="79.0" mnemonicParsing="false" text="Indisponível" />
+               </children>
+            </Pane>
+            <Pane layoutX="31.0" layoutY="340.0" prefHeight="180.0" prefWidth="395.0" style="-fx-background-color: #d9d9d9;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <children>
+                  <Label layoutX="132.0" layoutY="6.0" text="Informações do proprietário">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="30.0" layoutY="39.0" text="Nome:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="32.0" layoutY="82.0" text="Email:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="32.0" layoutY="125.0" text="Telefone:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="lblNome" layoutX="48.0" layoutY="39.0" prefHeight="17.0" prefWidth="311.0" />
+                  <Label fx:id="lblEmail" layoutX="48.0" layoutY="72.0" prefHeight="17.0" prefWidth="311.0" />
+                  <Label fx:id="lblTelefone" layoutX="64.0" layoutY="104.0" prefHeight="17.0" prefWidth="295.0" />
+                  <TextField fx:id="txtfdNomeProprietario" layoutX="103.0" layoutY="35.0" prefHeight="25.0" prefWidth="217.0" promptText="Insira o nome do proprietário" />
+                  <TextField fx:id="txtfdEmailProprietario" layoutX="103.0" layoutY="78.0" prefHeight="25.0" prefWidth="217.0" promptText="Insira o email do proprietário" />
+                  <TextField fx:id="txtfdTelefoneProprietario" layoutX="103.0" layoutY="121.0" prefHeight="25.0" prefWidth="217.0" promptText="Insira o telefone do proprietário" />
+               </children>
+            </Pane>
+            <Button fx:id="btnAdicionarImagem" layoutX="34.0" layoutY="295.0" mnemonicParsing="false" onAction="#OnActionbtnAdicionarImagem" prefHeight="25.0" prefWidth="395.0" text="Adicionar imagem">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            </children>
+        </Pane>
+   </children>
+</FlowPane>

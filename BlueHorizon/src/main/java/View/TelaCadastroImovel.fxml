@@ -71,7 +71,7 @@
             <Button fx:id="btnCancelarCadastro" layoutX="383.0" layoutY="496.0" mnemonicParsing="false" onAction="#onClickCancelarCadastro" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #DC7777;" text="Cancelar cadastro">
                <font><Font name="System Bold" size="12.0" /></font>
             </Button>
-            <Button fx:id="btnAdicionarImagem" layoutX="613.0" layoutY="332.0" mnemonicParsing="false" onAction="#OnClickAdicionarImagem" prefHeight="17.0" prefWidth="265.0" style="-fx-background-color: a7a7a7;" text="Adicionar Imagem">
+            <Button fx:id="btnAdicionarImagem" layoutX="613.0" layoutY="332.0" mnemonicParsing="false" onAction="#OnClickAdicionarImagem" prefHeight="17.0" prefWidth="265.0" text="Adicionar Imagem">
                <font><Font name="System Bold" size="12.0" /></font>
             </Button>
 
