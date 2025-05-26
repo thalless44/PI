@@ -176,7 +176,6 @@ public class TelaCadastroImovelController {
     @FXML
     void onClickCadastro(ActionEvent event) {
         
-        try {
             String telefoneProprietario = txtTelefoneProprietario.getText();
             String nomeProprietario = txtProprietario.getText();
             String emailProprietario = txtEmailProprietario.getText();
@@ -215,9 +214,7 @@ public class TelaCadastroImovelController {
                     "Houve um erro ao tentar cadastrar o imóvel. Verifique os dados e tente novamente.");
             }
 
-        } catch (Exception e) {
-            AlertaUtil.mostrarErro("Erro", "Ocorreu um erro inesperado.","Verifique os dados e tente novamente.");
-        }
+        
     }
 
     @FXML
