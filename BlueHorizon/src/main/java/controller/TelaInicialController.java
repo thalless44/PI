@@ -263,6 +263,37 @@ public class TelaInicialController {
     }
     @FXML
     void OnClickAbrirUsuarioSistemaProprietario(ActionEvent event) {
+        try {
+    // Carregar o FXML da tela de Proprietário
+    URL url = new File("src/main/java/view/TelaUsuarioSistemaProprietario.fxml").toURI().toURL();
+    FXMLLoader loader = new FXMLLoader(url);
+    Parent root = loader.load();
+
+    // Criar a nova tela
+    Stage telaPRE = new Stage();
+
+    // Obter o controlador correto (TelaUsuarioSistemaProprietarioController)
+    TelaUsuarioSistemaProprietarioController controller = loader.getController();
+
+    // Passar a Stage para o controlador, se necessário
+    controller.setStage(telaPRE);
+
+    // Criar a cena e configurar o ícone
+    Scene scene = new Scene(root);
+    Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+    telaPRE.getIcons().add(icone);
+
+    // Configurar e exibir a tela
+    telaPRE.setScene(scene);
+    telaPRE.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Usuários do sistema - Proprietarios");
+    telaPRE.setMaximized(true);
+    telaPRE.show();
+
+} catch (IOException e) {
+    e.printStackTrace();
+}
+
+        
 
     }
     //cadastrar Proprietario
@@ -270,7 +301,7 @@ public class TelaInicialController {
 void onClickProprietario(ActionEvent event) {
     try {
         // Carregar o FXML da tela de Proprietário
-        URL url = new File("src/main/java/view/TelaProprietario.fxml").toURI().toURL();
+        URL url = new File("src/main/java/view/TelaCadastroProprietario.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
         
@@ -278,7 +309,7 @@ void onClickProprietario(ActionEvent event) {
         Stage telaPRO = new Stage();
 
         // Obter o controlador correto (TelaProprietarioController)
-        TelaProprietarioController controller = loader.getController();
+        TelaCadastroProprietarioController controller = loader.getController();
         
         // Passar a Stage para o controlador, se necessário
         controller.setStage(telaPRO);

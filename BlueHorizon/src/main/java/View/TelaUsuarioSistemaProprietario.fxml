@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane alignment="CENTER" minHeight="700.0" minWidth="700.0" prefHeight="862.0" prefWidth="1256.0" style="-fx-background-color: #6ec4e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaUsuarioSistemaPropietarioController">
+<FlowPane alignment="CENTER" minHeight="700.0" minWidth="700.0" prefHeight="862.0" prefWidth="1256.0" style="-fx-background-color: #6ec4e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaUsuarioSistemaProprietarioController">
    <children>
         <Pane prefHeight="770.0" prefWidth="1163.0" style="-fx-background-color: #d9d9d9;">
             <effect>
