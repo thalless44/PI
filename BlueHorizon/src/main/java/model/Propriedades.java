@@ -5,6 +5,7 @@ import javafx.beans.property.*;
 
 public class Propriedades {
 
+    private final IntegerProperty id = new SimpleIntegerProperty();
     private final StringProperty tipoPropriedade = new SimpleStringProperty();
     private final StringProperty endereco = new SimpleStringProperty();
     private final DoubleProperty preco = new SimpleDoubleProperty();
@@ -22,6 +23,27 @@ public class Propriedades {
     private final StringProperty area = new SimpleStringProperty();
 
 
+    public Propriedades(int id, String tipoPropriedade, String endereco, double preco, boolean disponibilidade, Date dataCadastro, String rua, int quartos, int banheiros,
+            int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa, String area) {
+        
+        this.id.set(id);
+        this.tipoPropriedade.set(tipoPropriedade);
+        this.endereco.set(endereco);
+        this.preco.set(preco);
+        this.disponibilidade.set(disponibilidade);
+        this.dataCadastro.set(dataCadastro);
+        this.rua.set(rua);
+        this.quartos.set(quartos);
+        this.banheiros.set(banheiros);
+        this.vagasGaragem.set(vagasGaragem);
+        this.mobilia.set(mobilia);
+        this.jardim.set(jardim);
+        this.sistemaSeguranca.set(sistemaSeguranca);
+        this.piscina.set(piscina);
+        this.numeroCasa.set(numeroCasa);
+        this.area.set(area);
+    }
+    
     public Propriedades(String tipoPropriedade, String endereco, double preco, boolean disponibilidade, Date dataCadastro, String rua, int quartos, int banheiros,
             int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa, String area) {
         
@@ -46,6 +68,18 @@ public class Propriedades {
     }
 
     // Getters e Setters
+    
+    public IntegerProperty idProperty(){
+        return id;
+    }
+    
+    public int getId(){
+        return id.get();
+    }
+    
+    public void setId(int id){
+        this.id.set(id);
+    }
 
     public StringProperty tipoPropriedadeProperty() {
         return tipoPropriedade;

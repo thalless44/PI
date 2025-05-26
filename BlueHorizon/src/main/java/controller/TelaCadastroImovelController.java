@@ -203,8 +203,6 @@ public class TelaCadastroImovelController {
             int numeroCasa = Integer.parseInt(txtNumeracaoImovel.getText());
             String area = txtArea.getText();
             
-            //int quartos, int banheiros, int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa, String area
-
             boolean sucessoProprietario = ProprietarioDAO.Proprietarios(telefoneProprietario, nomeProprietario, emailProprietario);
             boolean sucessoPropriedade = PropriedadesDAO.Propriedades(tipoPropriedade, endereco, preco, disponibilidade, dataCadastro, rua, quartos, banheiros, 
                     vagasGaragem, mobilia, jardim, sistemaSeguranca, piscina, numeroCasa, area);
