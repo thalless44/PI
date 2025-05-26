@@ -265,11 +265,40 @@ public class TelaInicialController {
     void OnClickAbrirUsuarioSistemaProprietario(ActionEvent event) {
 
     }
-    
-    @FXML
-    void onClickProprietario(ActionEvent event) {
+    //cadastrar Proprietario
+ @FXML
+void onClickProprietario(ActionEvent event) {
+    try {
+        // Carregar o FXML da tela de Proprietário
+        URL url = new File("src/main/java/view/TelaProprietario.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+        
+        // Criar a nova tela
+        Stage telaPRO = new Stage();
 
+        // Obter o controlador correto (TelaProprietarioController)
+        TelaProprietarioController controller = loader.getController();
+        
+        // Passar a Stage para o controlador, se necessário
+        controller.setStage(telaPRO);
+
+        // Criar a cena e configurar o ícone
+        Scene scene = new Scene(root);
+        Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+        telaPRO.getIcons().add(icone);
+
+        // Configurar e exibir a tela
+        telaPRO.setScene(scene);
+        telaPRO.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Usuários do sistema - Proprietarios");
+        telaPRO.setMaximized(true);
+        telaPRO.show();
+        
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
 
     private boolean SairTelaInicio() {
         
