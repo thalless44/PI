@@ -45,6 +45,9 @@ public class TelaInicialController {
     private MenuItem menuCadastroImovol;
     
     @FXML
+    private MenuItem menuCadastroProprietario;
+    
+    @FXML
     private MenuItem btnFecharApp;
     
     @FXML
@@ -53,6 +56,9 @@ public class TelaInicialController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+    
+    @FXML
+    private MenuItem btnUsuarioSistemaProprietario;
 
   
     @FXML
@@ -255,7 +261,15 @@ public class TelaInicialController {
     }
 
     }
+    @FXML
+    void OnClickAbrirUsuarioSistemaProprietario(ActionEvent event) {
 
+    }
+    
+    @FXML
+    void onClickProprietario(ActionEvent event) {
+
+    }
 
     private boolean SairTelaInicio() {
         

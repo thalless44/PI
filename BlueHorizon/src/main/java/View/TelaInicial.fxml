@@ -33,6 +33,7 @@
               <MenuItem fx:id="menuCadastroFuncionario" mnemonicParsing="false" onAction="#onClickFuncionario" text="Funcionário" />
                   <MenuItem fx:id="menuCadastroCliente" mnemonicParsing="false" onAction="#onClickCliente" text="Cliente " />
                   <MenuItem fx:id="menuCadastroImovol" mnemonicParsing="false" onAction="#onClickImovel" text="Imóvel" />
+                  <MenuItem fx:id="menuCadastroProprietario" mnemonicParsing="false" onAction="#onClickProprietario" text="Proprietário" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Relatório">
@@ -44,6 +45,7 @@
                <items>
                   <MenuItem fx:id="btnUsuarioSistemaFuncionario" mnemonicParsing="false" onAction="#OnClickAbrirUsuarioSistemaFuncionario" text="Planilha de funcionários" />
                   <MenuItem fx:id="btnUsuarioSistemaCliente" mnemonicParsing="false" onAction="#OnClickAbrirUsuarioSistemaCliente" text="Planilha de clientes" />
+                  <MenuItem fx:id="btnUsuarioSistemaProprietario" mnemonicParsing="false" onAction="#OnClickAbrirUsuarioSistemaProprietario" text="Planilha de proprietários" />
                </items>
             </Menu>
             <Menu fx:id="btnSair" mnemonicParsing="false" text="Sair">

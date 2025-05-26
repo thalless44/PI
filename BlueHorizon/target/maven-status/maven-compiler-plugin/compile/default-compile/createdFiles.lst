@@ -22,6 +22,7 @@ model\PropriedadesDAO.class
 controller\TelaPersonalizacaoPerfilController.class
 controller\TelaAlterarDadosClientesController.class
 controller\TelaInformacoesPerfilController.class
+controller\TelaAlterarDadosProprietarioController.class
 model\Propriedades.class
 controller\TelaPagamentoController.class
 principal\App.class
@@ -29,4 +30,5 @@ controller\TelaCadastroFuncionarioController.class
 dal\ConexaoBD.class
 controller\TelaLoginPIController.class
 controller\TelaImovelVendaController.class
+controller\TelaProprietarioController.class
 util\AlertaUtil.class
