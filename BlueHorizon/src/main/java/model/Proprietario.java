@@ -17,6 +17,7 @@ public class Proprietario {
         
     }
     
+    //Método construtor com o id
     public Proprietario(int id, String telefone, String nome, String email) {
         this.id.set(id);
         this.telefone.set(telefone);
@@ -78,14 +79,5 @@ public class Proprietario {
     public void setEmail(String email){
         this.email.set(email);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
 }

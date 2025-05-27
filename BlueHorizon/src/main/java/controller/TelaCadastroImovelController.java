@@ -159,7 +159,7 @@ public class TelaCadastroImovelController {
     void OnClickAdicionarImagem(ActionEvent event) {
         
     
-       FileChooser fileChooser = new FileChooser();
+    FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Selecionar Imagem");
     fileChooser.getExtensionFilters().add(
         new FileChooser.ExtensionFilter("Imagens", "*.png", "*.jpg", "*.jpeg", "*.gif")

@@ -29,13 +29,13 @@
                </font>
             </Label>
             <Button fx:id="btnAlterar" layoutX="392.0" layoutY="579.0" mnemonicParsing="false" onAction="#ActionbtnAlterarInformacoesImovel" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #EBDB8C;" text="Alterar" />
-            <Button fx:id="btnSair" layoutX="392.0" layoutY="616.0" mnemonicParsing="false" onAction="#ActionSair" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #DC7777;" text="Sair" />
+            <Button fx:id="btnSair" layoutX="392.0" layoutY="616.0" mnemonicParsing="false" onAction="#ActionbtnSair" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #DC7777;" text="Sair" />
             <Pane layoutX="34.0" layoutY="88.0" prefHeight="203.0" prefWidth="395.0" style="-fx-background-color: #FFFF;">
                <effect>
                   <DropShadow />
                </effect>
                <children>
-                  <ImageView fitHeight="203.0" fitWidth="395.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="ImageViewImovel" fitHeight="203.0" fitWidth="395.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane layoutX="441.0" layoutY="88.0" prefHeight="433.0" prefWidth="439.0" style="-fx-background-color: #d9d9d9;">
@@ -121,7 +121,7 @@
                   <TextField fx:id="txtfdValorImovel" layoutX="126.0" layoutY="41.0" prefHeight="25.0" prefWidth="206.0" promptText="Insira o valor do imóvel R$" />
                   <TextField fx:id="txtfdDataCadastro" layoutX="125.0" layoutY="109.0" prefHeight="25.0" prefWidth="206.0" promptText="Insira a data de cadastro do imóvel" />
                   <TextField fx:id="txtfdArea" layoutX="88.0" layoutY="188.0" prefHeight="25.0" prefWidth="107.0" promptText="Insira a área" />
-                  <TextField fx:id="txtfdQuartos" layoutX="88.0" layoutY="222.0" prefHeight="25.0" prefWidth="107.0" promptText="Quant. quartos" />
+                  <TextField fx:id="txtfdQuartos" layoutX="88.0" layoutY="222.0" prefHeight="25.0" prefWidth="107.0" promptText="Quant. " />
                   <TextField fx:id="txtfdBanheiros" layoutX="88.0" layoutY="262.0" prefHeight="25.0" prefWidth="107.0" promptText="Quant. banheiros" />
                   <TextField fx:id="txtfdVagasGaragem" layoutX="128.0" layoutY="295.0" prefHeight="25.0" prefWidth="67.0" promptText="Quant. " />
                   <RadioButton fx:id="rbSimMobiliada" layoutX="84.0" layoutY="332.0" mnemonicParsing="false" text="Sim" />
