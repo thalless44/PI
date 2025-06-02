@@ -41,8 +41,8 @@
             <TableView fx:id="tabelaUsuarioProprietarios" layoutX="164.0" layoutY="54.0" prefHeight="647.0" prefWidth="825.0">
                <columns>
                   <TableColumn fx:id="TableColumnID" prefWidth="196.0" text="ID" />
-                  <TableColumn fx:id="TableColumnNome" prefWidth="200.0" text="Nome" />
-                  <TableColumn fx:id="TableColumnTelefone" prefWidth="218.0" text="Telefone" />
+                  <TableColumn fx:id="TableColumnTelefone" prefWidth="200.0" text="Telefone" />
+                  <TableColumn fx:id="TableColumnNome" prefWidth="218.0" text="Nome" />
                   <TableColumn fx:id="TableColumnEmail" prefWidth="210.0" text="Email" />
                </columns>
             </TableView>
