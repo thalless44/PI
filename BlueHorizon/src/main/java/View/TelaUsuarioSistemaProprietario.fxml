@@ -38,7 +38,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <TableView fx:id="tabelaUsuarioProprietarios" layoutX="164.0" layoutY="54.0" prefHeight="647.0" prefWidth="825.0">
+            <TableView fx:id="tabelaUsuariosProprietarios" layoutX="164.0" layoutY="54.0" prefHeight="647.0" prefWidth="825.0">
                <columns>
                   <TableColumn fx:id="TableColumnID" prefWidth="196.0" text="ID" />
                   <TableColumn fx:id="TableColumnTelefone" prefWidth="200.0" text="Telefone" />

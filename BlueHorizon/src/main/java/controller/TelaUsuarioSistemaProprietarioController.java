@@ -23,6 +23,8 @@ import model.ProprietarioDAO;
 import util.AlertaUtil;
 
 public class TelaUsuarioSistemaProprietarioController {
+    
+    private Stage stageUsuarios;
 
     @FXML
     private TableColumn<Proprietario, Number> TableColumnID;
@@ -142,7 +144,7 @@ void OnclickAlterarDados(ActionEvent event) {
     }
 
     void setStage(Stage telaPRE) {
-        this.setStage(telaPRE);
+        this.stageUsuarios = telaPRE;
         
     }
     }

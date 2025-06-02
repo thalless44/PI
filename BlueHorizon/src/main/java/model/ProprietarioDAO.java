@@ -34,7 +34,7 @@ public class ProprietarioDAO extends GenericDAO {
 
             while (rs.next()) {
                 Proprietario p = new Proprietario();
-                p.setId(rs.getInt("id"));
+                p.setId(rs.getInt("id_proprietario"));
                 p.setTelefone(rs.getString("telefone"));
                 p.setNome(rs.getString("nome"));
                 p.setEmail(rs.getString("email"));
@@ -57,7 +57,7 @@ public class ProprietarioDAO extends GenericDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     p = new Proprietario();
-                    p.setId(rs.getInt("id"));
+                    p.setId(rs.getInt("id_proprietario"));
                     p.setTelefone(rs.getString("telefone"));
                     p.setNome(rs.getString("nome"));
                     p.setEmail(rs.getString("email"));
