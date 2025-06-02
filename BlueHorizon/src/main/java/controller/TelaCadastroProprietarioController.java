@@ -40,7 +40,7 @@ public class TelaCadastroProprietarioController {
         
         new LimitarCaracter(50, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtNomeProprietario);
         new LimitarCaracter(100, LimitarCaracter.TipoEntrada.EMAIL).applyToTextInputControl(txtEmailProprietario);
-        new LimitarCaracter(12, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtTelefoneProprietario);
+        new LimitarCaracter(13, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtTelefoneProprietario);
     }
 
     // Ação de Cancelar Cadastro
@@ -80,7 +80,7 @@ public class TelaCadastroProprietarioController {
                     "Todos os campos devem ser preenchidos!");
         } else {
             // Chamando o DAO para cadastrar o proprietário
-            boolean sucesso = ProprietarioDAO.cadastrarProprietario(nome, email, telefone);
+            boolean sucesso = ProprietarioDAO.cadastrarProprietario(telefone, nome, email);
 
             if (sucesso) {
                 AlertaUtil.mostrarInformacao("Cadastro de Proprietário", "Cadastro realizado",

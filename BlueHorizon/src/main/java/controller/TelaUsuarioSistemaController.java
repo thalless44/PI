@@ -50,9 +50,7 @@ public class TelaUsuarioSistemaController {
     @FXML
     public void initialize() {
         configurarColunasTabela();
-        carregarUsuariosTabela();
-        
-        
+        carregarUsuariosTabela();      
     }
 
     private void configurarColunasTabela() {

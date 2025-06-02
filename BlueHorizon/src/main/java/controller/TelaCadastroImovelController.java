@@ -148,7 +148,7 @@ public class TelaCadastroImovelController {
         
         new LimitarCaracter(50, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtProprietario);
         new LimitarCaracter(100, LimitarCaracter.TipoEntrada.EMAIL).applyToTextInputControl(txtEmailProprietario);
-        new LimitarCaracter(12, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtTelefoneProprietario);
+        new LimitarCaracter(13, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtTelefoneProprietario);
         new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtDatacadastro);
         
         

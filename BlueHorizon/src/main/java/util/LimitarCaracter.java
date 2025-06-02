@@ -98,22 +98,26 @@ public class LimitarCaracter {
     StringBuilder updatedRaw = new StringBuilder(foneOldText)
         .replace(start, end, foneInsertedText);
 
+    // Remove todos os caracteres não numéricos
     String digits = updatedRaw.toString().replaceAll("[^0-9]", "");
 
-    if (digits.length() > 11) return null;
+    if (digits.length() > 11) return null; // Limita para 11 dígitos (2 DDD + 9 número)
 
     StringBuilder foneFormatted = new StringBuilder();
     int foneLen = digits.length();
 
     if (foneLen > 0) {
         if (foneLen <= 2) {
-            foneFormatted.append(digits);
+            foneFormatted.append(digits); // Apenas DDD
         } else {
-            foneFormatted.append(digits.substring(0, 2)).append(" ");
-            if (foneLen > 2 && foneLen <= 7) {
-                foneFormatted.append(digits.substring(2));
-            } else if (foneLen > 7) {
-                foneFormatted.append(digits.substring(2, 7)).append("-").append(digits.substring(7));
+            foneFormatted.append(digits.substring(0, 2)).append(" "); // DDD + espaço
+            if (foneLen <= 7) {
+                foneFormatted.append(digits.substring(2)); // Número sem hífen ainda
+            } else {
+                // Se tem mais que 7 dígitos (total até 11), formata como 00000-0000
+                int middle = Math.min(7, foneLen); // Evita exceções
+                foneFormatted.append(digits.substring(2, 7)).append("-");
+                foneFormatted.append(digits.substring(7, foneLen));
             }
         }
     }
@@ -121,6 +125,7 @@ public class LimitarCaracter {
     change.setText(foneFormatted.toString());
     change.setRange(0, foneOldText.length());
 
+    // Posiciona o cursor no final
     int caret = foneFormatted.length();
     change.setCaretPosition(caret);
     change.setAnchor(caret);

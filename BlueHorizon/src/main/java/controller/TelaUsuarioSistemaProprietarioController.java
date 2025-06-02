@@ -2,6 +2,9 @@ package controller;
 
 import java.io.File;
 import java.net.URL;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,15 +17,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import model.Funcionario;
 import static model.FuncionarioDAO.deletarFuncionario;
 import model.Proprietario;  // Importar sua classe Proprietario
+import model.ProprietarioDAO;
 import util.AlertaUtil;
 
 public class TelaUsuarioSistemaProprietarioController {
 
     @FXML
-    private TableColumn<Proprietario, Integer> TableColumnID;
+    private TableColumn<Proprietario, Number> TableColumnID;
 
     @FXML
     private TableColumn<Proprietario, String> TableColumnNome;
@@ -43,18 +46,32 @@ public class TelaUsuarioSistemaProprietarioController {
     private Button btnSair;
 
     @FXML
-    private TableView<Proprietario> tabelaUsuarios;
+    private TableView<Proprietario> tabelaUsuariosProprietarios;
 
     @FXML
     public void initialize() {
-        // Configura quais campos da classe Proprietario cada coluna exibirá
-        TableColumnID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        TableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        TableColumnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        TableColumnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-
-        // Aqui você pode adicionar os dados na tabela, por exemplo:
+       configurarColunasTabela();
+       carregarUsuariosTabela();
+    }
+    
+    private void configurarColunasTabela() {
+        
+         // Configura quais campos da classe Proprietario cada coluna exibirá      
+        TableColumnID.setCellValueFactory(cellData -> cellData.getValue().idProperty());
+        TableColumnTelefone.setCellValueFactory(cellData -> cellData.getValue().telefoneProperty());
+        TableColumnNome.setCellValueFactory(cellData -> cellData.getValue().nomeProperty());
+        TableColumnEmail.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+      
+        
+         // Aqui você pode adicionar os dados na tabela, por exemplo:
         // tabelaUsuarios.setItems(seuObservableListDeProprietarios);
+       
+    }
+    
+     private void carregarUsuariosTabela() {
+        List<Proprietario> lista = ProprietarioDAO.listarTodosProprietarios();
+        ObservableList<Proprietario> observableList = FXCollections.observableArrayList(lista);
+        tabelaUsuariosProprietarios.setItems(observableList);
     }
 
     @FXML
@@ -66,7 +83,7 @@ public class TelaUsuarioSistemaProprietarioController {
     @FXML
 void OnclickAlterarDados(ActionEvent event) {
     // Código para alterar dados do proprietário selecionado
-    Proprietario selecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
+    Proprietario selecionado = tabelaUsuariosProprietarios.getSelectionModel().getSelectedItem();
     if (selecionado != null) {
         try {
             URL url = new File("src/main/java/view/TelaAlterarDadosProprietarios.fxml").toURI().toURL();
@@ -100,7 +117,7 @@ void OnclickAlterarDados(ActionEvent event) {
     @FXML
     void OnclickExcluir(ActionEvent event) {
         // Código para excluir proprietário selecionado
-        Proprietario selecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
+        Proprietario selecionado = tabelaUsuariosProprietarios.getSelectionModel().getSelectedItem();
         if (selecionado != null) {
        boolean confirmado = AlertaUtil.mostrarConfirmacao(
                 "Confirmação de exclusão",
@@ -110,10 +127,10 @@ void OnclickAlterarDados(ActionEvent event) {
         
 
         if (confirmado) {
-            Proprietario proprietarioSelecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
+            Proprietario proprietarioSelecionado = tabelaUsuariosProprietarios.getSelectionModel().getSelectedItem();
             if (proprietarioSelecionado != null ){
                 deletarFuncionario(proprietarioSelecionado.getId()); 
-                tabelaUsuarios.getItems().remove(proprietarioSelecionado);
+                tabelaUsuariosProprietarios.getItems().remove(proprietarioSelecionado);
                 AlertaUtil.mostrarInformacao("Aviso", "Proprietario excluído",
                     "O proprietário foi removido com sucesso.");
             }
@@ -121,12 +138,11 @@ void OnclickAlterarDados(ActionEvent event) {
         } else {
             event.consume();
         }
+        } 
     }
 
-    
-}
-
     void setStage(Stage telaPRE) {
+        this.setStage(telaPRE);
         
     }
     }

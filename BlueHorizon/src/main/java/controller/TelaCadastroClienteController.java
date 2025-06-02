@@ -36,7 +36,7 @@ public class TelaCadastroClienteController {
     public void initialize() {
         new LimitarCaracter(50, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtNomeCliente);
         new LimitarCaracter(100, LimitarCaracter.TipoEntrada.EMAIL).applyToTextInputControl(txtEmailCliente);
-        new LimitarCaracter(12, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtTelefoneCliente);
+        new LimitarCaracter(13, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtTelefoneCliente);
     }
 
     @FXML
