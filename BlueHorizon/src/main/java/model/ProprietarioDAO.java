@@ -7,22 +7,14 @@ import java.util.List;
 
 public class ProprietarioDAO extends GenericDAO {
 
-    public static boolean Proprietarios(String telefoneProprietario, String nomeProprietario, String emailProprietario) {
-        return false;
-    }
-
-    public static boolean cadastrarProprietario(String nome, String email, String telefone) {
-        return false;
-    }
-
-    // CREATE
-    public boolean inserir(String telefone, String nome, String email) {
-        String sql = "INSERT INTO proprietarios (telefone, nome, email) VALUES (?, ?, ?)";
+    // Método para cadastrar proprietário
+    public static boolean cadastrarProprietario(String nome, String telefone, String email) {
+        String sql = "INSERT INTO proprietarios (nome, telefone, email) VALUES (?, ?, ?)";
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, telefone);
-            stmt.setString(2, nome);
+            stmt.setString(1, nome);
+            stmt.setString(2, telefone);
             stmt.setString(3, email);
 
             return stmt.executeUpdate() > 0;
@@ -32,7 +24,7 @@ public class ProprietarioDAO extends GenericDAO {
         }
     }
 
-    // READ - Listar todos
+    // Método para listar todos os proprietários
     public List<Proprietario> listarTodos() {
         List<Proprietario> proprietarios = new ArrayList<>();
         String sql = "SELECT * FROM proprietarios";
@@ -43,8 +35,8 @@ public class ProprietarioDAO extends GenericDAO {
             while (rs.next()) {
                 Proprietario p = new Proprietario();
                 p.setId(rs.getInt("id"));
-                p.setTelefone(rs.getString("telefone"));
                 p.setNome(rs.getString("nome"));
+                p.setTelefone(rs.getString("telefone"));
                 p.setEmail(rs.getString("email"));
                 proprietarios.add(p);
             }
@@ -54,7 +46,7 @@ public class ProprietarioDAO extends GenericDAO {
         return proprietarios;
     }
 
-    // READ - Buscar por ID
+    // Método para buscar um proprietário pelo ID
     public Proprietario buscarPorId(int id) {
         Proprietario p = null;
         String sql = "SELECT * FROM proprietarios WHERE id = ?";
@@ -66,8 +58,8 @@ public class ProprietarioDAO extends GenericDAO {
                 if (rs.next()) {
                     p = new Proprietario();
                     p.setId(rs.getInt("id"));
-                    p.setTelefone(rs.getString("telefone"));
                     p.setNome(rs.getString("nome"));
+                    p.setTelefone(rs.getString("telefone"));
                     p.setEmail(rs.getString("email"));
                 }
             }
@@ -77,14 +69,14 @@ public class ProprietarioDAO extends GenericDAO {
         return p;
     }
 
-    // UPDATE
-    public boolean atualizar(int id, String telefone, String nome, String email) {
-        String sql = "UPDATE proprietarios SET telefone = ?, nome = ?, email = ? WHERE id = ?";
+    // Método para atualizar os dados de um proprietário
+    public boolean atualizar(int id, String nome, String telefone, String email) {
+        String sql = "UPDATE proprietarios SET nome = ?, telefone = ?, email = ? WHERE id = ?";
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, telefone);
-            stmt.setString(2, nome);
+            stmt.setString(1, nome);
+            stmt.setString(2, telefone);
             stmt.setString(3, email);
             stmt.setInt(4, id);
 
@@ -95,7 +87,7 @@ public class ProprietarioDAO extends GenericDAO {
         }
     }
 
-    // DELETE
+    // Método para deletar um proprietário
     public boolean deletar(int id) {
         String sql = "DELETE FROM proprietarios WHERE id = ?";
         try (Connection conn = ConexaoBD.conectar();
@@ -109,9 +101,9 @@ public class ProprietarioDAO extends GenericDAO {
         }
     }
 
-    // UPDATE - Versão utilitária para o controller
+    // Método para atualizar um proprietário usando o objeto
     public static boolean atualizarProprietario(Proprietario p) {
         ProprietarioDAO dao = new ProprietarioDAO();
-        return dao.atualizar(p.getId(), p.getTelefone(), p.getNome(), p.getEmail());
+        return dao.atualizar(p.getId(), p.getNome(), p.getTelefone(), p.getEmail());
     }
 }

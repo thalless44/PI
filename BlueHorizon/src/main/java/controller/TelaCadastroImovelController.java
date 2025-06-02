@@ -209,7 +209,7 @@ public class TelaCadastroImovelController {
             int numeroCasa = Integer.parseInt(txtNumeracaoImovel.getText());
             String area = txtArea.getText();
 
-            boolean sucessoProprietario = ProprietarioDAO.Proprietarios(telefoneProprietario, nomeProprietario, emailProprietario);
+            boolean sucessoProprietario = ProprietarioDAO.cadastrarProprietario(telefoneProprietario, nomeProprietario, emailProprietario);
             boolean sucessoPropriedade = PropriedadesDAO.Propriedades(tipoPropriedade, endereco, preco, disponibilidade, dataCadastro, rua);
             boolean sucessoImovel = ImovelDAO.InformacoesImovel(quartos, banheiros, vagasGaragem, mobiliada, jardim, sistemaSeguranca, piscina, numeroCasa, area);
 
