@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
 -- Host: localhost    Database: imobiliaria
 -- ------------------------------------------------------
--- Server version	8.0.15
+-- Server version	8.0.42
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,14 +21,14 @@
 
 DROP TABLE IF EXISTS `cidade`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cidade` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `nome` varchar(120) NOT NULL,
-  `uf` int(2) NOT NULL,
-  `ibge` int(7) NOT NULL,
+  `uf` int NOT NULL,
+  `ibge` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Municipios das Unidades Federativas';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COMMENT='Municipios das Unidades Federativas';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,14 +47,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `clientes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clientes` (
-  `id_cliente` int(11) NOT NULL AUTO_INCREMENT,
+  `id_cliente` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `telefone` varchar(15) NOT NULL,
   PRIMARY KEY (`id_cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,6 +63,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` VALUES (1,'Jose','j@gmail.com','25 25252-5252');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,13 +73,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `contratos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `contratos` (
-  `id_contrato` int(11) NOT NULL AUTO_INCREMENT,
+  `id_contrato` int NOT NULL AUTO_INCREMENT,
   `dataContrato` date NOT NULL,
   `valorCompra` decimal(10,2) NOT NULL,
-  `id_propriedade` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
+  `id_propriedade` int NOT NULL,
+  `id_cliente` int NOT NULL,
   PRIMARY KEY (`id_contrato`),
   KEY `contratos_ibfk_1` (`id_propriedade`),
   KEY `contratos_ibfk_2` (`id_cliente`),
@@ -102,9 +103,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `funcionarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `funcionarios` (
-  `id_funcionario` int(11) NOT NULL AUTO_INCREMENT,
+  `id_funcionario` int NOT NULL AUTO_INCREMENT,
   `Salario` varchar(45) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `telefone` varchar(15) NOT NULL,
@@ -135,11 +136,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `imagens_imoveis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `imagens_imoveis` (
-  `id_imagem` int(11) NOT NULL AUTO_INCREMENT,
+  `id_imagem` int NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
-  `id_propriedade` int(11) NOT NULL,
+  `id_propriedade` int NOT NULL,
   PRIMARY KEY (`id_imagem`),
   KEY `imagens_imoveis_ibfk_1` (`id_propriedade`),
   CONSTRAINT `imagens_imoveis_ibfk_1` FOREIGN KEY (`id_propriedade`) REFERENCES `propriedades` (`id_propriedade`)
@@ -161,17 +162,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `informacoes_imoveis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `informacoes_imoveis` (
-  `id_propriedade` int(11) NOT NULL,
-  `quartos` int(11) NOT NULL,
-  `banheiros` int(11) NOT NULL,
-  `vagasGaragem` int(11) NOT NULL,
+  `id_propriedade` int NOT NULL,
+  `quartos` int NOT NULL,
+  `banheiros` int NOT NULL,
+  `vagasGaragem` int NOT NULL,
   `mobilia` tinyint(1) NOT NULL,
   `jardim` tinyint(1) NOT NULL,
   `sistemaSeguranca` tinyint(1) NOT NULL,
   `piscina` tinyint(1) NOT NULL,
-  `numeroCasa` int(11) NOT NULL,
+  `numeroCasa` int NOT NULL,
   `area` varchar(45) NOT NULL,
   PRIMARY KEY (`id_propriedade`),
   CONSTRAINT `informacoes_imoveis_ibfk_1` FOREIGN KEY (`id_propriedade`) REFERENCES `propriedades` (`id_propriedade`)
@@ -193,10 +194,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `interesse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `interesse` (
-  `id_cliente` int(11) NOT NULL,
-  `id_propriedade` int(11) NOT NULL,
+  `id_cliente` int NOT NULL,
+  `id_propriedade` int NOT NULL,
   `data_interesse` date NOT NULL,
   PRIMARY KEY (`id_cliente`,`id_propriedade`),
   KEY `id_propriedade` (`id_propriedade`),
@@ -220,23 +221,32 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `propriedades`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `propriedades` (
-  `id_propriedade` int(11) NOT NULL AUTO_INCREMENT,
+  `id_propriedade` int NOT NULL AUTO_INCREMENT,
   `tipo_propriedade` varchar(50) NOT NULL,
   `endereco` varchar(255) NOT NULL,
   `preco` decimal(10,2) NOT NULL,
   `disponibilidade` tinyint(1) NOT NULL,
   `data_cadastro` date NOT NULL,
-  `id_proprietario` int(11) NOT NULL,
-  `id_funcionario` int(11) NOT NULL,
+  `id_proprietario` int DEFAULT NULL,
+  `id_funcionario` int DEFAULT NULL,
   `rua` varchar(45) NOT NULL,
+  `quartos` int NOT NULL,
+  `banheiros` int NOT NULL,
+  `vagasGaragem` int NOT NULL,
+  `mobilia` tinyint(1) NOT NULL,
+  `jardim` tinyint(1) NOT NULL,
+  `sistemaSeguranca` tinyint(1) NOT NULL,
+  `piscina` tinyint(1) NOT NULL,
+  `numeroCasa` int NOT NULL,
+  `area` varchar(45) NOT NULL,
   PRIMARY KEY (`id_propriedade`),
   KEY `propriedades_ibfk_1` (`id_proprietario`),
   KEY `propriedades_ibfk_2` (`id_funcionario`),
   CONSTRAINT `propriedades_ibfk_1` FOREIGN KEY (`id_proprietario`) REFERENCES `proprietarios` (`id_proprietario`),
   CONSTRAINT `propriedades_ibfk_2` FOREIGN KEY (`id_funcionario`) REFERENCES `funcionarios` (`id_funcionario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,6 +255,7 @@ CREATE TABLE `propriedades` (
 
 LOCK TABLES `propriedades` WRITE;
 /*!40000 ALTER TABLE `propriedades` DISABLE KEYS */;
+INSERT INTO `propriedades` VALUES (1,'casa','awdawd',4545.00,1,'2000-10-19',NULL,NULL,'awdawd',2,2,33,1,1,1,1,232,'22'),(2,'casa','rua x',10000.00,1,'2025-06-09',NULL,NULL,'rua x',5,5,3,1,1,0,1,100,'2000'),(3,'casa','rua negaodapicona',100000.00,1,'2025-06-09',NULL,NULL,'rua negaodapicona',2,2,2,1,1,1,1,1020,'1000');
 /*!40000 ALTER TABLE `propriedades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,14 +265,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `proprietarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `proprietarios` (
-  `id_proprietario` int(11) NOT NULL AUTO_INCREMENT,
+  `id_proprietario` int NOT NULL AUTO_INCREMENT,
   `telefone` varchar(15) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   PRIMARY KEY (`id_proprietario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -270,6 +281,7 @@ CREATE TABLE `proprietarios` (
 
 LOCK TABLES `proprietarios` WRITE;
 /*!40000 ALTER TABLE `proprietarios` DISABLE KEYS */;
+INSERT INTO `proprietarios` VALUES (1,'74 74747-4747','Joao','jaoao@gmail.com'),(2,'47 52525-2525','José da Silva Figueiredo','jsfg@gmail.com'),(3,'45 45454-5454','Thalles','th@gmail.com');
 /*!40000 ALTER TABLE `proprietarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,14 +291,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transacoes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transacoes` (
-  `id_transacao` int(11) NOT NULL AUTO_INCREMENT,
+  `id_transacao` int NOT NULL AUTO_INCREMENT,
   `formaPagamento` varchar(50) NOT NULL,
   `dataTransacao` date NOT NULL,
   `valor` decimal(10,2) NOT NULL,
-  `id_propriedade` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
+  `id_propriedade` int NOT NULL,
+  `id_cliente` int NOT NULL,
   PRIMARY KEY (`id_transacao`),
   KEY `transacoes_ibfk_1` (`id_propriedade`),
   KEY `transacoes_ibfk_2` (`id_cliente`),
@@ -313,4 +325,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-19 11:44:30
+-- Dump completed on 2025-06-09 11:01:36
