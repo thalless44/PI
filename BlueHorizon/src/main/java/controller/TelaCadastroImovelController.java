@@ -10,10 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -23,6 +25,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.ImovelDAO;
 import model.PropriedadesDAO;
+import model.Proprietario;
 import model.ProprietarioDAO;
 import util.AlertaUtil;
 import util.LimitarCaracter;
@@ -35,7 +38,7 @@ public class TelaCadastroImovelController {
     private ImageView imageViewImovel;
 
 
-    @FXML
+     @FXML
     private Button btnAdicionarImagem;
 
     @FXML
@@ -43,6 +46,9 @@ public class TelaCadastroImovelController {
 
     @FXML
     private Button btnCancelarCadastro;
+
+    @FXML
+    private ComboBox<Proprietario> cmbxProprietario;
 
     @FXML
     private RadioButton rbDisponivel;
@@ -87,19 +93,7 @@ public class TelaCadastroImovelController {
     private TextField txtDatacadastro;
 
     @FXML
-    private TextField txtDisponibilidade;
-
-    @FXML
-    private TextField txtEmailProprietario;
-
-    @FXML
     private TextField txtNumeracaoImovel;
-
-    @FXML
-    private TextField txtTipoPropriedade;
-
-    @FXML
-    private TextField txtProprietario;
 
     @FXML
     private TextField txtQuartos;
@@ -108,7 +102,7 @@ public class TelaCadastroImovelController {
     private TextField txtRua;
 
     @FXML
-    private TextField txtTelefoneProprietario;
+    private TextField txtTipoPropriedade;
 
     @FXML
     private TextField txtVagaGaragem;
@@ -121,7 +115,7 @@ public class TelaCadastroImovelController {
     private ToggleGroup grupoPiscina;
     private ToggleGroup grupoSG;
     private ToggleGroup grupoDisponibilidade;
-
+    
     @FXML
     void initialize() {
         
@@ -146,12 +140,17 @@ public class TelaCadastroImovelController {
         rbDisponivel.setToggleGroup(grupoDisponibilidade);
         rbNaoDisponivel.setToggleGroup(grupoDisponibilidade);
         
-        new LimitarCaracter(50, LimitarCaracter.TipoEntrada.NOME).applyToTextInputControl(txtProprietario);
-        new LimitarCaracter(100, LimitarCaracter.TipoEntrada.EMAIL).applyToTextInputControl(txtEmailProprietario);
-        new LimitarCaracter(13, LimitarCaracter.TipoEntrada.FONE).applyToTextInputControl(txtTelefoneProprietario);
+    
         new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtDatacadastro);
         
+        carregarProprietarios();
         
+    }
+    
+    private void carregarProprietarios() {
+    List<Proprietario> proprietarios = ProprietarioDAO.listarTodosProprietarios();
+    cmbxProprietario.getItems().clear();
+    cmbxProprietario.getItems().addAll(proprietarios);
     }
 
     @FXML
@@ -169,24 +168,22 @@ public class TelaCadastroImovelController {
         Image image = new Image(file.toURI().toString(), false);
         imageViewImovel.setImage(image);
     }
-}
+    }
     
-    
-
-
-
-   
-
-
 
     @FXML
     void onClickCadastro(ActionEvent event) {
         
         try {
-            String telefoneProprietario = txtTelefoneProprietario.getText();
-            String nomeProprietario = txtProprietario.getText();
-            String emailProprietario = txtEmailProprietario.getText();
-
+            
+            Proprietario proprietario = cmbxProprietario.getValue();
+            
+            if(proprietario == null){
+                AlertaUtil.mostrarErro("Erro", "Proprietário do imóvel não selecionado", "Selecione um proprietário!");
+                return;
+            }
+        
+            
             String tipoPropriedade = txtTipoPropriedade.getText();
             String cidade = txtCidades.getText();
             double preco = Double.parseDouble(txtValor.getText());
@@ -209,17 +206,17 @@ public class TelaCadastroImovelController {
             int numeroCasa = Integer.parseInt(txtNumeracaoImovel.getText());
             String area = txtArea.getText();
 
-            boolean sucessoProprietario = ProprietarioDAO.cadastrarProprietario(telefoneProprietario, nomeProprietario, emailProprietario);
-            boolean sucessoPropriedade = PropriedadesDAO.Propriedades(tipoPropriedade, endereco, preco, disponibilidade, dataCadastro, rua);
-            boolean sucessoImovel = ImovelDAO.InformacoesImovel(quartos, banheiros, vagasGaragem, mobiliada, jardim, sistemaSeguranca, piscina, numeroCasa, area);
-
-            if (sucessoProprietario && sucessoPropriedade && sucessoImovel) {
+            boolean sucessoPropriedade = PropriedadesDAO.Propriedades(tipoPropriedade, endereco, preco, disponibilidade, dataCadastro, rua, quartos, banheiros, 
+                    vagasGaragem, mobiliada, jardim, sistemaSeguranca, piscina, numeroCasa, area);
+       
+            if (sucessoPropriedade) {
                 AlertaUtil.mostrarInformacao("Cadastro de imóvel", "Cadastro realizado", 
                     "O imóvel foi cadastrado corretamente no banco de dados.");
             } else {
                 AlertaUtil.mostrarErro("Erro", "Erro no Cadastro", 
                     "Houve um erro ao tentar cadastrar o imóvel. Verifique os dados e tente novamente.");
             }
+
 
         } catch (Exception e) {
             AlertaUtil.mostrarErro("Erro", "Ocorreu um erro inesperado.","Verifique os dados e tente novamente.");
