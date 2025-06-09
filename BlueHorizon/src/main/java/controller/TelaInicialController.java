@@ -74,6 +74,11 @@ public class TelaInicialController {
     
     @FXML
     private MenuItem btnUsuarioSistemaProprietario;
+    
+    public void initialize() {
+        carregarPropriedades();
+   
+}
 
   
     @FXML
