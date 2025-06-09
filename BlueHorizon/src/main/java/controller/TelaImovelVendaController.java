@@ -6,9 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import model.Propriedades;
 import util.AlertaUtil;
 
 public class TelaImovelVendaController {
+    
+    private Stage stage;
 
     @FXML
     private Button btnEditarImovel;
@@ -72,6 +75,10 @@ public class TelaImovelVendaController {
 
     @FXML
     private Label lblValor;
+    
+    private Propriedades imovel;
+    
+    
 
     @FXML
     void ActionEditarImovel(ActionEvent event) {
@@ -123,4 +130,8 @@ public class TelaImovelVendaController {
             "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+    
 }

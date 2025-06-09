@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -16,6 +17,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -296,19 +298,42 @@ public class TelaInicialController {
 
     
     
-    private VBox criarCard(Propriedades imovel) {
-    
+    private VBox criarCard(Propriedades imovel) { 
+        
+        ImageView imageView = new ImageView();
+        
+        
+            
+            imageView.setFitWidth(200);
+            imageView.setFitHeight(150);
+            imageView.setPreserveRatio(false);
+            imageView.setStyle("-fx-background-color: #e0e0e0;");
+            
+            
+        
 
-    Label lblValor = new Label("Valor: " + imovel.getPreco());
+     Label lblValor = new Label("Valor: " + imovel.getPreco());
     Label lblData = new Label("Data de cadastro: " + imovel.getDataCadastro());
     Label lblInfo = new Label("Informações do imóvel: " + imovel.getEndereco());
     Label lblRua = new Label("Rua: " + imovel.getRua());
     Label lblTipoPropriedade = new Label("Tipo de propriedade: " + imovel.getTipoPropriedade());
 
     VBox card = new VBox(5, lblValor, lblData, lblInfo, lblRua, lblTipoPropriedade);
-    card.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 10; -fx-border-color: gray;");
+    card.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 10; -fx-border-color: gray; -fx-alignment: center;");
+    card.setCursor(Cursor.HAND);
+
+    // Adiciona o clique
+    card.setOnMouseClicked(event -> {
+        try {
+            abrirNovaTela(imovel);
+        } catch (Exception e) {
+            e.printStackTrace(); // importante para você ver se houver algum erro
+        }
+    });
+
     return card;
 }
+
    
     
     
@@ -327,5 +352,27 @@ public class TelaInicialController {
     public void setFuncionario(Funcionario f) {
         this.funcionario = f;
     }
+
+    private void abrirNovaTela(Propriedades imovel) throws IOException {
+        URL url = new File("src/main/java/View/TelaImovelVenda.fxml").toURI().toURL();
+    FXMLLoader loader = new FXMLLoader(url);
+    Parent root = loader.load();
+
+    Stage t = new Stage();
+    TelaImovelVendaController tIV = loader.getController(); 
+    tIV.setStage(t);
+    
+   
+
+    Scene scene = new Scene(root);
+
+    Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+    t.getIcons().add(icone);
+
+    t.setScene(scene);
+    t.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Relatório de venda dos imóveis");
+    t.setMaximized(true);
+    t.show();
     
     }
+}

@@ -23,6 +23,7 @@ controller\TelaPersonalizacaoPerfilController.class
 controller\TelaAlterarDadosClientesController.class
 controller\TelaInformacoesPerfilController.class
 model\Propriedades.class
+model\Imagens.class
 controller\TelaPagamentoController.class
 principal\App.class
 controller\TelaCadastroFuncionarioController.class
