@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import util.AlertaUtil;
 
 public class TelaImovelVendaController {
+    
+    private Stage stage;
 
     @FXML
     private Button btnEditarImovel;
@@ -122,5 +124,8 @@ public class TelaImovelVendaController {
             "Tem certeza que deseja sair da tela do imóvel?",
             "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
+    }
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
