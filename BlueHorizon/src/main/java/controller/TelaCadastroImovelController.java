@@ -23,7 +23,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.ImovelDAO;
 import model.PropriedadesDAO;
 import model.Proprietario;
 import model.ProprietarioDAO;

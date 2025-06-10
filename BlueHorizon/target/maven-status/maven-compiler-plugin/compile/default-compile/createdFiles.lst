@@ -3,7 +3,6 @@ util\LimitarCaracter$TipoEntrada.class
 controller\TelaCadastroProprietarioController.class
 controller\TelaContratoController.class
 model\Funcionario.class
-model\ImovelDAO.class
 model\Proprietario.class
 controller\TelaAlterarDadosProprietariosController.class
 model\FuncionarioDAO.class

@@ -377,25 +377,34 @@ void onClickProprietario(ActionEvent event) {
     
     private VBox criarCard(Propriedades imovel) { 
         
-        ImageView imageView = new ImageView();
-        
-        
+    ImageView imageView = new ImageView();
             
-            imageView.setFitWidth(200);
-            imageView.setFitHeight(150);
-            imageView.setPreserveRatio(false);
-            imageView.setStyle("-fx-background-color: #e0e0e0;");
+    imageView.setFitWidth(200);
+    imageView.setFitHeight(150);
+    imageView.setPreserveRatio(false);
+    imageView.setStyle("-fx-background-color: #e0e0e0;");
             
             
         
 
-     Label lblValor = new Label("Valor: " + imovel.getPreco());
+    Label lblValor = new Label("Valor: " + imovel.getPreco());
     Label lblData = new Label("Data de cadastro: " + imovel.getDataCadastro());
-    Label lblInfo = new Label("Informações do imóvel: " + imovel.getEndereco());
+    Label lblInfo = new Label("Informações do imóvel: ");
     Label lblRua = new Label("Rua: " + imovel.getRua());
     Label lblTipoPropriedade = new Label("Tipo de propriedade: " + imovel.getTipoPropriedade());
+    Label lblArea = new Label("Área: " + imovel.getArea());
+    Label lblQuartos = new Label("Quartos: " + imovel.getQuartos());
+    Label lblBanheiros = new Label("Banheiros: " + imovel.getBanheiros());
+    Label lblVagasGaragem = new Label("Vagas de garagem: " + imovel.getVagasGaragem());
+    Label lblNumeracaoImovel = new Label("Numeração do imóvel : " + imovel.getNumeroCasa());
+    Label lblMobiliada = new Label("Mobiliada? " + imovel.mobiliaProperty().getValue()); //ajustar 
+    Label lblPiscina = new Label("Piscina? " + imovel.piscinaProperty().getValue()); //ajustar 
+    Label lblSS = new Label("Sistema de segurança? " + imovel.sistemaSegurancaProperty().getValue()); //ajustar
+    Label lblJardim = new Label("Jardim? " + imovel.jardimProperty().getValue()); //ajustar
+    
 
-    VBox card = new VBox(5, lblValor, lblData, lblInfo, lblRua, lblTipoPropriedade);
+    VBox card = new VBox(5, lblValor, lblData, lblInfo, lblRua, lblTipoPropriedade, lblArea, lblQuartos, lblBanheiros, lblVagasGaragem, lblNumeracaoImovel, 
+            lblMobiliada, lblPiscina, lblSS, lblJardim);
     card.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 10; -fx-border-color: gray; -fx-alignment: center;");
     card.setCursor(Cursor.HAND);
 
