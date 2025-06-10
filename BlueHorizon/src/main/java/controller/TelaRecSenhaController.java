@@ -2,11 +2,14 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import util.AlertaUtil;
+import util.EmailService;
+import util.RecoveryCodeGenerator;
 
 public class TelaRecSenhaController {
     private Stage stage;
@@ -26,6 +29,23 @@ public class TelaRecSenhaController {
 
     @FXML
     void ActionRecuperarSenha(ActionEvent event) {
+        
+        String email = txtfdEmailRecSenha.getText();
+        
+        if(email.isEmpty()){
+            AlertaUtil.mostrarErro("Erro", "Recuperação de senha", "Por favor, preencha o campo de e-mail.");      
+           return;
+        }
+        
+        String recoveryCode =  RecoveryCodeGenerator.generateUniqueRecoveryCode();
+        
+        boolean emailSent = EmailService.sendRecoveryEmail(email, recoveryCode);
+        
+            if(emailSent){
+                AlertaUtil.mostrarInformacao("Recuperação de senha", "Um email com instruções de recuperação foi enviado para "+email, "Por favor, verifique sua caixa de entrada!");
+            }else{
+                AlertaUtil.mostrarErro("Erro", "Recuperação de senha", "Não foi possível enviar o email de recuperação.");
+            }
         
         //Ajustar a lógica da recuperação de senha
         
