@@ -10,8 +10,8 @@ import java.util.Properties;
 public class EmailService {
 
     // Configure com as suas credenciais e informações do servidor SMTP
-    private static final String USERNAME = "pedrominella123@gmail.com"; // Seu e-mail remetente
-    private static final String PASSWORD = "mmdw fmks etty nyhj";   // Sua senha do e-mail
+    private static final String USERNAME = "email"; // Seu e-mail remetente
+    private static final String PASSWORD = "senha";   // Sua senha do e-mail
     private static final String HOST = "smtp.gmail.com";     // Ex: smtp.gmail.com, smtp.outlook.com
     private static final String PORT = "587"; // Porta padrão para TLS; use "465" para SSL/TLS explícito
 
