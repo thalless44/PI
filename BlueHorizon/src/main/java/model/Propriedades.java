@@ -260,6 +260,26 @@ public class Propriedades {
     public void setArea(String area) {
         this.area.set(area);
     } 
+    
+      private String cidade;
+    private String codigoImovel;
+
+    // Construtores, getters e setters
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getCodigoImovel() {
+        return codigoImovel;
+    }
+
+    public void setCodigoImovel(String codigoImovel) {
+        this.codigoImovel = codigoImovel;
+    }
 }
 
 

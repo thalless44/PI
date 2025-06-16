@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +12,13 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -29,6 +32,46 @@ import model.PropriedadesDAO;
 public class TelaInicialController {
     private Stage stage;
     private Funcionario funcionario;
+    
+    
+     @FXML
+    private Button btnPesquisar;
+     
+    @FXML
+    private TextField txtfdArea;
+
+    @FXML
+    private TextField txtfdBanheiros;
+
+    @FXML
+    private TextField txtfdCidade;
+
+    @FXML
+    private TextField txtfdCodImovel;
+
+    @FXML
+    private TextField txtfdJardim;
+
+    @FXML
+    private TextField txtfdMobiliada;
+
+    @FXML
+    private TextField txtfdNumeroCasa;
+
+    @FXML
+    private TextField txtfdPiscina;
+
+    @FXML
+    private TextField txtfdQuartos;
+
+    @FXML
+    private TextField txtfdRua;
+
+    @FXML
+    private TextField txtfdSistemaSeguranca;
+
+    @FXML
+    private TextField txtfdVagasGaragem;
 
     
     @FXML
@@ -255,6 +298,9 @@ public class TelaInicialController {
 
     }
     
+    
+     
+    
      @FXML
     void OnActionBtnRelatorioVendaDosImoveis(ActionEvent event) {
         
@@ -316,6 +362,83 @@ public class TelaInicialController {
         
 
     }
+    
+     @FXML
+void OnClickPesquisaFiltrada(ActionEvent event) {
+    // Captura dos valores dos filtros
+    String cidade = txtfdCidade.getText().trim();
+    String rua = txtfdRua.getText().trim();
+    String codImovel = txtfdCodImovel.getText().trim();
+    String area = txtfdArea.getText().trim();
+    String banheiros = txtfdBanheiros.getText().trim();
+    String quartos = txtfdQuartos.getText().trim();
+    String vagasGaragem = txtfdVagasGaragem.getText().trim();
+    String jardim = txtfdJardim.getText().trim();
+    String piscina = txtfdPiscina.getText().trim();
+    String sistemaSeguranca = txtfdSistemaSeguranca.getText().trim();
+    String mobiliada = txtfdMobiliada.getText().trim();
+    String numeroCasa = txtfdNumeroCasa.getText().trim();
+    
+    // Realiza a filtragem dos imóveis
+    List<Propriedades> imoveisFiltrados = PropriedadesDAO.listarPropriedades().stream()
+            .filter(imovel -> {
+                boolean matches = true;
+                
+                // Verifica cada campo de filtro
+                if (!cidade.isEmpty() && !imovel.getCidade().toLowerCase().contains(cidade.toLowerCase())) {
+                    matches = false;
+                }
+                if (!rua.isEmpty() && !imovel.getRua().toLowerCase().contains(rua.toLowerCase())) {
+                    matches = false;
+                }
+                if (!codImovel.isEmpty() && !imovel.getCodigoImovel().toLowerCase().contains(codImovel.toLowerCase())) {
+                    matches = false;
+                }
+                if (!area.isEmpty() && !String.valueOf(imovel.getArea()).contains(area)) {
+                    matches = false;
+                }
+                if (!banheiros.isEmpty() && !String.valueOf(imovel.getBanheiros()).contains(banheiros)) {
+                    matches = false;
+                }
+                if (!quartos.isEmpty() && !String.valueOf(imovel.getQuartos()).contains(quartos)) {
+                    matches = false;
+                }
+                if (!vagasGaragem.isEmpty() && !String.valueOf(imovel.getVagasGaragem()).contains(vagasGaragem)) {
+                    matches = false;
+                }
+                if (!jardim.isEmpty() && !String.valueOf(imovel.jardimProperty().getValue()).equalsIgnoreCase(jardim)) {
+                    matches = false;
+                }
+                if (!piscina.isEmpty() && !String.valueOf(imovel.piscinaProperty().getValue()).equalsIgnoreCase(piscina)) {
+                    matches = false;
+                }
+                if (!sistemaSeguranca.isEmpty() && !String.valueOf(imovel.sistemaSegurancaProperty().getValue()).equalsIgnoreCase(sistemaSeguranca)) {
+                    matches = false;
+                }
+                if (!mobiliada.isEmpty() && !String.valueOf(imovel.mobiliaProperty().getValue()).equalsIgnoreCase(mobiliada)) {
+                    matches = false;
+                }
+                if (!numeroCasa.isEmpty() && !String.valueOf(imovel.getNumeroCasa()).contains(numeroCasa)) {
+                    matches = false;
+                }
+                
+                return matches; // Retorna true se todas as condições forem atendidas
+            })
+            .collect(Collectors.toList()); // Converte o stream de volta para uma lista
+    
+    // Exibe os imóveis filtrados na interface
+    vboxConteudo.getChildren().clear(); // Limpa os itens antigos
+    if (imoveisFiltrados.isEmpty()) {
+        Label vazio = new Label("Nenhuma propriedade encontrada.");
+        vboxConteudo.getChildren().add(vazio);
+    } else {
+        for (Propriedades imovel : imoveisFiltrados) {
+            vboxConteudo.getChildren().add(criarCard(imovel)); // Cria e adiciona um novo card para cada imóvel
+        }
+    }
+}
+
+
     //cadastrar Proprietario
  @FXML
 void onClickProprietario(ActionEvent event) {
