@@ -10,12 +10,11 @@ model\FuncionarioDAO.class
 util\LimitarCaracter$VerificarData.class
 model\ProprietarioDAO.class
 model\GenericDAO.class
-util\RecoveryCodeGenerator.class
+controller\TelaRecSenha2Controller.class
 controller\TelaRelatorioVendasController.class
 controller\TelaAlterarDadosFuncionariosController.class
 module-info.class
 util\LimitarCaracter.class
-util\EmailService$1.class
 controller\TelaUsuarioSistemaController.class
 model\Cliente.class
 controller\TelaRecSenhaController.class
@@ -27,7 +26,6 @@ model\PropriedadesDAO.class
 controller\TelaPersonalizacaoPerfilController.class
 controller\TelaAlterarDadosClientesController.class
 controller\TelaInformacoesPerfilController.class
-util\EmailService.class
 model\Propriedades.class
 controller\TelaPagamentoController.class
 principal\App.class

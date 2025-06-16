@@ -2,7 +2,7 @@ module principal {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    requires jakarta.mail; // This is the key line!
+    requires java.base;
 
     opens controller to javafx.fxml;
     exports principal;

@@ -1,15 +1,20 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.FuncionarioDAO;
 import util.AlertaUtil;
-import util.EmailService;
-import util.RecoveryCodeGenerator;
 
 public class TelaRecSenhaController {
     private Stage stage;
@@ -28,40 +33,20 @@ public class TelaRecSenhaController {
     }
 
     @FXML
-    void ActionRecuperarSenha(ActionEvent event) {
+    void ActionRecuperarSenha(ActionEvent event) throws IOException {
         
-        String email = txtfdEmailRecSenha.getText();
+        String email = txtfdEmailRecSenha.getText().trim();
         
-        if(email.isEmpty()){
-            AlertaUtil.mostrarErro("Erro", "Recuperação de senha", "Por favor, preencha o campo de e-mail.");      
-           return;
-        }
-        
-        String recoveryCode =  RecoveryCodeGenerator.generateUniqueRecoveryCode();
-        
-        boolean emailSent = EmailService.sendRecoveryEmail(email, recoveryCode);
-        
-            if(emailSent){
-                AlertaUtil.mostrarInformacao("Recuperação de senha", "Um email com instruções de recuperação foi enviado para "+email, "Por favor, verifique sua caixa de entrada!");
-            }else{
-                AlertaUtil.mostrarErro("Erro", "Recuperação de senha", "Não foi possível enviar o email de recuperação.");
+            if(email.isEmpty()){
+                AlertaUtil.mostrarErro("Erro", "Recuperação de senha", "Por favor, informe um e-mail para recuperação.");
+            return;
             }
-        
-        //Ajustar a lógica da recuperação de senha
-        
-       /* String email = txtfdEmailRecSenha.getText();
-
-        if (email.equals("usuario@gmail.com")) {
-            AlertaUtil.mostrarInformacao(
-                "BlueHorizon - Recuperação de senha",
-                "Verifique o email " + email
-            );
-        } else if (!email.equals("usuario@gmail.com") || email.isEmpty()) {
-            AlertaUtil.mostrarErro(
-                "BlueHorizon - Recuperação de senha",
-                "Email não cadastrado no sistema ou não preenchido."
-            );
-        }*/
+            
+            if(FuncionarioDAO.verificarEmailCadastrado(email)){
+                abrirTelaNovaRecSenha(email);
+            }else{
+                AlertaUtil.mostrarErro("Erro", "Recuperação de senha", "O email informado não está cadastrado no sistema!");
+            }
     }
 
     @FXML
@@ -81,5 +66,30 @@ public class TelaRecSenhaController {
             "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
-}
 
+    private void abrirTelaNovaRecSenha(String email) throws IOException {
+        try {
+            URL url = new File("src/main/java/view/TelaRecSenha2.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Stage telaRS2 = new Stage();
+            TelaRecSenha2Controller trs2c = loader.getController(); 
+            trs2c.setEmail(email);
+            Scene scene = new Scene(root);
+            
+            Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+            telaRS2.getIcons().add(icone);
+            telaRS2.setScene(scene);
+            telaRS2.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Recuperação de senha");
+
+            telaRS2.setResizable(false); // Impede redimensionamento
+            telaRS2.setWidth(700);       // Largura fixa
+            telaRS2.setHeight(500);      // Altura fixa
+            telaRS2.setMaximized(false);
+            telaRS2.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    }

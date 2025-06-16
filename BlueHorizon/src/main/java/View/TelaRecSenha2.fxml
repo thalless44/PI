@@ -2,14 +2,14 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="595.0" prefWidth="651.0" style="-fx-background-color: #6ec4e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaRecSenhaController">
+<FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="595.0" prefWidth="651.0" style="-fx-background-color: #6ec4e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaRecSenha2Controller">
    <children>
         <Pane prefHeight="366.0" prefWidth="470.0" style="-fx-background-color: #d9d9d9;">
             <effect>
@@ -25,10 +25,12 @@
                         <Font name="System Bold" size="32.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtfdEmailRecSenha" layoutX="128.0" layoutY="154.0" prefHeight="32.0" prefWidth="210.0" promptText="Inserir email para recuperar senha" />
-                <Label layoutX="129.0" layoutY="137.0" prefHeight="17.0" prefWidth="182.0" text="Email" />
-                <Button fx:id="btnRecuperarSenha" layoutX="182.0" layoutY="239.0" mnemonicParsing="false" onAction="#ActionRecuperarSenha" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #7eb97b;" text="Recuperar senha" />
+                <Button fx:id="btnRecuperarSenha" layoutX="182.0" layoutY="239.0" mnemonicParsing="false" onAction="#ActionRecuperarSenha" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #7eb97b;" text="Alterar senha" />
             <Button fx:id="btnSair" layoutX="182.0" layoutY="279.0" mnemonicParsing="false" onAction="#ActionSair" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #DC7777;" text="Sair" />
+            <Label layoutX="88.0" layoutY="98.0" text="Nova senha" />
+            <Label layoutX="88.0" layoutY="166.0" text="Confirmar senha" />
+            <PasswordField fx:id="passwordFieldNovaSenha" layoutX="88.0" layoutY="115.0" prefHeight="32.0" prefWidth="298.0" promptText="Informe a nova senha" />
+            <PasswordField fx:id="passwordFieldConfirmarNovaSenha" layoutX="88.0" layoutY="183.0" prefHeight="32.0" prefWidth="298.0" promptText="Confirme a nova senha" />
             </children>
         </Pane>
    </children>
