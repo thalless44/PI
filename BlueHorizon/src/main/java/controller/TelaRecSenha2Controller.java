@@ -50,8 +50,8 @@ public class TelaRecSenha2Controller {
         if(FuncionarioDAO.atualizarSenha(email, novaSenha)){
             AlertaUtil.mostrarInformacao("Sucesso", "Recuperação de senha", "Senha alterada com sucesso!");   
             
-            //Fazer um metodo para fechar a tela, se possível!
-            
+            Stage stage = (Stage) btnSair.getScene().getWindow();
+            stage.close();
         }else{
             AlertaUtil.mostrarErro("Erro", "Recuperação de senha", "Não foi possível alterar a senha!");
         }
