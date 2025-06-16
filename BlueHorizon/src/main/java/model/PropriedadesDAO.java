@@ -58,7 +58,7 @@ public class PropriedadesDAO extends GenericDAO{
         while (rs.next()) {
             Propriedades p = new Propriedades();
         
-            p.setId(rs.getInt("id"));
+            p.setId(rs.getInt("id_propriedade"));
             p.setTipoPropriedade(rs.getString("tipo_propriedade"));
             p.setEndereco(rs.getString("endereco"));
             p.setPreco(rs.getDouble("preco"));
@@ -86,7 +86,7 @@ public class PropriedadesDAO extends GenericDAO{
      
      //metodo para deletar
     public static boolean deletarPropriedade(int id) {
-    String sql = "DELETE FROM propriedades WHERE id = ?";
+    String sql = "DELETE FROM propriedades WHERE id_propriedade = ?";
 
     try (Connection conn = ConexaoBD.conectar();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -103,7 +103,7 @@ public class PropriedadesDAO extends GenericDAO{
 
      public static boolean atualizarPropriedade(Propriedades p) {
     String sql = "UPDATE propriedades SET tipo_propriedade = ?, endereco = ?, preco = ?, disponibilidade = ?, data_cadastro = ?, rua = ?, quartos = ?, "
-            + "banheiros  = ?, vagasGaragem = ?, mobilia = ?, jardim = ?, sistemaSeguranca = ?, piscina = ?, numeroCasa = ?, area = ? WHERE id = ?";
+            + "banheiros  = ?, vagasGaragem = ?, mobilia = ?, jardim = ?, sistemaSeguranca = ?, piscina = ?, numeroCasa = ?, area = ? WHERE id_propriedade = ?";
 
     try (Connection conn = ConexaoBD.conectar();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -135,14 +135,14 @@ public class PropriedadesDAO extends GenericDAO{
      }
      
      public static int buscarUltimoIdInserido() {
-    String sql = "SELECT MAX(id) AS id FROM propriedades";
+    String sql = "SELECT MAX(id_propriedade) AS id_propriedade FROM propriedades";
 
     try (Connection conn = ConexaoBD.conectar();
          PreparedStatement stmt = conn.prepareStatement(sql);
          ResultSet rs = stmt.executeQuery()) {
 
         if (rs.next()) {
-            return rs.getInt("id");
+            return rs.getInt("id_propriedade");
         }
 
     } catch (SQLException e) {

@@ -403,7 +403,7 @@ void onClickProprietario(ActionEvent event) {
     Label lblJardim = new Label("Jardim? " + imovel.jardimProperty().getValue()); //ajustar
     
 
-    VBox card = new VBox(10, imageView, lblId, lblValor, lblData, lblInfo, lblRua, lblTipoPropriedade, lblArea, lblQuartos, lblBanheiros, lblVagasGaragem, lblNumeracaoImovel, 
+    VBox card = new VBox(1, imageView, lblId, lblValor, lblData, lblInfo, lblRua, lblTipoPropriedade, lblArea, lblQuartos, lblBanheiros, lblVagasGaragem, lblNumeracaoImovel, 
         lblMobiliada, lblPiscina, lblSS, lblJardim);
     card.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 10; -fx-border-color: gray; -fx-alignment: center;");
     card.setCursor(Cursor.HAND);
