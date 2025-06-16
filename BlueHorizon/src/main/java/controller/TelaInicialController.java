@@ -386,7 +386,7 @@ void onClickProprietario(ActionEvent event) {
             
             
         
-
+    Label lblId = new Label("ID: " + imovel.getId());
     Label lblValor = new Label("Valor: " + imovel.getPreco());
     Label lblData = new Label("Data de cadastro: " + imovel.getDataCadastro());
     Label lblInfo = new Label("Informações do imóvel: ");
@@ -403,8 +403,8 @@ void onClickProprietario(ActionEvent event) {
     Label lblJardim = new Label("Jardim? " + imovel.jardimProperty().getValue()); //ajustar
     
 
-    VBox card = new VBox(5, lblValor, lblData, lblInfo, lblRua, lblTipoPropriedade, lblArea, lblQuartos, lblBanheiros, lblVagasGaragem, lblNumeracaoImovel, 
-            lblMobiliada, lblPiscina, lblSS, lblJardim);
+    VBox card = new VBox(10, imageView, lblId, lblValor, lblData, lblInfo, lblRua, lblTipoPropriedade, lblArea, lblQuartos, lblBanheiros, lblVagasGaragem, lblNumeracaoImovel, 
+        lblMobiliada, lblPiscina, lblSS, lblJardim);
     card.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 10; -fx-border-color: gray; -fx-alignment: center;");
     card.setCursor(Cursor.HAND);
 
@@ -442,6 +442,9 @@ void onClickProprietario(ActionEvent event) {
     t.show();
     
     }
+    
+    
+
 
     public void setFuncionario(Funcionario f) {
         this.funcionario = f;

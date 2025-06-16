@@ -58,7 +58,7 @@ public class PropriedadesDAO extends GenericDAO{
         while (rs.next()) {
             Propriedades p = new Propriedades();
         
-            //p.setId(rs.getInt("id"));
+            p.setId(rs.getInt("id"));
             p.setTipoPropriedade(rs.getString("tipo_propriedade"));
             p.setEndereco(rs.getString("endereco"));
             p.setPreco(rs.getDouble("preco"));
@@ -133,5 +133,25 @@ public class PropriedadesDAO extends GenericDAO{
     }
 
      }
+     
+     public static int buscarUltimoIdInserido() {
+    String sql = "SELECT MAX(id) AS id FROM propriedades";
+
+    try (Connection conn = ConexaoBD.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        if (rs.next()) {
+            return rs.getInt("id");
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return -1; 
+}
+     
+     
     
 }

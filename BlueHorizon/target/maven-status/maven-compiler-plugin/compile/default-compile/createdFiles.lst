@@ -9,6 +9,7 @@ model\FuncionarioDAO.class
 util\LimitarCaracter$VerificarData.class
 model\ProprietarioDAO.class
 model\GenericDAO.class
+model\ImagemDAO.class
 controller\TelaRelatorioVendasController.class
 controller\TelaAlterarDadosFuncionariosController.class
 module-info.class

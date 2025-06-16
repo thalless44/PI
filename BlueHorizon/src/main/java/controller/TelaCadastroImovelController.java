@@ -23,6 +23,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.ImagemDAO;
+import static model.ImagemDAO.salvarImagemNoBanco;
+import model.Propriedades;
 import model.PropriedadesDAO;
 import model.Proprietario;
 import model.ProprietarioDAO;
@@ -105,6 +108,10 @@ public class TelaCadastroImovelController {
 
     @FXML
     private TextField txtVagaGaragem;
+    
+    private File arquivoImagemSelecionado; 
+    
+    private Propriedades proriedadeAtual;
 
     @FXML
     private TextField txtValor;
@@ -154,20 +161,15 @@ public class TelaCadastroImovelController {
 
     @FXML
     void OnClickAdicionarImagem(ActionEvent event) {
-        
-    
-       FileChooser fileChooser = new FileChooser();
+    FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Selecionar Imagem");
     fileChooser.getExtensionFilters().add(
         new FileChooser.ExtensionFilter("Imagens", "*.png", "*.jpg", "*.jpeg", "*.gif")
     );
 
     File file = fileChooser.showOpenDialog(null);
-    if (file != null) {
-        Image image = new Image(file.toURI().toString(), false);
-        imageViewImovel.setImage(image);
-    }
-    }
+    
+}
     
 
     @FXML
@@ -207,6 +209,26 @@ public class TelaCadastroImovelController {
 
             boolean sucessoPropriedade = PropriedadesDAO.Propriedades(tipoPropriedade, endereco, preco, disponibilidade, dataCadastro, rua, quartos, banheiros, 
                     vagasGaragem, mobiliada, jardim, sistemaSeguranca, piscina, numeroCasa, area);
+            
+            
+
+            if (sucessoPropriedade) {
+                int idPropriedade = PropriedadesDAO.buscarUltimoIdInserido();
+
+            if (arquivoImagemSelecionado != null) {
+                String caminhoImagem = arquivoImagemSelecionado.getAbsolutePath();
+
+                boolean imagemSalva = ImagemDAO.salvarImagemNoBanco(caminhoImagem, idPropriedade);
+            if (imagemSalva) {
+                System.out.println("Imagem salva com sucesso.");
+            } else {
+                System.out.println("Erro ao salvar a imagem.");
+            }
+            }
+            } else {
+            System.out.println("Erro ao cadastrar imóvel.");
+            }
+
        
             if (sucessoPropriedade) {
                 AlertaUtil.mostrarInformacao("Cadastro de imóvel", "Cadastro realizado", 
@@ -243,4 +265,7 @@ public class TelaCadastroImovelController {
             "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
+
+    
+    
 }
