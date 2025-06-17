@@ -58,7 +58,7 @@ public class PropriedadesDAO extends GenericDAO{
         while (rs.next()) {
             Propriedades p = new Propriedades();
         
-            //p.setId(rs.getInt("id"));
+            p.setId(rs.getInt("id_propriedade"));
             p.setTipoPropriedade(rs.getString("tipo_propriedade"));
             p.setEndereco(rs.getString("endereco"));
             p.setPreco(rs.getDouble("preco"));
