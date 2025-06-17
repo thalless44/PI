@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.File;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -10,12 +9,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -99,6 +102,9 @@ public class TelaCadastroImovelController {
 
     @FXML
     private TextField txtRua;
+    
+    @FXML
+    private ContextMenu cTextMenuCidade;
 
     @FXML
     private TextField txtTipoPropriedade;
@@ -143,6 +149,18 @@ public class TelaCadastroImovelController {
         new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtDatacadastro);
         
         carregarProprietarios();
+        
+      
+
+    
+        txtCidades.textProperty().addListener((obs, oldText, newText) -> {
+            if (newText.length() >= 2) {
+                List<String> sugestoes = buscarCidades(newText);
+                mostrarSugestoesCidade(sugestoes);
+            } else {
+                cTextMenuCidade.hide();
+            }
+        });
         
     }
     
@@ -242,5 +260,45 @@ public class TelaCadastroImovelController {
             "Tem certeza que deseja fechar a tela de cadastro de imóvel?",
             "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
+    }
+    
+    private List<String> buscarCidades(String termo) {
+    List<String> cidades = new ArrayList<>();
+    String sql = "SELECT nome FROM cidade WHERE nome LIKE ?";
+
+    try (Connection conn = dal.ConexaoBD.conectar();  // usa sua classe ConexaoBD
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, termo + "%");
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            cidades.add(rs.getString("nome"));
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return cidades;
+}
+
+    private void mostrarSugestoesCidade(List<String> sugestoes) {
+        cTextMenuCidade.getItems().clear();
+
+        for (String sugestao : sugestoes) {
+            MenuItem item = new MenuItem(sugestao);
+            item.setOnAction(e -> {
+                txtCidades.setText(sugestao);
+                cTextMenuCidade.hide();
+            });
+            cTextMenuCidade.getItems().add(item);
+        }
+
+        if (!sugestoes.isEmpty()) {
+            cTextMenuCidade.show(txtCidades, Side.BOTTOM, 0, 0);
+        } else {
+            cTextMenuCidade.hide();
+        }
     }
 }

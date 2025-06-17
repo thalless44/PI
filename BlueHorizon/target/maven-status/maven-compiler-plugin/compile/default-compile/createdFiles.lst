@@ -31,6 +31,8 @@ principal\App.class
 controller\TelaCadastroFuncionarioController.class
 dal\ConexaoBD.class
 controller\TelaLoginPIController.class
+model\Cidade.class
 controller\TelaUsuarioSistemaProprietarioController.class
 controller\TelaImovelVendaController.class
 util\AlertaUtil.class
+model\CidadeDAO.class
