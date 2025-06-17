@@ -1,5 +1,6 @@
 controller\TelaInicialController.class
 util\LimitarCaracter$TipoEntrada.class
+controller\TelaAlterarDadosImovelController.class
 controller\TelaCadastroProprietarioController.class
 controller\TelaContratoController.class
 model\Funcionario.class

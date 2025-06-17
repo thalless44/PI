@@ -6,11 +6,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import model.Propriedades;
+import model.PropriedadesDAO;
+import model.Proprietario;
 import util.AlertaUtil;
 
 public class TelaImovelVendaController {
-    
+
     private Stage stage;
+    private Propriedades propriedadeSelecionada;
 
     @FXML
     private Button btnEditarImovel;
@@ -74,42 +78,72 @@ public class TelaImovelVendaController {
 
     @FXML
     private Label lblValor;
+    
+    private Proprietario prop;
 
     @FXML
-    void ActionEditarImovel(ActionEvent event) {
+    public void carregarDadosImovel(Propriedades propriedade) {
+        this.propriedadeSelecionada = propriedade;
+
+        lblImovelVenda.setText(propriedade.getTipoPropriedade());
+        lblRua.setText(propriedade.getRua());
+        lblCidade.setText(propriedade.getCidade() != null ? propriedade.getCidade() : "Não informado");
+        lblValor.setText("R$ " + String.format("%.2f", propriedade.getPreco()));
+        lblDisponibilidade.setText(propriedade.isDisponibilidade() ? "Disponível" : "Vendido");
+        lblDataCadastro.setText(propriedade.getDataCadastro() != null ? propriedade.getDataCadastro().toString() : "N/D");
+        lblQuartos.setText(String.valueOf(propriedade.getQuartos()));
+        lblBanheiros.setText(String.valueOf(propriedade.getBanheiros()));
+        lblVagasGaragem.setText(String.valueOf(propriedade.getVagasGaragem()));
+        lblMobiliada.setText(propriedade.isMobilia() ? "Sim" : "Não");
+        lblJardim.setText(propriedade.isJardim() ? "Sim" : "Não");
+        lblSistemaSegurança.setText(propriedade.isSistemaSeguranca() ? "Sim" : "Não");
+        lblPiscina.setText(propriedade.isPiscina() ? "Sim" : "Não");
+        lblNumeracaoImovel.setText(String.valueOf(propriedade.getNumeroCasa()));
+        lblArea.setText(propriedade.getArea());
+
+        //Falta adicionar esse método de Proprietário, o mesmo motivo de erro na TelaAlterarDadosImovelController. Proprietario prop = 
         
-        /*if (!lblNumeracaoImovel.getText().isEmpty()) {
-            AlertaUtil.mostrarInformacao(
-                "Editar Imóvel",
-                "O imóvel nº " + lblNumeracaoImovel.getText() + " será enviado para edição."
-            );
+        if (prop != null) {
+            lblNome.setText(prop.getNome());
+            lblTelefone.setText(prop.getTelefone());
+            lblEmail.setText(prop.getEmail());
         } else {
-            AlertaUtil.mostrarAviso(
-                "Imóvel não selecionado",
-                "Não é possível editar. Nenhum imóvel foi selecionado."
-            );
-        }*/
+            lblNome.setText("Não informado");
+            lblTelefone.setText("Não informado");
+            lblEmail.setText("Não informado");
+        }
     }
 
     @FXML
-    void ActionEfetuarVenda(ActionEvent event) {
-        
-       /*if (!lblDisponibilidade.getText().equalsIgnoreCase("Vendido")) {
-            AlertaUtil.mostrarInformacao(
-                "Venda Efetuada",
-                "O imóvel foi vendido com sucesso!"
-            );
+    public void ActionEditarImovel(ActionEvent event) {
+        if (propriedadeSelecionada != null) {
+            AlertaUtil.mostrarInformacao("Editar Imóvel",
+                    "O imóvel nº " + propriedadeSelecionada.getNumeroCasa() + " será enviado para edição.");
+            // TODO: abrir tela de edição
         } else {
-            AlertaUtil.mostrarAviso(
-                "Venda não permitida",
-                "Este imóvel já está marcado como vendido."
-            );
-        }*/
+            AlertaUtil.mostrarAviso("Imóvel não selecionado", "Nenhum imóvel foi selecionado.");
+        }
     }
 
     @FXML
-    void ActionSair(ActionEvent event) {
-        
+    public void ActionEfetuarVenda(ActionEvent event) {
+        if (propriedadeSelecionada != null && propriedadeSelecionada.isDisponibilidade()) {
+            propriedadeSelecionada.setDisponibilidade(false);
+            boolean atualizado = PropriedadesDAO.atualizarPropriedade(propriedadeSelecionada);
+
+            if (atualizado) {
+                lblDisponibilidade.setText("Vendido");
+                AlertaUtil.mostrarInformacao("Venda Efetuada", "O imóvel foi vendido com sucesso!");
+            } else {
+                AlertaUtil.mostrarErro("Erro", "Falha ao atualizar", "Erro ao marcar o imóvel como vendido.");
+            }
+        } else {
+            AlertaUtil.mostrarAviso("Venda não permitida", "Este imóvel já está marcado como vendido.");
+        }
+    }
+
+    @FXML
+    public void ActionSair(ActionEvent event) {
         if (FecharTelaImovelVenda()) {
             Stage stage = (Stage) btnSair.getScene().getWindow();
             stage.close();
@@ -120,12 +154,14 @@ public class TelaImovelVendaController {
 
     private boolean FecharTelaImovelVenda() {
         return AlertaUtil.mostrarConfirmacao(
-            "Confirmação",
-            "Tem certeza que deseja sair da tela do imóvel?",
-            "Todas as alterações não salvas serão perdidas!"
+                "Confirmação",
+                "Tem certeza que deseja sair da tela do imóvel?",
+                "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 }
+
