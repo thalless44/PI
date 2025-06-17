@@ -363,12 +363,11 @@ public class TelaInicialController {
 
     }
     
-     @FXML
+    @FXML
 void OnClickPesquisaFiltrada(ActionEvent event) {
-    // Captura dos valores dos filtros
     String cidade = txtfdCidade.getText().trim();
     String rua = txtfdRua.getText().trim();
-    String codImovel = txtfdCodImovel.getText().trim();
+    String ID = txtfdCodImovel.getText().trim();
     String area = txtfdArea.getText().trim();
     String banheiros = txtfdBanheiros.getText().trim();
     String quartos = txtfdQuartos.getText().trim();
@@ -378,65 +377,66 @@ void OnClickPesquisaFiltrada(ActionEvent event) {
     String sistemaSeguranca = txtfdSistemaSeguranca.getText().trim();
     String mobiliada = txtfdMobiliada.getText().trim();
     String numeroCasa = txtfdNumeroCasa.getText().trim();
-    
-    // Realiza a filtragem dos imóveis
+
     List<Propriedades> imoveisFiltrados = PropriedadesDAO.listarPropriedades().stream()
-            .filter(imovel -> {
-                boolean matches = true;
-                
-                // Verifica cada campo de filtro
-                if (!cidade.isEmpty() && !imovel.getCidade().toLowerCase().contains(cidade.toLowerCase())) {
+        .filter(imovel -> {
+            boolean matches = true;
+
+            if (!cidade.isEmpty() && !imovel.getCidade().toLowerCase().contains(cidade.toLowerCase())) {
+                matches = false;
+            }
+            if (!rua.isEmpty() && !imovel.getRua().toLowerCase().contains(rua.toLowerCase())) {
+                matches = false;
+            }
+            if (!ID.isEmpty()) {
+                String idImovel = String.valueOf(imovel.getId()).trim(); // <-- Correção aqui
+                if (!idImovel.equalsIgnoreCase(ID)) {
                     matches = false;
                 }
-                if (!rua.isEmpty() && !imovel.getRua().toLowerCase().contains(rua.toLowerCase())) {
-                    matches = false;
-                }
-                if (!codImovel.isEmpty() && !imovel.getCodigoImovel().toLowerCase().contains(codImovel.toLowerCase())) {
-                    matches = false;
-                }
-                if (!area.isEmpty() && !String.valueOf(imovel.getArea()).contains(area)) {
-                    matches = false;
-                }
-                if (!banheiros.isEmpty() && !String.valueOf(imovel.getBanheiros()).contains(banheiros)) {
-                    matches = false;
-                }
-                if (!quartos.isEmpty() && !String.valueOf(imovel.getQuartos()).contains(quartos)) {
-                    matches = false;
-                }
-                if (!vagasGaragem.isEmpty() && !String.valueOf(imovel.getVagasGaragem()).contains(vagasGaragem)) {
-                    matches = false;
-                }
-                if (!jardim.isEmpty() && !String.valueOf(imovel.jardimProperty().getValue()).equalsIgnoreCase(jardim)) {
-                    matches = false;
-                }
-                if (!piscina.isEmpty() && !String.valueOf(imovel.piscinaProperty().getValue()).equalsIgnoreCase(piscina)) {
-                    matches = false;
-                }
-                if (!sistemaSeguranca.isEmpty() && !String.valueOf(imovel.sistemaSegurancaProperty().getValue()).equalsIgnoreCase(sistemaSeguranca)) {
-                    matches = false;
-                }
-                if (!mobiliada.isEmpty() && !String.valueOf(imovel.mobiliaProperty().getValue()).equalsIgnoreCase(mobiliada)) {
-                    matches = false;
-                }
-                if (!numeroCasa.isEmpty() && !String.valueOf(imovel.getNumeroCasa()).contains(numeroCasa)) {
-                    matches = false;
-                }
-                
-                return matches; // Retorna true se todas as condições forem atendidas
-            })
-            .collect(Collectors.toList()); // Converte o stream de volta para uma lista
-    
-    // Exibe os imóveis filtrados na interface
-    vboxConteudo.getChildren().clear(); // Limpa os itens antigos
+            }
+            if (!area.isEmpty() && !String.valueOf(imovel.getArea()).contains(area)) {
+                matches = false;
+            }
+            if (!banheiros.isEmpty() && !String.valueOf(imovel.getBanheiros()).contains(banheiros)) {
+                matches = false;
+            }
+            if (!quartos.isEmpty() && !String.valueOf(imovel.getQuartos()).contains(quartos)) {
+                matches = false;
+            }
+            if (!vagasGaragem.isEmpty() && !String.valueOf(imovel.getVagasGaragem()).contains(vagasGaragem)) {
+                matches = false;
+            }
+            if (!jardim.isEmpty() && !String.valueOf(imovel.jardimProperty().getValue()).equalsIgnoreCase(jardim)) {
+                matches = false;
+            }
+            if (!piscina.isEmpty() && !String.valueOf(imovel.piscinaProperty().getValue()).equalsIgnoreCase(piscina)) {
+                matches = false;
+            }
+            if (!sistemaSeguranca.isEmpty() && !String.valueOf(imovel.sistemaSegurancaProperty().getValue()).equalsIgnoreCase(sistemaSeguranca)) {
+                matches = false;
+            }
+            if (!mobiliada.isEmpty() && !String.valueOf(imovel.mobiliaProperty().getValue()).equalsIgnoreCase(mobiliada)) {
+                matches = false;
+            }
+            if (!numeroCasa.isEmpty() && !String.valueOf(imovel.getNumeroCasa()).contains(numeroCasa)) {
+                matches = false;
+            }
+
+            return matches;
+        })
+        .collect(Collectors.toList());
+
+    vboxConteudo.getChildren().clear();
     if (imoveisFiltrados.isEmpty()) {
         Label vazio = new Label("Nenhuma propriedade encontrada.");
         vboxConteudo.getChildren().add(vazio);
     } else {
         for (Propriedades imovel : imoveisFiltrados) {
-            vboxConteudo.getChildren().add(criarCard(imovel)); // Cria e adiciona um novo card para cada imóvel
+            vboxConteudo.getChildren().add(criarCard(imovel));
         }
     }
 }
+
 
 
     //cadastrar Proprietario
