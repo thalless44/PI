@@ -6,16 +6,16 @@ import javafx.beans.property.*;
 
 public class Propriedades {
 
-  private final IntegerProperty id = new SimpleIntegerProperty();
+    private final IntegerProperty id = new SimpleIntegerProperty();
     private final StringProperty tipoPropriedade = new SimpleStringProperty();
     private final StringProperty endereco = new SimpleStringProperty();
     private final DoubleProperty preco = new SimpleDoubleProperty();
     private final BooleanProperty disponibilidade = new SimpleBooleanProperty();
     private final ObjectProperty<Date> dataCadastro = new SimpleObjectProperty<>();
     private final StringProperty rua = new SimpleStringProperty();
-    private final IntegerProperty quartos =  new SimpleIntegerProperty();
-    private final IntegerProperty banheiros =  new SimpleIntegerProperty();
-    private final IntegerProperty vagasGaragem =  new SimpleIntegerProperty();
+    private final IntegerProperty quartos = new SimpleIntegerProperty();
+    private final IntegerProperty banheiros = new SimpleIntegerProperty();
+    private final IntegerProperty vagasGaragem = new SimpleIntegerProperty();
     private final BooleanProperty mobilia = new SimpleBooleanProperty();
     private final BooleanProperty jardim = new SimpleBooleanProperty();
     private final BooleanProperty sistemaSeguranca = new SimpleBooleanProperty();
@@ -23,10 +23,19 @@ public class Propriedades {
     private final IntegerProperty numeroCasa = new SimpleIntegerProperty();
     private final StringProperty area = new SimpleStringProperty();
 
+    private final StringProperty nomeProprietario = new SimpleStringProperty();
+    private final ObjectProperty<byte[]> imagem = new SimpleObjectProperty<>();
 
-    public Propriedades(int id, String tipoPropriedade, String endereco, double preco, boolean disponibilidade, Date dataCadastro, String rua, int quartos, int banheiros,
-            int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa, String area) {
-        
+    private String cidade;
+    private String codigoImovel;
+
+    private Proprietario proprietario;
+    private String imagemUrl;
+
+    public Propriedades(int id, String tipoPropriedade, String endereco, double preco, boolean disponibilidade, Date dataCadastro, String rua,
+            int quartos, int banheiros, int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa,
+            String area) {
+
         this.id.set(id);
         this.tipoPropriedade.set(tipoPropriedade);
         this.endereco.set(endereco);
@@ -44,10 +53,11 @@ public class Propriedades {
         this.numeroCasa.set(numeroCasa);
         this.area.set(area);
     }
-    
-    public Propriedades(String tipoPropriedade, String endereco, double preco, boolean disponibilidade, Date dataCadastro, String rua, int quartos, int banheiros,
-            int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa, String area) {
-        
+
+    public Propriedades(String tipoPropriedade, String endereco, double preco, boolean disponibilidade, Date dataCadastro, String rua,
+            int quartos, int banheiros, int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina,
+            int numeroCasa, String area) {
+
         this.tipoPropriedade.set(tipoPropriedade);
         this.endereco.set(endereco);
         this.preco.set(preco);
@@ -68,17 +78,17 @@ public class Propriedades {
     public Propriedades() {
     }
 
-    // Getters e Setters
-    
-    public IntegerProperty idProperty(){
+    // Getters e Setters das propriedades JavaFX
+
+    public IntegerProperty idProperty() {
         return id;
     }
-    
-    public int getId(){
+
+    public int getId() {
         return id.get();
     }
-    
-    public void setId(int id){
+
+    public void setId(int id) {
         this.id.set(id);
     }
 
@@ -153,7 +163,7 @@ public class Propriedades {
     public void setRua(String rua) {
         this.rua.set(rua);
     }
-    
+
     public IntegerProperty quartosProperty() {
         return quartos;
     }
@@ -260,12 +270,36 @@ public class Propriedades {
 
     public void setArea(String area) {
         this.area.set(area);
-    } 
-    
-      private String cidade;
-    private String codigoImovel;
+    }
 
-    // Construtores, getters e setters
+    // Getter e Setter para nomeProprietario (StringProperty)
+    public StringProperty nomeProprietarioProperty() {
+        return nomeProprietario;
+    }
+
+    public String getNomeProprietario() {
+        return nomeProprietario.get();
+    }
+
+    public void setNomeProprietario(String nomeProprietario) {
+        this.nomeProprietario.set(nomeProprietario);
+    }
+
+    // Getter e Setter para imagem (ObjectProperty<byte[]>)
+    public ObjectProperty<byte[]> imagemProperty() {
+        return imagem;
+    }
+
+    public byte[] getImagem() {
+        return imagem.get();
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem.set(imagem);
+    }
+
+    // Getters e Setters para atributos simples (não propriedades JavaFX)
+
     public String getCidade() {
         return cidade;
     }
@@ -281,24 +315,21 @@ public class Propriedades {
     public void setCodigoImovel(String codigoImovel) {
         this.codigoImovel = codigoImovel;
     }
-    private Proprietario proprietario;
-    private String imagemUrl;
-
 
     public Proprietario getProprietario() {
-    return proprietario;
+        return proprietario;
     }
 
     public void setProprietario(Proprietario proprietario) {
-    this.proprietario = proprietario;
+        this.proprietario = proprietario;
     }
 
     public String getImagemUrl() {
-    return imagemUrl;
+        return imagemUrl;
     }
 
     public void setImagemUrl(String imagemUrl) {
-    this.imagemUrl = imagemUrl;
-    }
+        this.imagemUrl = imagemUrl;
     }
 
+}

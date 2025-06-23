@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -8,6 +9,8 @@ import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -498,46 +501,50 @@ void onClickProprietario(ActionEvent event) {
         }
     }
     
-    private VBox criarCard(Propriedades imovel) { 
-        
-    ImageView imageView = new ImageView();
-            
+    private VBox criarCard(Propriedades imovel) {
+    ByteArrayInputStream bis = new ByteArrayInputStream(imovel.getImagem());
+    Image imagem = new Image(bis);
+    ImageView imageView = new ImageView(imagem);
     imageView.setFitWidth(200);
-    imageView.setFitHeight(150);
-    imageView.setPreserveRatio(false);
-    imageView.setStyle("-fx-background-color: #e0e0e0;");
-            
-            
-        
+    imageView.setPreserveRatio(true);
 
+    // ===== DADOS DO PROPRIETÁRIO =====
+    String nomeProprietario = imovel.getProprietario() != null ? imovel.getProprietario().getNome() : "Não informado";
+    Label lblProprietario = new Label("Proprietário: " + nomeProprietario);
+
+    
     Label lblId = new Label("ID: " + imovel.getId());
-    Label lblValor = new Label("Valor: " + imovel.getPreco());
-    Label lblData = new Label("Data de cadastro: " + imovel.getDataCadastro());
-    Label lblInfo = new Label("Informações do imóvel: ");
+    Label lblValor = new Label("Valor: R$ " + imovel.getPreco());
+    Label lblData = new Label("Cadastro: " + imovel.getDataCadastro());
     Label lblRua = new Label("Rua: " + imovel.getRua());
-    Label lblTipoPropriedade = new Label("Tipo de propriedade: " + imovel.getTipoPropriedade());
+    Label lblTipoPropriedade = new Label("Tipo: " + imovel.getTipoPropriedade());
     Label lblArea = new Label("Área: " + imovel.getArea());
     Label lblQuartos = new Label("Quartos: " + imovel.getQuartos());
     Label lblBanheiros = new Label("Banheiros: " + imovel.getBanheiros());
-    Label lblVagasGaragem = new Label("Vagas de garagem: " + imovel.getVagasGaragem());
-    Label lblNumeracaoImovel = new Label("Numeração do imóvel : " + imovel.getNumeroCasa());
-    Label lblMobiliada = new Label("Mobiliada? " + imovel.mobiliaProperty().getValue()); //ajustar 
-    Label lblPiscina = new Label("Piscina? " + imovel.piscinaProperty().getValue()); //ajustar 
-    Label lblSS = new Label("Sistema de segurança? " + imovel.sistemaSegurancaProperty().getValue()); //ajustar
-    Label lblJardim = new Label("Jardim? " + imovel.jardimProperty().getValue()); //ajustar
+    Label lblVagasGaragem = new Label("Garagem: " + imovel.getVagasGaragem());
+    Label lblNumero = new Label("Nº: " + imovel.getNumeroCasa());
+    Label lblMobiliada = new Label("Mobiliada? " + (imovel.isMobilia() ? "Sim" : "Não"));
+    Label lblPiscina = new Label("Piscina? " + (imovel.isPiscina() ? "Sim" : "Não"));
+    Label lblSS = new Label("Segurança? " + (imovel.isSistemaSeguranca() ? "Sim" : "Não"));
+    Label lblJardim = new Label("Jardim? " + (imovel.isJardim() ? "Sim" : "Não"));
+
     
+    VBox vInfo = new VBox(3, lblProprietario, lblId, lblValor, lblData, lblRua, lblTipoPropriedade, lblArea,
+            lblQuartos, lblBanheiros, lblVagasGaragem, lblNumero, lblMobiliada, lblPiscina, lblSS, lblJardim);
+    vInfo.setPadding(new Insets(5, 0, 0, 0));
 
-    VBox card = new VBox(5, lblId, lblValor, lblData, lblInfo, lblRua, lblTipoPropriedade, lblArea, lblQuartos, lblBanheiros, lblVagasGaragem, lblNumeracaoImovel, 
-            lblMobiliada, lblPiscina, lblSS, lblJardim);
-    card.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 10; -fx-border-color: gray; -fx-alignment: center;");
+    VBox card = new VBox(10, imageView, vInfo);
+    card.setPadding(new Insets(10));
+    card.setStyle("-fx-background-color: #f5f5f5; -fx-border-color: #bbb; -fx-border-radius: 8; -fx-background-radius: 8;");
     card.setCursor(Cursor.HAND);
+    card.setAlignment(Pos.CENTER_LEFT);
 
-    // Adiciona o clique
+    // ===== EVENTO DE CLIQUE =====
     card.setOnMouseClicked(event -> {
         try {
             abrirNovaTela(imovel);
         } catch (Exception e) {
-            e.printStackTrace(); // importante para você ver se houver algum erro
+            e.printStackTrace();
         }
     });
 

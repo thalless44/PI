@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -26,6 +27,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import static model.ImagemDAO.salvarImagemNoBanco;
 import model.PropriedadesDAO;
 import model.Proprietario;
 import model.ProprietarioDAO;
@@ -105,6 +107,8 @@ public class TelaCadastroImovelController {
     
     @FXML
     private ContextMenu cTextMenuCidade;
+    
+    private File arquivoSelecionado;
 
     @FXML
     private TextField txtTipoPropriedade;
@@ -123,7 +127,6 @@ public class TelaCadastroImovelController {
     
     @FXML
     void initialize() {
-        
         grupoJardim = new ToggleGroup();
         grupoPiscina = new ToggleGroup();
         grupoMobiliada = new ToggleGroup();
@@ -132,27 +135,18 @@ public class TelaCadastroImovelController {
 
         rbSimJardim.setToggleGroup(grupoJardim);
         rbNaoJardim.setToggleGroup(grupoJardim);
-
         rbSimPiscina.setToggleGroup(grupoPiscina);
         rbNaoPiscina.setToggleGroup(grupoPiscina);
-
         rbSimMobiliada.setToggleGroup(grupoMobiliada);
         rbNaoMobiliada.setToggleGroup(grupoMobiliada);
-
         rbSimSG.setToggleGroup(grupoSG);
         rbNaoSG.setToggleGroup(grupoSG);
-
         rbDisponivel.setToggleGroup(grupoDisponibilidade);
         rbNaoDisponivel.setToggleGroup(grupoDisponibilidade);
-        
-    
-        new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtDatacadastro);
-        
-        carregarProprietarios();
-        
-      
 
-    
+        new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtDatacadastro);
+        carregarProprietarios();
+
         txtCidades.textProperty().addListener((obs, oldText, newText) -> {
             if (newText.length() >= 2) {
                 List<String> sugestoes = buscarCidades(newText);
@@ -161,46 +155,47 @@ public class TelaCadastroImovelController {
                 cTextMenuCidade.hide();
             }
         });
-        
     }
-    
+
     private void carregarProprietarios() {
-    List<Proprietario> proprietarios = ProprietarioDAO.listarTodosProprietarios();
-    cmbxProprietario.getItems().clear();
-    cmbxProprietario.getItems().addAll(proprietarios);
+        List<Proprietario> proprietarios = ProprietarioDAO.listarTodosProprietarios();
+        cmbxProprietario.getItems().clear();
+        cmbxProprietario.getItems().addAll(proprietarios);
     }
 
     @FXML
     void OnClickAdicionarImagem(ActionEvent event) {
-        
-    
-       FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Selecionar Imagem");
-    fileChooser.getExtensionFilters().add(
-        new FileChooser.ExtensionFilter("Imagens", "*.png", "*.jpg", "*.jpeg", "*.gif")
-    );
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Selecionar Imagem");
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("Imagens", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
 
-    File file = fileChooser.showOpenDialog(null);
-    if (file != null) {
-        Image image = new Image(file.toURI().toString(), false);
-        imageViewImovel.setImage(image);
+        arquivoSelecionado = fileChooser.showOpenDialog(null);
+        if (arquivoSelecionado != null) {
+            Image image = new Image(arquivoSelecionado.toURI().toString(), false);
+            imageViewImovel.setImage(image);
+        }
     }
-    }
-    
 
     @FXML
     void onClickCadastro(ActionEvent event) {
-        
         try {
-            
             Proprietario proprietario = cmbxProprietario.getValue();
-            
-            if(proprietario == null){
+            if (proprietario == null) {
                 AlertaUtil.mostrarErro("Erro", "Proprietário do imóvel não selecionado", "Selecione um proprietário!");
                 return;
             }
-        
-            
+
+            int idImagem = -1;
+            if (arquivoSelecionado != null) {
+                idImagem = salvarImagemNoBanco(arquivoSelecionado);
+                if (idImagem == -1) {
+                    AlertaUtil.mostrarErro("Erro", "Imagem", "Erro ao salvar imagem no banco de dados.");
+                    return;
+                }
+            }
+
             String tipoPropriedade = txtTipoPropriedade.getText();
             String cidade = txtCidades.getText();
             double preco = Double.parseDouble(txtValor.getText());
@@ -212,7 +207,6 @@ public class TelaCadastroImovelController {
 
             String rua = txtRua.getText();
             String endereco = txtRua.getText();
-
             int quartos = Integer.parseInt(txtQuartos.getText());
             int banheiros = Integer.parseInt(txtBanheiros.getText());
             int vagasGaragem = Integer.parseInt(txtVagaGaragem.getText());
@@ -222,23 +216,27 @@ public class TelaCadastroImovelController {
             boolean piscina = rbSimPiscina.isSelected();
             int numeroCasa = Integer.parseInt(txtNumeracaoImovel.getText());
             String area = txtArea.getText();
+            int idProprietario = proprietario.getId();
 
-            boolean sucessoPropriedade = PropriedadesDAO.Propriedades(tipoPropriedade, endereco, preco, disponibilidade, dataCadastro, rua, quartos, banheiros, 
-                    vagasGaragem, mobiliada, jardim, sistemaSeguranca, piscina, numeroCasa, area);
-       
+            boolean sucessoPropriedade = PropriedadesDAO.Propriedades(
+                tipoPropriedade, endereco, preco, disponibilidade, dataCadastro, rua,
+                quartos, banheiros, vagasGaragem, mobiliada, jardim, sistemaSeguranca,
+                piscina, numeroCasa, area, idProprietario, idImagem
+            );
+
             if (sucessoPropriedade) {
-                AlertaUtil.mostrarInformacao("Cadastro de imóvel", "Cadastro realizado", 
-                    "O imóvel foi cadastrado corretamente no banco de dados.");
+                AlertaUtil.mostrarInformacao("Cadastro de imóvel", "Cadastro realizado", "O imóvel foi cadastrado corretamente no banco de dados.");
             } else {
-                AlertaUtil.mostrarErro("Erro", "Erro no Cadastro", 
-                    "Houve um erro ao tentar cadastrar o imóvel. Verifique os dados e tente novamente.");
+                AlertaUtil.mostrarErro("Erro", "Erro no Cadastro", "Houve um erro ao tentar cadastrar o imóvel. Verifique os dados e tente novamente.");
             }
 
-
         } catch (Exception e) {
-            AlertaUtil.mostrarErro("Erro", "Ocorreu um erro inesperado.","Verifique os dados e tente novamente.");
+            e.printStackTrace();
+            AlertaUtil.mostrarErro("Erro", "Ocorreu um erro inesperado.", "Verifique os dados e tente novamente.");
         }
     }
+
+    
 
     @FXML
     void onClickCancelarCadastro(ActionEvent event) {
@@ -256,32 +254,32 @@ public class TelaCadastroImovelController {
 
     private boolean CancelarCadastroImovel() {
         return AlertaUtil.mostrarConfirmacao(
-            "Confirmação", 
+            "Confirmação",
             "Tem certeza que deseja fechar a tela de cadastro de imóvel?",
             "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
-    
+
     private List<String> buscarCidades(String termo) {
-    List<String> cidades = new ArrayList<>();
-    String sql = "SELECT nome FROM cidade WHERE nome LIKE ?";
+        List<String> cidades = new ArrayList<>();
+        String sql = "SELECT nome FROM cidade WHERE nome LIKE ?";
 
-    try (Connection conn = dal.ConexaoBD.conectar();  // usa sua classe ConexaoBD
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = dal.ConexaoBD.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        stmt.setString(1, termo + "%");
-        ResultSet rs = stmt.executeQuery();
+            stmt.setString(1, termo + "%");
+            ResultSet rs = stmt.executeQuery();
 
-        while (rs.next()) {
-            cidades.add(rs.getString("nome"));
+            while (rs.next()) {
+                cidades.add(rs.getString("nome"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return cidades;
     }
-
-    return cidades;
-}
 
     private void mostrarSugestoesCidade(List<String> sugestoes) {
         cTextMenuCidade.getItems().clear();

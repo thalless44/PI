@@ -11,6 +11,7 @@ util\LimitarCaracter$VerificarData.class
 model\ProprietarioDAO.class
 controller\TelaAlterarDadosImovelController$proprietario.class
 model\GenericDAO.class
+model\ImagemDAO.class
 controller\TelaRelatorioVendasController.class
 controller\TelaAlterarDadosFuncionariosController.class
 module-info.class
@@ -33,6 +34,7 @@ controller\TelaCadastroFuncionarioController.class
 dal\ConexaoBD.class
 controller\TelaLoginPIController.class
 model\Cidade.class
+model\Imagem.class
 controller\TelaUsuarioSistemaProprietarioController.class
 controller\TelaImovelVendaController.class
 util\AlertaUtil.class
