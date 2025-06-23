@@ -172,7 +172,7 @@ public class TelaAlterarDadosImovelController {
         rbNaoSG.setSelected(!propriedade.isSistemaSeguranca());
 
         // Falta ajustar isso, pois não está recebendo os atributos de Proprietário.
-        /*roprietario prop = propriedade.getProprietario();
+        Proprietario prop = propriedade.getProprietario();
         if (prop != null) {
             cmbxProprietario.getSelectionModel().select(prop);
         } else {
@@ -204,7 +204,7 @@ public class TelaAlterarDadosImovelController {
 
             // Você pode guardar o caminho da imagem em um atributo da propriedade (exemplo)
             // propriedadeSelecionada.setImagemUrl(file.toURI().toString());
-        }*/
+        }
     }
 
     @FXML
@@ -243,7 +243,7 @@ public class TelaAlterarDadosImovelController {
             String area = txtArea.getText();
 
             // Atualizar objeto
-            //propriedadeSelecionada.setProprietario(proprietario);
+            propriedadeSelecionada.setProprietario(proprietario);
             propriedadeSelecionada.setTipoPropriedade(tipoPropriedade);
             propriedadeSelecionada.setCidade(cidade);
             propriedadeSelecionada.setPreco(preco);
@@ -303,4 +303,11 @@ public class TelaAlterarDadosImovelController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
+    private static class proprietario {
+
+        public proprietario() {
+        }
+    }
 }
+

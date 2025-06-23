@@ -1,5 +1,6 @@
 package model;
 
+import controller.TelaAlterarDadosImovelController;
 import java.sql.Date;
 import javafx.beans.property.*;
 
@@ -280,8 +281,24 @@ public class Propriedades {
     public void setCodigoImovel(String codigoImovel) {
         this.codigoImovel = codigoImovel;
     }
-}
+    private Proprietario proprietario;
+    private String imagemUrl;
 
 
-    
+    public Proprietario getProprietario() {
+    return proprietario;
+    }
+
+    public void setProprietario(Proprietario proprietario) {
+    this.proprietario = proprietario;
+    }
+
+    public String getImagemUrl() {
+    return imagemUrl;
+    }
+
+    public void setImagemUrl(String imagemUrl) {
+    this.imagemUrl = imagemUrl;
+    }
+    }
 

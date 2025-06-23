@@ -9,6 +9,7 @@ controller\TelaAlterarDadosProprietariosController.class
 model\FuncionarioDAO.class
 util\LimitarCaracter$VerificarData.class
 model\ProprietarioDAO.class
+controller\TelaAlterarDadosImovelController$proprietario.class
 model\GenericDAO.class
 controller\TelaRelatorioVendasController.class
 controller\TelaAlterarDadosFuncionariosController.class

@@ -101,7 +101,8 @@ public class TelaImovelVendaController {
         lblNumeracaoImovel.setText(String.valueOf(propriedade.getNumeroCasa()));
         lblArea.setText(propriedade.getArea());
 
-        //Falta adicionar esse método de Proprietário, o mesmo motivo de erro na TelaAlterarDadosImovelController. Proprietario prop = 
+        //Falta adicionar esse método de Proprietário, o mesmo motivo de erro na TelaAlterarDadosImovelController. 
+        Proprietario prop = propriedade.getProprietario();
         
         if (prop != null) {
             lblNome.setText(prop.getNome());
