@@ -165,8 +165,39 @@ public class FuncionarioDAO extends GenericDAO{
     } catch (SQLException e) {
         e.printStackTrace(); // Isso ajuda a entender o que deu errado
     }
-
     return usuario; // Vai retornar null se não encontrar
+}
+  public static boolean verificarDadosRecSenha(String email, String cpf, java.sql.Date dataNascimento) {
+    String sql = "SELECT * FROM funcionarios " +
+                 "WHERE email=? AND cpf=? AND dataNascimento=?";
+    try (Connection conn = ConexaoBD.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, email);
+        stmt.setString(2, cpf);
+        stmt.setDate(3, dataNascimento);
+        try (ResultSet rs = stmt.executeQuery()) {
+            return rs.next();
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+    public static boolean atualizarSenha(String email, String novaSenha) {
+    String sql = "UPDATE funcionarios SET senha=? WHERE email=?";
+    
+    try (Connection conn = ConexaoBD.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, novaSenha);
+        stmt.setString(2, email);
+        
+        int linhasAfetadas = stmt.executeUpdate(); // Atualiza a senha no banco
+        return linhasAfetadas > 0; // Se atualizou com sucesso, retorna true
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
 }
 }
 

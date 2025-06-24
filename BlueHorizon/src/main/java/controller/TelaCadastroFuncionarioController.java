@@ -89,7 +89,7 @@ public class TelaCadastroFuncionarioController {
         }else if (!txtFSenha.getText().equals(txtFConfirmacaoSenha.getText())) {
             AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Senha e Confirmação .");
             
-        }else if (txtFTelefone.getText().length()!=12){
+        }else if (txtFTelefone.getText().length()!=13){
             AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Telefone.");
             
         }else if (txtFCPF.getText().length()!=14){

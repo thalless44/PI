@@ -11,7 +11,7 @@
 
 <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="595.0" prefWidth="651.0" style="-fx-background-color: #6ec4e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaRecSenhaController">
    <children>
-        <Pane prefHeight="366.0" prefWidth="470.0" style="-fx-background-color: #d9d9d9;">
+        <Pane prefHeight="473.0" prefWidth="470.0" style="-fx-background-color: #d9d9d9;">
             <effect>
                 <DropShadow>
                     <color>
@@ -25,10 +25,14 @@
                         <Font name="System Bold" size="32.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtfdEmailRecSenha" layoutX="88.0" layoutY="154.0" prefHeight="32.0" prefWidth="298.0" promptText="Inserir email" />
-                <Label layoutX="88.0" layoutY="137.0" prefHeight="17.0" prefWidth="318.0" text="Email para recuperação de senha" />
-                <Button fx:id="btnRecuperarSenha" layoutX="182.0" layoutY="239.0" mnemonicParsing="false" onAction="#ActionRecuperarSenha" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #7eb97b;" text="Recuperar senha" />
-            <Button fx:id="btnSair" layoutX="182.0" layoutY="279.0" mnemonicParsing="false" onAction="#ActionSair" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #DC7777;" text="Sair" />
+                <TextField fx:id="txtfdEmailRecSenha" layoutX="103.0" layoutY="124.0" prefHeight="32.0" prefWidth="268.0" promptText="Email para recuperar senha" />
+                <Label layoutX="103.0" layoutY="107.0" prefHeight="17.0" prefWidth="138.0" text="Email" />
+                <Button fx:id="btnRecuperarSenha" layoutX="182.0" layoutY="359.0" mnemonicParsing="false" onAction="#ActionRecuperarSenha" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #7eb97b;" text="Recuperar senha" />
+            <Button fx:id="btnSair" layoutX="182.0" layoutY="398.0" mnemonicParsing="false" onAction="#ActionSair" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #DC7777;" text="Sair" />
+            <TextField fx:id="txtfdCPF" layoutX="103.0" layoutY="224.0" prefHeight="32.0" prefWidth="268.0" promptText="CPF para recuperar de senha" />
+            <Label layoutX="103.0" layoutY="207.0" prefHeight="17.0" prefWidth="72.0" text="CPF" />
+            <TextField fx:id="txtfdDataNascimento" layoutX="103.0" layoutY="278.0" prefHeight="32.0" prefWidth="268.0" promptText="Data de nascimento para recuperar senha" />
+            <Label layoutX="103.0" layoutY="261.0" prefHeight="17.0" prefWidth="195.0" text="Data de nascimento" />
             </children>
         </Pane>
    </children>
