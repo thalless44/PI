@@ -27,6 +27,7 @@ model\PropriedadesDAO.class
 controller\TelaPersonalizacaoPerfilController.class
 controller\TelaAlterarDadosClientesController.class
 controller\TelaInformacoesPerfilController.class
+model\ContratoDAO.class
 model\Propriedades.class
 controller\TelaPagamentoController.class
 principal\App.class
@@ -37,5 +38,6 @@ model\Cidade.class
 model\Imagem.class
 controller\TelaUsuarioSistemaProprietarioController.class
 controller\TelaImovelVendaController.class
+model\Contrato.class
 util\AlertaUtil.class
 model\CidadeDAO.class
