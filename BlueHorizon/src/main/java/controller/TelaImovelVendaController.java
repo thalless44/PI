@@ -1,10 +1,13 @@
 package controller;
 
+import java.io.ByteArrayInputStream;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.Propriedades;
 import model.PropriedadesDAO;
@@ -18,6 +21,9 @@ public class TelaImovelVendaController {
 
     @FXML
     private Button btnEditarImovel;
+    
+     @FXML
+    private ImageView Image;
 
     @FXML
     private Button btnEfetuarVenda;
@@ -82,37 +88,40 @@ public class TelaImovelVendaController {
     private Proprietario prop;
 
     @FXML
-    public void carregarDadosImovel(Propriedades propriedade) {
-        this.propriedadeSelecionada = propriedade;
+    public void carregarDadosImovel(Propriedades imovel, Proprietario proprietario) {
+        this.propriedadeSelecionada = imovel;
 
-        lblImovelVenda.setText(propriedade.getTipoPropriedade());
-        lblRua.setText(propriedade.getRua());
-        lblCidade.setText(propriedade.getCidade() != null ? propriedade.getCidade() : "Não informado");
-        lblValor.setText("R$ " + String.format("%.2f", propriedade.getPreco()));
-        lblDisponibilidade.setText(propriedade.isDisponibilidade() ? "Disponível" : "Vendido");
-        lblDataCadastro.setText(propriedade.getDataCadastro() != null ? propriedade.getDataCadastro().toString() : "N/D");
-        lblQuartos.setText(String.valueOf(propriedade.getQuartos()));
-        lblBanheiros.setText(String.valueOf(propriedade.getBanheiros()));
-        lblVagasGaragem.setText(String.valueOf(propriedade.getVagasGaragem()));
-        lblMobiliada.setText(propriedade.isMobilia() ? "Sim" : "Não");
-        lblJardim.setText(propriedade.isJardim() ? "Sim" : "Não");
-        lblSistemaSegurança.setText(propriedade.isSistemaSeguranca() ? "Sim" : "Não");
-        lblPiscina.setText(propriedade.isPiscina() ? "Sim" : "Não");
-        lblNumeracaoImovel.setText(String.valueOf(propriedade.getNumeroCasa()));
-        lblArea.setText(propriedade.getArea());
-
-        //Falta adicionar esse método de Proprietário, o mesmo motivo de erro na TelaAlterarDadosImovelController. 
-        Proprietario prop = propriedade.getProprietario();
+        lblImovelVenda.setText(imovel.getTipoPropriedade());
+        lblRua.setText(imovel.getRua());
+        lblCidade.setText(imovel.getCidade() != null ? imovel.getCidade() : "Não informado");
+        lblValor.setText("R$ " + String.format("%.2f", imovel.getPreco()));
+        lblDisponibilidade.setText(imovel.isDisponibilidade() ? "Disponível" : "Vendido");
+        lblDataCadastro.setText(imovel.getDataCadastro() != null ? imovel.getDataCadastro().toString() : "N/D");
+        lblQuartos.setText(String.valueOf(imovel.getQuartos()));
+        lblBanheiros.setText(String.valueOf(imovel.getBanheiros()));
+        lblVagasGaragem.setText(String.valueOf(imovel.getVagasGaragem()));
+        lblMobiliada.setText(imovel.isMobilia() ? "Sim" : "Não");
+        lblJardim.setText(imovel.isJardim() ? "Sim" : "Não");
+        lblSistemaSegurança.setText(imovel.isSistemaSeguranca() ? "Sim" : "Não");
+        lblPiscina.setText(imovel.isPiscina() ? "Sim" : "Não");
+        lblNumeracaoImovel.setText(String.valueOf(imovel.getNumeroCasa()));
+        lblArea.setText(imovel.getArea());
         
-        if (prop != null) {
-            lblNome.setText(prop.getNome());
-            lblTelefone.setText(prop.getTelefone());
-            lblEmail.setText(prop.getEmail());
-        } else {
-            lblNome.setText("Não informado");
-            lblTelefone.setText("Não informado");
-            lblEmail.setText("Não informado");
+        if (imovel.getImagem() != null) {
+            ByteArrayInputStream bis = new ByteArrayInputStream(imovel.getImagem());
+            Image.setImage(new Image(bis));
         }
+
+         
+        Proprietario prop = imovel.getProprietario();
+        
+        
+            lblNome.setText("22 " + proprietario.getNome());
+            lblTelefone.setText("12  " +proprietario.getTelefone());
+            lblEmail.setText("22 " + proprietario.getEmail());
+        
+
+        
     }
 
     @FXML

@@ -31,6 +31,7 @@ import model.Funcionario;
 import model.FuncionarioDAO;
 import model.Propriedades;
 import model.PropriedadesDAO;
+import model.Proprietario;
 
 public class TelaInicialController {
     private Stage stage;
@@ -508,10 +509,11 @@ void onClickProprietario(ActionEvent event) {
     imageView.setFitWidth(200);
     imageView.setPreserveRatio(true);
 
-    // ===== DADOS DO PROPRIETÁRIO =====
-    String nomeProprietario = imovel.getProprietario() != null ? imovel.getProprietario().getNome() : "Não informado";
-    Label lblProprietario = new Label("Proprietário: " + nomeProprietario);
+   
+    Proprietario proprietario = imovel.getProprietario();
 
+    String nomeProprietario = proprietario != null ? proprietario.getNome() : "Não informado";
+    Label lblProprietario = new Label("Proprietário: " + nomeProprietario);
     
     Label lblId = new Label("ID: " + imovel.getId());
     Label lblValor = new Label("Valor: R$ " + imovel.getPreco());
@@ -523,12 +525,11 @@ void onClickProprietario(ActionEvent event) {
     Label lblBanheiros = new Label("Banheiros: " + imovel.getBanheiros());
     Label lblVagasGaragem = new Label("Garagem: " + imovel.getVagasGaragem());
     Label lblNumero = new Label("Nº: " + imovel.getNumeroCasa());
-    Label lblMobiliada = new Label("Mobiliada? " + (imovel.isMobilia() ? "Sim" : "Não"));
-    Label lblPiscina = new Label("Piscina? " + (imovel.isPiscina() ? "Sim" : "Não"));
-    Label lblSS = new Label("Segurança? " + (imovel.isSistemaSeguranca() ? "Sim" : "Não"));
-    Label lblJardim = new Label("Jardim? " + (imovel.isJardim() ? "Sim" : "Não"));
+    Label lblMobiliada = new Label("Mobiliada: " + (imovel.isMobilia() ? "Sim" : "Não"));
+    Label lblPiscina = new Label("Piscina: " + (imovel.isPiscina() ? "Sim" : "Não"));
+    Label lblSS = new Label("Segurança: " + (imovel.isSistemaSeguranca() ? "Sim" : "Não"));
+    Label lblJardim = new Label("Jardim: " + (imovel.isJardim() ? "Sim" : "Não"));
 
-    
     VBox vInfo = new VBox(3, lblProprietario, lblId, lblValor, lblData, lblRua, lblTipoPropriedade, lblArea,
             lblQuartos, lblBanheiros, lblVagasGaragem, lblNumero, lblMobiliada, lblPiscina, lblSS, lblJardim);
     vInfo.setPadding(new Insets(5, 0, 0, 0));
@@ -539,10 +540,10 @@ void onClickProprietario(ActionEvent event) {
     card.setCursor(Cursor.HAND);
     card.setAlignment(Pos.CENTER_LEFT);
 
-    // ===== EVENTO DE CLIQUE =====
+    
     card.setOnMouseClicked(event -> {
         try {
-            abrirNovaTela(imovel);
+            abrirNovaTela(imovel, proprietario);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -550,14 +551,17 @@ void onClickProprietario(ActionEvent event) {
 
     return card;
 }
+
     
-    private void abrirNovaTela(Propriedades imovel) throws IOException {
+    private void abrirNovaTela(Propriedades imovel, Proprietario proprietario) throws IOException {
         URL url = new File("src/main/java/View/TelaImovelVenda.fxml").toURI().toURL();
     FXMLLoader loader = new FXMLLoader(url);
     Parent root = loader.load();
+    
+    TelaImovelVendaController tIV = loader.getController();
+    tIV.carregarDadosImovel(imovel, proprietario);
 
     Stage t = new Stage();
-    TelaImovelVendaController tIV = loader.getController(); 
     tIV.setStage(t);
     
    
@@ -573,6 +577,7 @@ void onClickProprietario(ActionEvent event) {
     t.show();
     
     }
+    
 
     public void setFuncionario(Funcionario f) {
         this.funcionario = f;

@@ -19,7 +19,10 @@ C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\controller\TelaAlterarDado
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\controller\TelaUsuarioSistemaController.java
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\controller\TelaLoginPIController.java
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\controller\TelaAlterarDadosClientesController.java
+<<<<<<< Updated upstream
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\model\Contrato.java
+=======
+>>>>>>> Stashed changes
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\util\LimitarCaracter.java
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\principal\App.java
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\controller\TelaClientesSistemaController.java
@@ -29,7 +32,10 @@ C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\controller\TelaContratoCon
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\controller\TelaCadastroImovelController.java
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\model\PropriedadesDAO.java
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\controller\TelaAlterarDadosFuncionariosController.java
+<<<<<<< Updated upstream
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\controller\TelaRecSenha2Controller.java
+=======
+>>>>>>> Stashed changes
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\model\ClienteDAO.java
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\dal\ConexaoBD.java
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\model\Funcionario.java
@@ -38,4 +44,7 @@ C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\model\ImagemDAO.java
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\controller\TelaInicialController.java
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\model\CidadeDAO.java
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\module-info.java
+<<<<<<< Updated upstream
 C:\Users\aluno\Documents\PI\BlueHorizon\src\main\java\model\ContratoDAO.java
+=======
+>>>>>>> Stashed changes

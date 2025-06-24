@@ -34,7 +34,7 @@
                   <DropShadow />
                </effect>
                <children>
-                  <ImageView fitHeight="203.0" fitWidth="367.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="Image" fitHeight="203.0" fitWidth="367.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane layoutX="441.0" layoutY="88.0" prefHeight="359.0" prefWidth="422.0" style="-fx-background-color: #d9d9d9;">
