@@ -12,120 +12,36 @@ import java.util.List;
 public class ContratoDAO {
 
     // Método para cadastrar contrato (CREATE)
-    public static boolean cadastrarContrato(Contrato contrato) {
-        String sql = "INSERT INTO contratos (data_cadastro, data_contrato, id_cliente, id_imovel, valor_total) VALUES (?, ?, ?, ?, ?)";
+   public static int cadastrarContrato(Contrato contrato, Date dataContrato, Double valorCompra, int idPropriedade, int idCliente) {
+    String sql = "INSERT INTO contratos (dataContrato, valorCompra, id_propriedade, id_cliente) VALUES (?, ?, ?, ?)";
+    int idGerado = -1;
 
-        try (Connection conn = ConexaoBD.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    try (Connection conn = ConexaoBD.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setDate(1, contrato.getDataCadastro());
-            stmt.setDate(2, contrato.getDataContrato());
-            stmt.setInt(3, contrato.getIdCliente());
-            stmt.setInt(4, contrato.getIdImovel());
-            stmt.setDouble(5, contrato.getValorTotal());
+        stmt.setDate(1, dataContrato);
+        stmt.setDouble(2, valorCompra);
+        stmt.setInt(3, idPropriedade);
+        stmt.setInt(4, idCliente);
+       
+        
 
-            int linhasAfetadas = stmt.executeUpdate();
-            return linhasAfetadas > 0;
+        int linhasAfetadas = stmt.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    // Método para listar todos os contratos (READ)
-    public static List<Contrato> listarTodos() {
-        List<Contrato> lista = new ArrayList<>();
-        String sql = "SELECT * FROM contratos";
-
-        try (Connection conn = ConexaoBD.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Contrato contrato = new Contrato(
-                    rs.getInt("id_contrato"),
-                    rs.getDate("data_cadastro"),
-                    rs.getDate("data_contrato"),
-                    rs.getInt("id_cliente"),
-                    rs.getInt("id_imovel"),
-                    rs.getDouble("valor_total")
-                );
-                lista.add(contrato);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return lista;
-    }
-
-    // Método para atualizar contrato (UPDATE)
-    public static boolean atualizarContrato(Contrato contrato) {
-        String sql = "UPDATE contratos SET data_cadastro = ?, data_contrato = ?, id_cliente = ?, id_imovel = ?, valor_total = ? WHERE id_contrato = ?";
-
-        try (Connection conn = ConexaoBD.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setDate(1, contrato.getDataCadastro());
-            stmt.setDate(2, contrato.getDataContrato());
-            stmt.setInt(3, contrato.getIdCliente());
-            stmt.setInt(4, contrato.getIdImovel());
-            stmt.setDouble(5, contrato.getValorTotal());
-            stmt.setInt(6, contrato.getIdContrato());
-
-            int linhasAfetadas = stmt.executeUpdate();
-            return linhasAfetadas > 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    // Método para deletar contrato (DELETE)
-    public static boolean deletarContrato(int idContrato) {
-        String sql = "DELETE FROM contratos WHERE id_contrato = ?";
-
-        try (Connection conn = ConexaoBD.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, idContrato);
-            int linhasAfetadas = stmt.executeUpdate();
-
-            return linhasAfetadas > 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    // Método para buscar contrato por ID
-    public static Contrato buscarPorId(int idContrato) {
-        String sql = "SELECT * FROM contratos WHERE id_contrato = ?";
-
-        try (Connection conn = ConexaoBD.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, idContrato);
-            ResultSet rs = stmt.executeQuery();
-
+        if (linhasAfetadas > 0) {
+            ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
-                return new Contrato(
-                    rs.getInt("id_contrato"),
-                    rs.getDate("data_cadastro"),
-                    rs.getDate("data_contrato"),
-                    rs.getInt("id_cliente"),
-                    rs.getInt("id_imovel"),
-                    rs.getDouble("valor_total")
-                );
+                idGerado = rs.getInt(1);
+                contrato.setIdContrato(idGerado); // já seta o ID no objeto
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
-        return null;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+
+    return idGerado;
+}
+
+    
 }

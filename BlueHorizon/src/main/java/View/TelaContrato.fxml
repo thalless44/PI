@@ -58,17 +58,17 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="373.0" text="Nome do cliente:">
+            <Label layoutX="42.0" layoutY="373.0" text="Nome do cliente comprador:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label layoutX="43.0" layoutY="403.0" text="Email do cliente:">
+            <Label layoutX="43.0" layoutY="403.0" text="Email do cliente comprador:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="433.0" text="Telefone do cliente:">
+            <Label layoutX="42.0" layoutY="433.0" text="Telefone do cliente comprador:">
                <font>
                   <Font size="15.0" />
                </font>
@@ -79,9 +79,9 @@
             <Label fx:id="lblIdImovel" layoutX="109.0" layoutY="257.0" prefHeight="17.0" prefWidth="403.0" />
             <Label fx:id="lblDataCadastro" layoutX="158.0" layoutY="288.0" prefHeight="17.0" prefWidth="355.0" />
             <Label fx:id="lblValorImovel" layoutX="151.0" layoutY="316.0" prefHeight="17.0" prefWidth="355.0" />
-            <Label fx:id="lblNomeCliente" layoutX="158.0" layoutY="375.0" prefHeight="17.0" prefWidth="355.0" />
-            <Label fx:id="lblEmailCliente" layoutX="157.0" layoutY="405.0" prefHeight="17.0" prefWidth="355.0" />
-            <Label fx:id="lblTelefoneCliente" layoutX="174.0" layoutY="435.0" prefHeight="17.0" prefWidth="336.0" />
+            <Label fx:id="lblNomeCliente" layoutX="239.0" layoutY="375.0" prefHeight="17.0" prefWidth="274.0" />
+            <Label fx:id="lblEmailCliente" layoutX="232.0" layoutY="405.0" prefHeight="17.0" prefWidth="280.0" />
+            <Label fx:id="lblTelefoneCliente" layoutX="256.0" layoutY="435.0" prefHeight="17.0" prefWidth="254.0" />
             </children>
         </Pane>
    </children>
