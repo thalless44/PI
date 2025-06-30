@@ -100,6 +100,20 @@ public class ProprietarioDAO extends GenericDAO {
             return false;
         }
     }
+    public static Integer buscarIdProprietarioPorNome(String nome) {
+    String sql = "SELECT id FROM proprietarios WHERE nome = ?";
+    try (Connection conn = dal.ConexaoBD.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, nome);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("id");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return null; // retorna null se não encontrar
+}
 
     // Método para atualizar um proprietário usando o objeto
     public static boolean atualizarProprietario(Proprietario p) {

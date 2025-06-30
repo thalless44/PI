@@ -53,7 +53,8 @@ public class PropriedadesDAO extends GenericDAO{
      public static List<Propriedades> listarPropriedades() {
     List<Propriedades> lista = new ArrayList<>();
 
-    String sql = "SELECT p.*, pr.nome AS nome_proprietario, i.dados AS imagem_blob, c.nome AS nome_cidade " +
+    String sql = "SELECT p.*, pr.id_proprietario, pr.nome AS nome_proprietario, pr.telefone, pr.email, " +
+             "i.dados AS imagem_blob, c.nome AS nome_cidade " +
              "FROM propriedades p " +
              "LEFT JOIN proprietarios pr ON p.id_proprietario = pr.id_proprietario " +
              "LEFT JOIN imagens_imoveis i ON i.id_imagem = p.id_imagem " +
@@ -67,6 +68,7 @@ public class PropriedadesDAO extends GenericDAO{
 
         while (rs.next()) {
             Propriedades p = new Propriedades();
+            Proprietario proprietario = new Proprietario();
 
             // Dados da propriedade
             p.setId(rs.getInt("id_propriedade"));
@@ -86,11 +88,12 @@ public class PropriedadesDAO extends GenericDAO{
             p.setNumeroCasa(rs.getInt("numeroCasa"));
             p.setArea(rs.getString("area"));
             p.setCidade(rs.getString("nome_cidade"));
-
-            // Nome do proprietário
-            Proprietario proprietario = new Proprietario();
             proprietario.setNome(rs.getString("nome_proprietario"));
+            proprietario.setTelefone(rs.getString("telefone"));
+            proprietario.setEmail(rs.getString("email"));
             p.setProprietario(proprietario);
+
+            
 
             byte[] imagemBytes = rs.getBytes("imagem_blob");
             p.setImagem(imagemBytes); // Supondo que você tenha esse campo na classe Propriedades
