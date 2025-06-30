@@ -96,6 +96,7 @@ public class TelaImovelVendaController {
     public void carregarDadosImovel(Propriedades imovel, Proprietario proprietario) {
         this.propriedadeSelecionada = imovel;
         this.prop = imovel.getProprietario();
+        
 
         lblImovelVenda.setText(imovel.getTipoPropriedade());
         lblRua.setText(imovel.getRua());
@@ -118,19 +119,43 @@ public class TelaImovelVendaController {
             Image.setImage(new Image(bis));
         }
 
-        if (this.prop != null) {
+        
             lblNome.setText(prop.getNome());
             lblTelefone.setText(prop.getTelefone());
             lblEmail.setText(prop.getEmail());
-        } else {
-            lblNome.setText("N/D");
-            lblTelefone.setText("N/D");
-            lblEmail.setText("N/D");
-        }
+
     }
 
     @FXML
     public void ActionEditarImovel(ActionEvent event) {
+        try {
+            URL url = new File("src/main/java/view/TelaAlterarDadosImovel.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+
+            // Pega o controller da tela de pagamento
+            TelaAlterarDadosImovelController tEI = loader.getController();
+
+            
+            tEI.carregarDadosImovel(propriedadeSelecionada);
+
+            Stage telaEdImovel = new Stage();
+            tEI.setStage(telaEdImovel);
+
+            Scene scene = new Scene(root);
+
+            Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+            telaEdImovel.getIcons().add(icone);
+
+            telaEdImovel.setScene(scene);
+            telaEdImovel.setTitle("BlueHorizon - Pagamento");
+            telaEdImovel.setMaximized(false);
+            telaEdImovel.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao abrir a tela de pagamento.");
+        }
         
     }
 

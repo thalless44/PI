@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Cidade;
 import model.Propriedades;
 import model.PropriedadesDAO;
 import model.Proprietario;
@@ -132,7 +134,7 @@ public class TelaAlterarDadosImovelController {
         rbNaoDisponivel.setToggleGroup(grupoDisponibilidade);
 
         new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtDatacadastro);
-
+        new LimitarCaracter(20, LimitarCaracter.TipoEntrada.VALOR).applyToTextInputControl(txtValor);
         carregarProprietarios();
     }
 
@@ -154,6 +156,11 @@ public class TelaAlterarDadosImovelController {
         txtVagaGaragem.setText(String.valueOf(propriedade.getVagasGaragem()));
         txtNumeracaoImovel.setText(String.valueOf(propriedade.getNumeroCasa()));
         txtArea.setText(propriedade.getArea());
+        
+        if (propriedade.getImagem() != null) {
+            ByteArrayInputStream bis = new ByteArrayInputStream(propriedade.getImagem());
+            imageViewImovel.setImage(new Image(bis));
+        }
 
         // Definir radio buttons conforme valores booleanos
         rbDisponivel.setSelected(propriedade.isDisponibilidade());
@@ -209,22 +216,25 @@ public class TelaAlterarDadosImovelController {
 
     @FXML
     void onClickEditarImovel(ActionEvent event) {
-        try {
+        
+            
+            Proprietario proprietario = propriedadeSelecionada.getProprietario();
             if (propriedadeSelecionada == null) {
                 AlertaUtil.mostrarErro("Erro", "Nenhum imóvel selecionado", "Não há imóvel para editar.");
                 return;
             }
 
-            Proprietario proprietario = cmbxProprietario.getValue();
+            
             if (proprietario == null) {
                 AlertaUtil.mostrarErro("Erro", "Proprietário não selecionado", "Selecione um proprietário para o imóvel.");
                 return;
             }
 
             // Capturar dados
+            String valorFormatado = txtValor.getText().replaceAll("[^\\d]","");
+            double preco = Double.parseDouble(valorFormatado)/100.0;
             String tipoPropriedade = txtTipoPropriedade.getText();
             String cidade = txtCidades.getText();
-            double preco = Double.parseDouble(txtValor.getText());
             boolean disponibilidade = rbDisponivel.isSelected();
 
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -261,6 +271,8 @@ public class TelaAlterarDadosImovelController {
             propriedadeSelecionada.setArea(area);
 
             // Se tiver imagem alterada, pode atualizar propriedadeSelecionada.setImagemUrl(...)
+            
+            
 
             boolean atualizado = PropriedadesDAO.atualizarPropriedade(propriedadeSelecionada);
 
@@ -271,9 +283,7 @@ public class TelaAlterarDadosImovelController {
                 AlertaUtil.mostrarErro("Erro", "Falha ao atualizar o imóvel", "Tente novamente.");
             }
 
-        } catch (Exception e) {
-            AlertaUtil.mostrarErro("Erro", "Dados inválidos", "Verifique os campos e tente novamente.");
-        }
+
     }
 
     @FXML
