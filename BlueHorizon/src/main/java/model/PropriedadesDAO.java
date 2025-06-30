@@ -12,10 +12,10 @@ import java.util.List;
 public class PropriedadesDAO extends GenericDAO{
     
       public static boolean Propriedades(String tipo_propriedade, String endereco, Double preco, boolean disponibilidade, Date data_cadastro, String rua, 
-             int quartos, int banheiros, int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa, String area, int id_proprietario, int id_imagem ) {
+             int quartos, int banheiros, int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa, String area, int id_proprietario, int id_imagem, int id_cidade ) {
          
         String sql = "INSERT INTO propriedades (tipo_propriedade, endereco, preco, disponibilidade, data_cadastro, rua, quartos, banheiros, vagasGaragem,"
-                  + " mobilia, jardim, sistemaSeguranca, piscina, numeroCasa, area, id_proprietario, id_imagem) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                  + " mobilia, jardim, sistemaSeguranca, piscina, numeroCasa, area, id_proprietario, id_imagem, id_cidade) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -37,6 +37,7 @@ public class PropriedadesDAO extends GenericDAO{
             stmt.setString(15, area);
             stmt.setInt(16, id_proprietario);
             stmt.setInt(17, id_imagem);
+            stmt.setInt(18, id_cidade);
 
             int linhasAfetadas = stmt.executeUpdate();
             return linhasAfetadas > 0;
@@ -52,11 +53,13 @@ public class PropriedadesDAO extends GenericDAO{
      public static List<Propriedades> listarPropriedades() {
     List<Propriedades> lista = new ArrayList<>();
 
-    String sql = "SELECT p.*, pr.nome AS nome_proprietario, i.dados AS imagem_blob "
-           + "FROM propriedades p "
-           + "LEFT JOIN proprietarios pr ON p.id_proprietario = pr.id_proprietario "
-           + "LEFT JOIN imagens_imoveis i ON i.id_imagem = p.id_imagem "
-           + "GROUP BY p.id_propriedade";
+    String sql = "SELECT p.*, pr.nome AS nome_proprietario, i.dados AS imagem_blob, c.nome AS nome_cidade " +
+             "FROM propriedades p " +
+             "LEFT JOIN proprietarios pr ON p.id_proprietario = pr.id_proprietario " +
+             "LEFT JOIN imagens_imoveis i ON i.id_imagem = p.id_imagem " +
+             "LEFT JOIN cidade c ON p.id_cidade = c.id " +
+             "GROUP BY p.id_propriedade";
+
 
     try (Connection conn = ConexaoBD.conectar();
          PreparedStatement stmt = conn.prepareStatement(sql);
@@ -82,6 +85,7 @@ public class PropriedadesDAO extends GenericDAO{
             p.setPiscina(rs.getBoolean("piscina"));
             p.setNumeroCasa(rs.getInt("numeroCasa"));
             p.setArea(rs.getString("area"));
+            p.setCidade(rs.getString("nome_cidade"));
 
             // Nome do proprietário
             Proprietario proprietario = new Proprietario();
@@ -121,7 +125,7 @@ public class PropriedadesDAO extends GenericDAO{
 
     public static boolean atualizarPropriedade(Propriedades p) {
     String sql = "UPDATE propriedades SET tipo_propriedade = ?, endereco = ?, preco = ?, disponibilidade = ?, data_cadastro = ?, rua = ?, quartos = ?, "
-            + "banheiros  = ?, vagasGaragem = ?, mobilia = ?, jardim = ?, sistemaSeguranca = ?, piscina = ?, numeroCasa = ?, area = ? WHERE id_propriedade = ?";
+            + "banheiros  = ?, vagasGaragem = ?, mobilia = ?, jardim = ?, sistemaSeguranca = ?, piscina = ?, numeroCasa = ?, area = ?   WHERE id_propriedade = ?";
 
     try (Connection conn = ConexaoBD.conectar();
          PreparedStatement stmt = conn.prepareStatement(sql)) {

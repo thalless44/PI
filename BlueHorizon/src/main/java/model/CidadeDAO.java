@@ -30,4 +30,18 @@ public class CidadeDAO {
 
         return lista;
     }
+    public static Integer buscarIdCidadePorNome(String nomeCidade) {
+    String sql = "SELECT id FROM cidade WHERE nome = ?";
+    try (Connection conn = dal.ConexaoBD.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, nomeCidade);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("id");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return null; // retorna null se não encontrar
+}
 }
