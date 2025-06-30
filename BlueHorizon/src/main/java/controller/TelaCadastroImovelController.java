@@ -145,6 +145,7 @@ public class TelaCadastroImovelController {
         rbNaoDisponivel.setToggleGroup(grupoDisponibilidade);
 
         new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtDatacadastro);
+        new LimitarCaracter(20, LimitarCaracter.TipoEntrada.VALOR).applyToTextInputControl(txtValor);
         carregarProprietarios();
 
         txtCidades.textProperty().addListener((obs, oldText, newText) -> {
@@ -198,7 +199,10 @@ public class TelaCadastroImovelController {
 
             String tipoPropriedade = txtTipoPropriedade.getText();
             String cidade = txtCidades.getText();
-            double preco = Double.parseDouble(txtValor.getText());
+            
+            String valorFormatado = txtValor.getText().replaceAll("[^\\d]","");
+            double preco = Double.parseDouble(valorFormatado)/100.0;
+            
             boolean disponibilidade = rbDisponivel.isSelected();
 
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -225,7 +229,8 @@ public class TelaCadastroImovelController {
             );
 
             if (sucessoPropriedade) {
-                AlertaUtil.mostrarInformacao("Cadastro de imóvel", "Cadastro realizado", "O imóvel foi cadastrado corretamente no banco de dados.");
+                AlertaUtil.mostrarInformacao("Sucesso", "Cadastro de imóvel", "O imóvel foi cadastrado com sucesso!");
+                stage.close();
             } else {
                 AlertaUtil.mostrarErro("Erro", "Erro no Cadastro", "Houve um erro ao tentar cadastrar o imóvel. Verifique os dados e tente novamente.");
             }

@@ -6,7 +6,7 @@ import javafx.scene.control.TextInputControl;
 public class LimitarCaracter {
 
     public enum TipoEntrada {
-        NUMERODECIMAL, NOME, EMAIL, DATA, CPF, FONE;
+        NUMERODECIMAL, NOME, EMAIL, DATA, CPF, FONE, VALOR;
     }
 
     private int qtdCaracteres;
@@ -89,50 +89,84 @@ public class LimitarCaracter {
                     change.setAnchor(cpfCaret);
                     break;
 
-                case FONE: {
-    String foneOldText = change.getControlText();
-    String foneInsertedText = change.getText();
-    int start = change.getRangeStart();
-    int end = change.getRangeEnd();
+                case FONE: 
+                    String foneOldText = change.getControlText();
+                    String foneInsertedText = change.getText();
+                    int start = change.getRangeStart();
+                    int end = change.getRangeEnd();
 
-    StringBuilder updatedRaw = new StringBuilder(foneOldText)
-        .replace(start, end, foneInsertedText);
+                    StringBuilder updatedRaw = new StringBuilder(foneOldText)
+                        .replace(start, end, foneInsertedText);
 
-    // Remove todos os caracteres não numéricos
-    String digits = updatedRaw.toString().replaceAll("[^0-9]", "");
+                    // Remove todos os caracteres não numéricos
+                    String digits = updatedRaw.toString().replaceAll("[^0-9]", "");
 
-    if (digits.length() > 11) return null; // Limita para 11 dígitos (2 DDD + 9 número)
+                    if (digits.length() > 11) return null; // Limita para 11 dígitos (2 DDD + 9 número)
 
-    StringBuilder foneFormatted = new StringBuilder();
-    int foneLen = digits.length();
+                    StringBuilder foneFormatted = new StringBuilder();
+                    int foneLen = digits.length();
 
-    if (foneLen > 0) {
-        if (foneLen <= 2) {
-            foneFormatted.append(digits); // Apenas DDD
-        } else {
-            foneFormatted.append(digits.substring(0, 2)).append(" "); // DDD + espaço
-            if (foneLen <= 7) {
-                foneFormatted.append(digits.substring(2)); // Número sem hífen ainda
-            } else {
-                // Se tem mais que 7 dígitos (total até 11), formata como 00000-0000
-                int middle = Math.min(7, foneLen); // Evita exceções
-                foneFormatted.append(digits.substring(2, 7)).append("-");
-                foneFormatted.append(digits.substring(7, foneLen));
-            }
-        }
-    }
+                    if (foneLen > 0) {
+                        if (foneLen <= 2) {
+                            foneFormatted.append(digits); // Apenas DDD
+                        } else {
+                            foneFormatted.append(digits.substring(0, 2)).append(" "); // DDD + espaço
+                            if (foneLen <= 7) {
+                                foneFormatted.append(digits.substring(2)); // Número sem hífen ainda
+                            } else {
+                                // Se tem mais que 7 dígitos (total até 11), formata como 00000-0000
+                                int middle = Math.min(7, foneLen); // Evita exceções
+                                foneFormatted.append(digits.substring(2, 7)).append("-");
+                                foneFormatted.append(digits.substring(7, foneLen));
+                            }
+                        }
+                    }
 
-    change.setText(foneFormatted.toString());
-    change.setRange(0, foneOldText.length());
+                    change.setText(foneFormatted.toString());
+                    change.setRange(0, foneOldText.length());
 
-    // Posiciona o cursor no final
-    int caret = foneFormatted.length();
-    change.setCaretPosition(caret);
-    change.setAnchor(caret);
-    break;
-}
+                    // Posiciona o cursor no final
+                    int caret = foneFormatted.length();
+                    change.setCaretPosition(caret);
+                    change.setAnchor(caret);
+                    break;
+            
+                    case VALOR: {
+                        // Pega o texto atual do campo e o novo que está sendo inserido
+                        String oldValorText = change.getControlText();
+                        String newValorText = change.getControlNewText();
 
+                        // Remove todos os caracteres que não sejam dígitos
+                        String digitsValue = newValorText.replaceAll("[^\\d]", "");
 
+                        if (digitsValue.isEmpty()) {
+                            change.setText("");
+                            return change;
+                        }
+
+                        if (digitsValue.length() > 15) return null; // Limita a 15 dígitos
+
+                        try {
+                            // Converte os centavos (últimos dois dígitos)
+                            double parsedValue = Double.parseDouble(digitsValue) / 100.0;
+                            java.text.NumberFormat nf = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("pt", "BR"));
+                            String Valorformatted = nf.format(parsedValue);
+
+                            // Substitui todo o texto do campo com o formatado
+                            change.setText(Valorformatted);
+                            change.setRange(0, oldValorText.length());
+
+                            int caretValue = Valorformatted.length();
+                            change.setCaretPosition(caretValue);
+                            change.setAnchor(caretValue);
+
+                            return change;
+                        } catch (NumberFormatException e) {
+                            return null;
+                        }
+                    }
+
+                   
 
             }
 

@@ -4,7 +4,10 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -492,7 +495,7 @@ void onClickProprietario(ActionEvent event) {
         List<Propriedades> imoveis = PropriedadesDAO.listarPropriedades();
 
         if (imoveis.isEmpty()) {
-            Label vazio = new Label("Nenhuma propriedade encontrada.");
+            Label vazio = new Label("Nenhuma propriedade cadastrada.");
             vboxConteudo.getChildren().add(vazio);
             return;
         }
@@ -503,6 +506,10 @@ void onClickProprietario(ActionEvent event) {
     }
     
     private VBox criarCard(Propriedades imovel) {
+        
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+            
     ByteArrayInputStream bis = new ByteArrayInputStream(imovel.getImagem());
     Image imagem = new Image(bis);
     ImageView imageView = new ImageView(imagem);
@@ -516,8 +523,8 @@ void onClickProprietario(ActionEvent event) {
     Label lblProprietario = new Label("Proprietário: " + nomeProprietario);
     
     Label lblId = new Label("ID: " + imovel.getId());
-    Label lblValor = new Label("Valor: R$ " + imovel.getPreco());
-    Label lblData = new Label("Cadastro: " + imovel.getDataCadastro());
+    Label lblValor = new Label("Valor: " + currencyFormat.format(imovel.getPreco()));
+    Label lblData = new Label("Cadastro: " + dateFormat.format(imovel.getDataCadastro()));
     Label lblRua = new Label("Rua: " + imovel.getRua());
     Label lblTipoPropriedade = new Label("Tipo: " + imovel.getTipoPropriedade());
     Label lblArea = new Label("Área: " + imovel.getArea());
