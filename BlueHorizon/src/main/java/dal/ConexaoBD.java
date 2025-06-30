@@ -13,7 +13,7 @@ public class ConexaoBD {
 
     private static final String USER = "root";
 
-    private static final String PASSWORD = "admin";
+    private static final String PASSWORD = "aluno";
 
     public static Connection conectar() {
 

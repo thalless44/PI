@@ -30,6 +30,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Cidade;
 import model.Funcionario;
 import model.FuncionarioDAO;
 import model.Propriedades;
@@ -505,6 +506,7 @@ void onClickProprietario(ActionEvent event) {
         }
     }
     
+    
     private VBox criarCard(Propriedades imovel) {
         
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -518,13 +520,18 @@ void onClickProprietario(ActionEvent event) {
 
    
     Proprietario proprietario = imovel.getProprietario();
-
     String nomeProprietario = proprietario != null ? proprietario.getNome() : "Não informado";
     Label lblProprietario = new Label("Proprietário: " + nomeProprietario);
+    
+    
+    
+    
     
     Label lblId = new Label("ID: " + imovel.getId());
     Label lblValor = new Label("Valor: " + currencyFormat.format(imovel.getPreco()));
     Label lblData = new Label("Cadastro: " + dateFormat.format(imovel.getDataCadastro()));
+    String cidade = imovel.getCidade(); 
+    Label lblCidade = new Label("Cidade: " + cidade);
     Label lblRua = new Label("Rua: " + imovel.getRua());
     Label lblTipoPropriedade = new Label("Tipo: " + imovel.getTipoPropriedade());
     Label lblArea = new Label("Área: " + imovel.getArea());
@@ -537,7 +544,7 @@ void onClickProprietario(ActionEvent event) {
     Label lblSS = new Label("Segurança: " + (imovel.isSistemaSeguranca() ? "Sim" : "Não"));
     Label lblJardim = new Label("Jardim: " + (imovel.isJardim() ? "Sim" : "Não"));
 
-    VBox vInfo = new VBox(3, lblProprietario, lblId, lblValor, lblData, lblRua, lblTipoPropriedade, lblArea,
+    VBox vInfo = new VBox(3, lblProprietario, lblId, lblValor, lblData, lblCidade, lblRua, lblTipoPropriedade, lblArea,
             lblQuartos, lblBanheiros, lblVagasGaragem, lblNumero, lblMobiliada, lblPiscina, lblSS, lblJardim);
     vInfo.setPadding(new Insets(5, 0, 0, 0));
 

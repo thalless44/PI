@@ -1,10 +1,8 @@
 package controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,6 +25,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import static model.CidadeDAO.buscarIdCidadePorNome;
 import static model.ImagemDAO.salvarImagemNoBanco;
 import model.PropriedadesDAO;
 import model.Proprietario;
@@ -198,7 +197,13 @@ public class TelaCadastroImovelController {
             }
 
             String tipoPropriedade = txtTipoPropriedade.getText();
-            String cidade = txtCidades.getText();
+            String nomeCidade = txtCidades.getText();
+            Integer idCidade = buscarIdCidadePorNome(nomeCidade);
+
+            if (idCidade == null) {
+                AlertaUtil.mostrarErro("Erro", "Cidade não encontrada", "A cidade digitada não existe no banco de dados.");
+                return;
+            }
             
             String valorFormatado = txtValor.getText().replaceAll("[^\\d]","");
             double preco = Double.parseDouble(valorFormatado)/100.0;
@@ -225,7 +230,7 @@ public class TelaCadastroImovelController {
             boolean sucessoPropriedade = PropriedadesDAO.Propriedades(
                 tipoPropriedade, endereco, preco, disponibilidade, dataCadastro, rua,
                 quartos, banheiros, vagasGaragem, mobiliada, jardim, sistemaSeguranca,
-                piscina, numeroCasa, area, idProprietario, idImagem
+                piscina, numeroCasa, area, idProprietario, idImagem, idCidade
             );
 
             if (sucessoPropriedade) {
