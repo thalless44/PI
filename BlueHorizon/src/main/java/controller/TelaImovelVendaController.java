@@ -1,8 +1,14 @@
 package controller;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -18,11 +24,12 @@ public class TelaImovelVendaController {
 
     private Stage stage;
     private Propriedades propriedadeSelecionada;
+    private Proprietario prop;
 
     @FXML
     private Button btnEditarImovel;
-    
-     @FXML
+
+    @FXML
     private ImageView Image;
 
     @FXML
@@ -84,17 +91,16 @@ public class TelaImovelVendaController {
 
     @FXML
     private Label lblValor;
-    
-    private Proprietario prop;
 
     @FXML
     public void carregarDadosImovel(Propriedades imovel, Proprietario proprietario) {
         this.propriedadeSelecionada = imovel;
+        this.prop = imovel.getProprietario();
 
         lblImovelVenda.setText(imovel.getTipoPropriedade());
         lblRua.setText(imovel.getRua());
         lblCidade.setText(imovel.getCidade() != null ? imovel.getCidade() : "Não informado");
-        lblValor.setText("R$ " + String.format("%.2f", imovel.getPreco()));
+        lblValor.setText(" R$ " + String.format("%.2f", imovel.getPreco()));
         lblDisponibilidade.setText(imovel.isDisponibilidade() ? "Disponível" : "Vendido");
         lblDataCadastro.setText(imovel.getDataCadastro() != null ? imovel.getDataCadastro().toString() : "N/D");
         lblQuartos.setText(String.valueOf(imovel.getQuartos()));
@@ -106,49 +112,57 @@ public class TelaImovelVendaController {
         lblPiscina.setText(imovel.isPiscina() ? "Sim" : "Não");
         lblNumeracaoImovel.setText(String.valueOf(imovel.getNumeroCasa()));
         lblArea.setText(imovel.getArea());
-        
+
         if (imovel.getImagem() != null) {
             ByteArrayInputStream bis = new ByteArrayInputStream(imovel.getImagem());
             Image.setImage(new Image(bis));
         }
 
-         
-        Proprietario prop = imovel.getProprietario();
-        
-        
-            lblNome.setText("22 " + proprietario.getNome());
-            lblTelefone.setText("12  " +proprietario.getTelefone());
-            lblEmail.setText("22 " + proprietario.getEmail());
-        
-
-        
-    }
-
-    @FXML
-    public void ActionEditarImovel(ActionEvent event) {
-        if (propriedadeSelecionada != null) {
-            AlertaUtil.mostrarInformacao("Editar Imóvel",
-                    "O imóvel nº " + propriedadeSelecionada.getNumeroCasa() + " será enviado para edição.");
-            // TODO: abrir tela de edição
+        if (this.prop != null) {
+            lblNome.setText(prop.getNome());
+            lblTelefone.setText(prop.getTelefone());
+            lblEmail.setText(prop.getEmail());
         } else {
-            AlertaUtil.mostrarAviso("Imóvel não selecionado", "Nenhum imóvel foi selecionado.");
+            lblNome.setText("N/D");
+            lblTelefone.setText("N/D");
+            lblEmail.setText("N/D");
         }
     }
 
     @FXML
-    public void ActionEfetuarVenda(ActionEvent event) {
-        if (propriedadeSelecionada != null && propriedadeSelecionada.isDisponibilidade()) {
-            propriedadeSelecionada.setDisponibilidade(false);
-            boolean atualizado = PropriedadesDAO.atualizarPropriedade(propriedadeSelecionada);
+    public void ActionEditarImovel(ActionEvent event) {
+        
+    }
 
-            if (atualizado) {
-                lblDisponibilidade.setText("Vendido");
-                AlertaUtil.mostrarInformacao("Venda Efetuada", "O imóvel foi vendido com sucesso!");
-            } else {
-                AlertaUtil.mostrarErro("Erro", "Falha ao atualizar", "Erro ao marcar o imóvel como vendido.");
-            }
-        } else {
-            AlertaUtil.mostrarAviso("Venda não permitida", "Este imóvel já está marcado como vendido.");
+    @FXML
+    public void ActionEfetuarVenda(ActionEvent event) {
+        try {
+            URL url = new File("src/main/java/view/TelaPagamento.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+
+            // Pega o controller da tela de pagamento
+            TelaPagamentoController tp = loader.getController();
+
+            // Passa o imóvel selecionado para a tela de pagamento
+            tp.setPropriedade(propriedadeSelecionada);
+
+            Stage telaPG = new Stage();
+            tp.setStage(telaPG);
+
+            Scene scene = new Scene(root);
+
+            Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+            telaPG.getIcons().add(icone);
+
+            telaPG.setScene(scene);
+            telaPG.setTitle("BlueHorizon - Pagamento");
+            telaPG.setMaximized(false);
+            telaPG.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao abrir a tela de pagamento.");
         }
     }
 
@@ -174,4 +188,3 @@ public class TelaImovelVendaController {
         this.stage = stage;
     }
 }
-

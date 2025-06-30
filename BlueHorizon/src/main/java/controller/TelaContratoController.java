@@ -38,7 +38,7 @@ public class TelaContratoController {
         String sql = "SELECT c.id_contrato, c.data_cadastro, c.data_contrato, c.valor_total, " +
                      "cli.nome AS nome_cliente, cli.email AS email_cliente, cli.telefone AS telefone_cliente, " +
                      "c.id_imovel, p.preco AS valor_imovel " +
-                     "FROM contratos c " +  // verifique se é 'contratos' mesmo
+                     "FROM contratos c " +  
                      "JOIN clientes cli ON c.id_cliente = cli.id_cliente " +
                      "JOIN propriedades p ON c.id_imovel = p.id_propriedade " +
                      "WHERE c.id_contrato = ?";
