@@ -36,8 +36,10 @@ dal\ConexaoBD.class
 controller\TelaLoginPIController.class
 model\Cidade.class
 model\Imagem.class
+model\Transacoes.class
 controller\TelaUsuarioSistemaProprietarioController.class
 controller\TelaImovelVendaController.class
 model\Contrato.class
 util\AlertaUtil.class
 model\CidadeDAO.class
+model\TransacoesDAO.class

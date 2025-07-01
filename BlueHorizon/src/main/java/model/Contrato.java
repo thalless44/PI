@@ -1,30 +1,25 @@
 package model;
 
 import javafx.beans.property.*;
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Contrato {
 
     private final IntegerProperty idContrato = new SimpleIntegerProperty();
-    private final ObjectProperty<Date> dataCadastro = new SimpleObjectProperty<>();
-    private final ObjectProperty<Date> dataContrato = new SimpleObjectProperty<>();
-    private final IntegerProperty idCliente = new SimpleIntegerProperty();
-    private final IntegerProperty idImovel = new SimpleIntegerProperty();
-    private final DoubleProperty valorTotal = new SimpleDoubleProperty();
+    private final ObjectProperty<LocalDate> dataContrato = new SimpleObjectProperty<>();
+    private final DoubleProperty valorCompra = new SimpleDoubleProperty();
+    
+    private final IntegerProperty idImovel = new SimpleIntegerProperty();  // novo campo
+    private final IntegerProperty idCliente = new SimpleIntegerProperty(); // novo campo
 
     public Contrato() {}
 
-    public Contrato(int idContrato, Date dataCadastro, Date dataContrato, int idCliente, int idImovel, double valorTotal) {
-        setIdContrato(idContrato);
-        setDataCadastro(dataCadastro);
-        setDataContrato(dataContrato);
-        setIdCliente(idCliente);
-        setIdImovel(idImovel);
-        setValorTotal(valorTotal);
-    }
-
-    public IntegerProperty idContratoProperty() {
-        return idContrato;
+    public Contrato(int idContrato, LocalDate dataContrato, double valorCompra, int idImovel, int idCliente) {
+        this.idContrato.set(idContrato);
+        this.dataContrato.set(dataContrato);
+        this.valorCompra.set(valorCompra);
+        this.idImovel.set(idImovel);
+        this.idCliente.set(idCliente);
     }
 
     public int getIdContrato() {
@@ -35,46 +30,35 @@ public class Contrato {
         this.idContrato.set(idContrato);
     }
 
-    public ObjectProperty<Date> dataCadastroProperty() {
-        return dataCadastro;
+    public IntegerProperty idContratoProperty() {
+        return idContrato;
     }
 
-    public Date getDataCadastro() {
-        return dataCadastro.get();
-    }
-
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro.set(dataCadastro);
-    }
-
-    public ObjectProperty<Date> dataContratoProperty() {
-        return dataContrato;
-    }
-
-    public Date getDataContrato() {
+    public LocalDate getDataContrato() {
         return dataContrato.get();
     }
 
-    public void setDataContrato(Date dataContrato) {
+    public void setDataContrato(LocalDate dataContrato) {
         this.dataContrato.set(dataContrato);
     }
 
-    public IntegerProperty idClienteProperty() {
-        return idCliente;
+    public ObjectProperty<LocalDate> dataContratoProperty() {
+        return dataContrato;
     }
 
-    public int getIdCliente() {
-        return idCliente.get();
+    public double getValorCompra() {
+        return valorCompra.get();
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente.set(idCliente);
+    public void setValorCompra(double valorCompra) {
+        this.valorCompra.set(valorCompra);
     }
 
-    public IntegerProperty idImovelProperty() {
-        return idImovel;
+    public DoubleProperty valorCompraProperty() {
+        return valorCompra;
     }
 
+    // Getters e setters para idImovel
     public int getIdImovel() {
         return idImovel.get();
     }
@@ -83,15 +67,20 @@ public class Contrato {
         this.idImovel.set(idImovel);
     }
 
-    public DoubleProperty valorTotalProperty() {
-        return valorTotal;
+    public IntegerProperty idImovelProperty() {
+        return idImovel;
     }
 
-    public double getValorTotal() {
-        return valorTotal.get();
+    // Getters e setters para idCliente
+    public int getIdCliente() {
+        return idCliente.get();
     }
 
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal.set(valorTotal);
+    public void setIdCliente(int idCliente) {
+        this.idCliente.set(idCliente);
+    }
+
+    public IntegerProperty idClienteProperty() {
+        return idCliente;
     }
 }

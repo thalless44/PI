@@ -80,4 +80,9 @@ public class Cliente {
     public void setTelefone(String telefone) {
         this.telefone.set(telefone);
     }
+    
+    @Override
+    public String toString() {
+    return this.getNome(); // ou qualquer outro campo que represente o cliente (nome completo, CPF, etc.)
+    }
 }

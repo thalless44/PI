@@ -29,6 +29,7 @@ C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\model\Propriedades.java
 C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\util\LimitarCaracter.java
 C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\controller\TelaCadastroClienteController.java
 C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\util\AlertaUtil.java
+C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\model\Transacoes.java
 C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\controller\TelaAlterarDadosImovelController.java
 C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\model\Cidade.java
 C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\controller\TelaRecSenhaController.java
@@ -39,3 +40,4 @@ C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\model\Funcionario.java
 C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\controller\TelaRelatorioVendasController.java
 C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\controller\TelaContratoController.java
 C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\controller\TelaAlterarDadosClientesController.java
+C:\Users\Thalles\Documents\PI\BlueHorizon\src\main\java\model\TransacoesDAO.java
