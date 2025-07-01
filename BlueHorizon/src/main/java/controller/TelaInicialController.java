@@ -516,21 +516,25 @@ void onClickProprietario(ActionEvent event) {
     Image imagem = new Image(bis);
     ImageView imageView = new ImageView(imagem);
     imageView.setFitWidth(200);
+    imageView.setFitHeight(400);
     imageView.setPreserveRatio(true);
+    imageView.setSmooth(true);
+    imageView.setCache(true);
+    imageView.setStyle("-fx-background-color: #e0e0e0;");
 
    
     Proprietario proprietario = imovel.getProprietario();
     String nomeProprietario = proprietario != null ? proprietario.getNome() : "Não informado";
-    Label lblProprietario = new Label("Proprietário: " + nomeProprietario);
+    String cidade = imovel.getCidade(); 
     
     
     
     
     
     Label lblId = new Label("ID: " + imovel.getId());
+    Label lblProprietario = new Label("Proprietário: " + nomeProprietario);
     Label lblValor = new Label("Valor: " + currencyFormat.format(imovel.getPreco()));
     Label lblData = new Label("Cadastro: " + dateFormat.format(imovel.getDataCadastro()));
-    String cidade = imovel.getCidade(); 
     Label lblCidade = new Label("Cidade: " + cidade);
     Label lblRua = new Label("Rua: " + imovel.getRua());
     Label lblTipoPropriedade = new Label("Tipo: " + imovel.getTipoPropriedade());
@@ -541,12 +545,12 @@ void onClickProprietario(ActionEvent event) {
     Label lblNumero = new Label("Nº: " + imovel.getNumeroCasa());
     Label lblMobiliada = new Label("Mobiliada: " + (imovel.isMobilia() ? "Sim" : "Não"));
     Label lblPiscina = new Label("Piscina: " + (imovel.isPiscina() ? "Sim" : "Não"));
-    Label lblSS = new Label("Segurança: " + (imovel.isSistemaSeguranca() ? "Sim" : "Não"));
+    Label lblSS = new Label("Sistema de Segurança: " + (imovel.isSistemaSeguranca() ? "Sim" : "Não"));
     Label lblJardim = new Label("Jardim: " + (imovel.isJardim() ? "Sim" : "Não"));
     
         System.out.println("id propriettario " + proprietario.getId());
 
-    VBox vInfo = new VBox(3, lblProprietario, lblId, lblValor, lblData, lblCidade, lblRua, lblTipoPropriedade, lblArea,
+    VBox vInfo = new VBox(3, lblId, lblProprietario, lblCidade, lblRua, lblValor, lblData, lblTipoPropriedade, lblArea,
             lblQuartos, lblBanheiros, lblVagasGaragem, lblNumero, lblMobiliada, lblPiscina, lblSS, lblJardim);
     vInfo.setPadding(new Insets(5, 0, 0, 0));
 
@@ -567,6 +571,7 @@ void onClickProprietario(ActionEvent event) {
 
     return card;
 }
+
 
     
     private void abrirNovaTela(Propriedades imovel, Proprietario proprietario) throws IOException {
