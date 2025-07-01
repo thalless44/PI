@@ -4,6 +4,9 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -97,13 +100,14 @@ public class TelaImovelVendaController {
         this.propriedadeSelecionada = imovel;
         this.prop = imovel.getProprietario();
         
+         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
         lblImovelVenda.setText(imovel.getTipoPropriedade());
         lblRua.setText(imovel.getRua());
         lblCidade.setText(imovel.getCidade() != null ? imovel.getCidade() : "Não informado");
-        lblValor.setText(" R$ " + String.format("%.2f", imovel.getPreco()));
-        lblDisponibilidade.setText(imovel.isDisponibilidade() ? "Disponível" : "Vendido");
-        lblDataCadastro.setText(imovel.getDataCadastro() != null ? imovel.getDataCadastro().toString() : "N/D");
+        lblDisponibilidade.setText(imovel.isDisponibilidade() ? " Disponível" : " Vendido");
+        lblDataCadastro.setText(dateFormat.format(imovel.getDataCadastro()));
         lblQuartos.setText(String.valueOf(imovel.getQuartos()));
         lblBanheiros.setText(String.valueOf(imovel.getBanheiros()));
         lblVagasGaragem.setText(String.valueOf(imovel.getVagasGaragem()));
@@ -113,6 +117,9 @@ public class TelaImovelVendaController {
         lblPiscina.setText(imovel.isPiscina() ? "Sim" : "Não");
         lblNumeracaoImovel.setText(String.valueOf(imovel.getNumeroCasa()));
         lblArea.setText(imovel.getArea());
+        lblValor.setText(currencyFormat.format(imovel.getPreco()));          
+        
+
 
         if (imovel.getImagem() != null) {
             ByteArrayInputStream bis = new ByteArrayInputStream(imovel.getImagem());
@@ -120,7 +127,7 @@ public class TelaImovelVendaController {
         }
 
         
-            lblNome.setText(prop.getNome());
+            lblNome.setText(" "+prop.getNome());
             lblTelefone.setText(prop.getTelefone());
             lblEmail.setText(prop.getEmail());
             System.out.println("id proprietario" + proprietario.getId());

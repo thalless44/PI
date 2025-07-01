@@ -61,7 +61,6 @@ public class TelaUsuarioSistemaController {
         TableColumnTelefone.setCellValueFactory(cellData -> cellData.getValue().telefoneProperty());
         TableColumnEndereco.setCellValueFactory(cellData -> cellData.getValue().enderecoProperty());
         TableColumnEmail.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
-        TableColumnSenha.setCellValueFactory(cellData -> cellData.getValue().senhaProperty());
         TableColumnCargo.setCellValueFactory(cellData -> cellData.getValue().CargoProperty());
         TableColumnSalario.setCellValueFactory(cellData -> cellData.getValue().salarioProperty());
         TableColumnNascimento.setCellValueFactory(cellData -> cellData.getValue().dataNascimentoProperty());

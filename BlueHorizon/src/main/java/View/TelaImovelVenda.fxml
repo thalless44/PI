@@ -55,7 +55,7 @@
                   <Label layoutX="204.0" layoutY="192.0" text="Piscina:" />
                   <Label layoutX="204.0" layoutY="217.0" text="Sistema de segurança:" />
                   <Label layoutX="203.0" layoutY="243.0" text="Cidade:" />
-                  <Label layoutX="203.0" layoutY="266.0" prefHeight="17.0" prefWidth="35.0" text="Rua:" />
+                  <Label layoutX="203.0" layoutY="266.0" prefHeight="17.0" prefWidth="55.0" text="Endereço:" />
                   <Label layoutX="15.0" layoutY="315.0" text="Jardim:" />
                   <Label layoutX="203.0" layoutY="290.0" text="Numeração do imóvel:" />
                   <Label fx:id="lblValor" layoutX="43.0" layoutY="45.0" prefHeight="17.0" prefWidth="367.0" />
@@ -70,7 +70,7 @@
                   <Label fx:id="lblPiscina" layoutX="243.0" layoutY="192.0" prefHeight="17.0" prefWidth="173.0" />
                   <Label fx:id="lblSistemaSegurança" layoutX="323.0" layoutY="217.0" prefHeight="17.0" prefWidth="92.0" />
                   <Label fx:id="lblCidade" layoutX="243.0" layoutY="243.0" prefHeight="17.0" prefWidth="173.0" />
-                  <Label fx:id="lblRua" layoutX="226.0" layoutY="266.0" prefHeight="17.0" prefWidth="189.0" />
+                  <Label fx:id="lblRua" layoutX="257.0" layoutY="266.0" prefHeight="17.0" prefWidth="158.0" />
                   <Label fx:id="lblNumeracaoImovel" layoutX="323.0" layoutY="290.0" prefHeight="17.0" prefWidth="92.0" />
                </children>
             </Pane>

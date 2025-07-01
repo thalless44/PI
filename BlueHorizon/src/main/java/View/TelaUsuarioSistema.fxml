@@ -48,9 +48,8 @@
                   <TableColumn fx:id="TableColumnCPF" prefWidth="75.0" text="CPF" />
                   <TableColumn fx:id="TableColumnCargo" prefWidth="75.0" text="Cargo" />
                   <TableColumn fx:id="TableColumnContratacao" prefWidth="75.0" text="Contratação" />
-                  <TableColumn fx:id="TableColumnNascimento" prefWidth="75.0" text="Nascimento" />
-                  <TableColumn fx:id="TableColumnEmail" prefWidth="75.0" text="Email" />
-                  <TableColumn fx:id="TableColumnSenha" prefWidth="75.0" text="Senha" />
+                  <TableColumn fx:id="TableColumnNascimento" prefWidth="105.0" text="Nascimento" />
+                  <TableColumn fx:id="TableColumnEmail" prefWidth="119.0" text="Email" />
                </columns>
             </TableView>
             <Button fx:id="btnAlterarDados" layoutX="164.0" layoutY="709.0" mnemonicParsing="false" onAction="#OnclickAlterarDados" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #EBDB8C;" text="Alterar Dados">
