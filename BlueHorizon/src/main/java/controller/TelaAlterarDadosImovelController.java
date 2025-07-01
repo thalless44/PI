@@ -258,8 +258,7 @@ public class TelaAlterarDadosImovelController {
 
             
             if (proprietario == null) {
-                AlertaUtil.mostrarErro("Erro", "Proprietário não selecionado", "Selecione um proprietário para o imóvel.");
-                return;
+                proprietario = propriedadeSelecionada.getProprietario();
             }
 
             // Capturar dados
