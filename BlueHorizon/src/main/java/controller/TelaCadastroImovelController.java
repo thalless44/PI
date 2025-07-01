@@ -25,6 +25,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import static model.CidadeDAO.buscarCidades;
 import static model.CidadeDAO.buscarIdCidadePorNome;
 import static model.ImagemDAO.salvarImagemNoBanco;
 import model.PropriedadesDAO;
@@ -161,7 +162,9 @@ public class TelaCadastroImovelController {
         List<Proprietario> proprietarios = ProprietarioDAO.listarTodosProprietarios();
         cmbxProprietario.getItems().clear();
         cmbxProprietario.getItems().addAll(proprietarios);
+        
     }
+    
 
     @FXML
     void OnClickAdicionarImagem(ActionEvent event) {
@@ -182,9 +185,12 @@ public class TelaCadastroImovelController {
     void onClickCadastro(ActionEvent event) {
         try {
             Proprietario proprietario = cmbxProprietario.getValue();
+            
             if (proprietario == null) {
                 AlertaUtil.mostrarErro("Erro", "Proprietário do imóvel não selecionado", "Selecione um proprietário!");
                 return;
+            }else {
+                System.out.println("Selecionado: " + proprietario.getNome() + " | ID: " + proprietario.getId());
             }
 
             int idImagem = -1;
@@ -199,6 +205,7 @@ public class TelaCadastroImovelController {
             String tipoPropriedade = txtTipoPropriedade.getText();
             String nomeCidade = txtCidades.getText();
             Integer idCidade = buscarIdCidadePorNome(nomeCidade);
+            System.out.println("id " + idCidade);
 
             if (idCidade == null) {
                 AlertaUtil.mostrarErro("Erro", "Cidade não encontrada", "A cidade digitada não existe no banco de dados.");
@@ -226,6 +233,7 @@ public class TelaCadastroImovelController {
             int numeroCasa = Integer.parseInt(txtNumeracaoImovel.getText());
             String area = txtArea.getText();
             int idProprietario = proprietario.getId();
+            
 
             boolean sucessoPropriedade = PropriedadesDAO.Propriedades(
                 tipoPropriedade, endereco, preco, disponibilidade, dataCadastro, rua,
@@ -270,28 +278,9 @@ public class TelaCadastroImovelController {
         ).filter(response -> response == ButtonType.OK).isPresent();
     }
 
-    private List<String> buscarCidades(String termo) {
-        List<String> cidades = new ArrayList<>();
-        String sql = "SELECT nome FROM cidade WHERE nome LIKE ?";
+   
 
-        try (Connection conn = dal.ConexaoBD.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, termo + "%");
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                cidades.add(rs.getString("nome"));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return cidades;
-    }
-
-    private void mostrarSugestoesCidade(List<String> sugestoes) {
+    public void mostrarSugestoesCidade(List<String> sugestoes) {
         cTextMenuCidade.getItems().clear();
 
         for (String sugestao : sugestoes) {

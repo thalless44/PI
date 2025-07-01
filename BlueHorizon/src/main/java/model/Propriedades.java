@@ -21,7 +21,8 @@ public class Propriedades {
     private final BooleanProperty piscina = new SimpleBooleanProperty();
     private final IntegerProperty numeroCasa = new SimpleIntegerProperty();
     private final StringProperty area = new SimpleStringProperty();
-    private final IntegerProperty id_cidade = new SimpleIntegerProperty();
+    private final IntegerProperty idCidade = new SimpleIntegerProperty();
+    private final IntegerProperty idProprietario = new SimpleIntegerProperty();
 
     private final StringProperty nomeProprietario = new SimpleStringProperty();
     private final ObjectProperty<byte[]> imagem = new SimpleObjectProperty<>();
@@ -35,7 +36,7 @@ public class Propriedades {
     // Construtor com ID e idCidade
     public Propriedades(int id, String tipoPropriedade, String endereco, double preco, boolean disponibilidade, Date dataCadastro, String rua,
             int quartos, int banheiros, int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa,
-            String area, int id_cidade) {
+            String area, int idCidade, int idProprietario) {
 
         this.id.set(id);
         this.tipoPropriedade.set(tipoPropriedade);
@@ -53,13 +54,14 @@ public class Propriedades {
         this.piscina.set(piscina);
         this.numeroCasa.set(numeroCasa);
         this.area.set(area);
-        this.id_cidade.set(id_cidade);
+        this.idCidade.set(idCidade);
+        this.idProprietario.set(idProprietario);
     }
 
     // Construtor sem ID, com idCidade
     public Propriedades(String tipoPropriedade, String endereco, double preco, boolean disponibilidade, Date dataCadastro, String rua,
             int quartos, int banheiros, int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina,
-            int numeroCasa, String area, int id_cidade) {
+            int numeroCasa, String area) {
 
         this.tipoPropriedade.set(tipoPropriedade);
         this.endereco.set(endereco);
@@ -76,7 +78,6 @@ public class Propriedades {
         this.piscina.set(piscina);
         this.numeroCasa.set(numeroCasa);
         this.area.set(area);
-        this.id_cidade.set(id_cidade);
     }
 
     public Propriedades() {
@@ -147,9 +148,13 @@ public class Propriedades {
     public String getArea() { return area.get(); }
     public void setArea(String area) { this.area.set(area); }
 
-    public IntegerProperty idCidadeProperty() { return id_cidade; }
-    public int getIdCidade() { return id_cidade.get(); }
-    public void setIdCidade(int idCidade) { this.id_cidade.set(idCidade); }
+    public IntegerProperty idCidadeProperty() { return idCidade; }
+    public int getIdCidade() { return idCidade.get(); }
+    public void setIdCidade(int idCidade) { this.idCidade.set(idCidade); }
+    
+    public IntegerProperty idProprietarioProperty() { return idProprietario; }
+    public int getIdProprietario() { return idProprietario.get(); }
+    public void setIdProprietario(int idProprietario) { this.idProprietario.set(idProprietario); }
 
     public StringProperty nomeProprietarioProperty() { return nomeProprietario; }
     public String getNomeProprietario() { return nomeProprietario.get(); }

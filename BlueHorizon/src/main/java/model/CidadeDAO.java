@@ -12,7 +12,7 @@ public class CidadeDAO {
 
     public static List<String> buscarCidades(String prefixo) {
         List<String> lista = new ArrayList<>();
-        String sql = "SELECT nome FROM cidades WHERE nome LIKE ? ORDER BY nome LIMIT 10";
+        String sql = "SELECT nome FROM cidade WHERE nome LIKE ? ORDER BY nome LIMIT 10";
 
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

@@ -123,6 +123,7 @@ public class TelaImovelVendaController {
             lblNome.setText(prop.getNome());
             lblTelefone.setText(prop.getTelefone());
             lblEmail.setText(prop.getEmail());
+            System.out.println("id proprietario" + proprietario.getId());
 
     }
 

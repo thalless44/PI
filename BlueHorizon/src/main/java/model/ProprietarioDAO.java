@@ -26,30 +26,32 @@ public class ProprietarioDAO extends GenericDAO {
 
     // Método para listar todos os proprietários
     public static List<Proprietario> listarTodosProprietarios() {
-        List<Proprietario> proprietarios = new ArrayList<>();
-        String sql = "SELECT * FROM proprietarios";
-        try (Connection conn = ConexaoBD.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+    List<Proprietario> lista = new ArrayList<>();
+    String sql = "SELECT id_proprietario, nome, telefone, email FROM proprietarios";
 
-            while (rs.next()) {
-                Proprietario p = new Proprietario();
-                p.setId(rs.getInt("id_proprietario"));
-                p.setTelefone(rs.getString("telefone"));
-                p.setNome(rs.getString("nome"));
-                p.setEmail(rs.getString("email"));
-                proprietarios.add(p);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return proprietarios;
+    try (Connection conn = ConexaoBD.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            Proprietario p = new Proprietario();
+            p.setId(rs.getInt("id_proprietario")); // 
+            p.setNome(rs.getString("nome"));
+            p.setTelefone(rs.getString("telefone"));
+            p.setEmail(rs.getString("email"));
+            lista.add(p);
     }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return lista;
+}
 
     // Método para buscar um proprietário pelo ID
     public static Proprietario buscarPorId(int id) {
         Proprietario p = null;
-        String sql = "SELECT * FROM proprietarios WHERE id = ?";
+        String sql = "SELECT * FROM proprietarios WHERE id_proprietario = ?";
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -71,7 +73,7 @@ public class ProprietarioDAO extends GenericDAO {
 
     // Método para atualizar os dados de um proprietário
     public boolean atualizar(int id, String nome, String telefone, String email) {
-        String sql = "UPDATE proprietarios SET telefone = ?, nome = ?, email = ? WHERE id = ?";
+        String sql = "UPDATE proprietarios SET telefone = ?, nome = ?, email = ? WHERE id_proprietario = ?";
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -89,7 +91,7 @@ public class ProprietarioDAO extends GenericDAO {
 
     // Método para deletar um proprietário
     public boolean deletar(int id) {
-        String sql = "DELETE FROM proprietarios WHERE id = ?";
+        String sql = "DELETE FROM proprietarios WHERE id_proprietario = ?";
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -101,13 +103,13 @@ public class ProprietarioDAO extends GenericDAO {
         }
     }
     public static Integer buscarIdProprietarioPorNome(String nome) {
-    String sql = "SELECT id FROM proprietarios WHERE nome = ?";
+    String sql = "SELECT id_proprietario FROM proprietarios WHERE nome = ?";
     try (Connection conn = dal.ConexaoBD.conectar();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
         stmt.setString(1, nome);
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) {
-            return rs.getInt("id");
+            return rs.getInt("id_proprietario");
         }
     } catch (SQLException e) {
         e.printStackTrace();

@@ -543,6 +543,8 @@ void onClickProprietario(ActionEvent event) {
     Label lblPiscina = new Label("Piscina: " + (imovel.isPiscina() ? "Sim" : "Não"));
     Label lblSS = new Label("Segurança: " + (imovel.isSistemaSeguranca() ? "Sim" : "Não"));
     Label lblJardim = new Label("Jardim: " + (imovel.isJardim() ? "Sim" : "Não"));
+    
+        System.out.println("id propriettario " + proprietario.getId());
 
     VBox vInfo = new VBox(3, lblProprietario, lblId, lblValor, lblData, lblCidade, lblRua, lblTipoPropriedade, lblArea,
             lblQuartos, lblBanheiros, lblVagasGaragem, lblNumero, lblMobiliada, lblPiscina, lblSS, lblJardim);

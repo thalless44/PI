@@ -2,13 +2,18 @@ package controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -17,6 +22,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Cidade;
+import model.CidadeDAO;
+import static model.CidadeDAO.buscarCidades;
 import model.Propriedades;
 import model.PropriedadesDAO;
 import model.Proprietario;
@@ -37,6 +44,9 @@ public class TelaAlterarDadosImovelController {
 
     @FXML
     private Button btnEditarImovel;
+    
+    @FXML
+    private ContextMenu cTextMenuCidade;
 
     @FXML
     private Button btnCancelarEdicaoImovel;
@@ -132,15 +142,26 @@ public class TelaAlterarDadosImovelController {
 
         rbDisponivel.setToggleGroup(grupoDisponibilidade);
         rbNaoDisponivel.setToggleGroup(grupoDisponibilidade);
-
+        
         new LimitarCaracter(10, LimitarCaracter.TipoEntrada.DATA).applyToTextInputControl(txtDatacadastro);
         new LimitarCaracter(20, LimitarCaracter.TipoEntrada.VALOR).applyToTextInputControl(txtValor);
         carregarProprietarios();
+        
+        txtCidades.textProperty().addListener((obs, oldText, newText) -> {
+            if (newText.length() >= 2) {
+                List<String> sugestoes = buscarCidades(newText);
+                mostrarCidade(sugestoes);
+            } else {
+                cTextMenuCidade.hide();
+            }
+        });
     }
 
     private void carregarProprietarios() {
         cmbxProprietario.getItems().clear();
         cmbxProprietario.getItems().addAll(ProprietarioDAO.listarTodosProprietarios());
+        
+        
     }
 
     public void carregarDadosImovel(Propriedades propriedade) {
@@ -179,9 +200,9 @@ public class TelaAlterarDadosImovelController {
         rbNaoSG.setSelected(!propriedade.isSistemaSeguranca());
 
         // Falta ajustar isso, pois não está recebendo os atributos de Proprietário.
-        Proprietario prop = propriedade.getProprietario();
-        if (prop != null) {
-            cmbxProprietario.getSelectionModel().select(prop);
+        Proprietario proprietarioSelecionado = cmbxProprietario.getSelectionModel().getSelectedItem();
+        if (proprietarioSelecionado != null) {
+            cmbxProprietario.getSelectionModel().select(proprietarioSelecionado);
         } else {
             cmbxProprietario.getSelectionModel().clearSelection();
         }
@@ -208,6 +229,15 @@ public class TelaAlterarDadosImovelController {
         if (file != null) {
             Image image = new Image(file.toURI().toString(), false);
             imageViewImovel.setImage(image);
+            
+            try {
+            // Lê a imagem do arquivo e converte para byte[]
+            byte[] imagemBytes = java.nio.file.Files.readAllBytes(file.toPath());
+            propriedadeSelecionada.setImagem(imagemBytes); // SALVA OS BYTES NA PROPRIEDADE
+            propriedadeSelecionada.setImagemUrl(file.toURI().toString()); // Opcional: salva o caminho da imagem
+            } catch (IOException e) {
+            AlertaUtil.mostrarErro("Erro", "Erro ao carregar imagem", e.getMessage());
+        }
 
             // Você pode guardar o caminho da imagem em um atributo da propriedade (exemplo)
             // propriedadeSelecionada.setImagemUrl(file.toURI().toString());
@@ -218,7 +248,9 @@ public class TelaAlterarDadosImovelController {
     void onClickEditarImovel(ActionEvent event) {
         
             
-            Proprietario proprietario = propriedadeSelecionada.getProprietario();
+            Proprietario proprietario = cmbxProprietario.getSelectionModel().getSelectedItem();
+            
+            
             if (propriedadeSelecionada == null) {
                 AlertaUtil.mostrarErro("Erro", "Nenhum imóvel selecionado", "Não há imóvel para editar.");
                 return;
@@ -251,11 +283,20 @@ public class TelaAlterarDadosImovelController {
             boolean piscina = rbSimPiscina.isSelected();
             int numeroCasa = Integer.parseInt(txtNumeracaoImovel.getText());
             String area = txtArea.getText();
+            
+            int idCidade = CidadeDAO.buscarIdCidadePorNome(cidade);
+            if (idCidade == -1) {
+            AlertaUtil.mostrarErro("Cidade inválida", "A cidade informada não foi encontrada no banco de dados.");
+            return;
+            }
+            
+            
+            System.out.println("ID Proprietario: " + propriedadeSelecionada.getProprietario().getId());
 
             // Atualizar objeto
             propriedadeSelecionada.setProprietario(proprietario);
             propriedadeSelecionada.setTipoPropriedade(tipoPropriedade);
-            propriedadeSelecionada.setCidade(cidade);
+            propriedadeSelecionada.setIdCidade(idCidade);
             propriedadeSelecionada.setPreco(preco);
             propriedadeSelecionada.setDisponibilidade(disponibilidade);
             propriedadeSelecionada.setDataCadastro(dataCadastro);
@@ -270,7 +311,7 @@ public class TelaAlterarDadosImovelController {
             propriedadeSelecionada.setNumeroCasa(numeroCasa);
             propriedadeSelecionada.setArea(area);
 
-            // Se tiver imagem alterada, pode atualizar propriedadeSelecionada.setImagemUrl(...)
+             //propriedadeSelecionada.setImagemUrl(...)
             
             
 
@@ -313,11 +354,26 @@ public class TelaAlterarDadosImovelController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+    
+    public void mostrarCidade(List<String> sugestoes) {
+        cTextMenuCidade.getItems().clear();
 
-    private static class proprietario {
+        for (String sugestao : sugestoes) {
+            MenuItem item = new MenuItem(sugestao);
+            item.setOnAction(e -> {
+                txtCidades.setText(sugestao);
+                cTextMenuCidade.hide();
+            });
+            cTextMenuCidade.getItems().add(item);
+        }
 
-        public proprietario() {
+        if (!sugestoes.isEmpty()) {
+            cTextMenuCidade.show(txtCidades, Side.BOTTOM, 0, 0);
+        } else {
+            cTextMenuCidade.hide();
         }
     }
+
+    
 }
 

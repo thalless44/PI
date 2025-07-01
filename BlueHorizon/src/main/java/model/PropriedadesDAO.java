@@ -12,7 +12,7 @@ import java.util.List;
 public class PropriedadesDAO extends GenericDAO{
     
       public static boolean Propriedades(String tipo_propriedade, String endereco, Double preco, boolean disponibilidade, Date data_cadastro, String rua, 
-             int quartos, int banheiros, int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa, String area, int id_proprietario, int id_imagem, int id_cidade ) {
+             int quartos, int banheiros, int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa, String area, int idProprietario, int idImagem, int idCidade ) {
          
         String sql = "INSERT INTO propriedades (tipo_propriedade, endereco, preco, disponibilidade, data_cadastro, rua, quartos, banheiros, vagasGaragem,"
                   + " mobilia, jardim, sistemaSeguranca, piscina, numeroCasa, area, id_proprietario, id_imagem, id_cidade) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -35,9 +35,9 @@ public class PropriedadesDAO extends GenericDAO{
             stmt.setBoolean(13, piscina);
             stmt.setInt(14, numeroCasa);
             stmt.setString(15, area);
-            stmt.setInt(16, id_proprietario);
-            stmt.setInt(17, id_imagem);
-            stmt.setInt(18, id_cidade);
+            stmt.setInt(16, idProprietario);
+            stmt.setInt(17, idImagem);
+            stmt.setInt(18, idCidade);
 
             int linhasAfetadas = stmt.executeUpdate();
             return linhasAfetadas > 0;
@@ -91,6 +91,7 @@ public class PropriedadesDAO extends GenericDAO{
             proprietario.setNome(rs.getString("nome_proprietario"));
             proprietario.setTelefone(rs.getString("telefone"));
             proprietario.setEmail(rs.getString("email"));
+            proprietario.setId(rs.getInt("id_proprietario"));
             p.setProprietario(proprietario);
 
             
@@ -128,7 +129,8 @@ public class PropriedadesDAO extends GenericDAO{
 
     public static boolean atualizarPropriedade(Propriedades p) {
     String sql = "UPDATE propriedades SET tipo_propriedade = ?, endereco = ?, preco = ?, disponibilidade = ?, data_cadastro = ?, rua = ?, quartos = ?, "
-            + "banheiros  = ?, vagasGaragem = ?, mobilia = ?, jardim = ?, sistemaSeguranca = ?, piscina = ?, numeroCasa = ?, area = ?   WHERE id_propriedade = ?";
+        + "banheiros = ?, vagasGaragem = ?, mobilia = ?, jardim = ?, sistemaSeguranca = ?, piscina = ?, numeroCasa = ?, area = ?, id_proprietario = ?, id_cidade = ? "
+        + "WHERE id_propriedade = ?";
 
     try (Connection conn = ConexaoBD.conectar();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -148,7 +150,9 @@ public class PropriedadesDAO extends GenericDAO{
         stmt.setBoolean(13, p.isPiscina());
         stmt.setInt(14, p.getNumeroCasa());
         stmt.setString(15, p.getArea());
-        stmt.setInt(16, p.getId());  
+        stmt.setInt(16, p.getProprietario().getId());
+        stmt.setInt(17, p.getIdCidade());
+        stmt.setInt(18, p.getId());  
 
         int linhasAfetadas = stmt.executeUpdate();
         return linhasAfetadas > 0;
