@@ -116,9 +116,9 @@ public class TelaInformacoesPerfilController {
         }
         
         if(funcionario.getDataContratacao() != null){
-            DnID.setText(funcionario.getDataContratacao().format(formatter));
+            DcID.setText(funcionario.getDataContratacao().format(formatter));
         }else{
-            DnID.setText("Não informado");
+            DcID.setText("Não informado");
         }
         
             
