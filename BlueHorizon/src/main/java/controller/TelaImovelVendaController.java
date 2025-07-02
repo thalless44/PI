@@ -7,6 +7,7 @@ import java.net.URL;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +18,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Propriedades;
-import model.PropriedadesDAO;
 import model.Proprietario;
 import util.AlertaUtil;
 
@@ -29,79 +30,42 @@ public class TelaImovelVendaController {
     private Propriedades propriedadeSelecionada;
     private Proprietario prop;
 
-    @FXML
-    private Button btnEditarImovel;
+    @FXML private Button btnEditarImovel;
+    @FXML private Button btnEfetuarVenda;
+    @FXML private Button btnSair;
 
-    @FXML
-    private ImageView Image;
+    @FXML private Label lblArea;
+    @FXML private Label lblBanheiros;
+    @FXML private Label lblCidade;
+    @FXML private Label lblDataCadastro;
+    @FXML private Label lblDisponibilidade;
+    @FXML private Label lblEmail;
+    @FXML private Label lblImovelVenda;
+    @FXML private Label lblJardim;
+    @FXML private Label lblMobiliada;
+    @FXML private Label lblNome;
+    @FXML private Label lblNumeracaoImovel;
+    @FXML private Label lblPiscina;
+    @FXML private Label lblQuartos;
+    @FXML private Label lblRua;
+    @FXML private Label lblSistemaSegurança;
+    @FXML private Label lblTelefone;
+    @FXML private Label lblVagasGaragem;
+    @FXML private Label lblValor;
 
-    @FXML
-    private Button btnEfetuarVenda;
+    @FXML private ImageView Image;
 
-    @FXML
-    private Button btnSair;
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
-    @FXML
-    private Label lblArea;
-
-    @FXML
-    private Label lblBanheiros;
-
-    @FXML
-    private Label lblCidade;
-
-    @FXML
-    private Label lblDataCadastro;
-
-    @FXML
-    private Label lblDisponibilidade;
-
-    @FXML
-    private Label lblEmail;
-
-    @FXML
-    private Label lblImovelVenda;
-
-    @FXML
-    private Label lblJardim;
-
-    @FXML
-    private Label lblMobiliada;
-
-    @FXML
-    private Label lblNome;
-
-    @FXML
-    private Label lblNumeracaoImovel;
-
-    @FXML
-    private Label lblPiscina;
-
-    @FXML
-    private Label lblQuartos;
-
-    @FXML
-    private Label lblRua;
-
-    @FXML
-    private Label lblSistemaSegurança;
-
-    @FXML
-    private Label lblTelefone;
-
-    @FXML
-    private Label lblVagasGaragem;
-
-    @FXML
-    private Label lblValor;
-
-    @FXML
+     @FXML
     public void carregarDadosImovel(Propriedades imovel, Proprietario proprietario) {
         this.propriedadeSelecionada = imovel;
         this.prop = imovel.getProprietario();
-        
-         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
         lblImovelVenda.setText(imovel.getTipoPropriedade());
         lblRua.setText(imovel.getRua());
@@ -117,21 +81,24 @@ public class TelaImovelVendaController {
         lblPiscina.setText(imovel.isPiscina() ? "Sim" : "Não");
         lblNumeracaoImovel.setText(String.valueOf(imovel.getNumeroCasa()));
         lblArea.setText(imovel.getArea());
-        lblValor.setText(currencyFormat.format(imovel.getPreco()));          
-        
-
+        lblValor.setText(currencyFormat.format(imovel.getPreco()));
 
         if (imovel.getImagem() != null) {
             ByteArrayInputStream bis = new ByteArrayInputStream(imovel.getImagem());
-            Image.setImage(new Image(bis));
+            Image imagem = new Image(bis);
+            Image.setImage(imagem);
+
+            // Ajuste pra forçar o ImageView a ser quadrado e a imagem preencher:
+            Image.setFitWidth(367);
+            Image.setFitHeight(203);
+            Image.setPreserveRatio(false); // NÃO mantém proporção, pra preencher o quadrado e cortar o que não cabe
+            Image.setSmooth(true);
+            Image.setCache(true);
         }
 
-        
-            lblNome.setText(" "+prop.getNome());
-            lblTelefone.setText(prop.getTelefone());
-            lblEmail.setText(prop.getEmail());
-            System.out.println("id proprietario" + proprietario.getId());
-
+        lblNome.setText(" " + prop.getNome());
+        lblTelefone.setText(prop.getTelefone());
+        lblEmail.setText(prop.getEmail());
     }
 
     @FXML
@@ -140,31 +107,24 @@ public class TelaImovelVendaController {
             URL url = new File("src/main/java/view/TelaAlterarDadosImovel.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
-
-            // Pega o controller da tela de pagamento
             TelaAlterarDadosImovelController tEI = loader.getController();
 
-            
             tEI.carregarDadosImovel(propriedadeSelecionada);
 
             Stage telaEdImovel = new Stage();
             tEI.setStage(telaEdImovel);
 
             Scene scene = new Scene(root);
-
             Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
             telaEdImovel.getIcons().add(icone);
 
             telaEdImovel.setScene(scene);
-            telaEdImovel.setTitle("BlueHorizon - Pagamento");
+            telaEdImovel.setTitle("BlueHorizon - Alterar Imóvel");
             telaEdImovel.setMaximized(false);
             telaEdImovel.show();
-
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Erro ao abrir a tela de pagamento.");
         }
-        
     }
 
     @FXML
@@ -174,17 +134,13 @@ public class TelaImovelVendaController {
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
 
-            // Pega o controller da tela de pagamento
             TelaPagamentoController tp = loader.getController();
-
-            // Passa o imóvel selecionado para a tela de pagamento
             tp.setPropriedade(propriedadeSelecionada);
 
             Stage telaPG = new Stage();
             tp.setStage(telaPG);
 
             Scene scene = new Scene(root);
-
             Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
             telaPG.getIcons().add(icone);
 
@@ -192,10 +148,8 @@ public class TelaImovelVendaController {
             telaPG.setTitle("BlueHorizon - Pagamento");
             telaPG.setMaximized(false);
             telaPG.show();
-
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Erro ao abrir a tela de pagamento.");
         }
     }
 
@@ -211,13 +165,9 @@ public class TelaImovelVendaController {
 
     private boolean FecharTelaImovelVenda() {
         return AlertaUtil.mostrarConfirmacao(
-                "Confirmação",
-                "Tem certeza que deseja sair da tela do imóvel?",
-                "Todas as alterações não salvas serão perdidas!"
+            "Confirmação",
+            "Tem certeza que deseja sair da tela do imóvel?",
+            "Todas as alterações não salvas serão perdidas!"
         ).filter(response -> response == ButtonType.OK).isPresent();
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
     }
 }

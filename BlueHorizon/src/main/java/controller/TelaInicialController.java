@@ -28,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Cidade;
@@ -507,30 +508,32 @@ void onClickProprietario(ActionEvent event) {
     }
     
     
-    private VBox criarCard(Propriedades imovel) {
-        
+   private VBox criarCard(Propriedades imovel) {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-            
+
+    // Converte byte[] para imagem
     ByteArrayInputStream bis = new ByteArrayInputStream(imovel.getImagem());
     Image imagem = new Image(bis);
+
+    // Configura o ImageView com proporção preservada
     ImageView imageView = new ImageView(imagem);
-    imageView.setFitWidth(200);
-    imageView.setFitHeight(400);
+    imageView.setFitWidth(300);
+    imageView.setFitHeight(200);
     imageView.setPreserveRatio(true);
     imageView.setSmooth(true);
     imageView.setCache(true);
-    imageView.setStyle("-fx-background-color: #e0e0e0;");
 
-   
+    // Usa StackPane pra centralizar e limitar o tamanho do contêiner
+    StackPane imgPane = new StackPane(imageView);
+    imgPane.setPrefSize(300, 200);
+    imgPane.setMaxSize(300, 200);
+    imgPane.setStyle("-fx-background-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8;");
+
     Proprietario proprietario = imovel.getProprietario();
     String nomeProprietario = proprietario != null ? proprietario.getNome() : "Não informado";
-    String cidade = imovel.getCidade(); 
-    
-    
-    
-    
-    
+    String cidade = imovel.getCidade();
+
     Label lblId = new Label("ID: " + imovel.getId());
     Label lblProprietario = new Label("Proprietário: " + nomeProprietario);
     Label lblValor = new Label("Valor: " + currencyFormat.format(imovel.getPreco()));
@@ -547,20 +550,21 @@ void onClickProprietario(ActionEvent event) {
     Label lblPiscina = new Label("Piscina: " + (imovel.isPiscina() ? "Sim" : "Não"));
     Label lblSS = new Label("Sistema de Segurança: " + (imovel.isSistemaSeguranca() ? "Sim" : "Não"));
     Label lblJardim = new Label("Jardim: " + (imovel.isJardim() ? "Sim" : "Não"));
-    
-        System.out.println("id propriettario " + proprietario.getId());
 
-    VBox vInfo = new VBox(3, lblId, lblProprietario, lblCidade, lblRua, lblValor, lblData, lblTipoPropriedade, lblArea,
-            lblQuartos, lblBanheiros, lblVagasGaragem, lblNumero, lblMobiliada, lblPiscina, lblSS, lblJardim);
+    VBox vInfo = new VBox(3,
+        lblId, lblProprietario, lblCidade, lblRua, lblValor, lblData,
+        lblTipoPropriedade, lblArea, lblQuartos, lblBanheiros,
+        lblVagasGaragem, lblNumero, lblMobiliada, lblPiscina, lblSS, lblJardim
+    );
     vInfo.setPadding(new Insets(5, 0, 0, 0));
 
-    VBox card = new VBox(10, imageView, vInfo);
+    VBox card = new VBox(10, imgPane, vInfo);
     card.setPadding(new Insets(10));
     card.setStyle("-fx-background-color: #f5f5f5; -fx-border-color: #bbb; -fx-border-radius: 8; -fx-background-radius: 8;");
     card.setCursor(Cursor.HAND);
     card.setAlignment(Pos.CENTER_LEFT);
 
-    
+    // Evento de clique pra abrir tela de detalhes
     card.setOnMouseClicked(event -> {
         try {
             abrirNovaTela(imovel, proprietario);
@@ -571,8 +575,6 @@ void onClickProprietario(ActionEvent event) {
 
     return card;
 }
-
-
     
     private void abrirNovaTela(Propriedades imovel, Proprietario proprietario) throws IOException {
         URL url = new File("src/main/java/View/TelaImovelVenda.fxml").toURI().toURL();

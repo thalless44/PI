@@ -2,7 +2,10 @@ package controller;
 
 import java.io.File;
 import java.net.URL;
+import java.text.NumberFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
@@ -42,6 +46,9 @@ public class TelaUsuarioSistemaController {
     @FXML private TableColumn<Funcionario, String> TableColumnSalario;
     @FXML private TableColumn<Funcionario, java.time.LocalDate> TableColumnNascimento;
     @FXML private TableColumn<Funcionario, java.time.LocalDate> TableColumnContratacao;
+    
+    private final NumberFormat moedaBR = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+    private final DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -54,18 +61,50 @@ public class TelaUsuarioSistemaController {
     }
 
     private void configurarColunasTabela() {
-        
-        TableColumnID.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-        TableColumnNome.setCellValueFactory(cellData -> cellData.getValue().nomeProperty());
-        TableColumnCPF.setCellValueFactory(cellData -> cellData.getValue().cpfProperty());
-        TableColumnTelefone.setCellValueFactory(cellData -> cellData.getValue().telefoneProperty());
-        TableColumnEndereco.setCellValueFactory(cellData -> cellData.getValue().enderecoProperty());
-        TableColumnEmail.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
-        TableColumnCargo.setCellValueFactory(cellData -> cellData.getValue().CargoProperty());
-        TableColumnSalario.setCellValueFactory(cellData -> cellData.getValue().salarioProperty());
-        TableColumnNascimento.setCellValueFactory(cellData -> cellData.getValue().dataNascimentoProperty());
-        TableColumnContratacao.setCellValueFactory(cellData -> cellData.getValue().dataContratacaoProperty());
-    }
+    TableColumnID.setCellValueFactory(cellData -> cellData.getValue().idProperty());
+    TableColumnNome.setCellValueFactory(cellData -> cellData.getValue().nomeProperty());
+    TableColumnCPF.setCellValueFactory(cellData -> cellData.getValue().cpfProperty());
+    TableColumnTelefone.setCellValueFactory(cellData -> cellData.getValue().telefoneProperty());
+    TableColumnEndereco.setCellValueFactory(cellData -> cellData.getValue().enderecoProperty());
+    TableColumnEmail.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+    TableColumnCargo.setCellValueFactory(cellData -> cellData.getValue().CargoProperty());
+    TableColumnSalario.setCellValueFactory(cellData -> cellData.getValue().salarioProperty());
+    TableColumnSalario.setCellFactory(column -> new TableCell<Funcionario, String>() {
+        @Override
+        protected void updateItem(String salario, boolean empty) {
+            super.updateItem(salario, empty);
+            if (empty || salario == null) {
+                setText(null);
+            } else {
+                try {
+                    double valor = Double.parseDouble(salario);
+                    setText(moedaBR.format(valor));
+                } catch (NumberFormatException e) {
+                    setText(salario); 
+                }
+            }
+        }
+    });
+
+    // Datas: mostra no padrão dd/MM/yyyy
+    TableColumnNascimento.setCellValueFactory(cellData -> cellData.getValue().dataNascimentoProperty());
+    TableColumnNascimento.setCellFactory(column -> new TableCell<Funcionario, java.time.LocalDate>() {
+        @Override
+        protected void updateItem(java.time.LocalDate data, boolean empty) {
+            super.updateItem(data, empty);
+            setText(empty || data == null ? "" : data.format(formatoData));
+        }
+    });
+
+    TableColumnContratacao.setCellValueFactory(cellData -> cellData.getValue().dataContratacaoProperty());
+    TableColumnContratacao.setCellFactory(column -> new TableCell<Funcionario, java.time.LocalDate>() {
+        @Override
+        protected void updateItem(java.time.LocalDate data, boolean empty) {
+            super.updateItem(data, empty);
+            setText(empty || data == null ? "" : data.format(formatoData));
+        }
+    });
+}
 
     private void carregarUsuariosTabela() {
         List<Funcionario> lista = FuncionarioDAO.listarTodos();
@@ -102,7 +141,7 @@ public class TelaUsuarioSistemaController {
         Stage telaADF = new Stage();
 
         tadfc.setStage(telaADF);
-        tadfc.setFuncionario(funcionarioSelecionado);  // ✅ Passa o objeto só uma vez, no lugar certo
+        tadfc.setFuncionario(funcionarioSelecionado);  
 
         Scene scene = new Scene(root);
         
@@ -117,7 +156,6 @@ public class TelaUsuarioSistemaController {
            
           } catch (Exception e) {
         e.printStackTrace();
-        // Aqui você pode também mostrar um alerta visual, se quiser
     }
 }
 

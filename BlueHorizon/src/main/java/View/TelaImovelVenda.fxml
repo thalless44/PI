@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
@@ -12,16 +13,16 @@
 
 <FlowPane alignment="CENTER" columnHalignment="CENTER" minHeight="609.0" minWidth="700.0" prefHeight="644.0" prefWidth="892.0" style="-fx-background-color: #6ec4e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaImovelVendaController">
    <children>
-        <Pane prefHeight="631.0" prefWidth="896.0" style="-fx-background-color: #6EC4E9;">
-            <effect>
-                <DropShadow>
-                    <color>
-                        <Color fx:constant="GRAY" />
-                    </color>
-                </DropShadow>
-            </effect>
-            <children>
-                <Button fx:id="btnEfetuarVenda" layoutX="392.0" layoutY="497.0" mnemonicParsing="false" onAction="#ActionEfetuarVenda" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #7eb97b;" text="Efetuar venda" />
+      <Pane prefHeight="631.0" prefWidth="896.0" style="-fx-background-color: #6EC4E9;">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color fx:constant="GRAY" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <Button fx:id="btnEfetuarVenda" layoutX="392.0" layoutY="497.0" mnemonicParsing="false" onAction="#ActionEfetuarVenda" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #7eb97b;" text="Efetuar venda" />
             <Label fx:id="lblImovelVenda" layoutX="343.0" layoutY="27.0" text="IMÓVEL À VENDA">
                <font>
                   <Font name="System Bold" size="25.0" />
@@ -29,21 +30,20 @@
             </Label>
             <Button fx:id="btnEditarImovel" layoutX="392.0" layoutY="545.0" mnemonicParsing="false" onAction="#ActionEditarImovel" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #EBDB8C;" text="Editar imóvel" />
             <Button fx:id="btnSair" layoutX="392.0" layoutY="592.0" mnemonicParsing="false" onAction="#ActionSair" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #DC7777;" text="Sair" />
-            <Pane layoutX="34.0" layoutY="88.0" prefHeight="203.0" prefWidth="367.0" style="-fx-background-color: #FFFF;">
-               <effect>
-                  <DropShadow />
-               </effect>
+            
+            <AnchorPane layoutX="33.0" layoutY="87.0" prefHeight="188.0" prefWidth="367.0">
                <children>
-                  <ImageView fx:id="Image" fitHeight="203.0" fitWidth="367.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="Image" cache="true" fitHeight="205.0" fitWidth="367.0" pickOnBounds="true" preserveRatio="false" smooth="true" />
                </children>
-            </Pane>
+            </AnchorPane>
+            
             <Pane layoutX="441.0" layoutY="88.0" prefHeight="359.0" prefWidth="422.0" style="-fx-background-color: #d9d9d9;">
                <effect>
                   <DropShadow />
                </effect>
                <children>
                   <Label layoutX="13.0" layoutY="45.0" text="Valor:" />
-                  <Label layoutX="11.0" layoutY="79.0" text="Disponibildade:" />
+                  <Label layoutX="11.0" layoutY="79.0" text="Disponibilidade:" />
                   <Label layoutX="14.0" layoutY="113.0" text="Data de cadastro:" />
                   <Label layoutX="150.0" layoutY="6.0" text="Informações do imóvel" />
                   <Line endX="252.0" layoutX="155.0" layoutY="161.0" startX="-142.0" />
@@ -58,6 +58,7 @@
                   <Label layoutX="203.0" layoutY="266.0" prefHeight="17.0" prefWidth="55.0" text="Endereço:" />
                   <Label layoutX="15.0" layoutY="315.0" text="Jardim:" />
                   <Label layoutX="203.0" layoutY="290.0" text="Numeração do imóvel:" />
+                  
                   <Label fx:id="lblValor" layoutX="43.0" layoutY="45.0" prefHeight="17.0" prefWidth="367.0" />
                   <Label fx:id="lblDisponibilidade" layoutX="93.0" layoutY="79.0" prefHeight="17.0" prefWidth="322.0" />
                   <Label fx:id="lblDataCadastro" layoutX="112.0" layoutY="113.0" prefHeight="17.0" prefWidth="295.0" />
@@ -74,6 +75,7 @@
                   <Label fx:id="lblNumeracaoImovel" layoutX="323.0" layoutY="290.0" prefHeight="17.0" prefWidth="92.0" />
                </children>
             </Pane>
+            
             <Pane layoutX="33.0" layoutY="304.0" prefHeight="144.0" prefWidth="367.0" style="-fx-background-color: #d9d9d9;">
                <effect>
                   <DropShadow />
@@ -83,12 +85,13 @@
                   <Label layoutX="14.0" layoutY="39.0" text="Nome:" />
                   <Label layoutX="14.0" layoutY="72.0" text="Email:" />
                   <Label layoutX="14.0" layoutY="104.0" text="Telefone:" />
+                  
                   <Label fx:id="lblNome" layoutX="48.0" layoutY="39.0" prefHeight="17.0" prefWidth="311.0" />
                   <Label fx:id="lblEmail" layoutX="48.0" layoutY="72.0" prefHeight="17.0" prefWidth="311.0" />
                   <Label fx:id="lblTelefone" layoutX="64.0" layoutY="104.0" prefHeight="17.0" prefWidth="295.0" />
                </children>
             </Pane>
-            </children>
-        </Pane>
+         </children>
+      </Pane>
    </children>
 </FlowPane>

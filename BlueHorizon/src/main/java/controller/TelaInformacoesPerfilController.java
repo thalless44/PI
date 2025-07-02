@@ -52,48 +52,46 @@ public class TelaInformacoesPerfilController {
     @FXML
     private Label nomeID;
     
+    private Funcionario funcionario;
+    
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
     @FXML
-    void OnClickPersonalizarPerfil(ActionEvent event) {
+    void OnClickPersonalizarPerfil(ActionEvent event) throws IOException {
         
-        try {
-            URL url = new File("src/main/java/view/TelaPersonalizacaoPerfil.fxml").toURI().toURL();
+        try{
+         URL url = new File("src/main/java/view/TelaPersonalizacaoPerfil.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
+
+            TelaPersonalizacaoPerfilController ti = loader.getController();
+            ti.setStage(stage);
+            ti.setFuncionario(funcionario); // <- PASSANDO FUNCIONÁRIO PRA TELA DE PERSONALIZAÇÃO
+
             Stage telaPerfil = new Stage();
-            TelaPersonalizacaoPerfilController ti = loader.getController(); 
-            ti.setStage(telaPerfil);
             Scene scene = new Scene(root);
-            
+
             Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
             telaPerfil.getIcons().add(icone);
-        
+
             telaPerfil.setScene(scene);
             telaPerfil.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Personalização de perfil");
-
             telaPerfil.setMaximized(true);
             telaPerfil.show();
+
+            // <- ATUALIZA A TELA QUANDO A TELA DE PERSONALIZAÇÃO FECHAR
+            telaPerfil.setOnHiding(e -> preencherInformacoesPerfil(funcionario));
+
             } catch (IOException e) {
             e.printStackTrace();
             }
     }
-    
-    @FXML
-    void OnClickSairInformacoesPerfil(ActionEvent event) {
-        
-        if (FecharTelaInformacoesPerfil()) {              
-            Stage stage = (Stage) btnSair.getScene().getWindow();
-            stage.close();          
-        } else {
-            event.consume();
-        }
-    }
-    
-    public void preencherInformacoesPerfil(Funcionario funcionario){
-        
+
+    public void preencherInformacoesPerfil(Funcionario funcionario) {
+    this.funcionario = funcionario;
+
         if(funcionario != null){
             
         nomeID.setText(funcionario.getNome());
@@ -122,6 +120,20 @@ public class TelaInformacoesPerfilController {
         }
         
             
+        }
+
+
+    }
+    
+    
+    @FXML
+    void OnClickSairInformacoesPerfil(ActionEvent event) {
+        
+        if (FecharTelaInformacoesPerfil()) {              
+            Stage stage = (Stage) btnSair.getScene().getWindow();
+            stage.close();          
+        } else {
+            event.consume();
         }
     }
 

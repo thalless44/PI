@@ -26,26 +26,14 @@ public class AlertaUtil {
         mostrarAlerta(Alert.AlertType.ERROR, titulo, headerText, mensagem);
     }
     
-    public static void mostrarErro(String titulo, String mensagem) {
-        mostrarAlerta(Alert.AlertType.ERROR, titulo, null, mensagem);
-    }
-    
     // Informação
     public static void mostrarInformacao(String titulo, String headerText, String mensagem) {
         mostrarAlerta(Alert.AlertType.INFORMATION, titulo, headerText, mensagem);
-    }
-
-    public static void mostrarInformacao(String titulo, String mensagem) {
-        mostrarAlerta(Alert.AlertType.INFORMATION, titulo, null, mensagem);
     }
     
     // Aviso
     public static void mostrarAviso(String titulo, String headerText, String mensagem) {
         mostrarAlerta(Alert.AlertType.WARNING, titulo, headerText, mensagem);
-    }
-
-    public static void mostrarAviso(String titulo, String mensagem) {
-        mostrarAlerta(Alert.AlertType.WARNING, titulo, null, mensagem);
     }
     
     // Confirmação

@@ -42,6 +42,33 @@ public class ContratoDAO {
 
     return idGerado;
 }
+   
+    public static List<Contrato> listarContratosCompletos() {
+    List<Contrato> contratos = new ArrayList<>();
+
+    String sql = "SELECT c.id_contrato, c.dataContrato, c.valorCompra, c.id_propriedade, c.id_cliente FROM contratos c";
+
+    try (Connection conn = ConexaoBD.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            Contrato contrato = new Contrato();
+            contrato.setIdContrato(rs.getInt("id_contrato"));
+            contrato.setDataContrato(rs.getDate("dataContrato").toLocalDate());
+            contrato.setValorCompra(rs.getDouble("valorCompra"));
+            contrato.setIdImovel(rs.getInt("id_propriedade"));
+            contrato.setIdCliente(rs.getInt("id_cliente"));
+
+            contratos.add(contrato);
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return contratos;
+}
 
     
 }

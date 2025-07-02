@@ -26,12 +26,13 @@
                         <Font name="System Bold" size="25.0" />
                     </font>
                 </Label>
-            <TableView layoutX="63.0" layoutY="84.0" prefHeight="469.0" prefWidth="818.0">
+            <TableView fx:id="tblContratos" layoutX="63.0" layoutY="84.0" prefHeight="469.0" prefWidth="818.0">
               <columns>
-                <TableColumn fx:id="tblImovel" prefWidth="197.0" text="ID Imóvel" />
-                <TableColumn fx:id="tblCidade" minWidth="0.0" prefWidth="206.0" text="Cidade" />
-                  <TableColumn fx:id="tblDataCadastro" prefWidth="206.0" text="Data de cadastro" />
-                  <TableColumn fx:id="tblValor" prefWidth="208.0" text="Valor" />
+                <TableColumn fx:id="colIdContrato" prefWidth="141.60001754760742" text="ID do contrato" />
+                <TableColumn fx:id="colDataContrato" minWidth="0.0" prefWidth="156.00001525878906" text="Data do contrato" />
+                  <TableColumn fx:id="colValorCompra" prefWidth="182.4000244140625" text="Valor da compra" />
+                  <TableColumn fx:id="colIdPropriedade" prefWidth="165.60003662109375" text="ID da propriedade" />
+                  <TableColumn fx:id="colIdCliente" prefWidth="169.5999755859375" text="ID do cliente" />
               </columns>
             </TableView>
             <Button fx:id="btnSair" layoutX="411.0" layoutY="566.0" mnemonicParsing="false" onAction="#OnClickbntSair" prefHeight="31.0" prefWidth="122.0" style="-fx-background-color: BDBDBD;" text="SAIR">

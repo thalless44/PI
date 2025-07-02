@@ -79,70 +79,64 @@ public class TelaAlterarDadosFuncionariosController {
     }
 
     @FXML
-    void ActionAlterarDadosFuncionario(ActionEvent event) throws SQLException {
-        
-         boolean dataValidaNascimento = LimitarCaracter.VerificarData.validarData(txtfdAlterarDataNascimentoFuncionario.getText());
-         boolean dataValidaContratacao = LimitarCaracter.VerificarData.validarData(txtfdAlterarDataContratoFuncionario.getText());
-         
-          if (txtfdNomeFuncionarioAlterar.getText().isEmpty()||txtfdAlterarCPFFuncionario.getText().isEmpty()||txtfdAlterarEnderecoFuncionario.getText().isEmpty()
-                  || txtfdAlterarTelefoneFuncionario.getText().isEmpty() || txtfdAlterarEmailFuncionario.getText().isEmpty()||txtfdAlterarSenhaFuncionario.getText().isEmpty()
-                  || txtfdAlterarSalarioFuncionario.getText().isEmpty()|| txtfdAlterarDataContratoFuncionario.getText().isEmpty()||txtfdAlterarDataNascimentoFuncionario.getText().isEmpty()){
-            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Todos os campos devem ser preenchidos!");
-            
-        }else if (txtfdAlterarTelefoneFuncionario.getText().length()!=13){
-            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Telefone.");
-            
-        }else if (txtfdAlterarCPFFuncionario.getText().length()!=14){
-            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo CPF.");
-        
-        }else if(txtfdAlterarSalarioFuncionario.getText().length()<4){
-            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Salario.");
-        
-        }else if(txtfdAlterarEmailFuncionario.getText().length()<10){
-            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Email.");
-            
-        }else if(txtfdAlterarDataContratoFuncionario.getText().length()!=10 || !dataValidaContratacao ){
-            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Data de Contratação.");
-      
-        }else if(txtfdAlterarDataNascimentoFuncionario.getText().length()!=10 || !dataValidaNascimento){
-            AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Data de Nascimento.");
-            
-        }else{
-       // Ajuste nas variáveis
-    funcionario.setNome(txtfdNomeFuncionarioAlterar.getText());
-    funcionario.setCpf(txtfdAlterarCPFFuncionario.getText());
-    funcionario.setTelefone(txtfdAlterarTelefoneFuncionario.getText());
-    funcionario.setEndereco(txtfdAlterarEnderecoFuncionario.getText());
-    funcionario.setEmail(txtfdAlterarEmailFuncionario.getText());
-    funcionario.setSenha(txtfdAlterarSenhaFuncionario.getText());
-    
-    // Valida e seta o cargo se o valor não for nulo
-    if (cmbxAlterarCargoFuncionario.getValue() != null) {
-        funcionario.setCargo(cmbxAlterarCargoFuncionario.getValue());
-    }
+void ActionAlterarDadosFuncionario(ActionEvent event) throws SQLException {
 
-        funcionario.setSalario(txtfdAlterarSalarioFuncionario.getText());
+    boolean dataValidaNascimento = LimitarCaracter.VerificarData.validarData(txtfdAlterarDataNascimentoFuncionario.getText());
+    boolean dataValidaContratacao = LimitarCaracter.VerificarData.validarData(txtfdAlterarDataContratoFuncionario.getText());
 
-    // Validação da Data de Nascimento e data de contrato
+    if (txtfdNomeFuncionarioAlterar.getText().isEmpty() || txtfdAlterarCPFFuncionario.getText().isEmpty() ||
+        txtfdAlterarEnderecoFuncionario.getText().isEmpty() || txtfdAlterarTelefoneFuncionario.getText().isEmpty() ||
+        txtfdAlterarEmailFuncionario.getText().isEmpty() || txtfdAlterarSenhaFuncionario.getText().isEmpty() ||
+        txtfdAlterarSalarioFuncionario.getText().isEmpty() || txtfdAlterarDataContratoFuncionario.getText().isEmpty() ||
+        txtfdAlterarDataNascimentoFuncionario.getText().isEmpty()) {
 
+        AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Todos os campos devem ser preenchidos!");
+
+    } else if (txtfdAlterarTelefoneFuncionario.getText().length() != 13) {
+        AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Telefone.");
+
+    } else if (txtfdAlterarCPFFuncionario.getText().length() != 14) {
+        AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo CPF.");
+
+    } else if (txtfdAlterarSalarioFuncionario.getText().length() < 4) {
+        AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Salário.");
+
+    } else if (txtfdAlterarEmailFuncionario.getText().length() < 10) {
+        AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Email.");
+
+    } else if (txtfdAlterarDataContratoFuncionario.getText().length() != 10 || !dataValidaContratacao) {
+        AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Data de Contratação.");
+
+    } else if (txtfdAlterarDataNascimentoFuncionario.getText().length() != 10 || !dataValidaNascimento) {
+        AlertaUtil.mostrarErro("Erro", "Erro ao cadastrar", "Verifique o campo Data de Nascimento.");
+
+    } else {
+        // Converter as datas de String para LocalDate
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataNascimentoLD = LocalDate.parse(txtfdAlterarDataNascimentoFuncionario.getText(), formato);
         LocalDate dataContratacaoLD = LocalDate.parse(txtfdAlterarDataContratoFuncionario.getText(), formato);
 
-        Date dataNascimento = Date.valueOf(dataNascimentoLD);
-        Date dataContratacao = Date.valueOf(dataContratacaoLD);
-    
+        // Atualiza o objeto funcionário com os novos valores
+        funcionario.setNome(txtfdNomeFuncionarioAlterar.getText());
+        funcionario.setCpf(txtfdAlterarCPFFuncionario.getText());
+        funcionario.setTelefone(txtfdAlterarTelefoneFuncionario.getText());
+        funcionario.setEndereco(txtfdAlterarEnderecoFuncionario.getText());
+        funcionario.setEmail(txtfdAlterarEmailFuncionario.getText());
+        funcionario.setSenha(txtfdAlterarSenhaFuncionario.getText());
+        if (cmbxAlterarCargoFuncionario.getValue() != null) {
+            funcionario.setCargo(cmbxAlterarCargoFuncionario.getValue());
+        }
+        funcionario.setSalario(txtfdAlterarSalarioFuncionario.getText());
+        funcionario.setDataNascimento(dataNascimentoLD);
+        funcionario.setDataContratacao(dataContratacaoLD);
+
+        // Atualiza o banco com o funcionário atualizado
+        FuncionarioDAO.atualizarFuncionario(funcionario);
+
+        // Fecha a tela
+        ((Stage) ((Button) event.getSource()).getScene().getWindow()).close();
     }
-
-    // Atualizar no banco
-    FuncionarioDAO.atualizarFuncionario(funcionario);
-
-    // Fechar a tela
-    ((Stage) ((Button) event.getSource()).getScene().getWindow()).close(); 
-       
-    }
-         
-
+}
 
     @FXML
     void ActionCancelar(ActionEvent event) {
@@ -176,7 +170,7 @@ public class TelaAlterarDadosFuncionariosController {
         cmbxAlterarCargoFuncionario.setValue(funcionario.getCargo());
         txtfdAlterarSalarioFuncionario.setText(String.valueOf(funcionario.getSalario()));
         
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         txtfdAlterarDataNascimentoFuncionario.setText(funcionario.getDataNascimento().format(formatter));
         txtfdAlterarDataContratoFuncionario.setText(funcionario.getDataContratacao().format(formatter));

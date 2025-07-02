@@ -285,7 +285,8 @@ public class TelaAlterarDadosImovelController {
             
             int idCidade = CidadeDAO.buscarIdCidadePorNome(cidade);
             if (idCidade == -1) {
-            AlertaUtil.mostrarErro("Cidade inválida", "A cidade informada não foi encontrada no banco de dados.");
+            
+                AlertaUtil.mostrarErro("Erro", "Cidade inválida!", "A cidade informada não foi encontrada no banco de dados");
             return;
             }
             
@@ -317,7 +318,7 @@ public class TelaAlterarDadosImovelController {
             boolean atualizado = PropriedadesDAO.atualizarPropriedade(propriedadeSelecionada);
 
             if (atualizado) {
-                AlertaUtil.mostrarInformacao("Sucesso", "Imóvel atualizado com sucesso!");
+                AlertaUtil.mostrarInformacao("Sucesso", "Alterar dados do imóvel", "Imóvel atualizado com sucesso!");
                 fecharTela();
             } else {
                 AlertaUtil.mostrarErro("Erro", "Falha ao atualizar o imóvel", "Tente novamente.");

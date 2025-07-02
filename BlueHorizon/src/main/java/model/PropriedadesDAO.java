@@ -129,7 +129,7 @@ public class PropriedadesDAO extends GenericDAO{
 
     public static boolean atualizarPropriedade(Propriedades p) {
     String sql = "UPDATE propriedades SET tipo_propriedade = ?, endereco = ?, preco = ?, disponibilidade = ?, data_cadastro = ?, rua = ?, quartos = ?, "
-        + "banheiros = ?, vagasGaragem = ?, mobilia = ?, jardim = ?, sistemaSeguranca = ?, piscina = ?, numeroCasa = ?, area = ?, id_proprietario = ?, id_cidade = ? "
+        + "banheiros = ?, vagasGaragem = ?, mobilia = ?, jardim = ?, sistemaSeguranca = ?, piscina = ?, numeroCasa = ?, area = ?, id_proprietario = ? "
         + "WHERE id_propriedade = ?";
 
     try (Connection conn = ConexaoBD.conectar();
@@ -151,8 +151,7 @@ public class PropriedadesDAO extends GenericDAO{
         stmt.setInt(14, p.getNumeroCasa());
         stmt.setString(15, p.getArea());
         stmt.setInt(16, p.getProprietario().getId());
-        stmt.setInt(17, p.getIdCidade());
-        stmt.setInt(18, p.getId());  
+        stmt.setInt(17, p.getId());  
 
         int linhasAfetadas = stmt.executeUpdate();
         return linhasAfetadas > 0;
@@ -161,4 +160,17 @@ public class PropriedadesDAO extends GenericDAO{
         return false;
     }
   }
+    
+    // Atualiza o imóvel (inclusive a disponibilidade)
+    public void atualizar(Propriedades propriedade) throws SQLException {
+        String sql = "UPDATE propriedades SET disponibilidade = ? WHERE id_propriedade = ?";
+        try (Connection conn = ConexaoBD.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setBoolean(1, propriedade.isDisponibilidade());
+            stmt.setInt(2, propriedade.getId());
+            stmt.executeUpdate();
+        }
+    }
+    
 }

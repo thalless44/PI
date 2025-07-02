@@ -8,9 +8,11 @@ public class Contrato {
     private final IntegerProperty idContrato = new SimpleIntegerProperty();
     private final ObjectProperty<LocalDate> dataContrato = new SimpleObjectProperty<>();
     private final DoubleProperty valorCompra = new SimpleDoubleProperty();
+    private final IntegerProperty idImovel = new SimpleIntegerProperty();  
+    private final IntegerProperty idCliente = new SimpleIntegerProperty(); 
     
-    private final IntegerProperty idImovel = new SimpleIntegerProperty();  // novo campo
-    private final IntegerProperty idCliente = new SimpleIntegerProperty(); // novo campo
+    private Propriedades propriedade;
+    private Cliente cliente;
 
     public Contrato() {}
 
@@ -22,6 +24,7 @@ public class Contrato {
         this.idCliente.set(idCliente);
     }
 
+    // Getters e setters existentes
     public int getIdContrato() {
         return idContrato.get();
     }
@@ -58,7 +61,6 @@ public class Contrato {
         return valorCompra;
     }
 
-    // Getters e setters para idImovel
     public int getIdImovel() {
         return idImovel.get();
     }
@@ -71,7 +73,6 @@ public class Contrato {
         return idImovel;
     }
 
-    // Getters e setters para idCliente
     public int getIdCliente() {
         return idCliente.get();
     }
@@ -82,5 +83,22 @@ public class Contrato {
 
     public IntegerProperty idClienteProperty() {
         return idCliente;
+    }
+
+    // Getters e setters para os objetos relacionados
+    public Propriedades getPropriedade() {
+        return propriedade;
+    }
+
+    public void setPropriedade(Propriedades propriedade) {
+        this.propriedade = propriedade;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }
