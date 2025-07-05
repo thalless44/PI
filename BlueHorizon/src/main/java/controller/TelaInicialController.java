@@ -493,7 +493,10 @@ void onClickProprietario(ActionEvent event) {
                 -> response == ButtonType.OK).isPresent();
     }
     
-    private void carregarPropriedades() {
+    public void carregarPropriedades() {
+        
+        vboxConteudo.getChildren().clear();  // Limpa os cards antigos
+        
         List<Propriedades> imoveis = PropriedadesDAO.listarPropriedades();
 
         if (imoveis.isEmpty()) {
@@ -578,27 +581,25 @@ void onClickProprietario(ActionEvent event) {
     
     private void abrirNovaTela(Propriedades imovel, Proprietario proprietario) throws IOException {
         URL url = new File("src/main/java/View/TelaImovelVenda.fxml").toURI().toURL();
-    FXMLLoader loader = new FXMLLoader(url);
-    Parent root = loader.load();
-    
-    TelaImovelVendaController tIV = loader.getController();
-    tIV.carregarDadosImovel(imovel, proprietario);
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
 
-    Stage t = new Stage();
-    tIV.setStage(t);
-    
-   
+        TelaImovelVendaController tIV = loader.getController();
+        tIV.setTelaInicialController(this); // PASSANDO A REFERÊNCIA
+        tIV.carregarDadosImovel(imovel, proprietario);
 
-    Scene scene = new Scene(root);
+        Stage t = new Stage();
+        tIV.setStage(t);
 
-    Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
-    t.getIcons().add(icone);
+        Scene scene = new Scene(root);
 
-    t.setScene(scene);
-    t.setTitle("BlueHorizon - Sistema de gerenciamento de propriedades beira-mar | Relatório de venda dos imóveis");
-    t.setMaximized(true);
-    t.show();
-    
+        Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+        t.getIcons().add(icone);
+
+        t.setScene(scene);
+        t.setTitle("BlueHorizon - Detalhes do Imóvel");
+        t.setMaximized(true);
+        t.show();
     }
     
 

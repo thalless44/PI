@@ -54,6 +54,12 @@ public class TelaImovelVendaController {
     @FXML private Label lblValor;
 
     @FXML private ImageView Image;
+    
+    private TelaInicialController telaInicialController;
+
+    public void setTelaInicialController(TelaInicialController controller) {
+        this.telaInicialController = controller;
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -99,33 +105,45 @@ public class TelaImovelVendaController {
         lblNome.setText(" " + prop.getNome());
         lblTelefone.setText(prop.getTelefone());
         lblEmail.setText(prop.getEmail());
+        
+        this.prop = propriedadeSelecionada.getProprietario();
     }
 
     @FXML
     public void ActionEditarImovel(ActionEvent event) {
-        try {
-            URL url = new File("src/main/java/view/TelaAlterarDadosImovel.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-            TelaAlterarDadosImovelController tEI = loader.getController();
+         try {
+        URL url = new File("src/main/java/view/TelaAlterarDadosImovel.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
 
-            tEI.carregarDadosImovel(propriedadeSelecionada);
+        TelaAlterarDadosImovelController tEI = loader.getController();
 
-            Stage telaEdImovel = new Stage();
-            tEI.setStage(telaEdImovel);
+        // Passa a propriedade selecionada e a stage
+        tEI.carregarDadosImovel(propriedadeSelecionada);
 
-            Scene scene = new Scene(root);
-            Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
-            telaEdImovel.getIcons().add(icone);
+        Stage telaEdImovel = new Stage();
+        tEI.setStage(telaEdImovel);
 
-            telaEdImovel.setScene(scene);
-            telaEdImovel.setTitle("BlueHorizon - Alterar Imóvel");
-            telaEdImovel.setMaximized(false);
-            telaEdImovel.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Scene scene = new Scene(root);
+        Image icone = new Image(getClass().getResourceAsStream("/icons/Bh.png"));
+        telaEdImovel.getIcons().add(icone);
+
+        telaEdImovel.setScene(scene);
+        telaEdImovel.setTitle("BlueHorizon - Alterar dados do imóvel");
+        telaEdImovel.setMaximized(false);
+        telaEdImovel.show();
+
+        // Quando fechar a tela de edição, recarrega os dados
+        telaEdImovel.setOnHiding(e -> {
+            if (telaInicialController != null) {
+                telaInicialController.carregarPropriedades(); // chama da tela inicial, que realmente tem esse método
+            }
+        });
+
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
 
     @FXML
     public void ActionEfetuarVenda(ActionEvent event) {

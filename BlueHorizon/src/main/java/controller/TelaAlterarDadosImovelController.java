@@ -200,9 +200,9 @@ public class TelaAlterarDadosImovelController {
         rbNaoSG.setSelected(!propriedade.isSistemaSeguranca());
 
         // Falta ajustar isso, pois não está recebendo os atributos de Proprietário.
-        Proprietario proprietarioSelecionado = cmbxProprietario.getSelectionModel().getSelectedItem();
-        if (proprietarioSelecionado != null) {
-            cmbxProprietario.getSelectionModel().select(proprietarioSelecionado);
+        Proprietario proprietario = propriedade.getProprietario();
+        if (proprietario != null) {
+            cmbxProprietario.getSelectionModel().select(proprietario);
         } else {
             cmbxProprietario.getSelectionModel().clearSelection();
         }
