@@ -23,6 +23,7 @@ public class Propriedades {
     private final StringProperty area = new SimpleStringProperty();
     private final IntegerProperty idCidade = new SimpleIntegerProperty();
     private final IntegerProperty idProprietario = new SimpleIntegerProperty();
+    private final IntegerProperty idImagem = new SimpleIntegerProperty(); // Adicionado
 
     private final StringProperty nomeProprietario = new SimpleStringProperty();
     private final ObjectProperty<byte[]> imagem = new SimpleObjectProperty<>();
@@ -36,7 +37,7 @@ public class Propriedades {
     // Construtor com ID e idCidade
     public Propriedades(int id, String tipoPropriedade, String endereco, double preco, boolean disponibilidade, Date dataCadastro, String rua,
             int quartos, int banheiros, int vagasGaragem, boolean mobilia, boolean jardim, boolean sistemaSeguranca, boolean piscina, int numeroCasa,
-            String area, int idCidade, int idProprietario) {
+            String area, int idCidade, int idProprietario, int idImagem) {
 
         this.id.set(id);
         this.tipoPropriedade.set(tipoPropriedade);
@@ -56,6 +57,7 @@ public class Propriedades {
         this.area.set(area);
         this.idCidade.set(idCidade);
         this.idProprietario.set(idProprietario);
+        this.idImagem.set(idImagem); // Adicionado
     }
 
     // Construtor sem ID, com idCidade
@@ -151,10 +153,14 @@ public class Propriedades {
     public IntegerProperty idCidadeProperty() { return idCidade; }
     public int getIdCidade() { return idCidade.get(); }
     public void setIdCidade(int idCidade) { this.idCidade.set(idCidade); }
-    
+
     public IntegerProperty idProprietarioProperty() { return idProprietario; }
     public int getIdProprietario() { return idProprietario.get(); }
     public void setIdProprietario(int idProprietario) { this.idProprietario.set(idProprietario); }
+
+    public IntegerProperty idImagemProperty() { return idImagem; } // Adicionado
+    public int getIdImagem() { return idImagem.get(); }            // Adicionado
+    public void setIdImagem(int idImagem) { this.idImagem.set(idImagem); } // Adicionado
 
     public StringProperty nomeProprietarioProperty() { return nomeProprietario; }
     public String getNomeProprietario() { return nomeProprietario.get(); }

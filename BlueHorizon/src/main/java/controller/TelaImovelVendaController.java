@@ -73,7 +73,7 @@ public class TelaImovelVendaController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
-        lblImovelVenda.setText(imovel.getTipoPropriedade());
+        
         lblRua.setText(imovel.getRua());
         lblCidade.setText(imovel.getCidade() != null ? imovel.getCidade() : "Não informado");
         lblDisponibilidade.setText(imovel.isDisponibilidade() ? " Disponível" : " Vendido");

@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import model.Cidade;
 import model.CidadeDAO;
 import static model.CidadeDAO.buscarCidades;
+import model.ImagemDAO;
 import model.Propriedades;
 import model.PropriedadesDAO;
 import model.Proprietario;
@@ -235,6 +236,10 @@ public class TelaAlterarDadosImovelController {
             byte[] imagemBytes = java.nio.file.Files.readAllBytes(file.toPath());
             propriedadeSelecionada.setImagem(imagemBytes); // SALVA OS BYTES NA PROPRIEDADE
             propriedadeSelecionada.setImagemUrl(file.toURI().toString()); // Opcional: salva o caminho da imagem
+            int idImagem = ImagemDAO.salvarImagemNoBanco(file);
+                if (idImagem != -1) {
+                propriedadeSelecionada.setIdImagem(idImagem);
+            }
             } catch (IOException e) {
             AlertaUtil.mostrarErro("Erro", "Erro ao carregar imagem", e.getMessage());
         }
@@ -310,8 +315,7 @@ public class TelaAlterarDadosImovelController {
             propriedadeSelecionada.setPiscina(piscina);
             propriedadeSelecionada.setNumeroCasa(numeroCasa);
             propriedadeSelecionada.setArea(area);
-
-             //propriedadeSelecionada.setImagemUrl(...)
+            
             
             
 

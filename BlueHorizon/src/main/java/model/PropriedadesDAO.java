@@ -129,7 +129,7 @@ public class PropriedadesDAO extends GenericDAO{
 
     public static boolean atualizarPropriedade(Propriedades p) {
     String sql = "UPDATE propriedades SET tipo_propriedade = ?, endereco = ?, preco = ?, disponibilidade = ?, data_cadastro = ?, rua = ?, quartos = ?, "
-        + "banheiros = ?, vagasGaragem = ?, mobilia = ?, jardim = ?, sistemaSeguranca = ?, piscina = ?, numeroCasa = ?, area = ?, id_proprietario = ? "
+        + "banheiros = ?, vagasGaragem = ?, mobilia = ?, jardim = ?, sistemaSeguranca = ?, piscina = ?, numeroCasa = ?, area = ?, id_proprietario = ?, id_imagem = ? "
         + "WHERE id_propriedade = ?";
 
     try (Connection conn = ConexaoBD.conectar();
@@ -151,7 +151,8 @@ public class PropriedadesDAO extends GenericDAO{
         stmt.setInt(14, p.getNumeroCasa());
         stmt.setString(15, p.getArea());
         stmt.setInt(16, p.getProprietario().getId());
-        stmt.setInt(17, p.getId());  
+        stmt.setInt(17, p.getIdImagem());
+        stmt.setInt(18, p.getId());  
 
         int linhasAfetadas = stmt.executeUpdate();
         return linhasAfetadas > 0;

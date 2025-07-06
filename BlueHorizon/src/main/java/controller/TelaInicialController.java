@@ -537,7 +537,7 @@ void onClickProprietario(ActionEvent event) {
     String nomeProprietario = proprietario != null ? proprietario.getNome() : "Não informado";
     String cidade = imovel.getCidade();
 
-    Label lblId = new Label("ID: " + imovel.getId());
+    Label lblId = new Label("Código: " + imovel.getId());
     Label lblProprietario = new Label("Proprietário: " + nomeProprietario);
     Label lblValor = new Label("Valor: " + currencyFormat.format(imovel.getPreco()));
     Label lblData = new Label("Cadastro: " + dateFormat.format(imovel.getDataCadastro()));
